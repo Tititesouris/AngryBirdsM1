@@ -4,3 +4,5 @@ AngryBirds.iml
 
 #Eclipse
 .metadata/
+.project
+.classpath
