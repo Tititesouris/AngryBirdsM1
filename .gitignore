@@ -1,3 +1,6 @@
 #IntelliJ
 .idea/
 AngryBirds.iml
+
+#Eclipse
+.metadata/
