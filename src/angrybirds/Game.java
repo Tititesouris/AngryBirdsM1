@@ -13,21 +13,27 @@ public class Game extends BasicGameState {
 
     private Bird bird;
 
+    private Obstacle obstacle;
+
     @Override
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
         bird = new Bird(new Vector2d(0, 0));
         bird.init(gameContainer, stateBasedGame);
+        obstacle = new Obstacle(new Vector2d(50, 50));
+        obstacle.init(gameContainer, stateBasedGame);
     }
 
     @Override
     public void update(GameContainer gameContainer, StateBasedGame stateBasedGame, int delta) throws SlickException {
         bird.update(gameContainer, stateBasedGame, delta);
+        obstacle.update(gameContainer, stateBasedGame, delta);
     }
 
     @Override
     public void render(GameContainer gameContainer, StateBasedGame stateBasedGame, Graphics graphics) throws SlickException {
         graphics.drawString("Hello World!", 50, 50);
         bird.render(gameContainer, stateBasedGame, graphics);
+        obstacle.render(gameContainer, stateBasedGame, graphics);
     }
 
     @Override
