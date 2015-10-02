@@ -20,7 +20,7 @@ public class Game extends BasicGameState {
 
     @Override
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
-        bird = new Bird(new Vector2d(0, 0));
+        bird = new Bird(new Vector2d(0, 100));
         bird.init(gameContainer, stateBasedGame);
         obstacle = new Obstacle(new Vector2d(50, 50));
         obstacle.init(gameContainer, stateBasedGame);

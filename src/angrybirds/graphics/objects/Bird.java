@@ -15,7 +15,7 @@ import org.newdawn.slick.state.StateBasedGame;
 public class Bird extends ParametricObject {
 
     public Bird(Vector2d position) {
-        super(new Sinusoid(position), 0);
+        super(new Sinusoid(position, 50, 50), 0);
     }
 
     @Override

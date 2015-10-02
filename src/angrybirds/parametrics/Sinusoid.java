@@ -7,18 +7,24 @@ import angrybirds.structures.Vector2d;
  */
 public class Sinusoid extends Parametric {
 
-    public Sinusoid(Vector2d offset) {
+    private double period;
+
+    private double amplitude;
+
+    public Sinusoid(Vector2d offset, double period, double amplitude) {
         super(offset);
+        this.period = period;
+        this.amplitude = amplitude;
     }
 
     @Override
     public Vector2d getValue(double t) {
-        return new Vector2d(30 * t + offset.x, 50 * Math.sin(t) + offset.y);
+        return new Vector2d(period * t + offset.x, amplitude * Math.sin(t) + offset.y);
     }
 
     @Override
     public String toString() {
-        return "Sinusoid: TODO";
+        return "Sinusoid(X: " + period + "t + " + offset.x + ", Y: " + amplitude + "sin(t) + " + offset.y + ")";
     }
 
 }
