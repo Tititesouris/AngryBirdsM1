@@ -25,7 +25,8 @@ public class Bird extends ParametricObject {
 
     @Override
     public void render(GameContainer gameContainer, StateBasedGame stateBasedGame, Graphics graphics) throws SlickException {
-        graphics.drawOval((float)position.x - 25, (float)position.y - 25, 25, 25);
+        super.render(gameContainer, stateBasedGame, graphics);
+        graphics.drawOval((float)position.x - 25, (float)position.y - 25, 50, 50);
     }
 
 }

@@ -1,6 +1,7 @@
 package angrybirds.graphics;
 
 import angrybirds.parametrics.Parametric;
+import angrybirds.structures.Vector2d;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
@@ -13,11 +14,14 @@ public class ParametricObject extends GraphicalObject {
 
     private Parametric parametric;
 
+    private double start;
+
     protected double t;
 
     public ParametricObject(Parametric parametric, double t) {
         super(parametric.getValue(t));
         this.parametric = parametric;
+        this.start = t;
         this.t = t;
     }
 
@@ -34,6 +38,11 @@ public class ParametricObject extends GraphicalObject {
 
     @Override
     public void render(GameContainer gameContainer, StateBasedGame stateBasedGame, Graphics graphics) throws SlickException {
-
+        double i = start;
+        while (i <= t) {
+            Vector2d point = parametric.getValue(i);
+            graphics.fillOval((float)point.x, (float)point.y, 1, 1);
+            i += 0.1;
+        }
     }
 }
