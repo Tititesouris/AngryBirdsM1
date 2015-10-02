@@ -1,5 +1,6 @@
-package angrybirds;
+package angrybirds.graphics;
 
+import angrybirds.structures.Vector2d;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
@@ -10,20 +11,15 @@ import org.newdawn.slick.state.StateBasedGame;
  */
 public abstract class GraphicalObject {
 
-    protected Vector2d position, velocity, acceleration;
+    protected Vector2d position;
 
-    public GraphicalObject(Vector2d position, Vector2d velocity, Vector2d acceleration) {
+    public GraphicalObject(Vector2d position) {
         this.position = position;
-        this.velocity = velocity;
-        this.acceleration = acceleration;
     }
 
     public abstract void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException;
 
-    public void update(GameContainer gameContainer, StateBasedGame stateBasedGame, int delta) throws SlickException {
-        velocity.add(acceleration.product(delta));
-        position.add(velocity.product(delta));
-    }
+    public abstract void update(GameContainer gameContainer, StateBasedGame stateBasedGame, int delta) throws SlickException;
 
     public abstract void render(GameContainer gameContainer, StateBasedGame stateBasedGame, Graphics graphics) throws SlickException;
 

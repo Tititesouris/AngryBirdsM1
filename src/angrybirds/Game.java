@@ -1,5 +1,8 @@
 package angrybirds;
 
+import angrybirds.graphics.objects.Bird;
+import angrybirds.graphics.objects.Obstacle;
+import angrybirds.structures.Vector2d;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;

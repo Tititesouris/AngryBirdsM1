@@ -1,4 +1,4 @@
-package angrybirds;
+package angrybirds.structures;
 
 /**
  * Created by Quentin Brault on 25/09/2015.

@@ -1,5 +1,9 @@
-package angrybirds;
+package angrybirds.graphics.objects;
 
+import angrybirds.graphics.ParametricObject;
+import angrybirds.parametrics.Parametric;
+import angrybirds.parametrics.Sinusoid;
+import angrybirds.structures.Vector2d;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
@@ -8,10 +12,10 @@ import org.newdawn.slick.state.StateBasedGame;
 /**
  * Created by Quentin Brault on 25/09/2015.
  */
-public class Bird extends GraphicalObject {
+public class Bird extends ParametricObject {
 
     public Bird(Vector2d position) {
-        super(position, new Vector2d(0.1, 0), new Vector2d(0.0001, 0));
+        super(new Sinusoid(), 0);
     }
 
     @Override
