@@ -15,7 +15,7 @@ import org.newdawn.slick.state.StateBasedGame;
 public class Bird extends ParametricObject {
 
     public Bird(Vector2d position) {
-        super(new Sinusoid(), 0);
+        super(new Sinusoid(position), 0);
     }
 
     @Override
@@ -25,7 +25,7 @@ public class Bird extends ParametricObject {
 
     @Override
     public void render(GameContainer gameContainer, StateBasedGame stateBasedGame, Graphics graphics) throws SlickException {
-        graphics.drawOval((float)position.x, (float)position.y, 10, 10);
+        graphics.drawOval((float)position.x - 25, (float)position.y - 25, 25, 25);
     }
 
 }

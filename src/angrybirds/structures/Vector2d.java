@@ -22,8 +22,13 @@ public class Vector2d {
         return new Vector2d(x * amount, y * amount);
     }
 
+    public boolean equals(Vector2d vector) {
+        return x == vector.x && y == vector.y;
+    }
+
+    @Override
     public String toString() {
-        return "X: " + x + " Y: " + y;
+        return "X: " + x + ", Y: " + y;
     }
 
 }
