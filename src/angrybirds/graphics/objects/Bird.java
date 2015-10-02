@@ -3,6 +3,7 @@ package angrybirds.graphics.objects;
 import angrybirds.graphics.ParametricObject;
 import angrybirds.parametrics.Parametric;
 import angrybirds.parametrics.Sinusoid;
+import angrybirds.parametrics.Spiral;
 import angrybirds.structures.Vector2d;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;

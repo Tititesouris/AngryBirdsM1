@@ -24,7 +24,7 @@ public class Sinusoid extends Parametric {
 
     @Override
     public String toString() {
-        return "Sinusoid(X: " + period + "t + " + offset.x + ", Y: " + amplitude + "sin(t) + " + offset.y + ")";
+        return "Sinusoid(X: " + period + " * t + " + offset.x + ", Y: " + amplitude + " * sin(t) + " + offset.y + ")";
     }
 
 }

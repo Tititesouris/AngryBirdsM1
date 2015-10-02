@@ -21,7 +21,7 @@ public class Linear extends Parametric {
 
     @Override
     public String toString() {
-        return "Linear(X: " + a + "t + " + offset.x + ", Y: " + offset.y + ")";
+        return "Linear(X: " + a + " * t + " + offset.x + ", Y: " + offset.y + ")";
     }
 
 }

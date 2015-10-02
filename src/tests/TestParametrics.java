@@ -3,6 +3,7 @@ package tests;
 import angrybirds.parametrics.Linear;
 import angrybirds.parametrics.Parametric;
 import angrybirds.parametrics.Sinusoid;
+import angrybirds.parametrics.Spiral;
 import angrybirds.structures.Vector2d;
 import org.junit.Test;
 
@@ -27,7 +28,13 @@ public class TestParametrics {
         assertTrue(sinusoid.getValue(0).equals(new Vector2d(0, 0)));
         assertTrue(sinusoid.getValue(Math.PI / 2).equals(new Vector2d(Math.PI / 2, 1)));
         assertFalse(sinusoid.getValue(1).equals(new Vector2d(1, 1)));
+    }
 
+    @Test
+    public void testSpiral() {
+        Parametric spiral = new Spiral(new Vector2d(0, 0), 1, 1);
+        assertTrue(spiral.getValue(0).equals(new Vector2d(0, 0)));
+        assertTrue(spiral.getValue(1).equals(new Vector2d(Math.cos(1), Math.sin(1))));
     }
 
 }
