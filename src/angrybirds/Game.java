@@ -9,34 +9,51 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 /**
  * Created by Quentin Brault on 24/09/2015.
  */
 public class Game extends BasicGameState {
 
+    private static final Random rand = new Random();
+
     private Bird bird;
 
-    private Obstacle obstacle;
+    private List<Obstacle> obstacles;
+
+    public Game() {
+        bird = new Bird(new Vector2d(0, 100));
+        obstacles = new ArrayList<>();
+        for (int i = 0; i < 5; i++) {
+            obstacles.add(new Obstacle(new Vector2d(900, 100 + i * 150), 50 + rand.nextInt(100)));
+        }
+    }
 
     @Override
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
-        bird = new Bird(new Vector2d(0, 100));
         bird.init(gameContainer, stateBasedGame);
-        obstacle = new Obstacle(new Vector2d(50, 50));
-        obstacle.init(gameContainer, stateBasedGame);
+        for (Obstacle obstacle : obstacles) {
+            obstacle.init(gameContainer, stateBasedGame);
+        }
     }
 
     @Override
     public void update(GameContainer gameContainer, StateBasedGame stateBasedGame, int delta) throws SlickException {
         bird.update(gameContainer, stateBasedGame, delta);
-        obstacle.update(gameContainer, stateBasedGame, delta);
+        for (Obstacle obstacle : obstacles) {
+            obstacle.update(gameContainer, stateBasedGame, delta);
+        }
     }
 
     @Override
     public void render(GameContainer gameContainer, StateBasedGame stateBasedGame, Graphics graphics) throws SlickException {
-        graphics.drawString("Hello World!", 50, 50);
         bird.render(gameContainer, stateBasedGame, graphics);
-        obstacle.render(gameContainer, stateBasedGame, graphics);
+        for (Obstacle obstacle : obstacles) {
+            obstacle.render(gameContainer, stateBasedGame, graphics);
+        }
     }
 
     @Override
