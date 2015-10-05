@@ -12,7 +12,7 @@ import org.newdawn.slick.state.StateBasedGame;
  */
 public class ParametricObject extends GraphicalObject {
 
-    private Parametric parametric;
+    protected Parametric parametric;
 
     private double start;
 

@@ -15,6 +15,12 @@ public abstract class Parametric {
 
     public abstract Vector2d getValue(double t);
 
+    public Vector2d getTangent(double t) {
+        Vector2d a = getValue(t + 0.001);
+        Vector2d b = getValue(t);
+        return new Vector2d((a.x - b.x) / 0.001, (a.y - b.y) / 0.001);
+    }
+
     @Override
     public abstract String toString();
 
