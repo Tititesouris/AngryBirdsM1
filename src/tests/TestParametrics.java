@@ -15,6 +15,14 @@ import static org.junit.Assert.*;
 public class TestParametrics {
 
     @Test
+    public void testTangent() {
+        Parametric linear = new Linear(new Vector2d(0, 0), 1);
+        assertTrue(linear.getTangent(0).equals(new Vector2d(1, 0)));
+        assertTrue(Math.abs(1 - linear.getTangent(1).x) < 0.0000001);
+        assertTrue(Math.abs(1 - linear.getTangent(50).x) < 0.0000001);
+    }
+
+    @Test
     public void testlinear() {
         Parametric linear = new Linear(new Vector2d(0, 0), 1);
         assertTrue(linear.getValue(0).equals(new Vector2d(0, 0)));

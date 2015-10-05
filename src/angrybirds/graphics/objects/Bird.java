@@ -35,7 +35,7 @@ public class Bird extends ParametricObject {
     public void render(GameContainer gameContainer, StateBasedGame stateBasedGame, Graphics graphics) throws SlickException {
         super.render(gameContainer, stateBasedGame, graphics);
         Vector2d tangent = parametric.getTangent(t);
-        sprite.setRotation(45 + (float)(Math.atan2(tangent.y, tangent.x) / (2 * Math.PI) * 360));
+        sprite.setRotation(45 + (float)Math.toDegrees(Math.atan2(tangent.y, tangent.x)));
         sprite.draw((float)position.x - SIZE / 2, (float)position.y - SIZE / 2);
     }
 

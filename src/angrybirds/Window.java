@@ -8,15 +8,15 @@ import org.newdawn.slick.state.StateBasedGame;
 /**
  * Created by Quentin Brault on 24/09/2015.
  */
-public class Main extends StateBasedGame {
+public class Window extends StateBasedGame {
 
-    public Main() {
+    public Window() {
         super("Angry Birds");
     }
 
     public static void main(String[] args) {
         try {
-            AppGameContainer app = new AppGameContainer(new Main());
+            AppGameContainer app = new AppGameContainer(new Window());
             app.setDisplayMode(1080, 720, false);
             app.setAlwaysRender(true);
             app.setTargetFrameRate(60);
