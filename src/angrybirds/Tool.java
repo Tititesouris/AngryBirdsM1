@@ -11,7 +11,7 @@ public class Tool extends Image {
 
     public static Image getImage(String url) {
         try {
-            return new Image(new File(url).getPath());
+            return new Image(new File(url).getCanonicalPath());
         }
         catch (Exception e) {
             e.printStackTrace();
