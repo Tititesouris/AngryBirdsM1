@@ -8,3 +8,5 @@ AngryBirds.iml
 .metadata/
 .project
 .classpath
+.Rhistory
+bin/
