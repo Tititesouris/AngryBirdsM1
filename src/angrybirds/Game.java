@@ -28,7 +28,7 @@ public class Game extends BasicGameState {
         bird = new Bird(new Vector2d(0, 100));
         obstacles = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
-            obstacles.add(new Obstacle(new Vector2d(900, 100 + i * 150), 50 + rand.nextInt(100)));
+            obstacles.add(new Obstacle(new Vector2d(900, 100 + i * 150), 25 + rand.nextInt(50)));
         }
     }
 
