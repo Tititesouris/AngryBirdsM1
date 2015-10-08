@@ -23,7 +23,7 @@ public class Bird extends ParametricObject {
 
     public Bird(Vector2d position) {
         super(new Sinusoid(position, 50, 50), 0);
-        this.sprite = Tool.getImage("bird.png").getScaledCopy(SIZE, SIZE);
+        //this.sprite = Tool.getImage("bird.png").getScaledCopy(SIZE, SIZE);
     }
 
     @Override
@@ -35,8 +35,8 @@ public class Bird extends ParametricObject {
     public void render(GameContainer gameContainer, StateBasedGame stateBasedGame, Graphics graphics) throws SlickException {
         super.render(gameContainer, stateBasedGame, graphics);
         Vector2d tangent = parametric.getTangent(t);
-        sprite.setRotation(45 + (float)Math.toDegrees(Math.atan2(tangent.y, tangent.x)));
-        sprite.draw((float)position.x - SIZE / 2, (float)position.y - SIZE / 2);
+        //sprite.setRotation(45 + (float)Math.toDegrees(Math.atan2(tangent.y, tangent.x)));
+        //sprite.draw((float)position.x - SIZE / 2, (float)position.y - SIZE / 2);
     }
 
 }
