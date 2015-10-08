@@ -55,6 +55,24 @@ public class Game extends BasicGameState {
             obstacle.render(gameContainer, stateBasedGame, graphics);
         }
     }
+    
+    public boolean obstacleTouch(Bird bird){
+    	for(Obstacle obstacle : obstacles){
+    		/*theorie
+    		 * x = centre.x + rayon * cos(angle)
+    		 * y = centre.y + rayon * sin(angle)
+    		 * Augmenter l'angle a chaque iteration pour faire le tour 
+    		 * 		(a voir cb on itere pour avoir une meilleure precision en sachant 
+    		 * 			que si on a bcp d obstacle ca va prendre du temps)
+    		 * Stocker les coordonnées dans une list et verifier a 
+    		 * 		chaque update que Bird n'est pas entrain de toucher 
+    		 * 			(a voir aussi si on lui rajoute son bec en "hit box" 
+    		 * 				(plus dur car faut recuperer les coordonnées du triangle qui 
+    		 * 						depend de l angle du tir))
+    		 */
+    	}
+    	return false;
+    }
 
     @Override
     public int getID() {
