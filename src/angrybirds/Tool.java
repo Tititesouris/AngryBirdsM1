@@ -2,6 +2,8 @@ package angrybirds;
 
 import org.newdawn.slick.Image;
 
+import java.io.File;
+
 /**
  * Created by Tititesouris on 27/09/2015.
  */
@@ -9,7 +11,7 @@ public class Tool extends Image {
 
     public static Image getImage(String url) {
         try {
-            return new Image(Tool.class.getClassLoader().getResourceAsStream(url), url, false);
+            return new Image(new File(url).getCanonicalPath());
         }
         catch (Exception e) {
             e.printStackTrace();

@@ -2,9 +2,7 @@ package angrybirds.graphics.objects;
 
 import angrybirds.Tool;
 import angrybirds.graphics.ParametricObject;
-import angrybirds.parametrics.Parametric;
 import angrybirds.parametrics.Sinusoid;
-import angrybirds.parametrics.Spiral;
 import angrybirds.structures.Vector2d;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -23,7 +21,7 @@ public class Bird extends ParametricObject {
 
     public Bird(Vector2d position) {
         super(new Sinusoid(position, 50, 50), 0);
-        this.sprite = Tool.getImage("bird.png").getScaledCopy(SIZE, SIZE);
+        this.sprite = Tool.getImage("res/bird.png").getScaledCopy(SIZE, SIZE);
     }
 
     @Override
