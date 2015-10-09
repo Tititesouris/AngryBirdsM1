@@ -21,7 +21,7 @@ public class Bird extends ParametricObject {
 
     public Bird(Vector2d position) {
         super(new Sinusoid(position, 50, 50), 0);
-        this.sprite = Tool.getImage("res/bird.png").getScaledCopy(SIZE, SIZE);
+        this.sprite = Tool.getImage("/res/bird.png").getScaledCopy(SIZE, SIZE);
     }
 
     @Override

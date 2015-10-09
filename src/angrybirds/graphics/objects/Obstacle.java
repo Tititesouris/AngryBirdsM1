@@ -21,7 +21,7 @@ public class Obstacle extends VectorObject {
     public Obstacle(Vector2d position, int radius) {
         super(position, new Vector2d(0, 0), new Vector2d(0, 0));
         this.radius = radius;
-        this.sprite = Tool.getImage("res/flame.png").getScaledCopy(radius * 2, radius * 2);
+        this.sprite = Tool.getImage("/res/flame.png").getScaledCopy(radius * 2, radius * 2);
     }
 
     @Override

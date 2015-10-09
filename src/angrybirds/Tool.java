@@ -11,7 +11,8 @@ public class Tool extends Image {
 
     public static Image getImage(String url) {
         try {
-            return new Image(new File(url).getAbsolutePath());
+            return new Image(url);
+            //return new Image(System.class.getResource(url).openStream(), url, false); ---- DO NOT REMOVE ----
         }
         catch (Exception e) {
             e.printStackTrace();
