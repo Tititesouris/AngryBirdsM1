@@ -14,7 +14,7 @@ public class ParametricObject extends GraphicalObject {
 
     protected Parametric parametric;
 
-    private double start;
+    protected double start;
 
     protected double t;
 
