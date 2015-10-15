@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+
 /**
  * Created by Quentin Brault on 24/09/2015.
  */
@@ -46,6 +47,9 @@ public class Game extends BasicGameState {
         for (Obstacle obstacle : obstacles) {
             obstacle.update(gameContainer, stateBasedGame, delta);
         }
+        if(obstacleTouch() instanceof Obstacle){
+        	System.out.println("Touch");
+        }
     }
 
     @Override
@@ -56,7 +60,9 @@ public class Game extends BasicGameState {
         }
     }
     
-    public boolean obstacleTouch(Bird bird){
+    /*public boolean obstacleTouch(Bird bird){
+    	List<Vector2d> obstaclesHitBox = new ArrayList<>(); 
+    	
     	for(Obstacle obstacle : obstacles){
     		/*theorie
     		 * x = centre.x + rayon * cos(angle)
@@ -69,9 +75,37 @@ public class Game extends BasicGameState {
     		 * 			(a voir aussi si on lui rajoute son bec en "hit box" 
     		 * 				(plus dur car faut recuperer les coordonnées du triangle qui 
     		 * 						depend de l angle du tir))
-    		 */
+    		 
+    		
     	}
     	return false;
+    }*/
+    
+    public Obstacle obstacleTouch(){
+    	List<Vector2d> obstaclesHitBox = new ArrayList<>(); 
+    	
+    	double obstacleY;
+    	double obstacleX;	
+    	double birdX = this.bird.getPosition().x;
+    	double birdY = this.bird.getPosition().y;
+    	double x;
+    	double y;
+    	double hypo;
+    	
+    	for(Obstacle obstacle : obstacles){
+    		obstacleX = obstacle.getPosition().x;
+    		obstacleY = obstacle.getPosition().y;
+    		
+    		x = obstacleX - birdX;
+    		y = obstacleY - birdY;
+    		
+    		hypo = Math.sqrt((x*x) + (y*y));
+    		
+    		if(hypo <= this.bird.getRadius() + obstacle.getRadius()){
+    			return obstacle;
+    		}
+    	}
+		return null;
     }
 
     @Override

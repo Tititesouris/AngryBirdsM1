@@ -1,5 +1,8 @@
 package angrybirds.graphics.objects;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import angrybirds.Tool;
 import angrybirds.graphics.ParametricObject;
 import angrybirds.parametrics.Sinusoid;
@@ -15,13 +18,13 @@ import org.newdawn.slick.state.StateBasedGame;
  */
 public class Bird extends ParametricObject {
 
-    private static final int SIZE = 50;
+    private static final int RADIUS = 50;
 
     private Image sprite;
 
     public Bird(Vector2d position) {
         super(new Sinusoid(position, 50, 50), 0);
-        this.sprite = Tool.getImage("/res/bird.png").getScaledCopy(SIZE, SIZE);
+        this.sprite = Tool.getImage("/res/bird.png").getScaledCopy(RADIUS, RADIUS);
     }
 
     @Override
@@ -34,7 +37,10 @@ public class Bird extends ParametricObject {
         super.render(gameContainer, stateBasedGame, graphics);
         Vector2d tangent = parametric.getTangent(t);
         sprite.setRotation(45 + (float)Math.toDegrees(Math.atan2(tangent.y, tangent.x)));
-        sprite.draw((float)position.x - SIZE / 2, (float)position.y - SIZE / 2);
+        sprite.draw((float)position.x - RADIUS / 2, (float)position.y - RADIUS / 2);
     }
-
+    
+    public int getRadius(){
+    	return this.RADIUS;
+    }
 }

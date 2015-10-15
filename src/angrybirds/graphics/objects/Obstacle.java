@@ -34,4 +34,8 @@ public class Obstacle extends VectorObject {
         sprite.draw((float)position.x - radius, (float)position.y - radius);
         graphics.drawOval((float)position.x - radius, (float)position.y - radius, radius * 2, radius * 2);
     }
+    
+    public int getRadius(){
+    	return this.radius;
+    }
 }
