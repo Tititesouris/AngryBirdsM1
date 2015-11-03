@@ -9,6 +9,12 @@ import org.newdawn.slick.state.StateBasedGame;
 /**
  * Created by Quentin Brault on 02/10/2015.
  */
+/**
+ * Cette classe permet d'afficher les objects vectoriels, donc le traçage des
+ * courbes à chaque fois que son vecteur est modifié
+ * @author Maxime Catteau
+ *
+ */
 public class VectorObject extends GraphicalObject {
 
     protected Vector2d velocity, acceleration;
