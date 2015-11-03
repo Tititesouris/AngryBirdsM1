@@ -5,6 +5,15 @@ import angrybirds.structures.Vector2d;
 /**
  * Created by Quentin Brault on 03/11/2015.
  */
+
+/**
+ * Classe permettant a l'oiseau de suivre la trajectoire
+ * correspondant a une courbe de Bezier
+ * 
+ * @author Maxime Catteau
+ *
+ */
+
 public class Bezier extends Parametric {
 
     private Vector2d[] points;
