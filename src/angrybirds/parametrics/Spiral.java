@@ -5,6 +5,12 @@ import angrybirds.structures.Vector2d;
 /**
  * Created by Quentin Brault on 02/10/2015.
  */
+/**
+ * Cette classe permet a l'oiseau de suivre une trajectoire
+ * correspondant a une spirale
+ * @author Maxime Catteau
+ *
+ */
 public class Spiral extends Parametric {
 
     private double xIncrease;

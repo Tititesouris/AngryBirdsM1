@@ -5,6 +5,11 @@ import angrybirds.structures.Vector2d;
 /**
  * Created by Quentin Brault on 02/10/2015.
  */
+/**
+ * Cette classe permet a l'oiseau de suivre une trajectoire lineaire
+ * @author Maxime Catteau
+ *
+ */
 public class Linear extends Parametric {
 
     private double a;
