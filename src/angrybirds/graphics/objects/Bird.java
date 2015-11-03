@@ -18,13 +18,13 @@ import org.newdawn.slick.state.StateBasedGame;
  */
 public class Bird extends ParametricObject {
 
-    private static final int RADIUS = 50;
+    private static final int RADIUS = 32;
 
     private Image sprite;
 
     public Bird(Vector2d position) {
         super(new Sinusoid(position, 50, 50), 0);
-        this.sprite = Tool.getImage("/res/bird.png").getScaledCopy(RADIUS, RADIUS);
+        this.sprite = Tool.getImage("/res/bird.png").getScaledCopy(RADIUS * 2, RADIUS * 2);
     }
 
     @Override
@@ -37,7 +37,7 @@ public class Bird extends ParametricObject {
         super.render(gameContainer, stateBasedGame, graphics);
         Vector2d tangent = parametric.getTangent(t);
         sprite.setRotation(45 + (float)Math.toDegrees(Math.atan2(tangent.y, tangent.x)));
-        sprite.draw((float)position.x - RADIUS / 2, (float)position.y - RADIUS / 2);
+        sprite.draw((float)position.x - RADIUS, (float)position.y - RADIUS);
     }
     
     public int getRadius(){
