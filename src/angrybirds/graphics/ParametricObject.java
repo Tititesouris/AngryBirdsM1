@@ -34,6 +34,7 @@ public class ParametricObject extends GraphicalObject {
     public void update(GameContainer gameContainer, StateBasedGame stateBasedGame, int delta) throws SlickException {
         t += delta / 100f;
         position = parametric.getValue(t);
+        System.out.println(position);
     }
 
     @Override

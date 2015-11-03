@@ -18,6 +18,14 @@ public class Vector2d {
         return this;
     }
 
+    public Vector2d sum(Vector2d vector) {
+        return new Vector2d(this.x + vector.x, this.y + vector.y);
+    }
+
+    public Vector2d diff(Vector2d vector) {
+        return new Vector2d(this.x - vector.x, this.y - vector.y);
+    }
+
     public Vector2d product(double amount) {
         return new Vector2d(x * amount, y * amount);
     }

@@ -5,6 +5,7 @@ import java.util.List;
 
 import angrybirds.Tool;
 import angrybirds.graphics.ParametricObject;
+import angrybirds.parametrics.Bezier;
 import angrybirds.parametrics.Sinusoid;
 import angrybirds.structures.Vector2d;
 import org.newdawn.slick.GameContainer;
@@ -23,7 +24,7 @@ public class Bird extends ParametricObject {
     private Image sprite;
 
     public Bird(Vector2d position) {
-        super(new Sinusoid(position, 50, 50), 0);
+        super(new Bezier(position, new Vector2d[]{new Vector2d(50, 200), new Vector2d(200, 50), new Vector2d(500, 150)}), 0);
         this.sprite = Tool.getImage("/res/bird.png").getScaledCopy(RADIUS * 2, RADIUS * 2);
     }
 
