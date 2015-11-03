@@ -51,8 +51,10 @@ public class Game extends BasicGameState {
         for (Obstacle obstacle : obstacles) {
             obstacle.update(gameContainer, stateBasedGame, delta);
         }
-        if(obstacleTouch() instanceof Obstacle){
-        	System.out.println("Touch");
+        Obstacle obstacle = obstacleTouch();
+        if (obstacle != null) {
+            obstacles.remove(obstacle);
+            reset();
         }
     }
 
