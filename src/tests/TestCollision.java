@@ -29,7 +29,7 @@ public class TestCollision {
 			
 		}
 	}*/
-	
+	/*
 	@Test
 	public void testCollisionCentered(){
 		Bird bird = new Bird(new Vector2d(0,100));
@@ -38,5 +38,5 @@ public class TestCollision {
 			// probleme recuperation du this.bird
 			// nb : calculer de tete la position du bird et le mettre direct en contact
 		}
-	}
+	}*/
 }

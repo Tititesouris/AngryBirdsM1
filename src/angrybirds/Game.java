@@ -26,6 +26,7 @@ public class Game extends BasicGameState {
     private List<Obstacle> obstacles;
 
     public Game() {
+        reset();
         obstacles = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
             obstacles.add(new Obstacle(new Vector2d(900, 100 + i * 150), 25 + rand.nextInt(50)));
