@@ -6,6 +6,7 @@ import java.util.List;
 import angrybirds.Tool;
 import angrybirds.graphics.ParametricObject;
 import angrybirds.parametrics.Bezier;
+import angrybirds.parametrics.Parametric;
 import angrybirds.parametrics.Sinusoid;
 import angrybirds.structures.Vector2d;
 import org.newdawn.slick.GameContainer;
@@ -22,18 +23,21 @@ public class Bird extends ParametricObject {
     /**
      * Taille du rayon de l'oiseau
      */
-    private static final int RADIUS = 32;
+    private static final int RADIUS = 16;
     /**
      * Variable de type Image
      */
     private Image sprite;
 
     /**
-     * Création d'un oiseau avec les coordonnées données
-     * @param position position de depart de l'oiseau
+     * CrÃ©ation d'un oiseau.
+     *
+     * @param position  Position initiale de l'oiseau
+     * @param parametric    Courbe dÃ©crivant le chemin de l'oiseau
      */
-    public Bird(Vector2d position) {
-        super(new Bezier(position, new Vector2d[]{new Vector2d(50, 500), new Vector2d(200, 100), new Vector2d(500, 250)}), 0);
+    public Bird(Vector2d position, Parametric parametric) {
+        super(parametric, 0);
+        this.position = position;
         this.sprite = Tool.getImage("/res/bird.png").getScaledCopy(RADIUS * 2, RADIUS * 2);
     }
 

@@ -32,7 +32,7 @@ public class Bezier extends Parametric {
             for (int i = 0; i < points.length; i++) {
                 Vector2d line = new Vector2d(oldPoints[i + 1].x - oldPoints[i].x, oldPoints[i + 1].y - oldPoints[i].y);
                 Vector2d direction = line.normalize();
-                points[i] = oldPoints[i].add(direction.product(t));
+                points[i] = oldPoints[i].add(direction.product(t * 30));
             }
             oldPoints = points;
         }

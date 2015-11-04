@@ -25,7 +25,7 @@ public class Obstacle extends VectorObject {
     private Image sprite;
 
     /**
-     * Création d'un obstacle aux coordonnées et au rayon passés en paramètre
+     * Crï¿½ation d'un obstacle aux coordonnÃ©es et au rayon passï¿½s en paramï¿½tre
      * @param position position de l'obstacle
      * @param radius  rayon de l'obstacle
      */
@@ -43,7 +43,6 @@ public class Obstacle extends VectorObject {
     @Override
     public void render(GameContainer gameContainer, StateBasedGame stateBasedGame, Graphics graphics) throws SlickException {
         sprite.draw((float)position.x - radius, (float)position.y - radius);
-        graphics.drawOval((float)position.x - radius, (float)position.y - radius, radius * 2, radius * 2);
     }
 
     /**
