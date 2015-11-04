@@ -2,6 +2,7 @@ package angrybirds;
 
 import angrybirds.graphics.objects.Bird;
 import angrybirds.graphics.objects.Obstacle;
+import angrybirds.parametrics.*;
 import angrybirds.structures.Vector2d;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -35,15 +36,48 @@ public class Game extends BasicGameState {
     private List<Obstacle> obstacles;
 
     /**
+     * Position initiale de l'oiseau
+     */
+    private Vector2d birdStart;
+
+    /**
+     * Liste des courbes de l'oiseau
+     */
+    private Parametric[] parametrics;
+
+    /**
+     * Identifiant de la courbe actuelle de l'oiseau
+     */
+    private int currentParam;
+
+    /**
      * Lancement du jeu
      * L'oiseau est à sa position de départ
      * Les obstacles sont à leurs positions de départ
      */
     public Game() {
+        birdStart = new Vector2d(50, 650);
+        parametrics = new Parametric[]{
+                new Linear(birdStart, 17), new Sinusoid(birdStart, 50, 50), new Spiral(birdStart, 20, 5), new Bezier(birdStart, new Vector2d[]{
+                birdStart, new Vector2d(200, 100), new Vector2d(500, 250), new Vector2d(600, 350)
+        }), new Bezier(birdStart, new Vector2d[]{
+                birdStart, new Vector2d(200, 20), new Vector2d(500, 600), new Vector2d(600, 350)
+        }), new Bezier(birdStart, new Vector2d[]{
+                birdStart, new Vector2d(200, 500), new Vector2d(500, 300), new Vector2d(600, 100)
+        }), new Bezier(birdStart, new Vector2d[]{
+                birdStart, new Vector2d(200, 100), new Vector2d(500, 250), new Vector2d(300, 350), new Vector2d(800, 150)
+        }), new Bezier(birdStart, new Vector2d[]{
+                birdStart, new Vector2d(200, 600), new Vector2d(500, 150), new Vector2d(600, 650)
+        }), new Bezier(birdStart, new Vector2d[]{
+                birdStart, new Vector2d(700, 400), new Vector2d(400, 150), new Vector2d(800, 350)
+        }), new Bezier(birdStart, new Vector2d[]{
+                birdStart, new Vector2d(200, 100), new Vector2d(500, 100), new Vector2d(600, 550)
+        })
+        };
         reset();
         obstacles = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
-            obstacles.add(new Obstacle(new Vector2d(900, 100 + i * 150), 25 + rand.nextInt(50)));
+        for (int i = 0; i < 5 + rand.nextInt(5); i++) {
+            obstacles.add(new Obstacle(new Vector2d(850 + rand.nextInt(100), 50 + i * (50 + rand.nextInt(100))), 10 + rand.nextInt(30)));
         }
     }
 
@@ -51,7 +85,8 @@ public class Game extends BasicGameState {
      * Placement de l'oiseau à sa position initiale
      */
     private void reset() {
-        bird = new Bird(new Vector2d(0, 100));
+        bird = new Bird(birdStart, parametrics[currentParam]);
+        currentParam = (currentParam + 1) % parametrics.length;
     }
 
     @Override

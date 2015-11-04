@@ -21,12 +21,12 @@ public class Linear extends Parametric {
 
     @Override
     public Vector2d getValue(double t) {
-        return new Vector2d(a * t + offset.x, offset.y);
+        return new Vector2d(a * t + offset.x, -a * t + offset.y);
     }
 
     @Override
     public String toString() {
-        return "Linear(X: " + a + " * t + " + offset.x + ", Y: " + offset.y + ")";
+        return "Linear(X: " + a + " * t + " + offset.x + ", Y: " + -a + " * t + " + offset.y + ")";
     }
 
 }
