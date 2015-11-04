@@ -25,15 +25,18 @@ public class Bezier extends Parametric {
 
     @Override
     public Vector2d getValue(double t) {
-        Vector2d[] points = this.points;
-        while (points.length > 2) {
-            Vector2d[] middles = new Vector2d[points.length / 2 + 1];
-            for (int i = 0; i < middles.length; i++) {
-                middles[i] = points[i + 1].diff(points[i]);
+        Vector2d[] oldPoints = this.points;
+        Vector2d[] points = oldPoints;
+        while (points.length > 1) {
+            points = new Vector2d[points.length - 1];
+            for (int i = 0; i < points.length; i++) {
+                Vector2d line = new Vector2d(oldPoints[i + 1].x - oldPoints[i].x, oldPoints[i + 1].y - oldPoints[i].y);
+                Vector2d direction = line.normalize();
+                points[i] = oldPoints[i].add(direction.product(t));
             }
-            points = middles;
+            oldPoints = points;
         }
-        return points[0].sum(points[1].diff(points[0]).product(t / 100));
+        return points[0];
     }
 
     @Override

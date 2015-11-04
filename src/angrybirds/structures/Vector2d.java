@@ -26,18 +26,7 @@ public class Vector2d {
      * @return Vector2d issu du calcul
      */
     public Vector2d add(Vector2d vector) {
-        this.x += vector.x;
-        this.y += vector.y;
-        return this;
-    }
-
-    /**
-     * Méthode qui fait la somme du vecteur courant avec vecteur passé en paramètre
-     * @param vector
-     * @return Vector2d issu du calcul
-     */
-    public Vector2d sum(Vector2d vector) {
-        return new Vector2d(this.x + vector.x, this.y + vector.y);
+        return new Vector2d(x + vector.x, y + vector.y);
     }
 
     /**
@@ -58,11 +47,15 @@ public class Vector2d {
         return new Vector2d(x * amount, y * amount);
     }
 
-    /**
-     * Méthode qui vérifie si le vecteur courant est égal au vecteur passé en paramètre
-     * @param vector
-     * @return true si les vecteurs sont égaux, sinon false
-     */
+    public double getHypotenuse() {
+        return Math.sqrt(x*x + y*y);
+    }
+
+    public Vector2d normalize() {
+        double hypotenuse = getHypotenuse();
+        return new Vector2d(x / hypotenuse, y / hypotenuse);
+    }
+
     public boolean equals(Vector2d vector) {
         return x == vector.x && y == vector.y;
     }

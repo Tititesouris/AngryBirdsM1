@@ -11,8 +11,8 @@ import org.newdawn.slick.state.StateBasedGame;
  * Created by Quentin Brault on 02/10/2015.
  */
 /**
- * Cette classe permet d'afficher les objets paramétriques (comme les courbes ou l'oiseau
- * sur l'écran de jeu
+ * Cette classe permet d'afficher les objets paramï¿½triques (comme les courbes ou l'oiseau
+ * sur l'ï¿½cran de jeu
  * @author Maxime Catteau
  *
  */
@@ -40,7 +40,6 @@ public class ParametricObject extends GraphicalObject {
     public void update(GameContainer gameContainer, StateBasedGame stateBasedGame, int delta) throws SlickException {
         t += delta / 100f;
         position = parametric.getValue(t);
-        System.out.println(position);
     }
 
     @Override
