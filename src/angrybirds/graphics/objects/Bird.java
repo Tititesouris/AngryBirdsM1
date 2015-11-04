@@ -19,6 +19,9 @@ import org.newdawn.slick.state.StateBasedGame;
  */
 public class Bird extends ParametricObject {
 
+    /**
+     * Taille du rayon de l'oiseau
+     */
     private static final int RADIUS = 32;
 
     private Image sprite;
