@@ -19,12 +19,26 @@ import java.util.Random;
  */
 public class Game extends BasicGameState {
 
+    /**
+     * Générateur de nombres aléatoires
+     */
     private static final Random rand = new Random();
 
+    /**
+     * variable de l'oiseau
+     */
     private Bird bird;
 
+    /**
+     *  liste d'obstacles
+     */
     private List<Obstacle> obstacles;
 
+    /**
+     * Lancement du jeu
+     * L'oiseau est à sa position de départ
+     * Les obstacles sont à leurs positions de départ
+     */
     public Game() {
         reset();
         obstacles = new ArrayList<>();
@@ -33,6 +47,9 @@ public class Game extends BasicGameState {
         }
     }
 
+    /**
+     * Placement de l'oiseau à sa position initiale
+     */
     private void reset() {
         bird = new Bird(new Vector2d(0, 100));
     }
@@ -86,7 +103,11 @@ public class Game extends BasicGameState {
     	}
     	return false;
     }*/
-    
+
+    /**
+     * Determine la collision entre l'oiseau et l'obstacle
+     * @return l'obstacle avec lequel l'oiseau est entré en collision
+     */
     public Obstacle obstacleTouch(){
     	List<Vector2d> obstaclesHitBox = new ArrayList<>(); 
     	

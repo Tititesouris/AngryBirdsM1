@@ -14,10 +14,21 @@ import org.newdawn.slick.state.StateBasedGame;
  */
 public class Obstacle extends VectorObject {
 
+    /**
+     *  stock le rayon
+     */
     private int radius;
 
+    /**
+     * image de l'obstacle
+     */
     private Image sprite;
 
+    /**
+     * Création d'un obstacle aux coordonnées et au rayon passés en paramètre
+     * @param position position de l'obstacle
+     * @param radius  rayon de l'obstacle
+     */
     public Obstacle(Vector2d position, int radius) {
         super(position, new Vector2d(0, 0), new Vector2d(0, 0));
         this.radius = radius;
@@ -34,7 +45,11 @@ public class Obstacle extends VectorObject {
         sprite.draw((float)position.x - radius, (float)position.y - radius);
         graphics.drawOval((float)position.x - radius, (float)position.y - radius, radius * 2, radius * 2);
     }
-    
+
+    /**
+     * Retourne le rayon de l'obstacle
+     * @return le rayon de l'obstacle
+     */
     public int getRadius(){
     	return this.radius;
     }

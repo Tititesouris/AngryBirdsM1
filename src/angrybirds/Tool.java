@@ -9,6 +9,11 @@ import java.io.File;
  */
 public class Tool extends Image {
 
+    /**
+     * Retourne l'image dont l'URL est passée en paramètre
+     * @param url chemin vers l'image
+     * @return l'image dont l'URL est passée en paramètre
+     */
     public static Image getImage(String url) {
         try {
             return new Image(url);

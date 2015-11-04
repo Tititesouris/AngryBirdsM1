@@ -23,9 +23,15 @@ public class Bird extends ParametricObject {
      * Taille du rayon de l'oiseau
      */
     private static final int RADIUS = 32;
-
+    /**
+     * Variable de type Image
+     */
     private Image sprite;
 
+    /**
+     * Création d'un oiseau avec les coordonnées données
+     * @param position position de depart de l'oiseau
+     */
     public Bird(Vector2d position) {
         super(new Bezier(position, new Vector2d[]{new Vector2d(50, 200), new Vector2d(200, 50), new Vector2d(500, 150)}), 0);
         this.sprite = Tool.getImage("/res/bird.png").getScaledCopy(RADIUS * 2, RADIUS * 2);
@@ -43,7 +49,11 @@ public class Bird extends ParametricObject {
         sprite.setRotation(45 + (float)Math.toDegrees(Math.atan2(tangent.y, tangent.x)));
         sprite.draw((float)position.x - RADIUS, (float)position.y - RADIUS);
     }
-    
+
+    /**
+     * Retourne le rayon de l'oiseau
+     * @return le rayon de l'oiseau
+     */
     public int getRadius(){
     	return this.RADIUS;
     }
