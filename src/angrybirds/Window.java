@@ -1,5 +1,6 @@
 package angrybirds;
 
+import angrybirds.structures.Constantes;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
@@ -17,7 +18,7 @@ public class Window extends StateBasedGame {
     public static void main(String[] args) {
         try {
             AppGameContainer app = new AppGameContainer(new Window());
-            app.setDisplayMode(1080, 720, false);
+            app.setDisplayMode(Constantes.SCREEN_LENGTH,Constantes.SCREEN_WIDTH, false);
             app.setAlwaysRender(true);
             app.setTargetFrameRate(60);
             app.setMinimumLogicUpdateInterval(10);

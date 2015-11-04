@@ -2,6 +2,7 @@ package angrybirds;
 
 import angrybirds.graphics.objects.Bird;
 import angrybirds.graphics.objects.Obstacle;
+import angrybirds.structures.Constantes;
 import angrybirds.structures.Vector2d;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -43,7 +44,7 @@ public class Game extends BasicGameState {
         reset();
         obstacles = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
-            obstacles.add(new Obstacle(new Vector2d(900, 100 + i * 150), 25 + rand.nextInt(50)));
+            //obstacles.add(new Obstacle(new Vector2d(900, 100 + i * 150), 25 + rand.nextInt(50)));
         }
     }
 
@@ -72,6 +73,9 @@ public class Game extends BasicGameState {
         if (obstacle != null) {
             obstacles.remove(obstacle);
             reset();
+        }
+        if(outOfScreen()){
+           reset();
         }
     }
 
@@ -111,6 +115,18 @@ public class Game extends BasicGameState {
     		}
     	}
 		return null;
+    }
+
+    /**
+     * Determine le passage de l'oiseau hors de l'ecran
+     * @return true quand l'oiseau atteint le bord droit ou le sommet de l ecran
+     */
+    public boolean outOfScreen(){
+        if(this.bird.getPosition().x+this.bird.getRadius() >= Constantes.SCREEN_LENGTH || this.bird.getPosition().y+this.bird.getRadius() >= Constantes.SCREEN_WIDTH){
+            return true;
+        }else{
+            return false;
+        }
     }
 
     @Override
