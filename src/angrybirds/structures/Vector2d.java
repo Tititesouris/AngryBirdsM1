@@ -13,13 +13,7 @@ public class Vector2d {
     }
 
     public Vector2d add(Vector2d vector) {
-        this.x += vector.x;
-        this.y += vector.y;
-        return this;
-    }
-
-    public Vector2d sum(Vector2d vector) {
-        return new Vector2d(this.x + vector.x, this.y + vector.y);
+        return new Vector2d(x + vector.x, y + vector.y);
     }
 
     public Vector2d diff(Vector2d vector) {
@@ -28,6 +22,15 @@ public class Vector2d {
 
     public Vector2d product(double amount) {
         return new Vector2d(x * amount, y * amount);
+    }
+
+    public double getHypotenuse() {
+        return Math.sqrt(x*x + y*y);
+    }
+
+    public Vector2d normalize() {
+        double hypotenuse = getHypotenuse();
+        return new Vector2d(x / hypotenuse, y / hypotenuse);
     }
 
     public boolean equals(Vector2d vector) {

@@ -27,7 +27,7 @@ public class Bird extends ParametricObject {
     private Image sprite;
 
     public Bird(Vector2d position) {
-        super(new Bezier(position, new Vector2d[]{new Vector2d(50, 200), new Vector2d(200, 50), new Vector2d(500, 150)}), 0);
+        super(new Bezier(position, new Vector2d[]{new Vector2d(50, 500), new Vector2d(200, 100), new Vector2d(500, 250)}), 0);
         this.sprite = Tool.getImage("/res/bird.png").getScaledCopy(RADIUS * 2, RADIUS * 2);
     }
 
