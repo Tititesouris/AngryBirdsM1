@@ -18,7 +18,6 @@ public class Tool {
     public static Image getImage(String url) {
         try {
             return new Image(url);
-            //return new Image(System.class.getResource(url).openStream(), url, false); ---- DO NOT REMOVE ----
         }
         catch (Exception e) {
             e.printStackTrace();
