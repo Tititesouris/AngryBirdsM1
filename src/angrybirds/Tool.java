@@ -2,17 +2,18 @@ package angrybirds;
 
 import org.newdawn.slick.Image;
 
-import java.io.File;
-
 /**
- * Created by Tititesouris on 27/09/2015.
+ * Cette classe utilitaire permet de facilitÃ© certaines opÃ©rations.
+ *
+ * @author Quentin Brault
  */
-public class Tool extends Image {
+public class Tool {
 
     /**
-     * Retourne l'image dont l'URL est passée en paramètre
-     * @param url chemin vers l'image
-     * @return l'image dont l'URL est passée en paramètre
+     * Retourne l'image dont le chemin est spÃ©cifiÃ©
+     *
+     * @param url   Chemin de l'image Ã  charger
+     * @return      Image chargÃ©e
      */
     public static Image getImage(String url) {
         try {

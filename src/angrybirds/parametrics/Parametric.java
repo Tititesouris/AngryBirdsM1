@@ -3,37 +3,36 @@ package angrybirds.parametrics;
 import angrybirds.structures.Vector2d;
 
 /**
- * Created by Quentin Brault on 02/10/2015.
- */
-/**
- * Cette classe abstraite permet de creer des courbes parametriques
- * telles que des sinusoidales, des lineaires, des courbes de bezier ...
- * @author Maxime Catteau
+ * Cette classe abstraite reprÃ©sente une courbe paramÃ©trique.
  *
+ * @author Quentin Brault
  */
 public abstract class Parametric {
 
+    /**
+     * Offset de la courbe
+     */
     protected Vector2d offset;
 
+    /**
+     * CrÃ©Ã© une nouvelle courbe
+     *
+     * @param offset    Offset de la courbe
+     */
     public Parametric(Vector2d offset) {
         this.offset = offset;
     }
 
     /**
-     * Cette méthode permet de recupérer la valeur du ratio t permettant
-     * d'éviter les problèmes de latences selon le PC des utilisateurs
-     * @param t
-     * @return
+     * Cette mÃ©thode retourne la valeur de la courbe Ã  l'instant t
+     *
+     * @param t     Instant de la courbe
+     * @return      Valeur Ã  l'instant t
      */
-    
     public abstract Vector2d getValue(double t);
 
     /**
-     * Cette méthode permet de récupérer les coordonnées de la tangente
-     * ce qui nous permettra plus tard de dessiner la trajectoire de
-     * l'oiseau
-     * @param t
-     * @return
+     * Cette mÃ©thode retourne le vecteur tangeante Ã  la courbe Ã  l'instant t
      */
     public Vector2d getTangent(double t) {
         Vector2d a = getValue(t + 0.001);

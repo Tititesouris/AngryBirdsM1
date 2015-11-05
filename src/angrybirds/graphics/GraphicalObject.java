@@ -7,50 +7,61 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
 /**
- * Created by Quentin Brault on 25/09/2015.
- */
-/**
- * Cette classe abstraite permet d'effectuer le rendu des objects graphiques
- * ce qui affiche l'ecran de jeu et les objects qu'il contient
- * @author Maxime Catteau
+ * Cette classe abstraite contient toutes les méthodes et le champs nécessaire à l'affichage et à la mise à jour d'objets graphiques.
  *
+ * @author Maxime Catteau
+ * @author Quentin Brault
  */
 public abstract class GraphicalObject {
 
+    /**
+     * Position de l'objet
+     */
     protected Vector2d position;
 
+    /**
+     * Créé un nouvel objet
+     *
+     * @param position  Position de l'objet
+     */
     public GraphicalObject(Vector2d position) {
         this.position = position;
     }
 
     /**
-     * Cette m�thode permet d'initialiser l'�cran de jeu
-     * @param gameContainer
-     * @param stateBasedGame
+     * Cette méthode est appelé au chargement de l'objet.
+     *
+     * @param gameContainer     Contexte du jeu
+     * @param stateBasedGame    Référence au jeu
      * @throws SlickException
      */
     public abstract void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException;
 
     /**
-     * Cette methode permet de mettre a jour l'�cran a chaque fois qu'il subit
-     * un changement
-     * @param gameContainer
-     * @param stateBasedGame
-     * @param delta
+     * Cette méthode est appelée à chaque cycle du jeu.
+     *
+     * @param gameContainer     Contexte du jeu
+     * @param stateBasedGame    Référence au jeu
+     * @param delta             Nombre de millisecondes depuis le dernier appel de la méthode
      * @throws SlickException
      */
     public abstract void update(GameContainer gameContainer, StateBasedGame stateBasedGame, int delta) throws SlickException;
 
     /**
-     * Cette m�thode est un compl�ment de update, elle permet d'effectuer le rendu de
-     * l'�cran � chaque fois qu'il est mis � jour
-     * @param gameContainer
-     * @param stateBasedGame
-     * @param graphics
+     * Cette méthode permet d'afficher l'objet sur l'écran.
+     *
+     * @param gameContainer     Contexte du jeu
+     * @param stateBasedGame    Référence au jeu
+     * @param graphics          Contexte graphique
      * @throws SlickException
      */
     public abstract void render(GameContainer gameContainer, StateBasedGame stateBasedGame, Graphics graphics) throws SlickException;
-    
+
+    /**
+     * Retourne la position de l'objet.
+     *
+     * @return  Position de l'objet
+     */
     public Vector2d getPosition(){
     	return this.position;
     }

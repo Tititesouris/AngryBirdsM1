@@ -10,27 +10,32 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
 /**
- * Created by Quentin Brault on 25/09/2015.
+ * Cette classe représente un obstacle.
+ *
+ * @author Maxime Catteau
+ * @author Noémie Clay
+ * @see VectorObject
  */
 public class Obstacle extends VectorObject {
 
     /**
-     *  stock le rayon
+     *  Rayon de l'obstacle
      */
     private int radius;
 
     /**
-     * image de l'obstacle
+     * Image de l'obstacle
      */
     private Image sprite;
 
     /**
-     * Nombre de milliseconde avant de ne plus etre touché
+     * Nombre de millisecondes avant de ne plus être touché
      */
     private int hit;
 
     /**
-     * Création d'un obstacle aux coordonnées et au rayon pass�s en param�tre
+     * Création d'un obstacle aux coordonnées et au rayon passés en paramètre
+     *
      * @param position position de l'obstacle
      * @param radius  rayon de l'obstacle
      */
@@ -71,6 +76,7 @@ public class Obstacle extends VectorObject {
 
     /**
      * Retourne le rayon de l'obstacle
+     *
      * @return le rayon de l'obstacle
      */
     public int getRadius(){

@@ -2,7 +2,7 @@ package angrybirds;
 
 import angrybirds.graphics.objects.Bird;
 import angrybirds.graphics.objects.Obstacle;
-import angrybirds.structures.Constantes;
+import angrybirds.structures.Constants;
 import angrybirds.parametrics.*;
 import angrybirds.structures.Vector2d;
 import org.newdawn.slick.GameContainer;
@@ -17,7 +17,10 @@ import java.util.Random;
 
 
 /**
- * Created by Quentin Brault on 24/09/2015.
+ * Cette classe représente le jeu.
+ *
+ * @author Quentin Brault
+ * @author Florent Marcaille
  */
 public class Game extends BasicGameState {
 
@@ -27,12 +30,12 @@ public class Game extends BasicGameState {
     private static final Random rand = new Random();
 
     /**
-     * variable de l'oiseau
+     * Oiseau du jeu
      */
     private Bird bird;
 
     /**
-     *  liste d'obstacles
+     *  Liste d'obstacles
      */
     private List<Obstacle> obstacles;
 
@@ -52,24 +55,23 @@ public class Game extends BasicGameState {
     private int currentParam;
 
     /**
-     * Y a-t-il deja eu contact ce tour
+     * Y a-t-il déjà eu contact ce tour
      */
     private boolean touching;
 
     /**
-     * Nombre de millisecond avant le reset
+     * Nombre de millisecondes avant le reset
      */
     private int resetTime;
 
     /**
-     * Nombre de millisecond avant le départ du vol de l'oiseau
+     * Nombre de millisecondes avant le départ du vol de l'oiseau
      */
     private int resetting;
 
     /**
-     * Lancement du jeu
-     * L'oiseau est à sa position de départ
-     * Les obstacles sont à leurs positions de départ
+     * Création du jeu.
+     * Initialisation des courbes de l'oiseau et des obstacles.
      */
     public Game() {
         birdStart = new Vector2d(50, 650);
@@ -77,17 +79,17 @@ public class Game extends BasicGameState {
                 new Linear(birdStart, 17), new Sinusoid(birdStart, 50, 50), new Spiral(birdStart, 20, 5), new Bezier(birdStart, new Vector2d[]{
                 birdStart, new Vector2d(200, 100), new Vector2d(500, 250), new Vector2d(600, 350)
         }), new Bezier(birdStart, new Vector2d[]{
-                birdStart, new Vector2d(200, 20), new Vector2d(500, 600), new Vector2d(600, 350)
+                birdStart, new Vector2d(200, 20), new Vector2d(500, 200), new Vector2d(600, 350)
         }), new Bezier(birdStart, new Vector2d[]{
                 birdStart, new Vector2d(200, 500), new Vector2d(500, 300), new Vector2d(600, 400)
         }), new Bezier(birdStart, new Vector2d[]{
-                birdStart, new Vector2d(200, 100), new Vector2d(500, 250), new Vector2d(300, 350), new Vector2d(800, 550)
+                birdStart, new Vector2d(200, 100), new Vector2d(500, 250), new Vector2d(500, 350), new Vector2d(800, 550)
         }), new Bezier(birdStart, new Vector2d[]{
                 birdStart, new Vector2d(200, 600), new Vector2d(500, 150), new Vector2d(600, 650)
         }), new Bezier(birdStart, new Vector2d[]{
-                birdStart, new Vector2d(700, 400), new Vector2d(400, 150), new Vector2d(800, 350)
+                birdStart, new Vector2d(700, 400), new Vector2d(400, 250), new Vector2d(800, 350)
         }), new Bezier(birdStart, new Vector2d[]{
-                birdStart, new Vector2d(200, 100), new Vector2d(500, 100), new Vector2d(600, 550)
+                birdStart, new Vector2d(200, 100), new Vector2d(500, 100), new Vector2d(900, 0)
         })
         };
         reset();
@@ -99,7 +101,7 @@ public class Game extends BasicGameState {
     }
 
     /**
-     * Placement de l'oiseau à sa position initiale
+     * Placement de l'oiseau à sa position initiale et reset des variables
      */
     private void reset() {
         bird = new Bird(birdStart, parametrics[currentParam]);
@@ -164,7 +166,8 @@ public class Game extends BasicGameState {
     /**
      * Determine la collision entre l'oiseau et l'obstacle
      * Calcul de la collision par le rapport à la distance entre l'hypothénuse des centres de l'oiseau et des obstacles et leurs rayons
-     * @return l'obstacle avec lequel l'oiseau est entré en collision
+     *
+     * @return L'obstacle avec lequel l'oiseau est entré en collision, ou null si aucun
      */
     public Obstacle obstacleTouch(){
     	double obstacleY;
@@ -193,10 +196,11 @@ public class Game extends BasicGameState {
 
     /**
      * Determine le passage de l'oiseau hors de l'ecran
-     * @return true quand l'oiseau atteint le bord droit ou le sommet de l ecran
+     *
+     * @return True quand l'oiseau touche un bord de l'écran
      */
     public boolean outOfScreen() {
-        if (this.bird.getPosition().x + this.bird.getRadius() >= Constantes.SCREEN_LENGTH || this.bird.getPosition().y + this.bird.getRadius() >= Constantes.SCREEN_WIDTH) {
+        if (this.bird.getPosition().x + this.bird.getRadius() >= Constants.SCREEN_WIDTH || this.bird.getPosition().y + this.bird.getRadius() >= Constants.SCREEN_HEIGHT) {
             return true;
         } else {
             return false;

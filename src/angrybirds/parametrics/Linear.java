@@ -3,17 +3,23 @@ package angrybirds.parametrics;
 import angrybirds.structures.Vector2d;
 
 /**
- * Created by Quentin Brault on 02/10/2015.
- */
-/**
- * Cette classe permet a l'oiseau de suivre une trajectoire lineaire
- * @author Maxime Catteau
+ * Cette classe représente une courbe linéaire
  *
+ * @author Maxime Catteau
  */
 public class Linear extends Parametric {
 
+    /**
+     * Taux d'accroissement
+     */
     private double a;
 
+    /**
+     * Créé une courbe linéaire
+     *
+     * @param offset    offset de la courbe
+     * @param a         Taux d'accroissement
+     */
     public Linear(Vector2d offset, double a) {
         super(offset);
         this.a = a;
@@ -21,12 +27,12 @@ public class Linear extends Parametric {
 
     @Override
     public Vector2d getValue(double t) {
-        return new Vector2d(a * t + offset.x, -a * t + offset.y);
+        return new Vector2d(a * t + offset.x, offset.y);
     }
 
     @Override
     public String toString() {
-        return "Linear(X: " + a + " * t + " + offset.x + ", Y: " + -a + " * t + " + offset.y + ")";
+        return "Linear(X: " + a + " * t + " + offset.x + ", Y: " + offset.y + ")";
     }
 
 }

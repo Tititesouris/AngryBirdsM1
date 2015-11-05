@@ -6,7 +6,8 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- * Created by Quentin Brault on 02/10/2015.
+ * @author Quentin Brault
+ * @author Florent Marcaille
  */
 public class TestVectors {
 

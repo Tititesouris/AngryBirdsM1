@@ -1,7 +1,10 @@
 package angrybirds.structures;
 
 /**
- * Created by Quentin Brault on 25/09/2015.
+ * Cette classe représente un vecteur à deux dimensions.
+ *
+ * @author Quentin Brault
+ * @author Florent Marcaille
  */
 public class Vector2d {
 

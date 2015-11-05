@@ -1,13 +1,8 @@
 package angrybirds.graphics.objects;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import angrybirds.Tool;
 import angrybirds.graphics.ParametricObject;
-import angrybirds.parametrics.Bezier;
 import angrybirds.parametrics.Parametric;
-import angrybirds.parametrics.Sinusoid;
 import angrybirds.structures.Vector2d;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -16,7 +11,12 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
 /**
- * Created by Quentin Brault on 25/09/2015.
+ * Cette classe représente l'oiseau qui suit une courbe paramétrique.
+ *
+ * @author Maxime Catteau
+ * @author Noémie Clay
+ * @see ParametricObject
+ * @see Parametric
  */
 public class Bird extends ParametricObject {
 
@@ -24,13 +24,14 @@ public class Bird extends ParametricObject {
      * Taille du rayon de l'oiseau
      */
     private static final int RADIUS = 16;
+
     /**
      * Variable de type Image
      */
     private Image sprite;
 
     /**
-     * Nombre de milliseconde avant de ne plus etre touché
+     * Nombre de millisecondes avant de ne plus etre touché
      */
     private int hit;
 
@@ -80,6 +81,7 @@ public class Bird extends ParametricObject {
 
     /**
      * Retourne le rayon de l'oiseau
+     *
      * @return le rayon de l'oiseau
      */
     public int getRadius(){

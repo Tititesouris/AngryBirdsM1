@@ -12,6 +12,9 @@ import org.junit.Test;
 import angrybirds.graphics.objects.*;
 import angrybirds.structures.*;
 
+/**
+ * @author Florent Marcaille
+ */
 public class TestCollision {
 
 	private Bird bird;
