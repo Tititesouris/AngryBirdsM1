@@ -7,10 +7,13 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
 /**
- * Created by Quentin Brault on 24/09/2015.
+ * Cette classe représente la fenêtre de jeu.
  */
 public class Window extends StateBasedGame {
 
+    /**
+     * Créé une fenêtre intitulée Angry Birds
+     */
     public Window() {
         super("Angry Birds");
     }
@@ -33,4 +36,5 @@ public class Window extends StateBasedGame {
     public void initStatesList(GameContainer gameContainer) throws SlickException {
         addState(new Game());
     }
+    
 }

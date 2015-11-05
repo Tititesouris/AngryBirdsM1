@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Random;
 
-import angrybirds.Game;
 import angrybirds.parametrics.Linear;
 import org.junit.Before;
 import org.junit.Test;
@@ -22,7 +21,7 @@ public class TestCollision {
 	private static final Random rand = new Random();
 	
 	@Before
-	public void init(){
+	public void init() {
 		bird = new Bird(new Vector2d(0,100), new Linear(new Vector2d(0, 100), 0));
 		obstacles = new ArrayList<>();
 		
@@ -30,7 +29,7 @@ public class TestCollision {
             obstacles.add(new Obstacle(new Vector2d(900, 100 + i * 150), 25 + rand.nextInt(50)));
         }
 		
-		for(Obstacle obs : obstacles){
+		for(Obstacle obs : obstacles) {
 			
 		}
 	}

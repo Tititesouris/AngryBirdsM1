@@ -21,6 +21,7 @@ import java.util.Random;
  *
  * @author Quentin Brault
  * @author Florent Marcaille
+ * @author Maxime Catteau
  */
 public class Game extends BasicGameState {
 
