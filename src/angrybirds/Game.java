@@ -201,7 +201,9 @@ public class Game extends BasicGameState {
      * @return True quand l'oiseau touche un bord de l'écran
      */
     public boolean outOfScreen() {
-        if (this.bird.getPosition().x + this.bird.getRadius() >= Constants.SCREEN_WIDTH || this.bird.getPosition().y + this.bird.getRadius() >= Constants.SCREEN_HEIGHT) {
+        if (this.bird.getPosition().x + this.bird.getRadius() >= Constants.SCREEN_WIDTH ||
+                this.bird.getPosition().y + this.bird.getRadius() >= Constants.SCREEN_HEIGHT ||
+                this.bird.getPosition().x + this.bird.getRadius() <= 0 || this.bird.getPosition().y + this.bird.getRadius() <= 0) {
             return true;
         } else {
             return false;
