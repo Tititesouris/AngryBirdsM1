@@ -25,7 +25,12 @@ public class Obstacle extends VectorObject {
     private Image sprite;
 
     /**
-     * Cr�ation d'un obstacle aux coordonnées et au rayon pass�s en param�tre
+     * Nombre de milliseconde avant de ne plus etre touché
+     */
+    private int hit;
+
+    /**
+     * Création d'un obstacle aux coordonnées et au rayon pass�s en param�tre
      * @param position position de l'obstacle
      * @param radius  rayon de l'obstacle
      */
@@ -41,8 +46,27 @@ public class Obstacle extends VectorObject {
     }
 
     @Override
+    public void update(GameContainer gameContainer, StateBasedGame stateBasedGame, int delta) throws SlickException {
+        if (hit <= 0) {
+            super.update(gameContainer, stateBasedGame, delta);
+        }
+        else {
+            hit -= delta;
+        }
+    }
+
+    @Override
     public void render(GameContainer gameContainer, StateBasedGame stateBasedGame, Graphics graphics) throws SlickException {
-        sprite.draw((float)position.x - radius, (float)position.y - radius);
+        if (hit <= 0) {
+            sprite.draw((float) position.x - radius, (float) position.y - radius);
+        }
+        else {
+            sprite.drawFlash((float) position.x - radius, (float) position.y - radius);
+        }
+    }
+
+    public void hit() {
+        hit = 2000;
     }
 
     /**

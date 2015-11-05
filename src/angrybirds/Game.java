@@ -52,6 +52,21 @@ public class Game extends BasicGameState {
     private int currentParam;
 
     /**
+     * Y a-t-il deja eu contact ce tour
+     */
+    private boolean touching;
+
+    /**
+     * Nombre de millisecond avant le reset
+     */
+    private int resetTime;
+
+    /**
+     * Nombre de millisecond avant le départ du vol de l'oiseau
+     */
+    private int resetting;
+
+    /**
      * Lancement du jeu
      * L'oiseau est à sa position de départ
      * Les obstacles sont à leurs positions de départ
@@ -64,9 +79,9 @@ public class Game extends BasicGameState {
         }), new Bezier(birdStart, new Vector2d[]{
                 birdStart, new Vector2d(200, 20), new Vector2d(500, 600), new Vector2d(600, 350)
         }), new Bezier(birdStart, new Vector2d[]{
-                birdStart, new Vector2d(200, 500), new Vector2d(500, 300), new Vector2d(600, 100)
+                birdStart, new Vector2d(200, 500), new Vector2d(500, 300), new Vector2d(600, 400)
         }), new Bezier(birdStart, new Vector2d[]{
-                birdStart, new Vector2d(200, 100), new Vector2d(500, 250), new Vector2d(300, 350), new Vector2d(800, 150)
+                birdStart, new Vector2d(200, 100), new Vector2d(500, 250), new Vector2d(300, 350), new Vector2d(800, 550)
         }), new Bezier(birdStart, new Vector2d[]{
                 birdStart, new Vector2d(200, 600), new Vector2d(500, 150), new Vector2d(600, 650)
         }), new Bezier(birdStart, new Vector2d[]{
@@ -89,6 +104,9 @@ public class Game extends BasicGameState {
     private void reset() {
         bird = new Bird(birdStart, parametrics[currentParam]);
         currentParam = (currentParam + 1) % parametrics.length;
+        resetting = 1000;
+        touching = false;
+        resetTime = 15000;
     }
 
     @Override
@@ -101,17 +119,37 @@ public class Game extends BasicGameState {
 
     @Override
     public void update(GameContainer gameContainer, StateBasedGame stateBasedGame, int delta) throws SlickException {
-        bird.update(gameContainer, stateBasedGame, delta);
-        for (Obstacle obstacle : obstacles) {
-            obstacle.update(gameContainer, stateBasedGame, delta);
+        if (resetting <= 0) {
+            if (resetTime > 0) {
+                bird.update(gameContainer, stateBasedGame, delta);
+                for (Obstacle obstacle : obstacles) {
+                    obstacle.update(gameContainer, stateBasedGame, delta);
+                }
+                Obstacle obstacle = obstacleTouch();
+                if (obstacle != null) {
+                    if (touching) {
+                        if (resetTime <= 1000) {
+                            obstacles.remove(obstacle);
+                            reset();
+                        }
+                    } else {
+                        bird.hit();
+                        obstacle.hit();
+                        touching = true;
+                        resetTime = 3000;
+                    }
+                }
+                if (outOfScreen()) {
+                    reset();
+                }
+                resetTime -= delta;
+            }
+            else {
+                reset();
+            }
         }
-        Obstacle obstacle = obstacleTouch();
-        if (obstacle != null) {
-            obstacles.remove(obstacle);
-            reset();
-        }
-        if(outOfScreen()){
-           reset();
+        else {
+            resetting -= delta;
         }
     }
 
@@ -157,10 +195,10 @@ public class Game extends BasicGameState {
      * Determine le passage de l'oiseau hors de l'ecran
      * @return true quand l'oiseau atteint le bord droit ou le sommet de l ecran
      */
-    public boolean outOfScreen(){
-        if(this.bird.getPosition().x+this.bird.getRadius() >= Constantes.SCREEN_LENGTH || this.bird.getPosition().y+this.bird.getRadius() >= Constantes.SCREEN_WIDTH){
+    public boolean outOfScreen() {
+        if (this.bird.getPosition().x + this.bird.getRadius() >= Constantes.SCREEN_LENGTH || this.bird.getPosition().y + this.bird.getRadius() >= Constantes.SCREEN_WIDTH) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
