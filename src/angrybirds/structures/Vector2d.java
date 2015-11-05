@@ -6,14 +6,15 @@ package angrybirds.structures;
 public class Vector2d {
 
     /**
-     * Variables qui stockant les coordonnÈes des objets
+     * Valeur x et y du vecteur
      */
     public double x, y;
 
     /**
-     * CrÈation d'un vecteur de coordonnÈes passÈs en paramËtres
-     * @param x
-     * @param y
+     * Cr√©ation d'un vecteur de valeurs sp√©cifi√©es
+     *
+     * @param x Valeur x du vecteur
+     * @param y Valeur y du vecteur
      */
     public Vector2d(double x, double y) {
         this.x = x;
@@ -21,41 +22,50 @@ public class Vector2d {
     }
 
     /**
-     * MÈthode qui ajoute le vecteur courant au vecteur passÈ en paramËtre
-     * @param vector
-     * @return Vector2d issu du calcul
+     * Retourne un vecteur √©tant la somme de ce vecteur et de celui pass√© en param√®tre.
+     *
+     * @param vector    Vecteur √† ajout√©
+     * @return  Somme des deux vecteurs
      */
     public Vector2d add(Vector2d vector) {
         return new Vector2d(x + vector.x, y + vector.y);
     }
 
     /**
-     * MÈthode qui fait la diffÈrence du vecteur courant avec vecteur passÈ en paramËtre
-     * @param vector
-     * @return Vector2d issu du calcul
-     */
-    public Vector2d diff(Vector2d vector) {
-        return new Vector2d(this.x - vector.x, this.y - vector.y);
-    }
-
-    /**
-     * MÈthode qui fait le produit entre le vecteur avec le nombre passÈ en paramËtre
-     * @param amount
-     * @return Vector2d issu du calcul
+     * Retourne un vecteur √©tant le produit de ce vecteur par la quantit√© pass√©e en param√®tre.
+     *
+     * @param amount    Valeur √† multipli√©e
+     * @return  Produit du vecteur et de la valeur
      */
     public Vector2d product(double amount) {
         return new Vector2d(x * amount, y * amount);
     }
 
+    /**
+     * Retourne la longueur de l'hypot√©nuse du triangle rectangle form√© par ce vecteur.
+     *
+     * @return  Longeur de l'hypot√©nuse.
+     */
     public double getHypotenuse() {
         return Math.sqrt(x*x + y*y);
     }
 
+    /**
+     * Retourne ce vecteur normalis√©
+     *
+     * @return  Vecteur normalis√©
+     */
     public Vector2d normalize() {
         double hypotenuse = getHypotenuse();
         return new Vector2d(x / hypotenuse, y / hypotenuse);
     }
 
+    /**
+     * Compare ce vecteur avec celui pass√© en param√®tre
+     *
+     * @param vector    Vecteur √† comparer
+     * @return  True si les deux vecteurs sont √©gaux, false sinon.
+     */
     public boolean equals(Vector2d vector) {
         return x == vector.x && y == vector.y;
     }
