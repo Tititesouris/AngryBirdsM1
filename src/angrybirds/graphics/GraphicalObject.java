@@ -33,7 +33,7 @@ public abstract class GraphicalObject {
      *
      * @param gameContainer     Contexte du jeu
      * @param stateBasedGame    Référence au jeu
-     * @throws SlickException
+     * @throws SlickException   Librairie Slick
      */
     public abstract void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException;
 
@@ -43,7 +43,7 @@ public abstract class GraphicalObject {
      * @param gameContainer     Contexte du jeu
      * @param stateBasedGame    Référence au jeu
      * @param delta             Nombre de millisecondes depuis le dernier appel de la méthode
-     * @throws SlickException
+     * @throws SlickException   Librairie Slick
      */
     public abstract void update(GameContainer gameContainer, StateBasedGame stateBasedGame, int delta) throws SlickException;
 
@@ -53,7 +53,7 @@ public abstract class GraphicalObject {
      * @param gameContainer     Contexte du jeu
      * @param stateBasedGame    Référence au jeu
      * @param graphics          Contexte graphique
-     * @throws SlickException
+     * @throws SlickException   Librairie Slick
      */
     public abstract void render(GameContainer gameContainer, StateBasedGame stateBasedGame, Graphics graphics) throws SlickException;
 

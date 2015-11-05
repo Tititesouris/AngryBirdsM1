@@ -32,7 +32,10 @@ public abstract class Parametric {
     public abstract Vector2d getValue(double t);
 
     /**
-     * Cette méthode retourne le vecteur tangeante à la courbe à l'instant t
+     * Cette méthode retourne le vecteur tangente à la courbe à l'instant t
+     *
+     * @param t     Instant t
+     * @return Vecteur tangente à la courbe
      */
     public Vector2d getTangent(double t) {
         Vector2d a = getValue(t + 0.001);
