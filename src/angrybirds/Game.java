@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+
 /**
  * Created by Quentin Brault on 24/09/2015.
  */
@@ -46,6 +47,9 @@ public class Game extends BasicGameState {
         for (Obstacle obstacle : obstacles) {
             obstacle.update(gameContainer, stateBasedGame, delta);
         }
+        if(obstacleTouch() instanceof Obstacle){
+        	System.out.println("Touch");
+        }
     }
 
     @Override
@@ -54,6 +58,54 @@ public class Game extends BasicGameState {
         for (Obstacle obstacle : obstacles) {
             obstacle.render(gameContainer, stateBasedGame, graphics);
         }
+    }
+    
+    /*public boolean obstacleTouch(Bird bird){
+    	List<Vector2d> obstaclesHitBox = new ArrayList<>(); 
+    	
+    	for(Obstacle obstacle : obstacles){
+    		/*theorie
+    		 * x = centre.x + rayon * cos(angle)
+    		 * y = centre.y + rayon * sin(angle)
+    		 * Augmenter l'angle a chaque iteration pour faire le tour 
+    		 * 		(a voir cb on itere pour avoir une meilleure precision en sachant 
+    		 * 			que si on a bcp d obstacle ca va prendre du temps)
+    		 * Stocker les coordonnées dans une list et verifier a 
+    		 * 		chaque update que Bird n'est pas entrain de toucher 
+    		 * 			(a voir aussi si on lui rajoute son bec en "hit box" 
+    		 * 				(plus dur car faut recuperer les coordonnées du triangle qui 
+    		 * 						depend de l angle du tir))
+    		 
+    		
+    	}
+    	return false;
+    }*/
+    
+    public Obstacle obstacleTouch(){
+    	List<Vector2d> obstaclesHitBox = new ArrayList<>(); 
+    	
+    	double obstacleY;
+    	double obstacleX;	
+    	double birdX = this.bird.getPosition().x;
+    	double birdY = this.bird.getPosition().y;
+    	double x;
+    	double y;
+    	double hypo;
+    	
+    	for(Obstacle obstacle : obstacles){
+    		obstacleX = obstacle.getPosition().x;
+    		obstacleY = obstacle.getPosition().y;
+    		
+    		x = obstacleX - birdX;
+    		y = obstacleY - birdY;
+    		
+    		hypo = Math.sqrt((x*x) + (y*y));
+    		
+    		if(hypo <= this.bird.getRadius() + obstacle.getRadius()){
+    			return obstacle;
+    		}
+    	}
+		return null;
     }
 
     @Override

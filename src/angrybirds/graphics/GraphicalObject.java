@@ -22,5 +22,9 @@ public abstract class GraphicalObject {
     public abstract void update(GameContainer gameContainer, StateBasedGame stateBasedGame, int delta) throws SlickException;
 
     public abstract void render(GameContainer gameContainer, StateBasedGame stateBasedGame, Graphics graphics) throws SlickException;
+    
+    public Vector2d getPosition(){
+    	return this.position;
+    }
 
 }

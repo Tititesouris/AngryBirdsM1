@@ -21,7 +21,7 @@ public class Obstacle extends VectorObject {
     public Obstacle(Vector2d position, int radius) {
         super(position, new Vector2d(0, 0), new Vector2d(0, 0));
         this.radius = radius;
-        this.sprite = Tool.getImage("res/flame.png").getScaledCopy(radius * 2, radius * 2);
+        this.sprite = Tool.getImage("/res/flame.png").getScaledCopy(radius * 2, radius * 2);
     }
 
     @Override
@@ -33,5 +33,9 @@ public class Obstacle extends VectorObject {
     public void render(GameContainer gameContainer, StateBasedGame stateBasedGame, Graphics graphics) throws SlickException {
         sprite.draw((float)position.x - radius, (float)position.y - radius);
         graphics.drawOval((float)position.x - radius, (float)position.y - radius, radius * 2, radius * 2);
+    }
+    
+    public int getRadius(){
+    	return this.radius;
     }
 }
