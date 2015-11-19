@@ -1,15 +1,19 @@
 package angrybirds;
 
+import angrybirds.structures.Constants;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
 /**
- * Created by Quentin Brault on 24/09/2015.
+ * Cette classe représente la fenêtre de jeu.
  */
 public class Window extends StateBasedGame {
 
+    /**
+     * Créé une fenêtre intitulée Angry Birds
+     */
     public Window() {
         super("Angry Birds");
     }
@@ -17,7 +21,7 @@ public class Window extends StateBasedGame {
     public static void main(String[] args) {
         try {
             AppGameContainer app = new AppGameContainer(new Window());
-            app.setDisplayMode(1080, 720, false);
+            app.setDisplayMode(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, false);
             app.setAlwaysRender(true);
             app.setTargetFrameRate(60);
             app.setMinimumLogicUpdateInterval(10);
@@ -32,4 +36,5 @@ public class Window extends StateBasedGame {
     public void initStatesList(GameContainer gameContainer) throws SlickException {
         addState(new Game());
     }
+    
 }

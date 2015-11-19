@@ -3,12 +3,23 @@ package angrybirds.parametrics;
 import angrybirds.structures.Vector2d;
 
 /**
- * Created by Quentin Brault on 02/10/2015.
+ * Cette classe représente une courbe linéaire
+ *
+ * @author Maxime Catteau
  */
 public class Linear extends Parametric {
 
+    /**
+     * Taux d'accroissement
+     */
     private double a;
 
+    /**
+     * Créé une courbe linéaire
+     *
+     * @param offset    offset de la courbe
+     * @param a         Taux d'accroissement
+     */
     public Linear(Vector2d offset, double a) {
         super(offset);
         this.a = a;

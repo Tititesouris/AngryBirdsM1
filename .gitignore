@@ -10,3 +10,4 @@ AngryBirds.iml
 .classpath
 .Rhistory
 bin/
+.settings/

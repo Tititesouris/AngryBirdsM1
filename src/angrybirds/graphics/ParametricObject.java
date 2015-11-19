@@ -8,16 +8,34 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
 /**
- * Created by Quentin Brault on 02/10/2015.
+ * Cette classe représente un objet graphique suivant une courbe paramétrique.
+ *
+ * @author Quentin Brault
+ *
  */
 public class ParametricObject extends GraphicalObject {
 
+    /**
+     * Courbe paramétrique suivit
+     */
     protected Parametric parametric;
 
-    protected double start;
+    /**
+     * Valeur de départ
+     */
+    private double start;
 
+    /**
+     * Valeur actuelle
+     */
     protected double t;
 
+    /**
+     * Créé un nouvel objet paramétrique
+     *
+     * @param parametric    Courbe paramétrique à suivre
+     * @param t             Valeur de départ
+     */
     public ParametricObject(Parametric parametric, double t) {
         super(parametric.getValue(t));
         this.parametric = parametric;
@@ -32,7 +50,7 @@ public class ParametricObject extends GraphicalObject {
 
     @Override
     public void update(GameContainer gameContainer, StateBasedGame stateBasedGame, int delta) throws SlickException {
-        t += delta / 100f;
+        t += delta / 200f;
         position = parametric.getValue(t);
     }
 
@@ -42,7 +60,8 @@ public class ParametricObject extends GraphicalObject {
         while (i <= t) {
             Vector2d point = parametric.getValue(i);
             graphics.fillOval((float)point.x, (float)point.y, 1, 1);
-            i += 0.1;
+            i += 0.5;
         }
     }
+
 }

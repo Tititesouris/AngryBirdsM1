@@ -10,14 +10,35 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
 /**
- * Created by Quentin Brault on 25/09/2015.
+ * Cette classe représente un obstacle.
+ *
+ * @author Maxime Catteau
+ * @author Noémie Clay
+ * @see VectorObject
  */
 public class Obstacle extends VectorObject {
 
+    /**
+     *  Rayon de l'obstacle
+     */
     private int radius;
 
+    /**
+     * Image de l'obstacle
+     */
     private Image sprite;
 
+    /**
+     * Nombre de millisecondes avant de ne plus être touché
+     */
+    private int hit;
+
+    /**
+     * Création d'un obstacle aux coordonnées et au rayon passés en paramètre
+     *
+     * @param position position de l'obstacle
+     * @param radius  rayon de l'obstacle
+     */
     public Obstacle(Vector2d position, int radius) {
         super(position, new Vector2d(0, 0), new Vector2d(0, 0));
         this.radius = radius;
@@ -30,11 +51,34 @@ public class Obstacle extends VectorObject {
     }
 
     @Override
-    public void render(GameContainer gameContainer, StateBasedGame stateBasedGame, Graphics graphics) throws SlickException {
-        sprite.draw((float)position.x - radius, (float)position.y - radius);
-        graphics.drawOval((float)position.x - radius, (float)position.y - radius, radius * 2, radius * 2);
+    public void update(GameContainer gameContainer, StateBasedGame stateBasedGame, int delta) throws SlickException {
+        if (hit <= 0) {
+            super.update(gameContainer, stateBasedGame, delta);
+        }
+        else {
+            hit -= delta;
+        }
     }
-    
+
+    @Override
+    public void render(GameContainer gameContainer, StateBasedGame stateBasedGame, Graphics graphics) throws SlickException {
+        if (hit <= 0) {
+            sprite.draw((float) position.x - radius, (float) position.y - radius);
+        }
+        else {
+            sprite.drawFlash((float) position.x - radius, (float) position.y - radius);
+        }
+    }
+
+    public void hit() {
+        hit = 2000;
+    }
+
+    /**
+     * Retourne le rayon de l'obstacle
+     *
+     * @return le rayon de l'obstacle
+     */
     public int getRadius(){
     	return this.radius;
     }

@@ -1,16 +1,14 @@
 package tests;
 
-import angrybirds.parametrics.Linear;
-import angrybirds.parametrics.Parametric;
-import angrybirds.parametrics.Sinusoid;
-import angrybirds.parametrics.Spiral;
+import angrybirds.parametrics.*;
 import angrybirds.structures.Vector2d;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
 /**
- * Created by Quentin Brault on 02/10/2015.
+ * @author Florent Marcaille
+ * @author Quentin Brault
  */
 public class TestParametrics {
 
@@ -23,7 +21,7 @@ public class TestParametrics {
     }
 
     @Test
-    public void testlinear() {
+    public void testLinear() {
         Parametric linear = new Linear(new Vector2d(0, 0), 1);
         assertTrue(linear.getValue(0).equals(new Vector2d(0, 0)));
         assertTrue(linear.getValue(5).equals(new Vector2d(5, 0)));
@@ -44,5 +42,14 @@ public class TestParametrics {
         assertTrue(spiral.getValue(0).equals(new Vector2d(0, 0)));
         assertTrue(spiral.getValue(1).equals(new Vector2d(Math.cos(1), Math.sin(1))));
     }
+
+    @Test
+    public void testBezier() {
+        Parametric bezier = new Bezier(new Vector2d(0, 0), new Vector2d[]{
+                new Vector2d(0, 0), new Vector2d(100, 100), new Vector2d(100, 0)
+        });
+        assertTrue(bezier.getValue(0).equals(new Vector2d(0, 0)));
+    }
+
 
 }
