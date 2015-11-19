@@ -1,8 +1,7 @@
 package angrybirds.graphics.objects;
 
 import angrybirds.Tool;
-import angrybirds.graphics.ParametricObject;
-import angrybirds.parametrics.Parametric;
+import angrybirds.graphics.VectorObject;
 import angrybirds.structures.Vector2d;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -15,10 +14,8 @@ import org.newdawn.slick.state.StateBasedGame;
  *
  * @author Maxime Catteau
  * @author Noémie Clay
- * @see ParametricObject
- * @see Parametric
  */
-public class Bird extends ParametricObject {
+public class Bird extends VectorObject {
 
     /**
      * Taille du rayon de l'oiseau
@@ -39,11 +36,9 @@ public class Bird extends ParametricObject {
      * Création d'un oiseau.
      *
      * @param position  Position initiale de l'oiseau
-     * @param parametric    Courbe décrivant le chemin de l'oiseau
      */
-    public Bird(Vector2d position, Parametric parametric) {
-        super(parametric, 0);
-        this.position = position;
+    public Bird(Vector2d position) {
+        super(position, new Vector2d(0.1, -0.1), new Vector2d(0, 0));
         this.sprite = Tool.getImage("/res/bird.png").getScaledCopy(RADIUS * 2, RADIUS * 2);
     }
 
@@ -65,7 +60,7 @@ public class Bird extends ParametricObject {
     @Override
     public void render(GameContainer gameContainer, StateBasedGame stateBasedGame, Graphics graphics) throws SlickException {
         super.render(gameContainer, stateBasedGame, graphics);
-        Vector2d tangent = parametric.getTangent(t);
+        Vector2d tangent = new Vector2d(1, 0);
         sprite.setRotation(45 + (float)Math.toDegrees(Math.atan2(tangent.y, tangent.x)));
         if (hit <= 0) {
             sprite.draw((float) position.x - RADIUS, (float) position.y - RADIUS);
