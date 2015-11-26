@@ -1,5 +1,5 @@
 ## Angry Birds M1 ##
-La classe principale à lancer est angrybirds.Window  
+La classe principale à lancer est angrybirds.Window
 Ce jeu utilise la librairie graphique Slick2d.  
 Les resources sont situées dans le dossier res/  
 Le jar éxécutable doit être dans le même dossier que le dossier res/ lors de l'éxécution.

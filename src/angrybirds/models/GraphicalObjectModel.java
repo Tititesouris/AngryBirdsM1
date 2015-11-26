@@ -1,5 +1,6 @@
-package angrybirds.graphics;
+package angrybirds.models;
 
+import angrybirds.structures.Constants;
 import angrybirds.structures.Vector2d;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -12,20 +13,23 @@ import org.newdawn.slick.state.StateBasedGame;
  * @author Maxime Catteau
  * @author Quentin Brault
  */
-public abstract class GraphicalObject {
+public abstract class GraphicalObjectModel implements Model {
 
     /**
      * Position de l'objet
      */
     protected Vector2d position;
 
+    protected Vector2d size;
+
     /**
      * Créé un nouvel objet
      *
      * @param position  Position de l'objet
      */
-    public GraphicalObject(Vector2d position) {
+    public GraphicalObjectModel(Vector2d position, Vector2d size) {
         this.position = position;
+        this.size = size;
     }
 
     /**
@@ -48,22 +52,23 @@ public abstract class GraphicalObject {
     public abstract void update(GameContainer gameContainer, StateBasedGame stateBasedGame, int delta) throws SlickException;
 
     /**
-     * Cette méthode permet d'afficher l'objet sur l'écran.
-     *
-     * @param gameContainer     Contexte du jeu
-     * @param stateBasedGame    Référence au jeu
-     * @param graphics          Contexte graphique
-     * @throws SlickException   Librairie Slick
-     */
-    public abstract void render(GameContainer gameContainer, StateBasedGame stateBasedGame, Graphics graphics) throws SlickException;
-
-    /**
      * Retourne la position de l'objet.
      *
      * @return  Position de l'objet
      */
     public Vector2d getPosition(){
     	return this.position;
+    }
+
+    public Vector2d getSize() {
+        return size;
+    }
+
+    public boolean isOutOfBounds() {
+        return position.x + size.x >= Constants.SCREEN_WIDTH
+                || position.y + size.y >= Constants.SCREEN_HEIGHT
+                || position.x - size.x <= 0
+                || position.y - size.y <= 0;
     }
 
 }

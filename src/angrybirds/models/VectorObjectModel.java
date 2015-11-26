@@ -1,8 +1,7 @@
-package angrybirds.graphics;
+package angrybirds.models;
 
 import angrybirds.structures.Vector2d;
 import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
@@ -12,8 +11,7 @@ import org.newdawn.slick.state.StateBasedGame;
  * @author Quentin Brault
  *
  */
-public class VectorObject extends GraphicalObject {
-
+public class VectorObjectModel extends GraphicalObjectModel {
     /**
      * Vecteurs vélocité et accélération
      */
@@ -26,8 +24,8 @@ public class VectorObject extends GraphicalObject {
      * @param velocity      Vélocité de départ de l'objet
      * @param acceleration  Accélération de départ de l'objet
      */
-    public VectorObject(Vector2d position, Vector2d velocity, Vector2d acceleration) {
-        super(position);
+    public VectorObjectModel(Vector2d position, Vector2d size, Vector2d velocity, Vector2d acceleration) {
+        super(position, size);
         this.velocity = velocity;
         this.acceleration = acceleration;
     }
@@ -43,9 +41,12 @@ public class VectorObject extends GraphicalObject {
         position = position.add(velocity.product(delta));
     }
 
-    @Override
-    public void render(GameContainer gameContainer, StateBasedGame stateBasedGame, Graphics graphics) throws SlickException {
+    public Vector2d getVelocity() {
+        return velocity;
+    }
 
+    public Vector2d getAcceleration() {
+        return acceleration;
     }
 
 }
