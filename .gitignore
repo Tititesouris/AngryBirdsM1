@@ -10,3 +10,6 @@ AngryBirds.iml
 .classpath
 .Rhistory
 bin/
+
+#Physics notes
+florent_physics/
