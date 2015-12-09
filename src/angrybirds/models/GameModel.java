@@ -21,10 +21,13 @@ public class GameModel implements Model {
 
     private BirdModel bird;
 
+    private SlingshotModel slingshot;
+
     private List<ObstacleModel> obstacles;
 
     public GameModel() {
-        bird = new BirdModel(50, 650);
+        bird = new BirdModel(150, 500);
+        slingshot = new SlingshotModel(bird);
         obstacles = new ArrayList<>();
         for (int i = 0; i < 5 + rand.nextInt(5); i++) {
             obstacles.add(new ObstacleModel(new Vector2d(50, 50)));
@@ -34,6 +37,7 @@ public class GameModel implements Model {
     @Override
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
         bird.init(gameContainer, stateBasedGame);
+        slingshot.init(gameContainer, stateBasedGame);
         for (ObstacleModel obstacle : obstacles) {
             obstacle.init(gameContainer, stateBasedGame);
         }
@@ -42,6 +46,7 @@ public class GameModel implements Model {
     @Override
     public void update(GameContainer gameContainer, StateBasedGame stateBasedGame, int delta) throws SlickException {
         bird.update(gameContainer, stateBasedGame, delta);
+        slingshot.update(gameContainer, stateBasedGame, delta);
         for (ObstacleModel obstacle : obstacles) {
             obstacle.update(gameContainer, stateBasedGame, delta);
         }
@@ -87,4 +92,7 @@ public class GameModel implements Model {
         return null;
     }
 
+    public SlingshotModel getSlingshot() {
+        return slingshot;
+    }
 }

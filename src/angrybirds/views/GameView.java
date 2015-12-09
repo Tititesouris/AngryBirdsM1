@@ -23,11 +23,14 @@ public class GameView implements View {
 
     private BirdView bird;
 
+    private SlingshotView slingshot;
+
     private List<ObstacleView> obstacles;
 
     public GameView(GameModel model) {
         this.model = model;
         bird = new BirdView(model.getBird());
+        slingshot = new SlingshotView(model.getSlingshot());
         obstacles = new ArrayList<>();
         for (ObstacleModel obstacle : model.getObstacles()) {
             obstacles.add(new ObstacleView(obstacle));
@@ -37,6 +40,7 @@ public class GameView implements View {
     @Override
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
         bird.init(gameContainer, stateBasedGame);
+        slingshot.init(gameContainer, stateBasedGame);
         for (ObstacleView obstacle : obstacles) {
             obstacle.init(gameContainer, stateBasedGame);
         }
@@ -45,6 +49,7 @@ public class GameView implements View {
     @Override
     public void render(GameContainer gameContainer, StateBasedGame stateBasedGame, Graphics graphics) throws SlickException {
         bird.render(gameContainer, stateBasedGame, graphics);
+        slingshot.render(gameContainer, stateBasedGame, graphics);
         for (ObstacleView obstacle : obstacles) {
             obstacle.render(gameContainer, stateBasedGame, graphics);
         }

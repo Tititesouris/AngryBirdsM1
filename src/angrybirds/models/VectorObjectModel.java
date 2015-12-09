@@ -45,8 +45,16 @@ public class VectorObjectModel extends GraphicalObjectModel {
         return velocity;
     }
 
+    public void setVelocity(double x, double y) {
+        this.velocity = new Vector2d(x, y);
+    }
+
     public Vector2d getAcceleration() {
         return acceleration;
+    }
+
+    public void setAcceleration(double x, double y) {
+        this.acceleration = new Vector2d(x, y);
     }
 
 }

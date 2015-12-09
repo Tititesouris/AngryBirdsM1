@@ -39,6 +39,9 @@ public class BirdView implements View {
         else {
             sprite.draw((float) (model.getPosition().x - model.getSize().x), (float) (model.getPosition().y - model.getSize().y));
         }
+        for (Vector2d dot : model.getDots()) {
+            graphics.fillOval((float)dot.x - 2, (float)dot.y - 2, 4, 4);
+        }
     }
 
 }

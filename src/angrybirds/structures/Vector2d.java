@@ -78,4 +78,7 @@ public class Vector2d {
         return "X: " + x + ", Y: " + y;
     }
 
+    public Vector2d diff(Vector2d vector2d) {
+        return new Vector2d(this.x - vector2d.x, this.y - vector2d.y);
+    }
 }

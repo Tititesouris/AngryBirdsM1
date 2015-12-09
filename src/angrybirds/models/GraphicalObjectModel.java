@@ -60,6 +60,10 @@ public abstract class GraphicalObjectModel implements Model {
     	return this.position;
     }
 
+    public void setPosition(double x, double y) {
+        this.position = new Vector2d(x, y);
+    }
+
     public Vector2d getSize() {
         return size;
     }
