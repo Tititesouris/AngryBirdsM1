@@ -34,6 +34,11 @@ public class Vector2d {
         return new Vector2d(x + vector.x, y + vector.y);
     }
 
+
+    public Vector2d diff(Vector2d vector2d) {
+        return new Vector2d(this.x - vector2d.x, this.y - vector2d.y);
+    }
+
     /**
      * Retourne un vecteur étant le produit de ce vecteur par la quantité passée en paramètre.
      *
@@ -78,7 +83,4 @@ public class Vector2d {
         return "X: " + x + ", Y: " + y;
     }
 
-    public Vector2d diff(Vector2d vector2d) {
-        return new Vector2d(this.x - vector2d.x, this.y - vector2d.y);
-    }
 }

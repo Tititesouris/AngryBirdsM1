@@ -2,6 +2,8 @@ package angrybirds.views;
 
 import angrybirds.models.GameModel;
 import angrybirds.models.ObstacleModel;
+import angrybirds.structures.Constants;
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
@@ -53,6 +55,8 @@ public class GameView implements View {
         for (ObstacleView obstacle : obstacles) {
             obstacle.render(gameContainer, stateBasedGame, graphics);
         }
+        graphics.setColor(Color.green);
+        graphics.fillRect(0, Constants.SCREEN_HEIGHT - Constants.GROUND_HEIGHT, Constants.SCREEN_WIDTH, Constants.GROUND_HEIGHT);
     }
 
 }

@@ -27,7 +27,7 @@ public class GameModel implements Model {
 
     public GameModel() {
         bird = new BirdModel(150, 500);
-        slingshot = new SlingshotModel(bird);
+        slingshot = new SlingshotModel(bird, 150);
         obstacles = new ArrayList<>();
         for (int i = 0; i < 5 + rand.nextInt(5); i++) {
             obstacles.add(new ObstacleModel(new Vector2d(50, 50)));
@@ -50,6 +50,10 @@ public class GameModel implements Model {
         for (ObstacleModel obstacle : obstacles) {
             obstacle.update(gameContainer, stateBasedGame, delta);
         }
+        if (!bird.isHit() && isOutOfBounds(bird)) {
+            slingshot.init(gameContainer, stateBasedGame);
+            bird.hit();
+        }
     }
 
     public BirdModel getBird() {
@@ -60,6 +64,12 @@ public class GameModel implements Model {
         return obstacles;
     }
 
+    public boolean isOutOfBounds(GraphicalObjectModel object) {
+        return object.getPosition().x < 0
+                || object.getPosition().y < 0
+                || object.getPosition().x + object.size.x > Constants.SCREEN_WIDTH
+                || object.getPosition().y + object.size.y > Constants.SCREEN_HEIGHT - Constants.GROUND_HEIGHT;
+    }
 
     /**
      * Determine la collision entre l'oiseau et l'obstacle

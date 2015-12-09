@@ -3,10 +3,7 @@ package angrybirds.views;
 import angrybirds.Tool;
 import angrybirds.models.BirdModel;
 import angrybirds.structures.Vector2d;
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
-import org.newdawn.slick.SlickException;
+import org.newdawn.slick.*;
 import org.newdawn.slick.state.StateBasedGame;
 
 /**
@@ -39,6 +36,7 @@ public class BirdView implements View {
         else {
             sprite.draw((float) (model.getPosition().x - model.getSize().x), (float) (model.getPosition().y - model.getSize().y));
         }
+        graphics.setColor(Color.white);
         for (Vector2d dot : model.getDots()) {
             graphics.fillOval((float)dot.x - 2, (float)dot.y - 2, 4, 4);
         }

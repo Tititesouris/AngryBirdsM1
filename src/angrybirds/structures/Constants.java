@@ -11,4 +11,6 @@ public interface Constants {
 
     int SCREEN_HEIGHT = 720;
 
+    int GROUND_HEIGHT = 50;
+
 }
