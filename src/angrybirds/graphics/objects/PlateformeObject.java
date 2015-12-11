@@ -1,12 +1,11 @@
 package angrybirds.graphics.objects;
 
-import angrybirds.graphics.VectorObject;
 import angrybirds.structures.Vector2d;
 
 /**
  * Created by Florent on 26/11/2015.
  */
-public class PlateformeObject extends Obstacle {
+public class PlateformeObject{
 
     // zone d'arrivée
     Vector2d target;

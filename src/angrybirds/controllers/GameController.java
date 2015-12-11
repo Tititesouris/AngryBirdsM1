@@ -13,7 +13,7 @@ import org.newdawn.slick.state.StateBasedGame;
  *
  * @author Quentin Brault
  */
-public class GameController extends BasicGameState {
+public class  GameController extends BasicGameState {
 
     private final GameModel model = new GameModel();
 
