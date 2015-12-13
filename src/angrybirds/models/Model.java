@@ -5,9 +5,10 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
 /**
- * TODO: Description
+ *  * Cette interface determine comment les modèles doivent etre concus
+
  *
- * @author User
+ * @author AngryBirdsM1
  */
 public interface Model {
 
