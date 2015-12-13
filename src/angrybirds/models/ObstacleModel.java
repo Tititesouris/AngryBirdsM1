@@ -94,5 +94,4 @@ public abstract class ObstacleModel extends VectorObjectModel {
     public void setHit(boolean hit) {
         this.hit = hit;
     }
-
 }
