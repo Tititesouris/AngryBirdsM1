@@ -10,7 +10,7 @@ import org.newdawn.slick.state.StateBasedGame;
 /**
  * TODO: Description
  *
- * @author User
+ * @author Quentin Brault
  */
 public class ObstacleView implements View {
 

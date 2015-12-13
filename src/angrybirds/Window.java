@@ -13,6 +13,8 @@ import org.newdawn.slick.state.StateBasedGame;
  */
 public class Window extends StateBasedGame {
 
+    private static Window window = new Window();
+
     /**
      * Créé une fenêtre intitulée Angry Birds
      */
@@ -22,7 +24,7 @@ public class Window extends StateBasedGame {
 
     public static void main(String[] args) {
         try {
-            AppGameContainer app = new AppGameContainer(new Window());
+            AppGameContainer app = new AppGameContainer(Window.getWindow());
             app.setDisplayMode(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, false);
             app.setAlwaysRender(true);
             app.setTargetFrameRate(60);
@@ -37,6 +39,10 @@ public class Window extends StateBasedGame {
     @Override
     public void initStatesList(GameContainer gameContainer) throws SlickException {
         addState(new GameController());
+    }
+
+    public static Window getWindow() {
+        return window;
     }
     
 }
