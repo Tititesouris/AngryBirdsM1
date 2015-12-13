@@ -10,28 +10,37 @@ import org.newdawn.slick.state.StateBasedGame;
  *
  * @author User
  */
-public class ObstacleModel extends GraphicalObjectModel {
-
-    // target zone
-    private Vector2d target;
-    private int targetRadius;
+public class ObstacleModel extends VectorObjectModel {
 
     // departure zone
     private Vector2d start;
     private int startRadius;
 
+    // target zone
+    private Vector2d target;
+    private int targetRadius;
+
     /**
      * Créé un nouvel objet
      *
-     * @param position Position de l'objet
+     * @param startX,startY Obstacle's position
+     * @param targetX,targetY Direction of the obstacle
+     * @param startRadius Radius of the departure zone
+     * @param targetRadius Radius of the target zone
      */
-    public ObstacleModel(Vector2d position) {
-        super(position, new Vector2d(25, 25));
+    public ObstacleModel(double startX, double startY, Vector2d velocity) {
+        super(new Vector2d(startX, startY), new Vector2d(20, 20), velocity, new Vector2d(0, 0));
+        this.start = new Vector2d(startX,startY);
+        this.startRadius = startRadius;
+        this.target = new Vector2d(targetX,targetY);
+        this.targetRadius = targetRadius;
     }
 
     @Override
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
-
+        position = start;
+        velocity = new Vector2d(0, 0);
+        acceleration = new Vector2d(0, 0);
     }
 
     @Override

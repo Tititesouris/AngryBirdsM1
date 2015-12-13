@@ -13,7 +13,7 @@ import java.util.Random;
 /**
  * TODO: Description
  *
- * @author Quentin Brault
+ * @author Quentin Brault, Marcaille Florent
  */
 public class GameModel implements Model {
 
@@ -29,9 +29,8 @@ public class GameModel implements Model {
         bird = new BirdModel(150, 500);
         slingshot = new SlingshotModel(bird, 150);
         obstacles = new ArrayList<>();
-        for (int i = 0; i < 5 + rand.nextInt(5); i++) {
-            obstacles.add(new ObstacleModel(new Vector2d(50, 50)));
-        }
+
+        obstacles.add(new ObstacleModel(400,500,new Vector2d(10,20)));
     }
 
     @Override
