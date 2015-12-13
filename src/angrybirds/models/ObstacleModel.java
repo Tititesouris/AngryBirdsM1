@@ -28,14 +28,10 @@ public class ObstacleModel extends VectorObjectModel {
      * Créé un nouvel objet
      *
      * @param startX,startY Obstacle's position
-     * @param targetX,targetY Direction of the obstacle
-     * @param startRadius Radius of the departure zone
-     * @param targetRadius Radius of the target zone
      */
     public ObstacleModel(double startX, double startY, Vector2d velocity) {
         super(new Vector2d(startX, startY), new Vector2d(20, 20), velocity, new Vector2d(0, 0));
         this.start = new Vector2d(startX,startY);
-
     }
 
     @Override
@@ -95,36 +91,7 @@ public class ObstacleModel extends VectorObjectModel {
      * Swap the target with the start zone and inside out
      */
     public void reverseObstacleAiming(){
-        Vector2d tempVect = this.start;
-        this.start = this.target;
-        this.target = tempVect;
-
-        int tempRadius = this.startRadius;
-        this.startRadius = this.targetRadius;
-        this.targetRadius = tempRadius;
+        Vector2d velocityReverse = new Vector2d(velocity.x*-1,velocity.y*-1);
+        velocity = velocityReverse;
     }
-
-    /**
-     * Check if the obstacle has reach his going back area
-     *
-     * @return true when this reached target
-     */
-    public boolean targetReached(){
-        double targetY = this.target.y;
-        double targetX = this.target.x;
-
-        double obstacleX = this.getPosition().x;
-        double obstacleY = this.getPosition().y;
-
-        double x = targetX - obstacleX;
-        double y = targetY - obstacleY;
-
-        double hypo = Math.sqrt((x * x) + (y * y));
-
-        if (hypo <= this. + this.targetRadius) {
-            return true;
-        }
-        return false;
-    }
-
 }
