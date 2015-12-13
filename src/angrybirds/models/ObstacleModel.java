@@ -54,15 +54,6 @@ public class ObstacleModel extends VectorObjectModel {
             this.reverseTime -= delta;
             super.update(gameContainer,stateBasedGame,delta);
         }
-
-
-
-
-        if(this.touchScreen()==null){
-            //super.update(gameContainer,stateBasedGame,delta);
-        }else{
-            reverseObstacleAiming();
-        }
     }
 
     /**
