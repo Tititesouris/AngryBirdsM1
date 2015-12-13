@@ -5,6 +5,8 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
+import java.util.Vector;
+
 /**
  * TODO: Description
  *
@@ -20,6 +22,9 @@ public class ObstacleModel extends VectorObjectModel {
     private Vector2d target;
     private int targetRadius;
 
+    //private Vector2d velocity;
+    //private Vector2d acceleration;
+
     /**
      * Créé un nouvel objet
      *
@@ -30,10 +35,9 @@ public class ObstacleModel extends VectorObjectModel {
      */
     public ObstacleModel(double startX, double startY, Vector2d velocity) {
         super(new Vector2d(startX, startY), new Vector2d(20, 20), velocity, new Vector2d(0, 0));
+        this.velocity = velocity;
         this.start = new Vector2d(startX,startY);
-        this.startRadius = startRadius;
-        this.target = new Vector2d(targetX,targetY);
-        this.targetRadius = targetRadius;
+        //this.target = new Vector2d(targetX,targetY);
     }
 
     @Override
@@ -45,11 +49,23 @@ public class ObstacleModel extends VectorObjectModel {
 
     @Override
     public void update(GameContainer gameContainer, StateBasedGame stateBasedGame, int delta) throws SlickException {
+        if(this.touchScreen() != null || this.touchObstacle())
+
+
+
+
         if(this.touchScreen()==null){
             //super.update(gameContainer,stateBasedGame,delta);
         }else{
             reverseObstacleAiming();
         }
+    }
+
+
+    public Vector2d touchObstacle(){
+        int obstacleRadius = 1;
+        if(this.getPosition().)
+        return null;
     }
 
     /**
