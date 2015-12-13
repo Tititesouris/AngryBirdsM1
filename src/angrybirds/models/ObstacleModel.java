@@ -44,7 +44,7 @@ public class ObstacleModel extends VectorObjectModel {
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
         position = start;
         reverseTime = 200;
-        velocity = velocity;
+        super.velocity = velocity;
         acceleration = new Vector2d(0, 0);
     }
 
@@ -55,7 +55,7 @@ public class ObstacleModel extends VectorObjectModel {
             //System.out.println("reverse");
         }else{
             this.reverseTime -= delta;
-            //System.out.println("super.update");
+            System.out.println("reverseTime : "+this.reverseTime);
             super.update(gameContainer,stateBasedGame,delta);
         }
     }
@@ -93,6 +93,6 @@ public class ObstacleModel extends VectorObjectModel {
      */
     public void reverseObstacleAiming(){
         Vector2d velocityReverse = new Vector2d(velocity.x*-1,velocity.y*-1);
-        velocity = velocityReverse;
+        super.velocity = velocityReverse;
     }
 }
