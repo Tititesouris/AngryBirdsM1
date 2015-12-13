@@ -11,20 +11,37 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * TODO: Description
- *
+ *Cette classe représente le jeu avec un oiseau à sa position
+ *initiale sur la fronde et les obstacles en mouvement
  * @author Quentin Brault, Marcaille Florent
  */
 public class GameModel implements Model {
 
+    /**
+     *nombre aléatoire
+     */
     private static final Random rand = new Random();
 
+    /**
+     *l'oiseau
+     */
     private BirdModel bird;
 
+    /**
+     * fronde
+     */
     private SlingshotModel slingshot;
+
+    /**
+     * liste d'obstacles
+     */
 
     private List<ObstacleModel> obstacles;
 
+
+    /**
+     * Crée le lancement du jeu avec l'oiseau dans sa position initiale ainsi que les obstacles
+     */
     public GameModel() {
         bird = new BirdModel(150, 500);
         slingshot = new SlingshotModel(bird, 150);
@@ -67,14 +84,27 @@ public class GameModel implements Model {
         }
     }
 
+    /**
+     * Retourne l'oiseau
+     * @return bird
+     */
     public BirdModel getBird() {
         return bird;
     }
 
+    /**
+     * retourne une liste d'obstacles
+     * @return une liste d'obstacles
+     */
     public List<ObstacleModel> getObstacles() {
         return obstacles;
     }
 
+    /**
+     * Determine si un objet est en dehors de l'écran
+     * @param object
+     * @return si un objet est en dehors de l'ecran
+     */
     public boolean isOutOfBounds(GraphicalObjectModel object) {
         return object.getPosition().x < 0
                 || object.getPosition().y < 0
@@ -96,6 +126,10 @@ public class GameModel implements Model {
         return null;
     }
 
+    /**
+     * Retourne la fronde
+     * @return la fronde
+     */
     public SlingshotModel getSlingshot() {
         return slingshot;
     }
