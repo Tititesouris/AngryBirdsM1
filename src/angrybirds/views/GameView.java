@@ -44,7 +44,7 @@ public class GameView implements View {
 
     /**
      * crée un nouveau modèle de jeu
-     * @param model
+     * @param model Modèle du jeu
      */
     public GameView(GameModel model) {
         this.model = model;

@@ -26,6 +26,7 @@ public abstract class GraphicalObjectModel implements Model {
      * Créé un nouvel objet
      *
      * @param position  Position de l'objet
+     * @param size      Taille de l'objet
      */
     public GraphicalObjectModel(Vector2d position, Vector2d size) {
         this.position = position;

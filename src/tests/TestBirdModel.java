@@ -1,26 +1,20 @@
 package tests;
 
-/*
- * 
- * @author Maxime Catteau
- */
 
 import static org.junit.Assert.*;
 
 import org.junit.Test;
-import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.state.StateBasedGame;
 
 import angrybirds.Window;
 import angrybirds.models.BirdModel;
-import angrybirds.models.GraphicalObjectModel;
-import angrybirds.models.VectorObjectModel;
 import angrybirds.structures.Vector2d;
 
+/**
+ * @author Maxime Catteau
+ */
 public class TestBirdModel {
 
-	//Test de l'update du modele de l'oiseau
 	@Test
 	public void testUpdateBird() throws SlickException {
 		BirdModel b = new BirdModel(0,0);

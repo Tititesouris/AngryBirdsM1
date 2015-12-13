@@ -22,6 +22,7 @@ public abstract class VectorObjectModel extends GraphicalObjectModel {
      * Créé un nouvel objet vectoriel
      *
      * @param position      Position de départ de l'objet
+     * @param size          Taille de l'objet
      * @param velocity      Vélocité de départ de l'objet
      * @param acceleration  Accélération de départ de l'objet
      */

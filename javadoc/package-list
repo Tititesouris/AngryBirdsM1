@@ -1,6 +1,6 @@
 angrybirds
-angrybirds.views.graphics
-angrybirds.views.graphics.objects
-angrybirds.parametrics
+angrybirds.controllers
+angrybirds.models
 angrybirds.structures
+angrybirds.views
 tests
