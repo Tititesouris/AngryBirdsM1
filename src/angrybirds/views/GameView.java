@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Cette classe représente le jeu.
+ * Cette classe représente la vue du jeu.
  *
  * @author Quentin Brault
  * @author Florent Marcaille
@@ -22,17 +22,18 @@ import java.util.List;
 public class GameView implements View {
 
     /**
-     * modèle de jeu
+     * Modèle de jeu
      */
     private GameModel model;
 
     /**
-     * oiseau
+     * Vue de l'oiseau
      */
 
     private BirdView bird;
+
     /**
-     * fronde
+     * Vue du lanceur
      */
     private SlingshotView slingshot;
 

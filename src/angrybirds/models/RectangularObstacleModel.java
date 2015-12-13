@@ -5,7 +5,7 @@ import angrybirds.structures.Vector2d;
 /**
  * Cette classe représente un obstacle rectangulaire.
  *
- * @author Tititesouris
+ * @author Quentin Brault
  */
 public class RectangularObstacleModel extends ObstacleModel {
 

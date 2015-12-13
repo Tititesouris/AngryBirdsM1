@@ -12,6 +12,7 @@ import org.newdawn.slick.state.StateBasedGame;
  *
  */
 public class VectorObjectModel extends GraphicalObjectModel {
+
     /**
      * Vecteurs vélocité et accélération
      */
@@ -41,18 +42,37 @@ public class VectorObjectModel extends GraphicalObjectModel {
         position = position.add(velocity.product(delta));
     }
 
+    /**
+     * Retourne la vélocité
+     *
+     * @return  Vélocité de l'objet
+     */
     public Vector2d getVelocity() {
         return velocity;
     }
 
+    /**
+     * Change la vélocité
+     * @param x Vélocité sur l'axe des X.
+     * @param y Vélocité sur l'axe des Y.
+     */
     public void setVelocity(double x, double y) {
         this.velocity = new Vector2d(x, y);
     }
 
+    /**
+     * Retourne l'accélération.
+     * @return  Accélération de l'objet.
+     */
     public Vector2d getAcceleration() {
         return acceleration;
     }
 
+    /**
+     * Change l'accélération.
+     * @param x Accélération sur l'axe des X.
+     * @param y Accélération sur l'axe des Y.
+     */
     public void setAcceleration(double x, double y) {
         this.acceleration = new Vector2d(x, y);
     }

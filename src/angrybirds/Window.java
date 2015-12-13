@@ -13,6 +13,9 @@ import org.newdawn.slick.state.StateBasedGame;
  */
 public class Window extends StateBasedGame {
 
+    /**
+     * Singleton de la fenêtre
+     */
     private static Window window = new Window();
 
     /**
@@ -41,6 +44,10 @@ public class Window extends StateBasedGame {
         addState(new GameController());
     }
 
+    /**
+     * Retourne l'instance de la fenêtre.
+     * @return  Instance de la fenêtre.
+     */
     public static Window getWindow() {
         return window;
     }

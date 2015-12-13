@@ -11,36 +11,35 @@ import java.util.List;
 import java.util.Random;
 
 /**
- *Cette classe représente le jeu avec un oiseau à sa position
- *initiale sur la fronde et les obstacles en mouvement
+ * Cette classe représente le jeu
  * @author Quentin Brault, Marcaille Florent
  */
 public class GameModel implements Model {
 
     /**
-     *nombre aléatoire
+     * Générateur de nombre aléatoire.
      */
     private static final Random rand = new Random();
 
     /**
-     *l'oiseau
+     * L'oiseau
      */
     private BirdModel bird;
 
     /**
-     * fronde
+     * Le lanceur
      */
     private SlingshotModel slingshot;
 
     /**
-     * liste d'obstacles
+     * Les obstacles
      */
 
     private List<ObstacleModel> obstacles;
 
 
     /**
-     * Crée le lancement du jeu avec l'oiseau dans sa position initiale ainsi que les obstacles
+     * Créé les objects du jeu.
      */
     public GameModel() {
         bird = new BirdModel(150, 500);
@@ -102,8 +101,8 @@ public class GameModel implements Model {
 
     /**
      * Determine si un objet est en dehors de l'écran
-     * @param object
-     * @return si un objet est en dehors de l'ecran
+     * @param object    Objet à vérifier
+     * @return true si l'objet est en dehors de l'ecran
      */
     public boolean isOutOfBounds(GraphicalObjectModel object) {
         return object.getPosition().x < 0
@@ -113,9 +112,7 @@ public class GameModel implements Model {
     }
 
     /**
-     * Determine la collision entre l'oiseau et l'obstacle
-     * Calcul de la collision par le rapport à la distance entre l'hypothénuse des centres de l'oiseau et des obstacles et leurs rayons
-     *
+     * Determine la collision entre l'oiseau et un obstacle
      * @return L'obstacle avec lequel l'oiseau est entré en collision, ou null si aucun
      */
     public ObstacleModel getTouchedObstacle() {
@@ -127,8 +124,8 @@ public class GameModel implements Model {
     }
 
     /**
-     * Retourne la fronde
-     * @return la fronde
+     * Retourne le lanceur
+     * @return le lanceur
      */
     public SlingshotModel getSlingshot() {
         return slingshot;

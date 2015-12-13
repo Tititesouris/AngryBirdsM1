@@ -34,7 +34,11 @@ public class Vector2d {
         return new Vector2d(x + vector.x, y + vector.y);
     }
 
-
+    /**
+     * Retourne la différence des vecteurs.
+     * @param vector2d  Vecteur pour lequel calculer la différence.
+     * @return  Différence des vecteurs.
+     */
     public Vector2d diff(Vector2d vector2d) {
         return new Vector2d(this.x - vector2d.x, this.y - vector2d.y);
     }

@@ -9,23 +9,23 @@ import org.newdawn.slick.state.StateBasedGame;
 /**
  * Cette classe affiche l'oiseau
  *
- * @author AngryBirdsM1
+ * @author Quentin Brault
  */
 public class BirdView implements View {
 
     /**
-     * l'oiseau
+     * Le modèle de l'oiseau
      */
     private BirdModel model;
 
     /**
-     * sprite
+     * Image de l'oiseau
      */
     private Image sprite;
 
     /**
-     * Cr�e une vue sur l'oiseau
-     * @param model
+     * Crée une vue pour l'oiseau
+     * @param model Modèle de l'oiseau.
      */
     public BirdView(BirdModel model) {
         this.model = model;

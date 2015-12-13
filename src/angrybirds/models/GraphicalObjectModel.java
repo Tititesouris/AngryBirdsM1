@@ -8,7 +8,7 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
 /**
- * Cette classe abstraite contient toutes les méthodes et le champs nécessaire à l'affichage et à la mise à jour d'objets graphiques.
+ * Cette classe abstraite représente un object avec une position et une taille.
  *
  * @author Maxime Catteau
  * @author Quentin Brault
@@ -60,14 +60,27 @@ public abstract class GraphicalObjectModel implements Model {
     	return this.position;
     }
 
+    /**
+     * Change la position de l'objet
+     * @param x Position X de l'objet
+     * @param y Position Y de l'objet
+     */
     public void setPosition(double x, double y) {
         this.position = new Vector2d(x, y);
     }
 
+    /**
+     * Retourne la taille de l'objet
+     * @return  Taille de l'objet
+     */
     public Vector2d getSize() {
         return size;
     }
 
+    /**
+     * Retourne true si l'objet est en dehors de l'écran.
+     * @return  True si l'objet est en dehors de l'écran, false sinon.
+     */
     public boolean isOutOfBounds() {
         return position.x + size.x >= Constants.SCREEN_WIDTH
                 || position.y + size.y >= Constants.SCREEN_HEIGHT

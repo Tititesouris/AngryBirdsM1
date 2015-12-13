@@ -15,18 +15,18 @@ import org.newdawn.slick.state.StateBasedGame;
 public class ObstacleView implements View {
 
     /**
-     * obstacle
+     * Modèle de l'obstacle
      */
     private ObstacleModel model;
 
     /**
-     * sprite
+     * Image de l'obstacle
      */
     private Image sprite;
 
     /**
-     * Cr�e un vue sur l'obstacle
-     * @param model
+     * Crée une vue de l'obstacle
+     * @param model Modèle de l'obstacle
      */
     public ObstacleView(ObstacleModel model) {
         this.model = model;
