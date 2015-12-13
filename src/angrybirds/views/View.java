@@ -6,9 +6,9 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
 /**
- * TODO: Description
+ * Cette interface determine comment les vues doivent etre concues
  *
- * @author User
+ * @author AngryBirdsM1
  */
 public interface View {
 
