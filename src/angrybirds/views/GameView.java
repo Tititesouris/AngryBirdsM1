@@ -21,14 +21,30 @@ import java.util.List;
  */
 public class GameView implements View {
 
+    /**
+     * modèle de jeu
+     */
     private GameModel model;
 
-    private BirdView bird;
+    /**
+     * oiseau
+     */
 
+    private BirdView bird;
+    /**
+     * fronde
+     */
     private SlingshotView slingshot;
 
+    /**
+     * liste d'obsatacles
+     */
     private List<ObstacleView> obstacles;
 
+    /**
+     * crée un nouveau modèle de jeu
+     * @param model
+     */
     public GameView(GameModel model) {
         this.model = model;
         bird = new BirdView(model.getBird());
