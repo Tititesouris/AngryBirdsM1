@@ -24,21 +24,27 @@ public class ObstacleModel extends VectorObjectModel {
 
     private int reverseTime;
 
+    private Vector2d velocity;
+
     /**
      * Créé un nouvel objet
      *
      * @param startX,startY Obstacle's position
+     * @param velocity Obstacle's speed
      */
     public ObstacleModel(double startX, double startY, Vector2d velocity) {
         super(new Vector2d(startX, startY), new Vector2d(20, 20), velocity, new Vector2d(0, 0));
+        System.out.println("ObstacleModel velocity : "+super.getVelocity());
         this.start = new Vector2d(startX,startY);
+        this.reverseTime = 200;
+        this.velocity = velocity;
     }
 
     @Override
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
         position = start;
-        reverseTime = 500;
-        velocity = new Vector2d(0, 0);
+        reverseTime = 200;
+        velocity = velocity;
         acceleration = new Vector2d(0, 0);
     }
 
@@ -46,8 +52,10 @@ public class ObstacleModel extends VectorObjectModel {
     public void update(GameContainer gameContainer, StateBasedGame stateBasedGame, int delta) throws SlickException {
         if(this.touchScreen() != null || this.touchObstacle() != null || reverseTime < 0){
             reverseObstacleAiming();
+            //System.out.println("reverse");
         }else{
             this.reverseTime -= delta;
+            //System.out.println("super.update");
             super.update(gameContainer,stateBasedGame,delta);
         }
     }
@@ -62,9 +70,9 @@ public class ObstacleModel extends VectorObjectModel {
      */
     public Vector2d touchObstacle(){
         int obstacleRadius = 1;
-        if(this.getPosition().x == 0){
+
             // todo think miss a method to get the perimeter coordonates in graphicalObject
-        }
+
         return null;
     }
 
@@ -77,14 +85,7 @@ public class ObstacleModel extends VectorObjectModel {
      * @return Vector2d position where obstacle touch the border
      */
     public Vector2d touchScreen(){
-        if(this.isOutOfBounds()){
-            this.target.x = this.getPosition().x;
-            this.target.y = this.getPosition().y;
-
-            return this.getPosition();
-        }else{
-            return null;
-        }
+        return this.isOutOfBounds()?this.getPosition():null;
     }
 
     /**
