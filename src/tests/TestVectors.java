@@ -12,16 +12,17 @@ import static org.junit.Assert.*;
 public class TestVectors {
 
     @Test
-    public void testEquals() {
-        assertTrue(new Vector2d(5, 5).equals(new Vector2d(5, 5)));
-        assertFalse(new Vector2d(4, 5).equals(new Vector2d(5, 5)));
-    }
-
-    @Test
     public void testAdd() {
         assertTrue(new Vector2d(5, 5).add(new Vector2d(5, 5)).equals(new Vector2d(10, 10)));
         assertTrue(new Vector2d(6.3, 5.2).add(new Vector2d(5, 3.2)).equals(new Vector2d(11.3, 8.4)));
         assertFalse(new Vector2d(6.3, 5).add(new Vector2d(5, 3.2)).equals(new Vector2d(10, 10)));
+    }
+
+    @Test
+    public void testDiff() {
+        assertTrue(new Vector2d(5, 5).diff(new Vector2d(5, 5)).equals(new Vector2d(0, 0)));
+        assertTrue(new Vector2d(6.3, 5.2).diff(new Vector2d(1, 3.2)).equals(new Vector2d(5.3, 2)));
+        assertFalse(new Vector2d(6.3, 5).diff(new Vector2d(5, 3.2)).equals(new Vector2d(10, 10)));
     }
 
     @Test
@@ -45,6 +46,12 @@ public class TestVectors {
         assertTrue(new Vector2d(1, 0).normalize().equals(new Vector2d(1, 0)));
         assertTrue(new Vector2d(-7.1, 0).normalize().equals(new Vector2d(-1, 0)));
         assertFalse(new Vector2d(5, 5).normalize().equals(new Vector2d(0.5, 0.5)));
+    }
+
+    @Test
+    public void testEquals() {
+        assertTrue(new Vector2d(5, 5).equals(new Vector2d(5, 5)));
+        assertFalse(new Vector2d(4, 5).equals(new Vector2d(5, 5)));
     }
 
 }
