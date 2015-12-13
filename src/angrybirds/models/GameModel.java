@@ -33,7 +33,7 @@ public class GameModel implements Model {
         obstacles.add(new CircularObstacleModel(new Vector2d(700, 500), new Vector2d(30, 30), new Vector2d(0.1,0.2), 600));
         obstacles.add(new CircularObstacleModel(new Vector2d(500, 300), new Vector2d(30, 30), new Vector2d(0.5,0.1), 1000));
         obstacles.add(new CircularObstacleModel(new Vector2d(800, 200), new Vector2d(30, 30), new Vector2d(0.3,0.7), 800));
-        obstacles.add(new RectangularObstacleModel(new Vector2d(550, 400), new Vector2d(30, 10), new Vector2d(0.05,0.4), 1200));
+        obstacles.add(new RectangularObstacleModel(new Vector2d(550, 300), new Vector2d(20, 100), new Vector2d(0.05,0.4), 1200));
         obstacles.add(new RectangularObstacleModel(new Vector2d(1000,100), new Vector2d(75, 30), new Vector2d(0.8,0.2), 750));
 
     }
@@ -51,12 +51,19 @@ public class GameModel implements Model {
     public void update(GameContainer gameContainer, StateBasedGame stateBasedGame, int delta) throws SlickException {
         bird.update(gameContainer, stateBasedGame, delta);
         slingshot.update(gameContainer, stateBasedGame, delta);
-        for (ObstacleModel obstacle : obstacles) {
-            obstacle.update(gameContainer, stateBasedGame, delta);
-        }
-        if (!bird.isHit() && isOutOfBounds(bird)) {
-            slingshot.init(gameContainer, stateBasedGame);
-            bird.hit();
+        if (!bird.isHit()) {
+            for (ObstacleModel obstacle : obstacles) {
+                obstacle.update(gameContainer, stateBasedGame, delta);
+                ObstacleModel touched = getTouchedObstacle();
+                if (touched != null) {
+                    touched.setHit(true);
+                    bird.hit();
+                }
+            }
+            if (isOutOfBounds(bird)) {
+                slingshot.init(gameContainer, stateBasedGame);
+                bird.hit();
+            }
         }
     }
 
@@ -81,27 +88,10 @@ public class GameModel implements Model {
      *
      * @return L'obstacle avec lequel l'oiseau est entré en collision, ou null si aucun
      */
-    public ObstacleModel getTouchedObstacle(){
-        double obstacleY;
-        double obstacleX;
-        double birdX = this.bird.getPosition().x;
-        double birdY = this.bird.getPosition().y;
-        double x;
-        double y;
-        double hypo;
-
-        for(ObstacleModel obstacle : obstacles){
-            obstacleX = obstacle.getPosition().x;
-            obstacleY = obstacle.getPosition().y;
-
-            x = obstacleX - birdX;
-            y = obstacleY - birdY;
-
-            hypo = Math.sqrt((x*x) + (y*y));
-
-            if(hypo <= this.bird.getSize().x + obstacle.getSize().x) {
+    public ObstacleModel getTouchedObstacle() {
+        for (ObstacleModel obstacle : obstacles) {
+            if (obstacle.touchesBird(bird))
                 return obstacle;
-            }
         }
         return null;
     }

@@ -25,9 +25,9 @@ public class RectangularObstacleModel extends ObstacleModel {
     @Override
     public boolean touchesBird(BirdModel bird) {
         return position.x <= bird.position.x + bird.size.x
-                || position.y <= bird.position.y + bird.size.y
-                || position.x + size.x >= bird.position.x
-                || position.y + size.y >= bird.position.y;
+                && position.y <= bird.position.y + bird.size.y
+                && position.x + size.x >= bird.position.x
+                && position.y + size.y >= bird.position.y;
     }
 
 }

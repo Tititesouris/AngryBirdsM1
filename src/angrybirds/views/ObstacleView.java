@@ -30,10 +30,22 @@ public class ObstacleView implements View {
 
     @Override
     public void render(GameContainer gameContainer, StateBasedGame stateBasedGame, Graphics graphics) throws SlickException {
-        if (model instanceof CircularObstacleModel)
-            sprite.draw((float) (model.getPosition().x - model.getSize().x), (float) (model.getPosition().y - model.getSize().y));
-        else if (model instanceof RectangularObstacleModel)
-            graphics.fillRect((float)model.getPosition().x, (float)model.getPosition().y, (float)model.getSize().x, (float)model.getSize().y);
+        if (model instanceof CircularObstacleModel) {
+            if (model.isHit())
+                sprite.drawFlash((float) (model.getPosition().x - model.getSize().x), (float) (model.getPosition().y - model.getSize().y));
+            else
+                sprite.draw((float) (model.getPosition().x - model.getSize().x), (float) (model.getPosition().y - model.getSize().y));
+        }
+        else if (model instanceof RectangularObstacleModel) {
+            if (model.isHit()) {
+                graphics.setColor(Color.white);
+                graphics.fillRect((float) model.getPosition().x, (float) model.getPosition().y, (float) model.getSize().x, (float) model.getSize().y);
+            }
+            else {
+                graphics.setColor(Color.orange);
+                graphics.fillRect((float) model.getPosition().x, (float) model.getPosition().y, (float) model.getSize().x, (float) model.getSize().y);
+            }
+        }
     }
 
 }

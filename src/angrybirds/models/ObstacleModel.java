@@ -14,6 +14,11 @@ import org.newdawn.slick.state.StateBasedGame;
 public abstract class ObstacleModel extends VectorObjectModel {
 
     /**
+     * True si l'obstacle a été touché
+     */
+    private boolean hit;
+
+    /**
      * Temps en millisecondes entre chaque demi tour
      */
     private int flip;
@@ -37,6 +42,11 @@ public abstract class ObstacleModel extends VectorObjectModel {
     }
 
     @Override
+    public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
+        hit = false;
+    }
+
+    @Override
     public void update(GameContainer gameContainer, StateBasedGame stateBasedGame, int delta) throws SlickException {
         super.update(gameContainer, stateBasedGame, delta);
         if (isOutOfBounds() || tempFlip < 0) {
@@ -56,5 +66,13 @@ public abstract class ObstacleModel extends VectorObjectModel {
     }
 
     public abstract boolean touchesBird(BirdModel bird);
+
+    public boolean isHit() {
+        return hit;
+    }
+
+    public void setHit(boolean hit) {
+        this.hit = hit;
+    }
 
 }
