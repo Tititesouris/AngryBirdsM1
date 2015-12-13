@@ -37,7 +37,7 @@ public class ObstacleModel extends VectorObjectModel {
         super(new Vector2d(startX, startY), new Vector2d(20, 20), velocity, new Vector2d(0, 0));
         System.out.println("ObstacleModel velocity : "+super.getVelocity());
         this.start = new Vector2d(startX,startY);
-        this.reverseTimeValue = 200;
+        this.reverseTimeValue = 600;
         this.reverseTime = reverseTimeValue;
         this.velocity = velocity;
     }
@@ -46,18 +46,19 @@ public class ObstacleModel extends VectorObjectModel {
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
         position = start;
         reverseTime = reverseTimeValue;
-        super.velocity = velocity;
+        //super.velocity = velocity;
         acceleration = new Vector2d(0, 0);
     }
 
     @Override
     public void update(GameContainer gameContainer, StateBasedGame stateBasedGame, int delta) throws SlickException {
-        if(this.touchScreen() != null || this.touchObstacle() != null || reverseTime < 0){
+        if(this.touchScreen() != null || this.touchObstacle() != null || reverseTime <= 0){
             reverseObstacleAiming();
+            super.update(gameContainer,stateBasedGame,delta);
             //System.out.println("reverse");
         }else{
-            this.reverseTime -= delta;
             System.out.println("reverseTime : "+this.reverseTime);
+            this.reverseTime -= delta;
             super.update(gameContainer,stateBasedGame,delta);
         }
     }
@@ -94,7 +95,7 @@ public class ObstacleModel extends VectorObjectModel {
      * Swap the target with the start zone and inside out
      */
     public void reverseObstacleAiming(){
-        Vector2d velocityReverse = new Vector2d(velocity.x*-1,velocity.y*-1);
+        Vector2d velocityReverse = new Vector2d(super.velocity.x*-1,super.velocity.y*-1);
         super.velocity = velocityReverse;
         this.reverseTime = this.reverseTimeValue;
     }
