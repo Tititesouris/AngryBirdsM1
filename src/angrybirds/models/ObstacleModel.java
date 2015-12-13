@@ -11,7 +11,7 @@ import org.newdawn.slick.state.StateBasedGame;
  *
  * @author Tititesouris
  */
-public class ObstacleModel extends VectorObjectModel {
+public abstract class ObstacleModel extends VectorObjectModel {
 
     /**
      * Temps en millisecondes entre chaque demi tour
@@ -54,5 +54,7 @@ public class ObstacleModel extends VectorObjectModel {
                 || position.x + size.x > Constants.SCREEN_WIDTH
                 || position.y + size.y > Constants.SCREEN_HEIGHT - Constants.GROUND_HEIGHT;
     }
+
+    public abstract boolean touchesBird(BirdModel bird);
 
 }

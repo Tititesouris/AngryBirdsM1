@@ -30,7 +30,8 @@ public class GameModel implements Model {
         slingshot = new SlingshotModel(bird, 150);
         obstacles = new ArrayList<>();
 
-        obstacles.add(new ObstacleModel(new Vector2d(500, 500), new Vector2d(30, 30), new Vector2d(0.1, 0.1), 1000));
+        obstacles.add(new CircularObstacleModel(new Vector2d(500, 500), new Vector2d(30, 30), new Vector2d(0.1, 0.1), 1000));
+        obstacles.add(new RectangularObstacleModel(new Vector2d(800, 500), new Vector2d(75, 30), new Vector2d(0, 0.1), 1000));
     }
 
     @Override

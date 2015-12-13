@@ -1,7 +1,9 @@
 package angrybirds.views;
 
 import angrybirds.Tool;
+import angrybirds.models.CircularObstacleModel;
 import angrybirds.models.ObstacleModel;
+import angrybirds.models.RectangularObstacleModel;
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.StateBasedGame;
 
@@ -28,7 +30,10 @@ public class ObstacleView implements View {
 
     @Override
     public void render(GameContainer gameContainer, StateBasedGame stateBasedGame, Graphics graphics) throws SlickException {
-        sprite.draw((float) (model.getPosition().x - model.getSize().x), (float) (model.getPosition().y - model.getSize().y));
+        if (model instanceof CircularObstacleModel)
+            sprite.draw((float) (model.getPosition().x - model.getSize().x), (float) (model.getPosition().y - model.getSize().y));
+        else if (model instanceof RectangularObstacleModel)
+            graphics.fillRect((float)model.getPosition().x, (float)model.getPosition().y, (float)model.getSize().x, (float)model.getSize().y);
     }
 
 }
