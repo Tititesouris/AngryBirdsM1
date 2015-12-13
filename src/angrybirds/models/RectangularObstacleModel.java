@@ -3,24 +3,23 @@ package angrybirds.models;
 import angrybirds.structures.Vector2d;
 
 /**
- * TODO: Description
+ * Cette classe représente un obstacle rectangulaire.
  *
  * @author Tititesouris
  */
 public class RectangularObstacleModel extends ObstacleModel {
 
     /**
-     * Créé un nouvel objet vectoriel
+     * Créé un nouvel obstacle
      *
-     * @param position Position de départ de l'objet
-     * @param size
-     * @param velocity Vélocité de départ de l'objet
+     * @param position Position de départ de l'obstacle
+     * @param size     Taille de l'obstacle
+     * @param velocity Vélocité de l'obstacle
      * @param flip     Temps en millisecondes avant de faire demi-tour
      */
     public RectangularObstacleModel(Vector2d position, Vector2d size, Vector2d velocity, int flip) {
         super(position, size, velocity, flip);
     }
-
 
     @Override
     public boolean touchesBird(BirdModel bird) {

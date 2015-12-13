@@ -7,9 +7,10 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
 /**
- * TODO: Description
+ * Cette classe représente un obstacle.
  *
- * @author Tititesouris
+ * @author Quentin Brault
+ * @author Florent Marcaille
  */
 public abstract class ObstacleModel extends VectorObjectModel {
 
@@ -29,11 +30,11 @@ public abstract class ObstacleModel extends VectorObjectModel {
     private int tempFlip;
 
     /**
-     * Créé un nouvel objet vectoriel
+     * Créé un nouvel obstacle
      *
-     * @param position     Position de départ de l'objet
-     * @param size
-     * @param velocity     Vélocité de départ de l'objet
+     * @param position  Position de départ de l'obstacle
+     * @param size      Taille de l'obstacle
+     * @param velocity  Vélocité de l'obstacle
      * @param flip      Temps en millisecondes avant de faire demi-tour
      */
     public ObstacleModel(Vector2d position, Vector2d size, Vector2d velocity, int flip) {
@@ -58,6 +59,10 @@ public abstract class ObstacleModel extends VectorObjectModel {
         }
     }
 
+    /**
+     * Retourne true si l'obstacle sort de l'écran.
+     * @return  True si l'obstacle sort de l'écran.
+     */
     public boolean isOutOfBounds() {
         return position.x < 0
                 || position.y < 0
@@ -65,12 +70,27 @@ public abstract class ObstacleModel extends VectorObjectModel {
                 || position.y + size.y > Constants.SCREEN_HEIGHT - Constants.GROUND_HEIGHT;
     }
 
+    /**
+     * Retourne true si l'obstacle touche l'oiseau.
+     *
+     * @param bird  Oiseau à vérifier
+     * @return  True si l'obstacle touche l'oiseau.
+     */
     public abstract boolean touchesBird(BirdModel bird);
 
+    /**
+     * Retourne true si l'obstacle a été touché par l'oiseau
+     *
+     * @return  True si l'obstacle a été touche par l'oiseau.
+     */
     public boolean isHit() {
         return hit;
     }
 
+    /**
+     * Indique si l'obstacle a été touché par l'oiseau.
+     * @param hit   True si l'obstacle a été touché par l'oiseau. False sinon.
+     */
     public void setHit(boolean hit) {
         this.hit = hit;
     }

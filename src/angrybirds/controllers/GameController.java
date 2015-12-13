@@ -9,14 +9,20 @@ import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
 /**
- * TODO: Description
+ * Le controlleur du jeu. Il créé le model de jeu et la vue du jeu, et implémente les méthodes du framework Slick2d et dispatch les appels à ces méthodes au model et à la vue.
  *
  * @author Quentin Brault
  */
 public class  GameController extends BasicGameState {
 
+    /**
+     * Model du jeu qui reçoit les updates.
+     */
     private final GameModel model = new GameModel();
 
+    /**
+     * Vue du jeu qui reçoit les appels à render().
+     */
     private final GameView view = new GameView(model);
 
     @Override
