@@ -17,11 +17,6 @@ import java.util.Random;
 public class GameModel implements Model {
 
     /**
-     * Générateur de nombre aléatoire.
-     */
-    private static final Random rand = new Random();
-
-    /**
      * L'oiseau
      */
     private BirdModel bird;

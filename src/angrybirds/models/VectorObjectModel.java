@@ -11,7 +11,7 @@ import org.newdawn.slick.state.StateBasedGame;
  * @author Quentin Brault
  *
  */
-public class VectorObjectModel extends GraphicalObjectModel {
+public abstract class VectorObjectModel extends GraphicalObjectModel {
 
     /**
      * Vecteurs vélocité et accélération
@@ -29,11 +29,6 @@ public class VectorObjectModel extends GraphicalObjectModel {
         super(position, size);
         this.velocity = velocity;
         this.acceleration = acceleration;
-    }
-
-    @Override
-    public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
-
     }
 
     @Override

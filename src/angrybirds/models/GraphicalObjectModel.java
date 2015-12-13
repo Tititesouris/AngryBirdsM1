@@ -33,25 +33,6 @@ public abstract class GraphicalObjectModel implements Model {
     }
 
     /**
-     * Cette méthode est appelé au chargement de l'objet.
-     *
-     * @param gameContainer     Contexte du jeu
-     * @param stateBasedGame    Référence au jeu
-     * @throws SlickException   Librairie Slick
-     */
-    public abstract void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException;
-
-    /**
-     * Cette méthode est appelée à chaque cycle du jeu.
-     *
-     * @param gameContainer     Contexte du jeu
-     * @param stateBasedGame    Référence au jeu
-     * @param delta             Nombre de millisecondes depuis le dernier appel de la méthode
-     * @throws SlickException   Librairie Slick
-     */
-    public abstract void update(GameContainer gameContainer, StateBasedGame stateBasedGame, int delta) throws SlickException;
-
-    /**
      * Retourne la position de l'objet.
      *
      * @return  Position de l'objet
@@ -75,17 +56,6 @@ public abstract class GraphicalObjectModel implements Model {
      */
     public Vector2d getSize() {
         return size;
-    }
-
-    /**
-     * Retourne true si l'objet est en dehors de l'écran.
-     * @return  True si l'objet est en dehors de l'écran, false sinon.
-     */
-    public boolean isOutOfBounds() {
-        return position.x + size.x >= Constants.SCREEN_WIDTH
-                || position.y + size.y >= Constants.SCREEN_HEIGHT
-                || position.x - size.x <= 0
-                || position.y - size.y <= 0;
     }
 
 }

@@ -12,21 +12,21 @@ import org.newdawn.slick.state.StateBasedGame;
 public interface Model {
 
     /**
-     * Initialise le modèle.
+     * Cette méthode est appelé au chargement de l'objet.
      *
-     * @param gameContainer     Conteneur du jeu.
-     * @param stateBasedGame    Référence au jeu.
-     * @throws SlickException
+     * @param gameContainer     Contexte du jeu
+     * @param stateBasedGame    Référence au jeu
+     * @throws SlickException   Librairie Slick
      */
     void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException;
 
     /**
-     * Met à jour le modèle.
+     * Cette méthode est appelée à chaque cycle du jeu.
      *
-     * @param gameContainer     Conteneur du jeu.
-     * @param stateBasedGame    Référence au jeu.
-     * @param delta             Temps en millisecondes depuis le dernier appel à update()
-     * @throws SlickException
+     * @param gameContainer     Contexte du jeu
+     * @param stateBasedGame    Référence au jeu
+     * @param delta             Nombre de millisecondes depuis le dernier appel de la méthode
+     * @throws SlickException   Librairie Slick
      */
     void update(GameContainer gameContainer, StateBasedGame stateBasedGame, int delta) throws SlickException;
 

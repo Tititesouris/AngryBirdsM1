@@ -13,21 +13,21 @@ import org.newdawn.slick.state.StateBasedGame;
 public interface View {
 
     /**
-     * Initialise la vue.
+     * Cette méthode est appelé au chargement de l'objet.
      *
-     * @param gameContainer     Conteneur du jeu.
-     * @param stateBasedGame    Référence au jeu.
-     * @throws SlickException
+     * @param gameContainer     Contexte du jeu
+     * @param stateBasedGame    Référence au jeu
+     * @throws SlickException   Librairie Slick
      */
     void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException;
 
     /**
      * Affiche la vue.
      *
-     * @param gameContainer     Conteneur du jeu.
-     * @param stateBasedGame    Référence au jeu.
+     * @param gameContainer     Contexte du jeu
+     * @param stateBasedGame    Référence au jeu
      * @param graphics          Contexte graphique.
-     * @throws SlickException
+     * @throws SlickException   Librairie Slick
      */
     void render(GameContainer gameContainer, StateBasedGame stateBasedGame, Graphics graphics) throws SlickException;
 
