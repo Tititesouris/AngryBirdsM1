@@ -1,102 +1,58 @@
 package angrybirds.models;
 
+import angrybirds.structures.Constants;
 import angrybirds.structures.Vector2d;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
-import java.util.Vector;
-
 /**
  * TODO: Description
  *
- * @author User
+ * @author Tititesouris
  */
 public class ObstacleModel extends VectorObjectModel {
 
-    // departure zone
-    private Vector2d start;
-    private int startRadius;
-
-    // target zone
-    private Vector2d target;
-    private int targetRadius;
-
-    private int reverseTime;
-    private int reverseTimeValue;
-
-    private Vector2d velocity;
+    /**
+     * Temps en millisecondes entre chaque demi tour
+     */
+    private int flip;
 
     /**
-     * Créé un nouvel objet
-     *
-     * @param startX,startY Obstacle's position
-     * @param velocity Obstacle's speed
+     * Temps en millisecondes avant de faire demi-tour
      */
-    public ObstacleModel(double startX, double startY, Vector2d velocity) {
-        super(new Vector2d(startX, startY), new Vector2d(20, 20), velocity, new Vector2d(0, 0));
-        System.out.println("ObstacleModel velocity : "+super.getVelocity());
-        this.start = new Vector2d(startX,startY);
-        this.reverseTimeValue = 600;
-        this.reverseTime = reverseTimeValue;
-        this.velocity = velocity;
-    }
+    private int tempFlip;
 
-    @Override
-    public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
-        position = start;
-        reverseTime = reverseTimeValue;
-        //super.velocity = velocity;
-        acceleration = new Vector2d(0, 0);
+    /**
+     * Créé un nouvel objet vectoriel
+     *
+     * @param position     Position de départ de l'objet
+     * @param size
+     * @param velocity     Vélocité de départ de l'objet
+     * @param flip      Temps en millisecondes avant de faire demi-tour
+     */
+    public ObstacleModel(Vector2d position, Vector2d size, Vector2d velocity, int flip) {
+        super(position, size, velocity, new Vector2d(0, 0));
+        this.flip = flip;
     }
 
     @Override
     public void update(GameContainer gameContainer, StateBasedGame stateBasedGame, int delta) throws SlickException {
-        if(this.touchScreen() != null || this.touchObstacle() != null || reverseTime <= 0){
-            reverseObstacleAiming();
-            super.update(gameContainer,stateBasedGame,delta);
-            //System.out.println("reverse");
-        }else{
-            System.out.println("reverseTime : "+this.reverseTime);
-            this.reverseTime -= delta;
-            super.update(gameContainer,stateBasedGame,delta);
+        super.update(gameContainer, stateBasedGame, delta);
+        if (isOutOfBounds() || tempFlip < 0) {
+            tempFlip = flip;
+            velocity = velocity.product(-1);
+        }
+        else {
+            tempFlip -= delta;
         }
     }
 
-    /**
-     * Need to get the coordonates of the perimeter of this obstacle +1
-     *  Check if the coordonates are instanceof Obstacle
-     *    If yes in updates reverserObstacleAiming
-     *
-     * NB : Obstacle can be a square or a circle
-     * @return
-     */
-    public Vector2d touchObstacle(){
-        int obstacleRadius = 1;
-
-            // todo think miss a method to get the perimeter coordonates in graphicalObject
-
-        return null;
+    public boolean isOutOfBounds() {
+        return position.x < 0
+                || position.y < 0
+                || position.x + size.x > Constants.SCREEN_WIDTH
+                || position.y + size.y > Constants.SCREEN_HEIGHT - Constants.GROUND_HEIGHT;
     }
 
-    /**
-     * Return null if the obstacle doesn't touch the border
-     * If the obstacle is touching a border and doesn't reach his
-     *   target zone, then redefine the target zone with the position
-     *      where it touch the screen
-     *
-     * @return Vector2d position where obstacle touch the border
-     */
-    public Vector2d touchScreen(){
-        return this.isOutOfBounds()?this.getPosition():null;
-    }
-
-    /**
-     * Swap the target with the start zone and inside out
-     */
-    public void reverseObstacleAiming(){
-        Vector2d velocityReverse = new Vector2d(super.velocity.x*-1,super.velocity.y*-1);
-        super.velocity = velocityReverse;
-        this.reverseTime = this.reverseTimeValue;
-    }
 }

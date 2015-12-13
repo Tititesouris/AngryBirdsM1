@@ -2,7 +2,6 @@ package angrybirds.views;
 
 import angrybirds.Tool;
 import angrybirds.models.ObstacleModel;
-import angrybirds.structures.Vector2d;
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.StateBasedGame;
 

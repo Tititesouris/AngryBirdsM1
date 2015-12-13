@@ -30,11 +30,11 @@ public class GameModel implements Model {
         slingshot = new SlingshotModel(bird, 150);
         obstacles = new ArrayList<>();
 
-        obstacles.add(new ObstacleModel(700,500,new Vector2d(0.1,0.2)));
-        obstacles.add(new ObstacleModel(500,300,new Vector2d(0.5,0.1)));
-        obstacles.add(new ObstacleModel(800,200,new Vector2d(0.3,0.7)));
-        obstacles.add(new ObstacleModel(550,400,new Vector2d(0.05,0.4)));
-        obstacles.add(new ObstacleModel(1000,100,new Vector2d(0.8,0.2)));
+        obstacles.add(new ObstacleModel(new Vector2d(700, 500), new Vector2d(30, 30), new Vector2d(0.1,0.2), 600));
+        obstacles.add(new ObstacleModel(new Vector2d(500, 300), new Vector2d(30, 30), new Vector2d(0.5,0.1), 1000));
+        obstacles.add(new ObstacleModel(new Vector2d(800, 200), new Vector2d(30, 30), new Vector2d(0.3,0.7), 800));
+        obstacles.add(new ObstacleModel(new Vector2d(550, 400), new Vector2d(30, 30), new Vector2d(0.05,0.4), 1200));
+        obstacles.add(new ObstacleModel(new Vector2d(1000,100), new Vector2d(30, 30), new Vector2d(0.8,0.2), 750));
     }
 
     @Override
@@ -52,11 +52,6 @@ public class GameModel implements Model {
         slingshot.update(gameContainer, stateBasedGame, delta);
         for (ObstacleModel obstacle : obstacles) {
             obstacle.update(gameContainer, stateBasedGame, delta);
-
-            System.out.println(obstacle.getPosition());
-            System.out.println(obstacle.getVelocity());
-            System.out.println(obstacle.getAcceleration());
-
         }
         if (!bird.isHit() && isOutOfBounds(bird)) {
             slingshot.init(gameContainer, stateBasedGame);
