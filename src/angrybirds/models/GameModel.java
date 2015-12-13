@@ -23,21 +23,21 @@ public class GameModel implements Model {
 
     private SlingshotModel slingshot;
 
-    private List<ObstacleModel2> obstacles;
+    private List<ObstacleModel> obstacles;
 
     public GameModel() {
         bird = new BirdModel(150, 500);
         slingshot = new SlingshotModel(bird, 150);
         obstacles = new ArrayList<>();
 
-        obstacles.add(new ObstacleModel2(new Vector2d(500, 500), new Vector2d(50, 50), new Vector2d(1, 1), 1000));
+        obstacles.add(new ObstacleModel(new Vector2d(500, 500), new Vector2d(30, 30), new Vector2d(0.1, 0.1), 1000));
     }
 
     @Override
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
         bird.init(gameContainer, stateBasedGame);
         slingshot.init(gameContainer, stateBasedGame);
-        for (ObstacleModel2 obstacle : obstacles) {
+        for (ObstacleModel obstacle : obstacles) {
             obstacle.init(gameContainer, stateBasedGame);
         }
     }
@@ -46,7 +46,7 @@ public class GameModel implements Model {
     public void update(GameContainer gameContainer, StateBasedGame stateBasedGame, int delta) throws SlickException {
         bird.update(gameContainer, stateBasedGame, delta);
         slingshot.update(gameContainer, stateBasedGame, delta);
-        for (ObstacleModel2 obstacle : obstacles) {
+        for (ObstacleModel obstacle : obstacles) {
             obstacle.update(gameContainer, stateBasedGame, delta);
 
             System.out.println(obstacle.getPosition());
@@ -64,7 +64,7 @@ public class GameModel implements Model {
         return bird;
     }
 
-    public List<ObstacleModel2> getObstacles() {
+    public List<ObstacleModel> getObstacles() {
         return obstacles;
     }
 
@@ -81,7 +81,7 @@ public class GameModel implements Model {
      *
      * @return L'obstacle avec lequel l'oiseau est entré en collision, ou null si aucun
      */
-    public ObstacleModel2 getTouchedObstacle(){
+    public ObstacleModel getTouchedObstacle(){
         double obstacleY;
         double obstacleX;
         double birdX = this.bird.getPosition().x;
@@ -90,7 +90,7 @@ public class GameModel implements Model {
         double y;
         double hypo;
 
-        for(ObstacleModel2 obstacle : obstacles){
+        for(ObstacleModel obstacle : obstacles){
             obstacleX = obstacle.getPosition().x;
             obstacleY = obstacle.getPosition().y;
 
