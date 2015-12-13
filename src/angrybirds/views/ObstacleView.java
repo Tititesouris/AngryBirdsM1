@@ -2,6 +2,7 @@ package angrybirds.views;
 
 import angrybirds.Tool;
 import angrybirds.models.ObstacleModel;
+import angrybirds.models.ObstacleModel2;
 import angrybirds.structures.Vector2d;
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.StateBasedGame;
@@ -13,11 +14,11 @@ import org.newdawn.slick.state.StateBasedGame;
  */
 public class ObstacleView implements View {
 
-    private ObstacleModel model;
+    private ObstacleModel2 model;
 
     private Image sprite;
 
-    public ObstacleView(ObstacleModel model) {
+    public ObstacleView(ObstacleModel2 model) {
         this.model = model;
         this.sprite = Tool.getImage("/res/pig.png").getScaledCopy((int)(model.getSize().x * 2), (int)(model.getSize().y * 2));
     }

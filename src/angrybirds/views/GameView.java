@@ -2,6 +2,7 @@ package angrybirds.views;
 
 import angrybirds.models.GameModel;
 import angrybirds.models.ObstacleModel;
+import angrybirds.models.ObstacleModel2;
 import angrybirds.structures.Constants;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
@@ -34,7 +35,7 @@ public class GameView implements View {
         bird = new BirdView(model.getBird());
         slingshot = new SlingshotView(model.getSlingshot());
         obstacles = new ArrayList<>();
-        for (ObstacleModel obstacle : model.getObstacles()) {
+        for (ObstacleModel2 obstacle : model.getObstacles()) {
             obstacles.add(new ObstacleView(obstacle));
         }
     }
