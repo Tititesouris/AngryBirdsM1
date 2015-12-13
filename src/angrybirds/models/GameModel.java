@@ -31,7 +31,10 @@ public class GameModel implements Model {
         obstacles = new ArrayList<>();
 
         obstacles.add(new ObstacleModel(700,500,new Vector2d(0.1,0.2)));
-        obstacles.add(new ObstacleModel(800,200,new Vector2d(0.5,0.1)));
+        obstacles.add(new ObstacleModel(500,300,new Vector2d(0.5,0.1)));
+        obstacles.add(new ObstacleModel(800,200,new Vector2d(0.3,0.7)));
+        obstacles.add(new ObstacleModel(550,400,new Vector2d(0.05,0.4)));
+        obstacles.add(new ObstacleModel(1000,100,new Vector2d(0.8,0.2)));
     }
 
     @Override
