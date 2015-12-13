@@ -8,16 +8,26 @@ import org.newdawn.slick.*;
 import org.newdawn.slick.state.StateBasedGame;
 
 /**
- * TODO: Description
+ * Cette classe affiche les obstacles
  *
  * @author Quentin Brault
  */
 public class ObstacleView implements View {
 
+    /**
+     * obstacle
+     */
     private ObstacleModel model;
 
+    /**
+     * sprite
+     */
     private Image sprite;
 
+    /**
+     * Crée un vue sur l'obstacle
+     * @param model
+     */
     public ObstacleView(ObstacleModel model) {
         this.model = model;
         this.sprite = Tool.getImage("/res/pig.png").getScaledCopy((int)(model.getSize().x * 2), (int)(model.getSize().y * 2));
