@@ -7,16 +7,26 @@ import org.newdawn.slick.*;
 import org.newdawn.slick.state.StateBasedGame;
 
 /**
- * TODO: Description
+ * Cette classe affiche l'oiseau
  *
- * @author User
+ * @author AngryBirdsM1
  */
 public class BirdView implements View {
 
+    /**
+     * l'oiseau
+     */
     private BirdModel model;
 
+    /**
+     * sprite
+     */
     private Image sprite;
 
+    /**
+     * Crée une vue sur l'oiseau
+     * @param model
+     */
     public BirdView(BirdModel model) {
         this.model = model;
         this.sprite = Tool.getImage("/res/bird.png").getScaledCopy((int)(model.getSize().x * 2), (int)(model.getSize().y * 2));
