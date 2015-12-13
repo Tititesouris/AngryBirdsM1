@@ -7,18 +7,33 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
 /**
- * TODO: Description
+ * Cette classe représente la fronde
  *
  * @author Quentin Brault
  */
 public class SlingshotModel extends GraphicalObjectModel {
 
+    /**
+     * l'oiseau
+     */
     private BirdModel bird;
 
+    /**
+     *portée du tir
+     */
     private double range;
 
+    /**
+     * l'oiseau est actif
+     */
     private boolean active;
 
+
+    /**
+     * Crée une fronde contenant l'oiseau et la portée du tir
+     * @param bird
+     * @param range
+     */
     public SlingshotModel(BirdModel bird, double range) {
         super(new Vector2d(bird.getPosition().x, bird.getPosition().y), new Vector2d(bird.getSize().x * 2, 200));
         this.bird = bird;
@@ -55,10 +70,18 @@ public class SlingshotModel extends GraphicalObjectModel {
         }
     }
 
+    /**
+     * retourne true si l'oiseau est en mouvement
+     * @return active
+     */
     public boolean isActive() {
         return active;
     }
 
+    /**
+     * Retourne la position de l'oiseau
+     * @return la position de l'oiseau
+     */
     public Vector2d getBirdPosition() {
         return bird.getPosition();
     }
