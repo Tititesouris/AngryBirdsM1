@@ -22,8 +22,7 @@ public class ObstacleModel extends VectorObjectModel {
     private Vector2d target;
     private int targetRadius;
 
-    //private Vector2d velocity;
-    //private Vector2d acceleration;
+    private int reverseTime;
 
     /**
      * Créé un nouvel objet
@@ -35,21 +34,26 @@ public class ObstacleModel extends VectorObjectModel {
      */
     public ObstacleModel(double startX, double startY, Vector2d velocity) {
         super(new Vector2d(startX, startY), new Vector2d(20, 20), velocity, new Vector2d(0, 0));
-        this.velocity = velocity;
         this.start = new Vector2d(startX,startY);
-        //this.target = new Vector2d(targetX,targetY);
+
     }
 
     @Override
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
         position = start;
+        reverseTime = 500;
         velocity = new Vector2d(0, 0);
         acceleration = new Vector2d(0, 0);
     }
 
     @Override
     public void update(GameContainer gameContainer, StateBasedGame stateBasedGame, int delta) throws SlickException {
-        if(this.touchScreen() != null || this.touchObstacle())
+        if(this.touchScreen() != null || this.touchObstacle() != null || reverseTime < 0){
+            reverseObstacleAiming();
+        }else{
+            this.reverseTime -= delta;
+            super.update(gameContainer,stateBasedGame,delta);
+        }
 
 
 
@@ -61,10 +65,19 @@ public class ObstacleModel extends VectorObjectModel {
         }
     }
 
-
+    /**
+     * Need to get the coordonates of the perimeter of this obstacle +1
+     *  Check if the coordonates are instanceof Obstacle
+     *    If yes in updates reverserObstacleAiming
+     *
+     * NB : Obstacle can be a square or a circle
+     * @return
+     */
     public Vector2d touchObstacle(){
         int obstacleRadius = 1;
-        if(this.getPosition().)
+        if(this.getPosition().x == 0){
+            // todo think miss a method to get the perimeter coordonates in graphicalObject
+        }
         return null;
     }
 
