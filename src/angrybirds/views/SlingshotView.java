@@ -7,14 +7,21 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
 /**
- * TODO: Description
+ * Cette classe affiche la fronde
  *
- * @author User
+ * @author AngryBirdsM1
  */
 public class SlingshotView implements View {
 
+    /**
+     * fronde
+     */
     private SlingshotModel model;
 
+    /**
+     * crée une vue sur la fronde
+     * @param model
+     */
     public SlingshotView(SlingshotModel model) {
         this.model = model;
     }
