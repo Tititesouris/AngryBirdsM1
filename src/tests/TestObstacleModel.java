@@ -5,10 +5,10 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 import org.newdawn.slick.SlickException;
 
-import angrybirds.Window;
-import angrybirds.models.CircularObstacleModel;
-import angrybirds.models.RectangularObstacleModel;
-import angrybirds.structures.Vector2d;
+import angrybirdsold.Window;
+import angrybirdsold.models.CircularObstacleModel;
+import angrybirdsold.models.RectangularObstacleModel;
+import angrybirdsold.structures.Vector2d;
 
 /**
  * @author Maxime Catteau

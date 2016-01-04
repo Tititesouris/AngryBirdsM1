@@ -1,34 +1,33 @@
 package angrybirds.views;
 
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.SlickException;
-import org.newdawn.slick.state.StateBasedGame;
+import angrybirds.models.Model;
+import angrybirds.utils.Constants;
+import angrybirds.utils.inputs.InputObservable;
+import angrybirds.utils.updates.UpdateObserver;
+import org.newdawn.slick.*;
 
 /**
- * Cette interface determine comment les vues doivent etre concues
+ * TODO: Description
  *
- * @author Quentin Brault
+ * @author Tititesouris
  */
-public interface View {
+public abstract class View extends InputObservable implements UpdateObserver {
 
-    /**
-     * Cette méthode est appelé au chargement de l'objet.
-     *
-     * @param gameContainer     Contexte du jeu
-     * @param stateBasedGame    Référence au jeu
-     * @throws SlickException   Librairie Slick
-     */
-    void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException;
+    public static AppGameContainer app;
 
-    /**
-     * Affiche la vue.
-     *
-     * @param gameContainer     Contexte du jeu
-     * @param stateBasedGame    Référence au jeu
-     * @param graphics          Contexte graphique.
-     * @throws SlickException   Librairie Slick
-     */
-    void render(GameContainer gameContainer, StateBasedGame stateBasedGame, Graphics graphics) throws SlickException;
+    public View() {
+    }
+
+    public abstract void init(Model model);
+
+    public abstract void display();
+
+    protected Graphics getGraphics() {
+        return app.getGraphics();
+    }
+
+    protected Input getInput() {
+        return app.getInput();
+    }
 
 }

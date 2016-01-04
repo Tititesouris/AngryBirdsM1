@@ -1,54 +1,50 @@
 package angrybirds.views;
 
-import angrybirds.Tool;
-import angrybirds.models.BirdModel;
-import angrybirds.structures.Vector2d;
-import org.newdawn.slick.*;
-import org.newdawn.slick.state.StateBasedGame;
+import angrybirds.models.Model;
+import angrybirds.models.objects.birds.BirdModel;
+import angrybirds.utils.Vector2d;
+import angrybirds.utils.updates.actions.BirdUpdateAction;
+import angrybirds.utils.updates.actions.UpdateAction;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * Cette classe affiche l'oiseau
+ * TODO: Description
  *
- * @author Quentin Brault
+ * @author Tititesouris
  */
-public class BirdView implements View {
+public abstract class BirdView extends View {
 
-    /**
-     * Le modèle de l'oiseau
-     */
-    private BirdModel model;
+    protected Vector2d position;
 
-    /**
-     * Image de l'oiseau
-     */
-    private Image sprite;
+    protected Vector2d size;
 
-    /**
-     * Crée une vue pour l'oiseau
-     * @param model Modèle de l'oiseau.
-     */
-    public BirdView(BirdModel model) {
-        this.model = model;
-        this.sprite = Tool.getImage("/res/bird.png").getScaledCopy((int)(model.getSize().x * 2), (int)(model.getSize().y * 2));
+    protected float rotation;
+
+    private List<Vector2d> trail;
+
+    @Override
+    public void init(Model model) {
+        BirdModel bird = (BirdModel) model;
+        this.position = bird.getPosition();
+        this.size = bird.getSize();
+        this.rotation = bird.getRotation();
+        this.trail = new ArrayList<>();
     }
 
     @Override
-    public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
+    public void display() {
+        for (Vector2d point : trail) {
 
+        }
     }
 
     @Override
-    public void render(GameContainer gameContainer, StateBasedGame stateBasedGame, Graphics graphics) throws SlickException {
-        sprite.setRotation(45 + (float)Math.toDegrees(Math.atan2(model.getVelocity().y, model.getVelocity().x)));
-        if (model.isHit()) {
-            sprite.drawFlash((float) (model.getPosition().x - model.getSize().x), (float) (model.getPosition().y - model.getSize().y));
-        }
-        else {
-            sprite.draw((float) (model.getPosition().x - model.getSize().x), (float) (model.getPosition().y - model.getSize().y));
-        }
-        graphics.setColor(Color.white);
-        for (Vector2d dot : model.getDots()) {
-            graphics.fillOval((float)dot.x - 2, (float)dot.y - 2, 4, 4);
+    public void onUpdate(UpdateAction updateAction) {
+        if (updateAction instanceof BirdUpdateAction) {
+            if (updateAction instanceof BirdUpdateAction.Move)
+                position = ((BirdUpdateAction.Move) updateAction).getPosition();
         }
     }
 

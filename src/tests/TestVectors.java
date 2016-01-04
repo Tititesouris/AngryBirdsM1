@@ -1,6 +1,6 @@
 package tests;
 
-import angrybirds.structures.Vector2d;
+import angrybirdsold.structures.Vector2d;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

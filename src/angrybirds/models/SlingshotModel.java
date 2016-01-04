@@ -1,88 +1,109 @@
 package angrybirds.models;
 
-import angrybirds.structures.Vector2d;
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Input;
-import org.newdawn.slick.SlickException;
-import org.newdawn.slick.state.StateBasedGame;
+import angrybirds.models.objects.birds.BirdModel;
+import angrybirds.utils.Vector2d;
+import angrybirds.utils.updates.actions.BirdUpdateAction;
+import angrybirds.utils.updates.actions.SlingshotUpdateAction;
 
 /**
- * Cette classe représente le lanceur
+ * TODO: Description
  *
- * @author Quentin Brault
+ * @author Tititesouris
  */
-public class SlingshotModel extends GraphicalObjectModel {
+public class SlingshotModel extends Model {
 
     /**
-     * L'oiseau
+     * Position du lance-oiseau dans le niveau.
+     */
+    private Vector2d position;
+
+    /**
+     * Taille du lance-oiseau.
+     */
+    private Vector2d size;
+
+    /**
+     * Position de la partie du lance-oiseau tenant l'oiseau par rapport à sa position au repos.
+     */
+    private Vector2d holderPosition;
+
+    /**
+     * Distance maximale entre la position de la partie du lance-oiseau tenant l'oiseau lorsque
+     * l'élastique est tendu et sa position par default lorsque l'élastique est détendu.
+     * Cette distance permet de limiter la puissance de tir.
+     */
+    private int range;
+
+    /**
+     * Oiseau sur le lance-oiseau.
+     * Le champ est null si il n'y a pas d'oiseau sur le lance-oiseau.
      */
     private BirdModel bird;
 
-    /**
-     * Portée d'étirement du lanceur
-     */
-    private double range;
-
-    /**
-     * True si le lanceur est étiré
-     */
-    private boolean active;
-
-
-    /**
-     * Crée un lanceur contenant l'oiseau.
-     * @param bird  Oiseau sur le lanceur
-     * @param range Portée d'étirement du lanceur
-     */
-    public SlingshotModel(BirdModel bird, double range) {
-        super(new Vector2d(bird.getPosition().x, bird.getPosition().y), new Vector2d(bird.getSize().x * 2, 200));
-        this.bird = bird;
+    public SlingshotModel(Vector2d position, Vector2d size, int range) {
+        this.position = position;
+        this.size = size;
+        this.holderPosition = position.sum(size.product(0.5f));
         this.range = range;
     }
 
     @Override
-    public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
-        this.active = false;
+    public void init() {
+
     }
 
     @Override
-    public void update(GameContainer gameContainer, StateBasedGame stateBasedGame, int delta) throws SlickException {
-        if (!bird.isFlying()) {
-            Input input = gameContainer.getInput();
-            if (!active) {
-                if (input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
-                    active = true;
-                }
-            } else {
-                if (input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
-                    Vector2d newPos = new Vector2d(input.getMouseX(), input.getMouseY()).diff(position);
-                    newPos = position.add(newPos.normalize().product(Math.min(range, newPos.getHypotenuse())));
-                    bird.setPosition(newPos.x, newPos.y);
-                } else {
-                    Vector2d dir = new Vector2d(position.x - bird.getPosition().x, position.y - bird.getPosition().y);
-                    dir = dir.normalize().product(Math.min(10, dir.getHypotenuse() / 100));
-                    bird.setVelocity(dir.x, dir.y); // Impulsion
-                    bird.setAcceleration(0, 0.002); // Gravité
-                    bird.setFlying(true);
-                    active = false;
-                }
-            }
+    public void update(int delta) {
+
+    }
+
+    public void pull(Vector2d position) {
+        if (bird != null) {
+            holderPosition = position;
+            bird.setPosition(position);
+            bird.notifyObservers(new BirdUpdateAction.Move(position));
+            notifyObservers(new SlingshotUpdateAction.Stretch(position));
         }
     }
 
-    /**
-     * retourne true si le lanceur est étiré
-     * @return True si le lanceur est étiré
-     */
-    public boolean isActive() {
-        return active;
+    public Vector2d getPosition() {
+        return position;
     }
 
-    /**
-     * Retourne la position de l'oiseau
-     * @return la position de l'oiseau
-     */
-    public Vector2d getBirdPosition() {
-        return bird.getPosition();
+    public void setPosition(Vector2d position) {
+        this.position = position;
     }
+
+    public Vector2d getSize() {
+        return size;
+    }
+
+    public void setSize(Vector2d size) {
+        this.size = size;
+    }
+
+    public Vector2d getHolderPosition() {
+        return holderPosition;
+    }
+
+    public void setHolderPosition(Vector2d holderPosition) {
+        this.holderPosition = holderPosition;
+    }
+
+    public int getRange() {
+        return range;
+    }
+
+    public void setRange(int range) {
+        this.range = range;
+    }
+
+    public BirdModel getBird() {
+        return bird;
+    }
+
+    public void setBird(BirdModel bird) {
+        this.bird = bird;
+    }
+
 }

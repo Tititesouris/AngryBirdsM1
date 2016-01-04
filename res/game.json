@@ -1,0 +1,48 @@
+{
+  "levels": [
+    {
+      "name": "Level 1",
+      "birds": [
+        "RED",
+        "RED",
+        "YELLOW"
+      ],
+      "slingshot": {
+        "position": [
+          50,
+          250
+        ],
+        "size": [
+          100,
+          200
+        ],
+        "range": 50
+      },
+      "obstacles": [
+        {
+          "position": [
+            300,
+            300
+          ],
+          "size": [
+            50,
+            50
+          ],
+          "type": "WOOD"
+        }
+      ],
+      "pigs": [
+        {
+          "position": [
+            400,
+            300
+          ],
+          "size": [
+            50,
+            50
+          ]
+        }
+      ]
+    }
+  ]
+}

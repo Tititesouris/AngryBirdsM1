@@ -1,42 +1,50 @@
 package angrybirds.views;
 
+import angrybirds.models.Model;
 import angrybirds.models.SlingshotModel;
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.SlickException;
-import org.newdawn.slick.state.StateBasedGame;
+import angrybirds.utils.Vector2d;
+import angrybirds.utils.inputs.actions.SlingshotInputAction;
+import angrybirds.utils.updates.actions.SlingshotUpdateAction;
+import angrybirds.utils.updates.actions.UpdateAction;
+import org.newdawn.slick.Input;
 
 /**
- * Cette classe affiche le lanceur
+ * TODO: Description
  *
  * @author Quentin Brault
  */
-public class SlingshotView implements View {
+public class SlingshotView extends View {
 
-    /**
-     * Modèle du lanceur
-     */
-    private SlingshotModel model;
+    private Vector2d position;
 
-    /**
-     * Crée une vue du lanceur
-     * @param model Modèle du lanceur
-     */
-    public SlingshotView(SlingshotModel model) {
-        this.model = model;
+    private Vector2d size;
+
+    private Vector2d holderPosition;
+
+    @Override
+    public void init(Model model) {
+        SlingshotModel slingshot = (SlingshotModel) model;
+        this.position = slingshot.getPosition();
+        this.size = slingshot.getSize();
+        this.holderPosition = slingshot.getHolderPosition();
     }
 
     @Override
-    public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
-
+    public void display() {
+        getGraphics().drawRect(position.x, position.y, size.x, size.y);
+        getGraphics().drawRect(holderPosition.x, holderPosition.y, size.x, 20);
+        if (getInput().isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
+            Vector2d cursorPosition = new Vector2d(getInput().getMouseX(), getInput().getMouseY());
+            notifyObservers(new SlingshotInputAction.Pull(cursorPosition));
+        }
     }
 
     @Override
-    public void render(GameContainer gameContainer, StateBasedGame stateBasedGame, Graphics graphics) throws SlickException {
-        graphics.setLineWidth(5);
-        graphics.drawRect((float) (model.getPosition().x - model.getSize().x / 2), (float) model.getPosition().y, (float) model.getSize().x, (float) model.getSize().y);
-        if (model.isActive()) {
-            graphics.drawLine((float) model.getPosition().x, (float) model.getPosition().y, (float) model.getBirdPosition().x, (float) model.getBirdPosition().y);
+    public void onUpdate(UpdateAction updateAction) {
+        if (updateAction instanceof SlingshotUpdateAction) {
+            if (updateAction instanceof SlingshotUpdateAction.Stretch) {
+                holderPosition = ((SlingshotUpdateAction.Stretch) updateAction).getPosition();
+            }
         }
     }
 

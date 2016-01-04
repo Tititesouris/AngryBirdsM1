@@ -1,48 +1,71 @@
 package angrybirds.controllers;
 
 import angrybirds.models.GameModel;
+import angrybirds.models.LevelModel;
+import angrybirds.models.Model;
+import angrybirds.utils.ModelViewPair;
+import angrybirds.utils.inputs.actions.InputAction;
 import angrybirds.views.GameView;
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.SlickException;
-import org.newdawn.slick.state.BasicGameState;
-import org.newdawn.slick.state.StateBasedGame;
+import angrybirds.views.LevelView;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * Le controlleur du jeu. Il créé le model de jeu et la vue du jeu, et implémente les méthodes du framework Slick2d et dispatch les appels à ces méthodes au model et à la vue.
+ * TODO: Description
  *
- * @author Quentin Brault
+ * @author Tititesouris
  */
-public class  GameController extends BasicGameState {
+public class GameController extends Controller {
 
-    /**
-     * Model du jeu qui reçoit les updates.
-     */
-    private final GameModel model = new GameModel();
+    private LevelController levelController;
 
-    /**
-     * Vue du jeu qui reçoit les appels à render().
-     */
-    private final GameView view = new GameView(model);
+    public GameController() {
+        JsonParser parser = new JsonParser();
+        try {
+            JsonElement json = parser.parse(new BufferedReader(new FileReader("res/game.json")));
 
-    @Override
-    public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
-        model.init(gameContainer, stateBasedGame);
+            JsonObject game = json.getAsJsonObject();
+            JsonArray levels = game.get("levels").getAsJsonArray();
+            for (JsonElement element : levels) {
+                JsonObject level = element.getAsJsonObject();
+                String name = level.get("name").getAsString();
+                JsonArray birds = level.get("birds").getAsJsonArray();
+                JsonObject slingshot = level.get("slingshot").getAsJsonObject();
+                JsonArray obstacles = level.get("obstacles").getAsJsonArray();
+                JsonArray pigs = level.get("pigs").getAsJsonArray();
+            }
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        levelController = new LevelController();
+
+        GameModel gameModel = new GameModel(levelController.getModels());
+        GameView gameView = new GameView();
+        addModelViewPair(new ModelViewPair(gameModel, gameView));
     }
 
     @Override
-    public void render(GameContainer gameContainer, StateBasedGame stateBasedGame, Graphics graphics) throws SlickException {
-        view.render(gameContainer, stateBasedGame, graphics);
+    public List<GameModel> getModels() {
+        List<GameModel> models = new ArrayList<>();
+        for (Model model : getAbstractModels())
+            models.add((GameModel) model);
+        return models;
     }
 
     @Override
-    public void update(GameContainer gameContainer, StateBasedGame stateBasedGame, int delta) throws SlickException {
-        model.update(gameContainer, stateBasedGame, delta);
-    }
+    public void onInput(InputAction inputAction) {
 
-    @Override
-    public int getID() {
-        return 0;
     }
 
 }
