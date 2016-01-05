@@ -7,6 +7,8 @@ import angrybirds.utils.Vector2d;
 import angrybirds.utils.inputs.actions.InputAction;
 import angrybirds.utils.inputs.actions.SlingshotInputAction;
 import angrybirds.views.SlingshotView;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,29 +20,42 @@ import java.util.List;
  */
 public class SlingshotController extends Controller {
 
-    public SlingshotController(float[] position, float[] size, int range) {
-        SlingshotModel model = new SlingshotModel(new Vector2d(position[0], position[1]), new Vector2d(size[0], size[1]), range);
+    public SlingshotController(JsonObject slingshot) {
+        JsonArray position = slingshot.get("position").getAsJsonArray();
+        JsonArray size = slingshot.get("size").getAsJsonArray();
+        SlingshotModel model = new SlingshotModel(
+                new Vector2d(position.get(0).getAsFloat(), position.get(1).getAsFloat()),
+                new Vector2d(size.get(0).getAsFloat(), size.get(1).getAsFloat()),
+                slingshot.get("range").getAsInt());
         SlingshotView view = new SlingshotView();
-        view.init(model);
-        addModelViewPair(new ModelViewPair(model, view));
+        addModelViewPair(new ModelViewPair<>(model, view));
+
     }
 
     @Override
     public void onInput(InputAction inputAction) {
-        SlingshotModel slingshot = getModels().get(0);
-        if (inputAction instanceof SlingshotInputAction) {
-            if (inputAction instanceof SlingshotInputAction.Pull) {
-                slingshot.pull(((SlingshotInputAction.Pull) inputAction).getPosition());
+        for (Model model : getModels()) {
+            SlingshotModel slingshot = (SlingshotModel) model;
+            if (inputAction instanceof SlingshotInputAction) {
+                if (inputAction instanceof SlingshotInputAction.Pull) {
+                    slingshot.pull(((SlingshotInputAction.Pull) inputAction).getPosition());
+                }
             }
         }
     }
 
     @Override
-    public List<SlingshotModel> getModels() {
-        List<SlingshotModel> models = new ArrayList<>();
-        for (Model model : getAbstractModels())
-            models.add((SlingshotModel) model);
-        return models;
+    public void init() {
+
     }
 
+    @Override
+    public void update(int delta) {
+
+    }
+
+    @Override
+    public void display() {
+
+    }
 }

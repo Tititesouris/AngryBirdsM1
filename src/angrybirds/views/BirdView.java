@@ -5,6 +5,7 @@ import angrybirds.models.objects.birds.BirdModel;
 import angrybirds.utils.Vector2d;
 import angrybirds.utils.updates.actions.BirdUpdateAction;
 import angrybirds.utils.updates.actions.UpdateAction;
+import org.newdawn.slick.Graphics;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,13 +32,6 @@ public abstract class BirdView extends View {
         this.size = bird.getSize();
         this.rotation = bird.getRotation();
         this.trail = new ArrayList<>();
-    }
-
-    @Override
-    public void display() {
-        for (Vector2d point : trail) {
-
-        }
     }
 
     @Override

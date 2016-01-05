@@ -4,6 +4,8 @@ import angrybirds.models.GameModel;
 import angrybirds.models.LevelModel;
 import angrybirds.models.Model;
 import angrybirds.utils.updates.actions.UpdateAction;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Input;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,14 +32,19 @@ public class GameView extends View {
     }
 
     @Override
-    public void display() {
+    public void input(Input input) {
+
+    }
+
+    @Override
+    public void display(Graphics graphics) {
         if (inLevel) {
 
         }
         else {
             int x = 50;
             for (String levelName : levels) {
-                getGraphics().drawString(levelName, x+=100, 200);
+                graphics.drawString(levelName, x+=100, 200);
             }
         }
     }

@@ -8,13 +8,13 @@ import angrybirds.views.View;
  *
  * @author Tititesouris
  */
-public class ModelViewPair {
+public class ModelViewPair<M extends Model, V extends View> {
 
-    public final Model model;
+    public final M model;
 
-    public final View view;
+    public final V view;
 
-    public ModelViewPair(Model model, View view) {
+    public ModelViewPair(M model, V view) {
         this.model = model;
         this.view = view;
     }

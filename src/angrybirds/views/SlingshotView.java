@@ -6,6 +6,7 @@ import angrybirds.utils.Vector2d;
 import angrybirds.utils.inputs.actions.SlingshotInputAction;
 import angrybirds.utils.updates.actions.SlingshotUpdateAction;
 import angrybirds.utils.updates.actions.UpdateAction;
+import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 
 /**
@@ -30,13 +31,17 @@ public class SlingshotView extends View {
     }
 
     @Override
-    public void display() {
-        getGraphics().drawRect(position.x, position.y, size.x, size.y);
-        getGraphics().drawRect(holderPosition.x, holderPosition.y, size.x, 20);
-        if (getInput().isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
-            Vector2d cursorPosition = new Vector2d(getInput().getMouseX(), getInput().getMouseY());
+    public void input(Input input) {
+        if (input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
+            Vector2d cursorPosition = new Vector2d(input.getMouseX(), input.getMouseY());
             notifyObservers(new SlingshotInputAction.Pull(cursorPosition));
         }
+    }
+
+    @Override
+    public void display(Graphics graphics) {
+        graphics.drawRect(position.x, position.y, size.x, size.y);
+        graphics.drawRect(holderPosition.x, holderPosition.y, size.x, 20);
     }
 
     @Override

@@ -1,12 +1,18 @@
 package angrybirds.controllers;
 
+import angrybirds.exceptions.AngryBirdsException;
 import angrybirds.exceptions.UnknownBirdException;
 import angrybirds.models.LevelModel;
 import angrybirds.models.Model;
+import angrybirds.models.SlingshotModel;
+import angrybirds.models.objects.birds.BirdModel;
 import angrybirds.utils.ModelViewPair;
 import angrybirds.utils.inputs.actions.InputAction;
 import angrybirds.utils.inputs.actions.LevelInputAction;
 import angrybirds.views.LevelView;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,40 +30,55 @@ public class LevelController extends Controller {
 
     private SlingshotController slingshotController;
 
-    public LevelController() {
-        //TODO: Read game.json to find 'birds' and 'slingshotX'
-        String[] birds = new String[] {"RED", "RED", "YELLOW"};
-        float[] slingshotPosition = new float[] {50, 250};
-        float[] slingshotSize = new float[] {100, 200};
-        int slingshotRange = 50;
-        try {
-            this.birdController = new BirdController(birds);
-        } catch (UnknownBirdException e) {
-            e.printStackTrace();
-        }
-        this.slingshotController = new SlingshotController(slingshotPosition, slingshotSize, slingshotRange);
+    public LevelController(JsonArray levels) throws AngryBirdsException {
+        for (JsonElement element : levels) {
+            JsonObject level = element.getAsJsonObject();
+            String name = level.get("name").getAsString();
+            JsonArray birds = level.get("birds").getAsJsonArray();
+            JsonObject slingshot = level.get("slingshot").getAsJsonObject();
+            JsonArray obstacles = level.get("obstacles").getAsJsonArray();
+            JsonArray pigs = level.get("pigs").getAsJsonArray();
+            birdController = new BirdController(birds);
+            slingshotController = new SlingshotController(slingshot);
+            // TODO: obstacles and pigs
+            List<BirdModel> birdModels = birdController.getModels();
+            List<SlingshotModel> slingshotModel = slingshotController.getModels();
+            LevelModel levelModel = new LevelModel(name, birdModels, slingshotModel.get(0));
+            LevelView levelView = new LevelView();
+            addModelViewPair(new ModelViewPair<>(levelModel, levelView));
 
-        //TODO read game.json and create levels.
-        LevelModel levelModel = new LevelModel("Level 1", birdController.getModels(), slingshotController.getModels().get(0));
-        LevelView levelView = new LevelView();
-        addModelViewPair(new ModelViewPair(levelModel, levelView));
+        }
     }
 
     @Override
     public void onInput(InputAction inputAction) {
-        LevelModel level = getModels().get(0);
-        if (inputAction instanceof LevelInputAction) {
-            if (inputAction instanceof LevelInputAction.Start)
-                level.start();
+        for (Model model : getModels()) {
+            LevelModel level = (LevelModel) model;
+
+            if (inputAction instanceof LevelInputAction) {
+                if (inputAction instanceof LevelInputAction.Start)
+                    level.start();
+            }
+
         }
     }
 
     @Override
-    public List<LevelModel> getModels() {
-        List<LevelModel> models = new ArrayList<>();
-        for (Model model : getAbstractModels())
-        models.add((LevelModel) model);
-        return models;
+    public void init() {
+        birdController.init();
+        slingshotController.init();
+    }
+
+    @Override
+    public void update(int delta) {
+        birdController.update(delta);
+        slingshotController.update(delta);
+    }
+
+    @Override
+    public void display() {
+        birdController.display();
+        slingshotController.display();
     }
 
 }

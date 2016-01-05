@@ -1,5 +1,6 @@
 package angrybirds.controllers;
 
+import angrybirds.exceptions.AngryBirdsException;
 import angrybirds.models.GameModel;
 import angrybirds.models.LevelModel;
 import angrybirds.models.Model;
@@ -28,44 +29,43 @@ public class GameController extends Controller {
 
     private LevelController levelController;
 
-    public GameController() {
+    public GameController() throws AngryBirdsException {
         JsonParser parser = new JsonParser();
         try {
             JsonElement json = parser.parse(new BufferedReader(new FileReader("res/game.json")));
 
             JsonObject game = json.getAsJsonObject();
             JsonArray levels = game.get("levels").getAsJsonArray();
-            for (JsonElement element : levels) {
-                JsonObject level = element.getAsJsonObject();
-                String name = level.get("name").getAsString();
-                JsonArray birds = level.get("birds").getAsJsonArray();
-                JsonObject slingshot = level.get("slingshot").getAsJsonObject();
-                JsonArray obstacles = level.get("obstacles").getAsJsonArray();
-                JsonArray pigs = level.get("pigs").getAsJsonArray();
-            }
+
+            levelController = new LevelController(levels);
+
+            GameModel model = new GameModel(levelController.getModels());
+            GameView view = new GameView();
+            addModelViewPair(new ModelViewPair<>(model, view));
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-
-        levelController = new LevelController();
-
-        GameModel gameModel = new GameModel(levelController.getModels());
-        GameView gameView = new GameView();
-        addModelViewPair(new ModelViewPair(gameModel, gameView));
-    }
-
-    @Override
-    public List<GameModel> getModels() {
-        List<GameModel> models = new ArrayList<>();
-        for (Model model : getAbstractModels())
-            models.add((GameModel) model);
-        return models;
     }
 
     @Override
     public void onInput(InputAction inputAction) {
 
+    }
+
+    @Override
+    public void init() {
+        levelController.init();
+    }
+
+    @Override
+    public void update(int delta) {
+        levelController.update(delta);
+    }
+
+    @Override
+    public void display() {
+        levelController.display();
     }
 
 }
