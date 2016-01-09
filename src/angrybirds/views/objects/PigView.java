@@ -1,7 +1,7 @@
 package angrybirds.views.objects;
 
-import angrybirds.models.Model;
-import angrybirds.updates.actions.UpdateAction;
+import angrybirds.notifications.updates.actions.UpdateAction;
+import angrybirds.utils.Vector2d;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 
@@ -12,8 +12,12 @@ import org.newdawn.slick.Input;
  */
 public class PigView extends ObjectView {
 
+    public PigView(int id, Vector2d position, Vector2d size, float rotation) {
+        super(id, position, size, rotation);
+    }
+
     @Override
-    public void init(Model model) {
+    public void init() {
 
     }
 

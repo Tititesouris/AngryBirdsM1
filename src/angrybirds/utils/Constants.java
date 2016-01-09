@@ -11,6 +11,13 @@ public interface Constants {
 
     boolean DEBUG = true;
 
+    /**
+     * Le temps en millisecondes minimum avec lequel le moteur de jeu travaille.
+     * Deux InputAction ne peuvent pas être envoyée plus vite que ce temps, de même pour UpdateAction.
+     * Deux appels à update() ne peuvent pas être effectués plus vite que ce temps, de même pour display().
+     */
+    int MIN_ENGINE_DELAY = 10;
+
     Random RAND = new Random();
 
     int WINDOW_WIDTH = 1080;

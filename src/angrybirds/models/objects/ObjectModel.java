@@ -1,10 +1,7 @@
 package angrybirds.models.objects;
 
 import angrybirds.models.Model;
-import angrybirds.models.objects.birds.BirdModel;
-import angrybirds.models.objects.birds.YellowBirdModel;
-import angrybirds.updates.actions.BirdUpdateAction;
-import angrybirds.updates.actions.ObjectUpdateAction;
+import angrybirds.notifications.updates.actions.ObjectUpdateAction;
 import angrybirds.utils.Constants;
 import angrybirds.utils.Vector2d;
 

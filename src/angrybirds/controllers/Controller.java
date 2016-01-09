@@ -2,11 +2,10 @@ package angrybirds.controllers;
 
 import angrybirds.models.Model;
 import angrybirds.utils.ModelViewPair;
-import angrybirds.inputs.InputObserver;
+import angrybirds.notifications.inputs.InputObserver;
 import angrybirds.views.View;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * TODO: Description
@@ -27,18 +26,18 @@ public abstract class Controller implements InputObserver {
         return modelViewPairs.add(modelViewPair);
     }
 
-    protected <T extends Model> List<T> getModels() {
-        List<T> models = new ArrayList<>();
+    protected <T extends Model> SortedMap<Integer, T> getModels() {
+        SortedMap<Integer, T> models = new TreeMap<>();
         for (ModelViewPair modelViewPair : modelViewPairs) {
-            models.add((T) modelViewPair.model);
+            models.put(modelViewPair.model.getId(), (T) modelViewPair.model);
         }
         return models;
     }
 
-    protected <T extends View> List<T> getViews() {
-        List<T> views = new ArrayList<>();
+    protected <T extends View> SortedMap<Integer, T> getViews() {
+        SortedMap<Integer, T> views = new TreeMap<>();
         for (ModelViewPair modelViewPair : modelViewPairs) {
-            views.add((T) modelViewPair.view);
+            views.put(modelViewPair.view.getId(), (T) modelViewPair.view);
         }
         return views;
     }

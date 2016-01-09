@@ -1,6 +1,6 @@
 package angrybirds.models;
 
-import angrybirds.updates.UpdateObservable;
+import angrybirds.notifications.updates.UpdateObservable;
 
 /**
  * TODO: Description

@@ -1,15 +1,12 @@
 package angrybirds.views;
 
-import angrybirds.inputs.actions.GameInputAction;
-import angrybirds.models.GameModel;
-import angrybirds.models.LevelModel;
-import angrybirds.models.Model;
-import angrybirds.updates.actions.GameUpdateAction;
-import angrybirds.updates.actions.UpdateAction;
+import angrybirds.notifications.inputs.actions.GameInputAction;
+import angrybirds.notifications.updates.actions.GameUpdateAction;
+import angrybirds.notifications.updates.actions.UpdateAction;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 
-import java.util.List;
+import java.util.SortedMap;
 
 /**
  * TODO: Description
@@ -18,30 +15,28 @@ import java.util.List;
  */
 public class GameView extends View {
 
-    private List<LevelView> levels;
+    private SortedMap<Integer, LevelView> levels;
 
     private LevelView level;
 
-    public GameView(List<LevelView> levels) {
+    public GameView(int id, SortedMap<Integer, LevelView> levels) {
+        super(id);
         this.levels = levels;
     }
 
     @Override
-    public void init(Model model) {
-        GameModel game = (GameModel)model;
-        List<LevelModel> levels = game.getLevels();
-        LevelModel level = game.getLevel();
-        if (level != null) {
-            this.level = this.levels.get(levels.indexOf(level));
-            this.level.init(level);
-        }
+    public void init() {
+        for (LevelView level : levels.values())
+            level.init();
     }
 
     @Override
     public void input(Input input) {
         if (level == null) {
-            if (input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON))
-                notifyObservers(new GameInputAction.EnterLevel(0));
+            if (input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
+                LevelView levelSelected = levels.get(levels.firstKey());
+                notifyObservers(new GameInputAction.EnterLevel(id, levelSelected.id));
+            }
         } else
             level.input(input);
     }
@@ -49,7 +44,7 @@ public class GameView extends View {
     @Override
     public void display(Graphics graphics) {
         if (level == null) {
-            graphics.drawString("Angry Bird. PRESS SPACE", 200, 200);
+            graphics.drawString("Angry Birds. Click to start", 200, 200);
         }
         else
             level.display(graphics);
@@ -59,13 +54,12 @@ public class GameView extends View {
     public void onUpdate(UpdateAction updateAction) {
         if (updateAction instanceof GameUpdateAction) {
             if (updateAction instanceof GameUpdateAction.EnterLevel)
-                enterLevel(((GameUpdateAction.EnterLevel) updateAction).getId());
+                enterLevel(((GameUpdateAction.EnterLevel) updateAction).getLevel());
         }
     }
 
-    private void enterLevel(int id) {
-        this.level = levels.get(id);
-        level.ready();
+    private void enterLevel(int levelId) {
+        this.level = levels.get(levelId);
     }
 
 }

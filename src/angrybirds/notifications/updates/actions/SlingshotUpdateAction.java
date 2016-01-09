@@ -1,4 +1,4 @@
-package angrybirds.inputs.actions;
+package angrybirds.notifications.updates.actions;
 
 import angrybirds.utils.Vector2d;
 
@@ -7,9 +7,9 @@ import angrybirds.utils.Vector2d;
  *
  * @author Quentin Brault
  */
-public abstract class SlingshotInputAction implements InputAction {
+public abstract class SlingshotUpdateAction implements UpdateAction {
 
-    public static class Pull extends SlingshotInputAction {
+    public static class Pull extends SlingshotUpdateAction {
 
         private Vector2d holderPosition;
 
@@ -20,10 +20,6 @@ public abstract class SlingshotInputAction implements InputAction {
         public Vector2d getHolderPosition() {
             return holderPosition;
         }
-
-    }
-
-    public static class Release extends SlingshotInputAction {
 
     }
 

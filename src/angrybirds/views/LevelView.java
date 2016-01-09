@@ -1,10 +1,8 @@
 package angrybirds.views;
 
-import angrybirds.models.LevelModel;
-import angrybirds.models.Model;
-import angrybirds.inputs.actions.LevelInputAction;
-import angrybirds.updates.actions.LevelUpdateAction;
-import angrybirds.updates.actions.UpdateAction;
+import angrybirds.notifications.inputs.actions.LevelInputAction;
+import angrybirds.notifications.updates.actions.LevelUpdateAction;
+import angrybirds.notifications.updates.actions.UpdateAction;
 import angrybirds.utils.Constants;
 import angrybirds.views.objects.PigView;
 import angrybirds.views.objects.birds.BirdView;
@@ -14,7 +12,7 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 
-import java.util.List;
+import java.util.SortedMap;
 
 /**
  * TODO: Description
@@ -23,21 +21,23 @@ import java.util.List;
  */
 public class LevelView extends View {
 
-    private int id;
-
     private String name;
 
     private SlingshotView slingshot;
 
-    private List<BirdView> birds;
+    private SortedMap<Integer, BirdView> birds;
 
-    private List<ObstacleView> obstacles;
+    private SortedMap<Integer, ObstacleView> obstacles;
 
-    private List<PigView> pigs;
+    private SortedMap<Integer, PigView> pigs;
 
     private Image background;
 
-    public LevelView(SlingshotView slingshot, List<BirdView> birds, List<ObstacleView> obstacles, List<PigView> pigs) {
+    private boolean birdDied;
+
+    public LevelView(int id, String name, SlingshotView slingshot, SortedMap<Integer, BirdView> birds, SortedMap<Integer, ObstacleView> obstacles, SortedMap<Integer, PigView> pigs) {
+        super(id);
+        this.name = name;
         this.slingshot = slingshot;
         this.birds = birds;
         this.obstacles = obstacles;
@@ -45,36 +45,31 @@ public class LevelView extends View {
     }
 
     @Override
-    public void init(Model model) {
-        LevelModel level = (LevelModel) model;
-        this.id = level.getId();
-        this.name = level.getName();
-        if (this.background == null) { // Pour éviter de recharger l'image, car il n'y a pas de raison qu'elle change.
-            try {
-                this.background = new Image("/res/sprites/backgrounds/" + level.getName() + ".jpg");
-                this.background = background.getScaledCopy(Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT);
-            } catch (SlickException e) {
-                e.printStackTrace();
-            }
+    public void init() {
+        try {
+            this.background = new Image("/res/sprites/backgrounds/" + name + ".jpg");
+            this.background = background.getScaledCopy(Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT);
+        } catch (SlickException e) {
+            e.printStackTrace();
         }
-        slingshot.init(level.getSlingshot());
-        for (int i = 0; i < birds.size(); i++) {
-            birds.get(i).init(level.getBirds().get(i));
-        }
-        for (int i = 0; i < obstacles.size(); i++) {
-            obstacles.get(i).init(level.getObstacles().get(i));
-        }
-        for (int i = 0; i < pigs.size(); i++) {
-            pigs.get(i).init(level.getPigs().get(i));
-        }
+
+        slingshot.init();
+        for (BirdView bird : birds.values())
+            bird.init();
+        for (ObstacleView obstacle : obstacles.values())
+            obstacle.init();
+        for (PigView pig : pigs.values())
+            pig.init();
     }
 
     @Override
     public void input(Input input) {
-        if (input.isKeyDown(Input.KEY_SPACE))
-            ready();
-        else
-            slingshot.input(input);
+        if (birdDied) {
+            if (input.isKeyDown(Input.KEY_SPACE)) {
+                notifyObservers(new LevelInputAction.Ready(id));
+            }
+        }
+        slingshot.input(input);
     }
 
     @Override
@@ -82,11 +77,11 @@ public class LevelView extends View {
         graphics.drawImage(background, 0, 0);
         graphics.drawString(name, Constants.WINDOW_WIDTH - graphics.getFont().getWidth(name) - 10, 10);
         slingshot.display(graphics);
-        for (BirdView bird : birds)
+        for (BirdView bird : birds.values())
             bird.display(graphics);
-        for (ObstacleView obstacle : obstacles)
+        for (ObstacleView obstacle : obstacles.values())
             obstacle.display(graphics);
-        for (PigView pig : pigs)
+        for (PigView pig : pigs.values())
             pig.display(graphics);
     }
 
@@ -95,10 +90,9 @@ public class LevelView extends View {
         if (updateAction instanceof LevelUpdateAction.Ready) {
             // L'oiseau s'est arreté, le lance-oiseau vient d'etre préparé à tirer
         }
-    }
-
-    public void ready() {
-        notifyObservers(new LevelInputAction.Ready(id));
+        if (updateAction instanceof LevelUpdateAction.BirdDied) {
+            birdDied = true;
+        }
     }
 
 }

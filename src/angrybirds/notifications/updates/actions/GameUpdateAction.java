@@ -1,4 +1,4 @@
-package angrybirds.updates.actions;
+package angrybirds.notifications.updates.actions;
 
 /**
  * TODO: Description
@@ -9,14 +9,14 @@ public abstract class GameUpdateAction implements UpdateAction {
 
     public static class EnterLevel extends GameUpdateAction {
 
-        private int id;
+        private int levelId;
 
-        public EnterLevel(int id) {
-            this.id = id;
+        public EnterLevel(int levelId) {
+            this.levelId = levelId;
         }
 
-        public int getId() {
-            return id;
+        public int getLevel() {
+            return levelId;
         }
 
     }

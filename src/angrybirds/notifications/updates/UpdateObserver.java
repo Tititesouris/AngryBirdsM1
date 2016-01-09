@@ -1,6 +1,6 @@
-package angrybirds.updates;
+package angrybirds.notifications.updates;
 
-import angrybirds.updates.actions.UpdateAction;
+import angrybirds.notifications.updates.actions.UpdateAction;
 
 /**
  * TODO: Description

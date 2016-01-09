@@ -3,9 +3,9 @@ package angrybirds.models;
 import angrybirds.models.objects.PigModel;
 import angrybirds.models.objects.birds.BirdModel;
 import angrybirds.models.objects.obstacles.ObstacleModel;
-import angrybirds.updates.actions.LevelUpdateAction;
+import angrybirds.notifications.updates.actions.LevelUpdateAction;
 
-import java.util.List;
+import java.util.*;
 
 /**
  * TODO: Description
@@ -20,13 +20,15 @@ public class LevelModel extends Model {
 
     private SlingshotModel slingshot;
 
-    private List<BirdModel> birds;
+    private SortedMap<Integer, BirdModel> birds;
 
-    private List<ObstacleModel> obstacles;
+    private SortedMap<Integer, ObstacleModel> obstacles;
 
-    private List<PigModel> pigs;
+    private SortedMap<Integer, PigModel> pigs;
 
-    public LevelModel(String name, float ground, SlingshotModel slingshot, List<BirdModel> birds, List<ObstacleModel> obstacles, List<PigModel> pigs) {
+    private final List<Model> deadModels = new ArrayList<>();
+
+    public LevelModel(String name, float ground, SlingshotModel slingshot, SortedMap<Integer, BirdModel> birds, SortedMap<Integer, ObstacleModel> obstacles, SortedMap<Integer, PigModel> pigs) {
         this.name = name;
         this.ground = ground;
         this.slingshot = slingshot;
@@ -35,15 +37,42 @@ public class LevelModel extends Model {
         this.pigs = pigs;
     }
 
+    public LevelModel(String name, float ground) {
+        this(name, ground, null, null, null, null);
+    }
+
     @Override
     public void update(int delta) {
+        clearDeadModels();
+
         slingshot.update(delta);
-        for (BirdModel bird : birds)
+
+        for (BirdModel bird : birds.values())
             bird.update(delta);
-        for (ObstacleModel obstacle : obstacles)
+
+        for (ObstacleModel obstacle : obstacles.values())
             obstacle.update(delta);
-        for (PigModel pig : pigs)
+
+        for (PigModel pig : pigs.values())
             pig.update(delta);
+    }
+
+    public void clearDeadModels() {
+        if (deadModels.size() > 0) {
+            for (Model model : deadModels) {
+                if (model instanceof BirdModel)
+                    birds.remove(model.getId());
+                else if (model instanceof ObstacleModel)
+                    obstacles.remove(model.getId());
+                else if (model instanceof PigModel)
+                    pigs.remove(model.getId());
+            }
+        }
+        deadModels.clear();
+    }
+
+    public void enter() {
+        slingshot.setBird(birds.get(birds.firstKey()));
     }
 
     /**
@@ -52,17 +81,17 @@ public class LevelModel extends Model {
      * Sinon, elle les notifie avec LevelUpdateAction.End()
      */
     public void ready() {
-        BirdModel bird = slingshot.getBird();
-        if (bird == null) {
-            slingshot.ready(birds.get(0));
-            notifyObservers(new LevelUpdateAction.Ready());
-        }
-        else if (birds.indexOf(bird) < birds.size() - 1) {
-            slingshot.ready(birds.get(birds.indexOf(bird)));
+        if (birds.values().iterator().hasNext()) {
+            slingshot.ready(birds.values().iterator().next());
             notifyObservers(new LevelUpdateAction.Ready());
         }
         else
             notifyObservers(new LevelUpdateAction.End());
+    }
+
+    public void birdDied(BirdModel bird) {
+        deadModels.add(bird);
+        notifyObservers(new LevelUpdateAction.BirdDied());
     }
 
     public String getName() {
@@ -89,27 +118,27 @@ public class LevelModel extends Model {
         this.slingshot = slingshot;
     }
 
-    public List<BirdModel> getBirds() {
+    public SortedMap<Integer, BirdModel> getBirds() {
         return birds;
     }
 
-    public void setBirds(List<BirdModel> birds) {
+    public void setBirds(SortedMap<Integer, BirdModel> birds) {
         this.birds = birds;
     }
 
-    public List<ObstacleModel> getObstacles() {
+    public SortedMap<Integer, ObstacleModel> getObstacles() {
         return obstacles;
     }
 
-    public void setObstacles(List<ObstacleModel> obstacles) {
+    public void setObstacles(SortedMap<Integer, ObstacleModel> obstacles) {
         this.obstacles = obstacles;
     }
 
-    public List<PigModel> getPigs() {
+    public SortedMap<Integer, PigModel> getPigs() {
         return pigs;
     }
 
-    public void setPigs(List<PigModel> pigs) {
+    public void setPigs(SortedMap<Integer, PigModel> pigs) {
         this.pigs = pigs;
     }
 

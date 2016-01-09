@@ -1,8 +1,8 @@
 package angrybirds.models;
 
-import angrybirds.updates.actions.GameUpdateAction;
+import angrybirds.notifications.updates.actions.GameUpdateAction;
 
-import java.util.List;
+import java.util.Map;
 
 /**
  * TODO: Description
@@ -14,7 +14,7 @@ public class GameModel extends Model {
     /**
      * Liste des niveaux du jeu.
      */
-    private List<LevelModel> levels;
+    private Map<Integer, LevelModel> levels;
 
     /**
      * Niveau en train d'être joué.
@@ -22,7 +22,7 @@ public class GameModel extends Model {
      */
     private LevelModel level;
 
-    public GameModel(List<LevelModel> levels) {
+    public GameModel(Map<Integer, LevelModel> levels) {
         this.levels = levels;
     }
 
@@ -32,25 +32,14 @@ public class GameModel extends Model {
             level.update(delta);
     }
 
-    public void enterLevel(int id) {
-        this.level = levels.get(id);
-        notifyObservers(new GameUpdateAction.EnterLevel(id));
-    }
-
-    public List<LevelModel> getLevels() {
-        return levels;
-    }
-
-    public void setLevels(List<LevelModel> levels) {
-        this.levels = levels;
+    public void enterLevel(int levelId) {
+        level = levels.get(levelId);
+        level.enter();
+        notifyObservers(new GameUpdateAction.EnterLevel(levelId));
     }
 
     public LevelModel getLevel() {
         return level;
-    }
-
-    public void setLevel(LevelModel level) {
-        this.level = level;
     }
 
 }

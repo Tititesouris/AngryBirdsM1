@@ -1,4 +1,4 @@
-package angrybirds.inputs.actions;
+package angrybirds.notifications.inputs.actions;
 
 /**
  * TODO: Description
@@ -6,4 +6,5 @@ package angrybirds.inputs.actions;
  * @author Tititesouris
  */
 public interface InputAction {
+
 }

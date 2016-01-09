@@ -1,13 +1,10 @@
 package angrybirds.views.objects.birds;
 
-import angrybirds.models.Model;
-import angrybirds.models.objects.birds.BirdModel;
-import angrybirds.updates.actions.ObjectUpdateAction;
+import angrybirds.notifications.updates.actions.ObjectUpdateAction;
 import angrybirds.utils.Constants;
 import angrybirds.utils.Vector2d;
-import angrybirds.updates.actions.BirdUpdateAction;
-import angrybirds.updates.actions.UpdateAction;
-import angrybirds.views.LevelView;
+import angrybirds.notifications.updates.actions.BirdUpdateAction;
+import angrybirds.notifications.updates.actions.UpdateAction;
 import angrybirds.views.objects.ObjectView;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
@@ -22,20 +19,11 @@ import java.util.List;
  */
 public abstract class BirdView extends ObjectView {
 
-    private LevelView level;
-
     private List<Vector2d> trail;
 
-    public BirdView(LevelView level) {
-        this.level = level;
-    }
-
-    @Override
-    public void init(Model model) {
-        super.init(model);
-        BirdModel bird = (BirdModel) model;
-        rotation = bird.getRotation();
-        trail = new ArrayList<>();
+    public BirdView(int id, Vector2d position, Vector2d size, float rotation) {
+        super(id, position, size, rotation);
+        this.trail = new ArrayList<>();
     }
 
     @Override
@@ -51,8 +39,8 @@ public abstract class BirdView extends ObjectView {
                 // jouer un son
                 // animation
             }
-            else if (updateAction instanceof BirdUpdateAction.Stop) {
-                level.ready();
+            else if (updateAction instanceof BirdUpdateAction.Die) {
+                // animation de mort
             }
         }
     }

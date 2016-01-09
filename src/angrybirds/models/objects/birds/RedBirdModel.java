@@ -1,5 +1,6 @@
 package angrybirds.models.objects.birds;
 
+import angrybirds.models.LevelModel;
 import angrybirds.utils.Vector2d;
 
 /**
@@ -9,8 +10,7 @@ import angrybirds.utils.Vector2d;
  */
 public class RedBirdModel extends BirdModel {
 
-    public RedBirdModel(Vector2d position, Vector2d velocity, Vector2d acceleration) {
-        super(position, velocity, acceleration, new Vector2d(30), 0.0001f);
+    public RedBirdModel(LevelModel level, Vector2d position, Vector2d velocity, Vector2d acceleration) {
+        super(level, position, velocity, acceleration, new Vector2d(30), 0.0001f);
     }
-
 }

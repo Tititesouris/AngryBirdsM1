@@ -1,6 +1,7 @@
 package angrybirds.views.objects.birds;
 
 import angrybirds.utils.Constants;
+import angrybirds.utils.Vector2d;
 import angrybirds.views.LevelView;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
@@ -15,8 +16,13 @@ import org.newdawn.slick.geom.Triangulator;
  */
 public class YellowBirdView extends BirdView {
 
-    public YellowBirdView(LevelView level) {
-        super(level);
+    public YellowBirdView(int id, Vector2d position, Vector2d size, float rotation) {
+        super(id, position, size, rotation);
+    }
+
+    @Override
+    public void init() {
+
     }
 
     @Override

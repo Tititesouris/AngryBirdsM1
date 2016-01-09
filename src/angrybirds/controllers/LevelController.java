@@ -5,14 +5,9 @@ import angrybirds.controllers.objects.ObstacleController;
 import angrybirds.controllers.objects.PigController;
 import angrybirds.exceptions.AngryBirdsException;
 import angrybirds.models.LevelModel;
-import angrybirds.models.Model;
 import angrybirds.models.SlingshotModel;
-import angrybirds.models.objects.PigModel;
-import angrybirds.models.objects.birds.BirdModel;
-import angrybirds.models.objects.obstacles.ObstacleModel;
 import angrybirds.utils.ModelViewPair;
-import angrybirds.inputs.actions.InputAction;
-import angrybirds.inputs.actions.LevelInputAction;
+import angrybirds.notifications.inputs.actions.InputAction;
 import angrybirds.views.LevelView;
 import angrybirds.views.SlingshotView;
 import angrybirds.views.objects.PigView;
@@ -22,7 +17,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
-import java.util.List;
+import java.util.SortedMap;
 
 /**
  * TODO: Description
@@ -49,42 +44,36 @@ public class LevelController extends Controller {
             JsonArray obstacles = level.get("obstacles").getAsJsonArray();
             JsonArray pigs = level.get("pigs").getAsJsonArray();
 
-            LevelModel levelModel = null;
-            LevelView levelView = null;
+            LevelModel levelModel = new LevelModel(name, ground);
 
-            slingshotController = new SlingshotController(slingshot);
-            birdController = new BirdController(birds, levelView);
-            obstacleController = new ObstacleController(obstacles);
-            pigController = new PigController(pigs);
+            birdController = new BirdController(birds, levelModel);
+            slingshotController = new SlingshotController(slingshot, levelModel);
+            obstacleController = new ObstacleController(obstacles, levelModel);
+            pigController = new PigController(pigs, levelModel);
 
-            List<SlingshotModel> slingshotModels = slingshotController.getModels();
-            List<SlingshotView> slingshotViews = slingshotController.getViews();
-            List<BirdModel> birdModels = birdController.getModels();
-            List<BirdView> birdViews = birdController.getViews();
-            List<ObstacleModel> obstacleModels = obstacleController.getModels();
-            List<ObstacleView> obstacleViews = obstacleController.getViews();
-            List<PigModel> pigModels = pigController.getModels();
-            List<PigView> pigViews = pigController.getViews();
+            SortedMap<Integer, SlingshotModel> slingshotModels = slingshotController.getModels();
+            SortedMap<Integer, SlingshotView> slingshotViews = slingshotController.getViews();
+            // Il n'y a qu'un seul slingshot par niveau.
+            levelModel.setSlingshot(slingshotModels.get(slingshotModels.firstKey()));
+            SlingshotView slingshotView = slingshotViews.get(slingshotViews.firstKey());
 
-            levelModel = new LevelModel(name, ground, slingshotModels.get(0), birdModels, obstacleModels, pigModels);
-            levelView = new LevelView(slingshotViews.get(0), birdViews, obstacleViews, pigViews);
+            levelModel.setBirds(birdController.getModels());
+            SortedMap<Integer, BirdView> birdViews = birdController.getViews();
+
+            levelModel.setObstacles(obstacleController.getModels());
+            SortedMap<Integer, ObstacleView> obstacleViews = obstacleController.getViews();
+
+            levelModel.setPigs(pigController.getModels());
+            SortedMap<Integer, PigView> pigViews = pigController.getViews();
+
+            LevelView levelView = new LevelView(levelModel.getId(), levelModel.getName(), slingshotView, birdViews, obstacleViews, pigViews);
             addModelViewPair(new ModelViewPair<>(levelModel, levelView));
         }
     }
 
     @Override
     public void onInput(InputAction inputAction) {
-        List<LevelModel> models = getModels();
-        List<LevelView> views = getViews();
-        if (inputAction instanceof LevelInputAction) {
-            LevelModel model = models.get(((LevelInputAction) inputAction).getId());
-            LevelView view = views.get(((LevelInputAction) inputAction).getId());
 
-            if (inputAction instanceof LevelInputAction.Ready) {
-                model.ready();
-                view.init(model);
-            }
-        }
     }
 
 }

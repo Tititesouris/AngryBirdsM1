@@ -1,6 +1,7 @@
 package angrybirds.views.objects.birds;
 
 import angrybirds.utils.Constants;
+import angrybirds.utils.Vector2d;
 import angrybirds.views.LevelView;
 import angrybirds.views.objects.birds.BirdView;
 import org.newdawn.slick.Color;
@@ -14,8 +15,13 @@ import org.newdawn.slick.Input;
  */
 public class RedBirdView extends BirdView {
 
-    public RedBirdView(LevelView level) {
-        super(level);
+    public RedBirdView(int id, Vector2d position, Vector2d size, float rotation) {
+        super(id, position, size, rotation);
+    }
+
+    @Override
+    public void init() {
+
     }
 
     @Override

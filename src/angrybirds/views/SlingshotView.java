@@ -1,12 +1,9 @@
 package angrybirds.views;
 
-import angrybirds.models.LevelModel;
-import angrybirds.models.Model;
-import angrybirds.models.SlingshotModel;
 import angrybirds.utils.Vector2d;
-import angrybirds.inputs.actions.SlingshotInputAction;
-import angrybirds.updates.actions.SlingshotUpdateAction;
-import angrybirds.updates.actions.UpdateAction;
+import angrybirds.notifications.inputs.actions.SlingshotInputAction;
+import angrybirds.notifications.updates.actions.SlingshotUpdateAction;
+import angrybirds.notifications.updates.actions.UpdateAction;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 
@@ -25,19 +22,25 @@ public class SlingshotView extends View {
 
     private boolean pulling;
 
+    public SlingshotView(int id, Vector2d position, Vector2d size, Vector2d holderPosition) {
+        super(id);
+        this.position = position;
+        this.size = size;
+        this.holderPosition = holderPosition;
+    }
+
     @Override
-    public void init(Model model) {
-        SlingshotModel slingshot = (SlingshotModel) model;
-        this.position = slingshot.getPosition();
-        this.size = slingshot.getSize();
-        this.holderPosition = slingshot.getHolderPosition();
-        this.pulling = false;
+    public void init() {
+
     }
 
     @Override
     public void input(Input input) {
         if (input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
-            notifyObservers(new SlingshotInputAction.Pull(position.difference(new Vector2d(input.getMouseX(), input.getMouseY()))));
+            Vector2d mousePosition = new Vector2d(input.getMouseX(), input.getMouseY());
+            if (pulling || mousePosition.difference(position.sum(holderPosition)).hypotenuse() <= 50) {
+                notifyObservers(new SlingshotInputAction.Pull(mousePosition.difference(position)));
+            }
         }
         else if (pulling) {
             notifyObservers(new SlingshotInputAction.Release());

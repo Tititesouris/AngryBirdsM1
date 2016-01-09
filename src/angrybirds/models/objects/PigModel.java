@@ -1,5 +1,6 @@
 package angrybirds.models.objects;
 
+import angrybirds.models.LevelModel;
 import angrybirds.utils.Vector2d;
 
 /**
@@ -9,8 +10,11 @@ import angrybirds.utils.Vector2d;
  */
 public class PigModel extends ObjectModel {
 
-    public PigModel(Vector2d position, Vector2d velocity, Vector2d acceleration, float rotation, float angularSpeed) {
+    private LevelModel level;
+
+    public PigModel(LevelModel level, Vector2d position, Vector2d velocity, Vector2d acceleration, float rotation, float angularSpeed) {
         super(position, velocity, acceleration, new Vector2d(50), 2, rotation, angularSpeed, true);
+        this.level = level;
     }
 
 }

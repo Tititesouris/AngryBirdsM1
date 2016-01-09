@@ -1,17 +1,16 @@
 package angrybirds.controllers;
 
-import angrybirds.models.Model;
+import angrybirds.models.LevelModel;
 import angrybirds.models.SlingshotModel;
 import angrybirds.utils.ModelViewPair;
 import angrybirds.utils.Vector2d;
-import angrybirds.inputs.actions.InputAction;
-import angrybirds.inputs.actions.SlingshotInputAction;
+import angrybirds.notifications.inputs.actions.InputAction;
+import angrybirds.notifications.inputs.actions.SlingshotInputAction;
 import angrybirds.views.SlingshotView;
-import angrybirds.views.View;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
-import java.util.List;
+import java.util.SortedMap;
 
 /**
  * TODO: Description
@@ -20,31 +19,26 @@ import java.util.List;
  */
 public class SlingshotController extends Controller {
 
-    public SlingshotController(JsonObject slingshot) {
+    public SlingshotController(JsonObject slingshot, LevelModel level) {
         JsonArray position = slingshot.get("position").getAsJsonArray();
+        int range = slingshot.get("range").getAsInt();
         SlingshotModel model = new SlingshotModel(
+                level,
                 new Vector2d(position.get(0).getAsFloat(), position.get(1).getAsFloat()),
-                slingshot.get("range").getAsInt());
-        SlingshotView view = new SlingshotView();
+                range
+        );
+        SlingshotView view = new SlingshotView(model.getId(), model.getPosition(), model.getSize(), model.getHolderPosition());
         addModelViewPair(new ModelViewPair<>(model, view));
 
     }
 
     @Override
     public void onInput(InputAction inputAction) {
-        List<Model> models = getModels();
-        List<View> views = getViews();
-        for (int i = 0; i < models.size(); i++) {
-            SlingshotModel model = (SlingshotModel) models.get(i);
-            SlingshotView view = (SlingshotView) views.get(i);
-
-            if (inputAction instanceof SlingshotInputAction) {
-                if (inputAction instanceof SlingshotInputAction.Pull)
-                    model.pull(((SlingshotInputAction.Pull) inputAction).getHolderPosition());
-                else if (inputAction instanceof SlingshotInputAction.Release)
-                    model.release();
-            }
-
+        SortedMap<Integer, SlingshotModel> models = getModels();
+        // Un seul lance-oiseau par niveau
+        SlingshotModel model = models.get(models.firstKey());
+        if (inputAction instanceof SlingshotInputAction.Pull) {
+            model.pull(((SlingshotInputAction.Pull) inputAction).getHolderPosition());
         }
     }
 

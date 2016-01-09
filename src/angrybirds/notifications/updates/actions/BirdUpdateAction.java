@@ -1,7 +1,4 @@
-package angrybirds.updates.actions;
-
-import angrybirds.updates.actions.ObjectUpdateAction.Accelerate;
-import angrybirds.utils.Vector2d;
+package angrybirds.notifications.updates.actions;
 
 /**
  * TODO: Description
@@ -15,8 +12,5 @@ public abstract class BirdUpdateAction extends ObjectUpdateAction {
     public static class Hit extends BirdUpdateAction {}
 
     public static class Die extends BirdUpdateAction {}
-
-    public static class Stop extends BirdUpdateAction {
-    }
 
 }

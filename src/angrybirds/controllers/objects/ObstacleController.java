@@ -4,13 +4,14 @@ import angrybirds.controllers.Controller;
 import angrybirds.exceptions.AngryBirdsException;
 import angrybirds.exceptions.UnknownObstacleMaterialException;
 import angrybirds.exceptions.UnknownObstacleSizeException;
+import angrybirds.models.LevelModel;
 import angrybirds.models.objects.obstacles.ObstacleMaterial;
 import angrybirds.models.objects.obstacles.ObstacleModel;
 import angrybirds.models.objects.obstacles.ObstacleSize;
 import angrybirds.utils.ModelViewPair;
-import angrybirds.inputs.actions.InputAction;
+import angrybirds.notifications.inputs.actions.InputAction;
 import angrybirds.utils.Vector2d;
-import angrybirds.views.objects.ObjectView;
+import angrybirds.views.objects.obstacles.ObstacleMaterialView;
 import angrybirds.views.objects.obstacles.ObstacleView;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -23,7 +24,7 @@ import com.google.gson.JsonObject;
  */
 public class ObstacleController extends Controller {
 
-    public ObstacleController(JsonArray obstacles) throws AngryBirdsException {
+    public ObstacleController(JsonArray obstacles, LevelModel level) throws AngryBirdsException {
         for (JsonElement element : obstacles) {
             JsonObject obstacle = element.getAsJsonObject();
             JsonArray position = obstacle.get("position").getAsJsonArray();
@@ -37,11 +38,12 @@ public class ObstacleController extends Controller {
             if (obstacleMaterial == null)
                 throw new UnknownObstacleMaterialException();
             ObstacleModel model = new ObstacleModel(
+                    level,
                     new Vector2d(position.get(0).getAsFloat(), position.get(1).getAsFloat()),
                     Vector2d.ZERO, Vector2d.ZERO,
                     obstacleSize, obstacleMaterial,
                     0, 0);
-            ObstacleView view = new ObstacleView();
+            ObstacleView view = new ObstacleView(model.getId(), model.getPosition(), model.getSize(), model.getRotation(), ObstacleMaterialView.valueOf(model.getMaterial().name()));
             addModelViewPair(new ModelViewPair<>(model, view));
         }
     }

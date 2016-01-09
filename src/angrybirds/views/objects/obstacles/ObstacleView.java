@@ -1,18 +1,13 @@
 package angrybirds.views.objects.obstacles;
 
-import angrybirds.models.Model;
-import angrybirds.models.objects.obstacles.ObstacleModel;
-import angrybirds.updates.actions.UpdateAction;
+import angrybirds.notifications.updates.actions.UpdateAction;
 import angrybirds.utils.Constants;
 import angrybirds.utils.Vector2d;
 import angrybirds.views.objects.ObjectView;
-import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
-import org.newdawn.slick.geom.Polygon;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
-import org.newdawn.slick.geom.Transform;
 
 /**
  * TODO: Description
@@ -23,11 +18,14 @@ public class ObstacleView extends ObjectView {
 
     private ObstacleMaterialView material;
 
+    public ObstacleView(int id, Vector2d position, Vector2d size, float rotation, ObstacleMaterialView material) {
+        super(id, position, size, rotation);
+        this.material = material;
+    }
+
     @Override
-    public void init(Model model) {
-        super.init(model);
-        ObstacleModel obstacle = (ObstacleModel) model;
-        this.material = ObstacleMaterialView.valueOf(obstacle.getMaterial().name());
+    public void init() {
+
     }
 
     @Override

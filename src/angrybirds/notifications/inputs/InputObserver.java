@@ -1,6 +1,6 @@
-package angrybirds.inputs;
+package angrybirds.notifications.inputs;
 
-import angrybirds.inputs.actions.InputAction;
+import angrybirds.notifications.inputs.actions.InputAction;
 
 /**
  * TODO: Description

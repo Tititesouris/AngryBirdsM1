@@ -3,7 +3,7 @@ package angrybirds.models;
 import angrybirds.models.objects.birds.BirdModel;
 import angrybirds.utils.Constants;
 import angrybirds.utils.Vector2d;
-import angrybirds.updates.actions.SlingshotUpdateAction;
+import angrybirds.notifications.updates.actions.SlingshotUpdateAction;
 
 /**
  * TODO: Description
@@ -11,6 +11,14 @@ import angrybirds.updates.actions.SlingshotUpdateAction;
  * @author Tititesouris
  */
 public class SlingshotModel extends Model {
+
+    private LevelModel level;
+
+    /**
+     * Oiseau sur le lance-oiseau.
+     * Le champ est null si il n'y a pas d'oiseau sur le lance-oiseau.
+     */
+    private BirdModel bird;
 
     /**
      * Position du lance-oiseau dans le niveau.
@@ -35,13 +43,8 @@ public class SlingshotModel extends Model {
      */
     private int range;
 
-    /**
-     * Oiseau sur le lance-oiseau.
-     * Le champ est null si il n'y a pas d'oiseau sur le lance-oiseau.
-     */
-    private BirdModel bird;
-
-    public SlingshotModel(Vector2d position, int range) {
+    public SlingshotModel(LevelModel level, Vector2d position, int range) {
+        this.level = level;
         this.position = position;
         this.size = new Vector2d(100, 200);
         this.holderPosition = Vector2d.ZERO;
@@ -50,8 +53,7 @@ public class SlingshotModel extends Model {
 
     @Override
     public void update(int delta) {
-        if (bird != null)
-            bird.checkStop();
+
     }
 
     public void ready(BirdModel bird) {
@@ -64,10 +66,10 @@ public class SlingshotModel extends Model {
      * @param holderPosition  Nouvelle holderPosition du holder par rapport à sa holderPosition au repos.
      */
     public void pull(Vector2d holderPosition) {
-        this.holderPosition = getInRange(holderPosition);
-        bird.move(this.position.sum(this.holderPosition));
+        setHolderPosition(getInRange(holderPosition));
+        bird.move(getAbsoluteHolderPosition());
         //bird.rotate(?);
-        notifyObservers(new SlingshotUpdateAction.Pull(this.holderPosition));
+        notifyObservers(new SlingshotUpdateAction.Pull(getHolderPosition()));
     }
 
     /**
@@ -113,6 +115,10 @@ public class SlingshotModel extends Model {
 
     public void setHolderPosition(Vector2d holderPosition) {
         this.holderPosition = holderPosition;
+    }
+
+    public Vector2d getAbsoluteHolderPosition() {
+        return position.sum(holderPosition);
     }
 
     public int getRange() {

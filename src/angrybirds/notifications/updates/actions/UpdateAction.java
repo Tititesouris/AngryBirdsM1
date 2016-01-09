@@ -1,4 +1,4 @@
-package angrybirds.updates.actions;
+package angrybirds.notifications.updates.actions;
 
 /**
  * TODO: Description

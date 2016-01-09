@@ -1,6 +1,7 @@
-package angrybirds.inputs;
+package angrybirds.notifications.inputs;
 
-import angrybirds.inputs.actions.InputAction;
+import angrybirds.notifications.inputs.actions.InputAction;
+import angrybirds.utils.Constants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,9 +13,9 @@ import java.util.List;
  */
 public abstract class InputObservable {
 
-    private List<InputObserver> observers = new ArrayList<>();
-
     private long lastNotify = System.currentTimeMillis();
+
+    private List<InputObserver> observers = new ArrayList<>();
 
     public boolean addObserver(InputObserver observer) {
         return observers.add(observer);
@@ -24,16 +25,16 @@ public abstract class InputObservable {
         return observers.remove(observer);
     }
 
-    public boolean removeObservers() {
+    public boolean clear() {
         this.observers = new ArrayList<>();
         return true;
     }
 
-    public int notifyObservers(InputAction inputAction) {
+    public int notifyObservers(InputAction action) {
         long currentTime = System.currentTimeMillis();
-        if (lastNotify + 100 < currentTime) {
+        if (lastNotify + Constants.MIN_ENGINE_DELAY < currentTime) {
             for (InputObserver observer : observers) {
-                observer.onInput(inputAction);
+                observer.onInput(action);
             }
             lastNotify = currentTime;
             return observers.size();

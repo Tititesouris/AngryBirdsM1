@@ -1,11 +1,10 @@
 package angrybirds.controllers;
 
 import angrybirds.exceptions.AngryBirdsException;
-import angrybirds.inputs.actions.GameInputAction;
+import angrybirds.notifications.inputs.actions.GameInputAction;
 import angrybirds.models.GameModel;
-import angrybirds.models.LevelModel;
 import angrybirds.utils.ModelViewPair;
-import angrybirds.inputs.actions.InputAction;
+import angrybirds.notifications.inputs.actions.InputAction;
 import angrybirds.views.GameView;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -15,7 +14,7 @@ import com.google.gson.JsonParser;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.util.List;
+import java.util.SortedMap;
 
 /**
  * TODO: Description
@@ -37,7 +36,7 @@ public class GameController extends Controller {
             levelController = new LevelController(levels);
 
             GameModel model = new GameModel(levelController.getModels());
-            GameView view = new GameView(levelController.getViews());
+            GameView view = new GameView(model.getId(), levelController.getViews());
             addModelViewPair(new ModelViewPair<>(model, view));
 
         } catch (FileNotFoundException e) {
@@ -47,19 +46,10 @@ public class GameController extends Controller {
 
     @Override
     public void onInput(InputAction inputAction) {
-        List<GameModel> models = getModels();
-        List<GameView> views = getViews();
-        for (int i = 0; i < models.size(); i++) {
-            GameModel model = models.get(i);
-            GameView view = views.get(i);
-
-            if (inputAction instanceof GameInputAction) {
-                if (inputAction instanceof GameInputAction.EnterLevel) {
-                    model.enterLevel(((GameInputAction.EnterLevel) inputAction).getId());
-                    view.init(model);
-                }
-            }
-
+        SortedMap<Integer, GameModel> models = getModels();
+        if (inputAction instanceof GameInputAction.EnterLevel) {
+            GameModel model = models.get(((GameInputAction.EnterLevel) inputAction).getGameId());
+            model.enterLevel(((GameInputAction.EnterLevel) inputAction).getLevelId());
         }
     }
 

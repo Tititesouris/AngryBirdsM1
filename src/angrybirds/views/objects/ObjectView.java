@@ -18,12 +18,11 @@ public abstract class ObjectView extends View {
 
     protected float rotation;
 
-    @Override
-    public void init(Model model) {
-        ObjectModel object = (ObjectModel) model;
-        this.position = object.getPosition();
-        this.size = object.getSize();
-        this.rotation = object.getRotation();
+    public ObjectView(int id, Vector2d position, Vector2d size, float rotation) {
+        super(id);
+        this.position = position;
+        this.size = size;
+        this.rotation = rotation;
     }
 
 }

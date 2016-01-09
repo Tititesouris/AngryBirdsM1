@@ -1,4 +1,4 @@
-package angrybirds.updates.actions;
+package angrybirds.notifications.updates.actions;
 
 /**
  * TODO: Description
@@ -13,6 +13,9 @@ public abstract class LevelUpdateAction implements UpdateAction {
 
     public static class End extends LevelUpdateAction {
 
+    }
+
+    public static class BirdDied extends LevelUpdateAction {
     }
 
 }
