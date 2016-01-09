@@ -2,17 +2,19 @@
   "levels": [
     {
       "name": "Level 1",
-      "ground": 194,
+      "ground": 110,
       "slingshot": {
         "position": [
-          100,
-          450
+          150,
+          520
         ],
         "range": 100
       },
       "birds": [
+        "RED",
         "YELLOW",
-        "RED"
+        "RED",
+        "YELLOW"
       ],
       "obstacles": [
         {

@@ -13,18 +13,16 @@ public interface Constants {
 
     /**
      * Le temps en millisecondes minimum avec lequel le moteur de jeu travaille.
-     * Deux InputAction ne peuvent pas être envoyée plus vite que ce temps, de même pour UpdateAction.
+     * Deux InputAction ne peuvent pas être envoyée plus vite que ce temps.
      * Deux appels à update() ne peuvent pas être effectués plus vite que ce temps, de même pour display().
      */
     int MIN_ENGINE_DELAY = 10;
-
-    Random RAND = new Random();
 
     int WINDOW_WIDTH = 1080;
 
     int WINDOW_HEIGHT = 720;
 
-    Vector2d GRAVITY = new Vector2d(0, 3f);
+    Vector2d GRAVITY = new Vector2d(0, 0.001f);
 
     float SLING_STRENGTH = 100;
 }

@@ -48,8 +48,8 @@ public class LevelController extends Controller {
 
             LevelModel levelModel = new LevelModel(name, ground);
 
-            birdController = new BirdController(birds, levelModel);
             slingshotController = new SlingshotController(slingshot, levelModel);
+            birdController = new BirdController(birds, slingshot, levelModel);
             obstacleController = new ObstacleController(obstacles, levelModel);
             pigController = new PigController(pigs, levelModel);
 

@@ -82,6 +82,7 @@ public class SlingshotModel extends Model {
 
     public void ready(BirdModel bird) {
         setBird(bird);
+        setHolderPosition(Vector2d.ZERO);
         bird.ready(getAbsoluteHolderPosition());
     }
     /**

@@ -11,7 +11,7 @@ import angrybirds.utils.Vector2d;
 public class YellowBirdModel extends BirdModel {
 
     public YellowBirdModel(LevelModel level, Vector2d position, Vector2d velocity, Vector2d acceleration) {
-        super(level, position, velocity, acceleration, new Vector2d(20), 0.0000005f);
+        super(level, position, velocity, acceleration, new Vector2d(30), 0.0005f);
     }
 
 }

@@ -7,6 +7,8 @@ import angrybirds.notifications.updates.actions.UpdateAction;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
+import org.newdawn.slick.geom.Polygon;
+import org.newdawn.slick.geom.Shape;
 
 /**
  * TODO: Description
@@ -60,8 +62,23 @@ public class SlingshotView extends View {
     @Override
     public void display(Graphics graphics) {
         graphics.setColor(Color.black);
-        graphics.drawRect(position.x - size.x / 2, position.y - size.y / 2, size.x, size.y);
+        Shape slingshot = new Polygon(new float[]{
+                position.x - size.x / 2, position.y - size.y / 2,
+                position.x - size.x / 2 + 10, position.y - size.y / 2,
+                position.x, position.y - 10,
+                position.x + size.x / 2 - 10, position.y - size.y / 2,
+                position.x + size.x / 2, position.y - size.y / 2,
+                position.x + 10, position.y + 10,
+                position.x + 10, position.y + size.y / 2,
+                position.x - 10, position.y + size.y / 2,
+                position.x - 10, position.y + 10
+
+        });
+        graphics.draw(slingshot);
         graphics.drawRect(position.x + holderPosition.x - size.x / 4, position.y + holderPosition.y - 10, size.x / 2, 20);
+        graphics.setLineWidth(2);
+        graphics.drawLine(position.x - size.x / 2, position.y - size.y / 2, position.x + holderPosition.x - 20, position.y + holderPosition.y);
+        graphics.drawLine(position.x + size.x / 2, position.y - size.y / 2, position.x + holderPosition.x + 20, position.y + holderPosition.y);
     }
 
     private void pull(Vector2d holderPosition) {
