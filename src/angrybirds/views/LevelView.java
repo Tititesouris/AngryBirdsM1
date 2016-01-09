@@ -82,7 +82,9 @@ public class LevelView extends View {
 
     @Override
     public void onUpdate(UpdateAction updateAction) {
-
+        if (updateAction instanceof LevelUpdateAction.BirdDied) {
+            birds.remove(((LevelUpdateAction.BirdDied) updateAction).getBirdId());
+        }
     }
 
 }

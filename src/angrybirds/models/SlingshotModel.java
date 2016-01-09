@@ -61,11 +61,13 @@ public class SlingshotModel extends Model {
      * @param holderPosition  Nouvelle holderPosition du holder par rapport à sa holderPosition au repos.
      */
     public void pull(Vector2d holderPosition) {
-        if (!this.holderPosition.equals(holderPosition)) {
-            setHolderPosition(getInRange(holderPosition));
-            bird.setPosition(getAbsoluteHolderPosition());
-            //bird.rotate(?);
-            notifyObservers(new SlingshotUpdateAction.Pull(getHolderPosition()));
+        if (bird != null) {
+            if (!this.holderPosition.equals(holderPosition)) {
+                setHolderPosition(getInRange(holderPosition));
+                bird.setPosition(getAbsoluteHolderPosition());
+                //bird.rotate(?);
+                notifyObservers(new SlingshotUpdateAction.Pull(getHolderPosition()));
+            }
         }
     }
 

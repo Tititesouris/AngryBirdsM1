@@ -75,6 +75,11 @@ public class LevelModel extends Model {
         slingshot.setBird(birds.get(birds.firstKey()));
     }
 
+    public void birdDied(BirdModel bird) {
+        deadModels.add(bird);
+        notifyObservers(new LevelUpdateAction.BirdDied(bird.getId()));
+    }
+
     public String getName() {
         return name;
     }

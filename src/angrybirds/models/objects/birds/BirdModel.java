@@ -29,6 +29,7 @@ public abstract class BirdModel extends ObjectModel {
         super.update(delta);
         if (dying && dies < System.currentTimeMillis()) {
             dying = false;
+            level.birdDied(this);
             notifyObservers(new BirdUpdateAction.Die());
         }
     }
@@ -37,7 +38,7 @@ public abstract class BirdModel extends ObjectModel {
         setGravity(true);
         setVelocity(velocity);
         dying = true;
-        dies = System.currentTimeMillis() + 5000;
+        dies = System.currentTimeMillis() + 1000;
         notifyObservers(new BirdUpdateAction.Launch());
     }
 
