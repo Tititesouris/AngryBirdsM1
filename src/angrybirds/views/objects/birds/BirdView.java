@@ -8,6 +8,7 @@ import angrybirds.notifications.updates.actions.UpdateAction;
 import angrybirds.views.objects.ObjectView;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Input;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,11 +20,18 @@ import java.util.List;
  */
 public abstract class BirdView extends ObjectView {
 
+    protected Color color;
+
     private List<Vector2d> trail;
 
     public BirdView(int id, Vector2d position, Vector2d size, float rotation) {
         super(id, position, size, rotation);
         this.trail = new ArrayList<>();
+    }
+
+    @Override
+    public void input(Input input) {
+
     }
 
     @Override
@@ -42,8 +50,8 @@ public abstract class BirdView extends ObjectView {
     @Override
     public void display(Graphics graphics) {
         if (Constants.DEBUG) {
-            graphics.setColor(Color.white);
-            graphics.drawOval(position.x - size.x / 2, position.y - size.y / 2, size.x, size.y);
+            graphics.setColor(color);
+            graphics.fillOval(position.x - size.x / 2, position.y - size.y / 2, size.x, size.y);
         }
     }
 

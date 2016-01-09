@@ -4,6 +4,7 @@ import angrybirds.utils.Vector2d;
 import angrybirds.notifications.inputs.actions.SlingshotInputAction;
 import angrybirds.notifications.updates.actions.SlingshotUpdateAction;
 import angrybirds.notifications.updates.actions.UpdateAction;
+import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 
@@ -48,18 +49,19 @@ public class SlingshotView extends View {
     }
 
     @Override
-    public void display(Graphics graphics) {
-        graphics.drawRect(position.x - size.x / 2, position.y - size.y / 2, size.x, size.y);
-        graphics.drawRect(position.x + holderPosition.x - size.x / 4, position.y + holderPosition.y - 10, size.x / 2, 20);
-    }
-
-    @Override
     public void onUpdate(UpdateAction updateAction) {
         if (updateAction instanceof SlingshotUpdateAction.Pull) {
             pull(((SlingshotUpdateAction.Pull) updateAction).getHolderPosition());
         } else if (updateAction instanceof SlingshotUpdateAction.Release) {
             release();
         }
+    }
+
+    @Override
+    public void display(Graphics graphics) {
+        graphics.setColor(Color.black);
+        graphics.drawRect(position.x - size.x / 2, position.y - size.y / 2, size.x, size.y);
+        graphics.drawRect(position.x + holderPosition.x - size.x / 4, position.y + holderPosition.y - 10, size.x / 2, 20);
     }
 
     private void pull(Vector2d holderPosition) {

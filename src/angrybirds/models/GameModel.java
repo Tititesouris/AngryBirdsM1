@@ -34,7 +34,7 @@ public class GameModel extends Model {
 
     public void enterLevel(int levelId) {
         level = levels.get(levelId);
-        level.enter();
+        level.ready();
         notifyObservers(new GameUpdateAction.EnterLevel(levelId));
     }
 

@@ -4,8 +4,10 @@ import angrybirds.controllers.objects.BirdController;
 import angrybirds.controllers.objects.ObstacleController;
 import angrybirds.controllers.objects.PigController;
 import angrybirds.exceptions.AngryBirdsException;
+import angrybirds.models.GameModel;
 import angrybirds.models.LevelModel;
 import angrybirds.models.SlingshotModel;
+import angrybirds.notifications.inputs.actions.LevelInputAction;
 import angrybirds.utils.ModelViewPair;
 import angrybirds.notifications.inputs.actions.InputAction;
 import angrybirds.views.LevelView;
@@ -73,7 +75,11 @@ public class LevelController extends Controller {
 
     @Override
     public void onInput(InputAction inputAction) {
-
+        SortedMap<Integer, LevelModel> models = getModels();
+        if (inputAction instanceof LevelInputAction.Ready) {
+            LevelModel model = models.get(((LevelInputAction.Ready) inputAction).getId());
+            model.ready();
+        }
     }
 
 }

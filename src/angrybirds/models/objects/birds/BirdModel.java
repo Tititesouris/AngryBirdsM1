@@ -42,4 +42,8 @@ public abstract class BirdModel extends ObjectModel {
         notifyObservers(new BirdUpdateAction.Launch());
     }
 
+    public void ready(Vector2d holderPosition) {
+        setPosition(holderPosition);
+    }
+
 }

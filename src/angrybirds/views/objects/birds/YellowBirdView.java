@@ -22,26 +22,17 @@ public class YellowBirdView extends BirdView {
 
     @Override
     public void init() {
-
+        color = Color.yellow;
     }
 
     @Override
     public void input(Input input) {
-
+        super.input(input);
     }
 
     @Override
     public void display(Graphics graphics) {
         super.display(graphics);
-        if (Constants.DEBUG) {
-            graphics.setColor(Color.yellow);
-            Polygon triangle = new Polygon(new float[] {
-                    position.x - size.x / 2, position.y + size.y / 2,
-                    position.x, position.y - size.y / 2,
-                    position.x + size.x / 2, position.y + size.y /2
-            });
-            graphics.fill(triangle);
-        }
     }
 
 }

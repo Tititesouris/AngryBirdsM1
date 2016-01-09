@@ -76,10 +76,14 @@ public class SlingshotModel extends Model {
      */
     public void release() {
         bird.launch(getInitialVelocity(holderPosition));
-        bird = null;
+        setBird(null);
         notifyObservers(new SlingshotUpdateAction.Release());
     }
 
+    public void ready(BirdModel bird) {
+        setBird(bird);
+        bird.ready(getAbsoluteHolderPosition());
+    }
     /**
      * Cette méthode calcule la holderPosition du holder en respectant la portée du lance-oiseau.
      * @param holderPosition  Position du holder avant vérification.

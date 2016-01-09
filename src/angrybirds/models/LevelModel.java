@@ -43,8 +43,6 @@ public class LevelModel extends Model {
 
     @Override
     public void update(int delta) {
-        clearDeadModels();
-
         slingshot.update(delta);
 
         for (BirdModel bird : birds.values())
@@ -55,6 +53,8 @@ public class LevelModel extends Model {
 
         for (PigModel pig : pigs.values())
             pig.update(delta);*/
+
+        clearDeadModels();
     }
 
     public void clearDeadModels() {
@@ -71,13 +71,18 @@ public class LevelModel extends Model {
         deadModels.clear();
     }
 
-    public void enter() {
-        slingshot.setBird(birds.get(birds.firstKey()));
-    }
-
     public void birdDied(BirdModel bird) {
         deadModels.add(bird);
         notifyObservers(new LevelUpdateAction.BirdDied(bird.getId()));
+    }
+
+    public void ready() {
+        if (birds.size() > 0) {
+            slingshot.ready(birds.get(birds.firstKey()));
+            notifyObservers(new LevelUpdateAction.Ready());
+        }
+        else
+            notifyObservers(new LevelUpdateAction.End());
     }
 
     public String getName() {

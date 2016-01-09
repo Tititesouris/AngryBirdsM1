@@ -17,4 +17,12 @@ public abstract class LevelInputAction implements InputAction {
         return id;
     }
 
+    public static class Ready extends LevelInputAction {
+
+        public Ready(int id) {
+            super(id);
+        }
+
+    }
+
 }

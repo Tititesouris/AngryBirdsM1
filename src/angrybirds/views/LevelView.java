@@ -35,6 +35,8 @@ public class LevelView extends View {
 
     private boolean birdDied;
 
+    private boolean gameEnded;
+
     public LevelView(int id, String name, SlingshotView slingshot, SortedMap<Integer, BirdView> birds, SortedMap<Integer, ObstacleView> obstacles, SortedMap<Integer, PigView> pigs) {
         super(id);
         this.name = name;
@@ -64,13 +66,19 @@ public class LevelView extends View {
 
     @Override
     public void input(Input input) {
-        slingshot.input(input);
+        if (birdDied) {
+            if (input.isKeyDown(Input.KEY_SPACE))
+                notifyObservers(new LevelInputAction.Ready(id));
+        }
+        else
+            slingshot.input(input);
     }
 
     @Override
     public void display(Graphics graphics) {
         graphics.drawImage(background, 0, 0);
         graphics.drawString(name, Constants.WINDOW_WIDTH - graphics.getFont().getWidth(name) - 10, 10);
+
         slingshot.display(graphics);
         for (BirdView bird : birds.values())
             bird.display(graphics);
@@ -78,13 +86,37 @@ public class LevelView extends View {
             obstacle.display(graphics);
         for (PigView pig : pigs.values())
             pig.display(graphics);
+
+        if (gameEnded) {
+            graphics.drawString("LEVEL IS OVER", 250, 250);
+        }
     }
 
     @Override
     public void onUpdate(UpdateAction updateAction) {
         if (updateAction instanceof LevelUpdateAction.BirdDied) {
-            birds.remove(((LevelUpdateAction.BirdDied) updateAction).getBirdId());
+            birdDied(((LevelUpdateAction.BirdDied) updateAction).getBirdId());
         }
+        else if (updateAction instanceof LevelUpdateAction.Ready) {
+            ready();
+        }
+        else if (updateAction instanceof LevelUpdateAction.End) {
+            end();
+        }
+    }
+
+    private void birdDied(int birdId) {
+        birds.remove(birdId);
+        birdDied = true;
+    }
+
+    private void ready() {
+        birdDied = false;
+        System.out.println("READY");
+    }
+
+    private void end() {
+        gameEnded = true;
     }
 
 }

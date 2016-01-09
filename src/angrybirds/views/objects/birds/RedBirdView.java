@@ -21,20 +21,17 @@ public class RedBirdView extends BirdView {
 
     @Override
     public void init() {
-
+        color = Color.red;
     }
 
     @Override
     public void input(Input input) {
-
+        super.input(input);
     }
 
     @Override
     public void display(Graphics graphics) {
-        if (Constants.DEBUG) {
-            graphics.setColor(Color.red);
-            graphics.fillOval(position.x - size.x / 2, position.y - size.y / 2, size.x / 2, size.y / 2);
-        }
+        super.display(graphics);
     }
 
 }
