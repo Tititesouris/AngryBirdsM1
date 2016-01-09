@@ -28,20 +28,14 @@ public abstract class BirdView extends ObjectView {
 
     @Override
     public void onUpdate(UpdateAction updateAction) {
-        if (updateAction instanceof ObjectUpdateAction) {
-            if (updateAction instanceof BirdUpdateAction.Move) {
-                position = ((BirdUpdateAction.Move) updateAction).getPosition();
-            }
-            else if (updateAction instanceof BirdUpdateAction.Rotate) {
-                rotation = ((ObjectUpdateAction.Rotate) updateAction).getRotation();
-            }
-            else if (updateAction instanceof BirdUpdateAction.Launch) {
-                // jouer un son
-                // animation
-            }
-            else if (updateAction instanceof BirdUpdateAction.Die) {
-                // animation de mort
-            }
+        super.onUpdate(updateAction);
+        if (updateAction instanceof BirdUpdateAction.Launch) {
+            System.out.println("BIRD LAUNCHED");
+            // jouer un son
+            // animation
+        } else if (updateAction instanceof BirdUpdateAction.Die) {
+            System.out.println("BIRD DIED");
+            // animation de mort
         }
     }
 

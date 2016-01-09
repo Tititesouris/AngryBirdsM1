@@ -7,15 +7,4 @@ package angrybirds.notifications.updates.actions;
  */
 public abstract class LevelUpdateAction implements UpdateAction {
 
-    public static class Ready extends LevelUpdateAction {
-
-    }
-
-    public static class End extends LevelUpdateAction {
-
-    }
-
-    public static class BirdDied extends LevelUpdateAction {
-    }
-
 }

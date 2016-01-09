@@ -40,6 +40,9 @@ public class SlingshotController extends Controller {
         if (inputAction instanceof SlingshotInputAction.Pull) {
             model.pull(((SlingshotInputAction.Pull) inputAction).getHolderPosition());
         }
+        else if (inputAction instanceof SlingshotInputAction.Release) {
+            model.release();
+        }
     }
 
 }

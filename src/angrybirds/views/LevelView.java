@@ -64,11 +64,6 @@ public class LevelView extends View {
 
     @Override
     public void input(Input input) {
-        if (birdDied) {
-            if (input.isKeyDown(Input.KEY_SPACE)) {
-                notifyObservers(new LevelInputAction.Ready(id));
-            }
-        }
         slingshot.input(input);
     }
 
@@ -87,12 +82,7 @@ public class LevelView extends View {
 
     @Override
     public void onUpdate(UpdateAction updateAction) {
-        if (updateAction instanceof LevelUpdateAction.Ready) {
-            // L'oiseau s'est arreté, le lance-oiseau vient d'etre préparé à tirer
-        }
-        if (updateAction instanceof LevelUpdateAction.BirdDied) {
-            birdDied = true;
-        }
+
     }
 
 }

@@ -9,11 +9,11 @@ import angrybirds.utils.Vector2d;
  */
 public abstract class ObjectUpdateAction implements UpdateAction {
 
-    public static class Move extends ObjectUpdateAction {
+    public static class MoveTo extends ObjectUpdateAction {
 
         private Vector2d position;
 
-        public Move(Vector2d position) {
+        public MoveTo(Vector2d position) {
             this.position = position;
         }
 
@@ -23,11 +23,11 @@ public abstract class ObjectUpdateAction implements UpdateAction {
 
     }
 
-    public static class Accelerate extends ObjectUpdateAction {
+    public static class AccelerateTo extends ObjectUpdateAction {
 
         private Vector2d velocity;
 
-        public Accelerate(Vector2d velocity) {
+        public AccelerateTo(Vector2d velocity) {
             this.velocity = velocity;
         }
 
@@ -37,44 +37,16 @@ public abstract class ObjectUpdateAction implements UpdateAction {
 
     }
 
-    public static class Jerk extends ObjectUpdateAction {
-
-        private Vector2d acceleration;
-
-        public Jerk(Vector2d acceleration) {
-            this.acceleration = acceleration;
-        }
-
-        public Vector2d getAcceleration() {
-            return acceleration;
-        }
-
-    }
-
-    public static class Rotate extends ObjectUpdateAction {
+    public static class RotateTo extends ObjectUpdateAction {
 
         private float rotation;
 
-        public Rotate(float rotation) {
+        public RotateTo(float rotation) {
             this.rotation = rotation;
         }
 
         public float getRotation() {
             return rotation;
-        }
-
-    }
-
-    public static class Surge extends ObjectUpdateAction {
-
-        private float angularSpeed;
-
-        public Surge(float angularSpeed) {
-            this.angularSpeed = angularSpeed;
-        }
-
-        public float getAngularSpeed() {
-            return angularSpeed;
         }
 
     }

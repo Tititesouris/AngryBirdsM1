@@ -1,7 +1,7 @@
 package angrybirds.views.objects;
 
-import angrybirds.models.Model;
-import angrybirds.models.objects.ObjectModel;
+import angrybirds.notifications.updates.actions.ObjectUpdateAction;
+import angrybirds.notifications.updates.actions.UpdateAction;
 import angrybirds.utils.Vector2d;
 import angrybirds.views.View;
 
@@ -23,6 +23,16 @@ public abstract class ObjectView extends View {
         this.position = position;
         this.size = size;
         this.rotation = rotation;
+    }
+
+    @Override
+    public void onUpdate(UpdateAction updateAction) {
+        if (updateAction instanceof ObjectUpdateAction.MoveTo) {
+            position = ((ObjectUpdateAction.MoveTo) updateAction).getPosition();
+        }
+        else if (updateAction instanceof ObjectUpdateAction.RotateTo) {
+            rotation = ((ObjectUpdateAction.RotateTo) updateAction).getRotation();
+        }
     }
 
 }

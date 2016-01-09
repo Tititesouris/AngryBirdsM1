@@ -42,36 +42,29 @@ public abstract class ObjectModel extends Model {
     @Override
     public void update(int delta) {
         if (gravity)
-            accelerate(velocity.sum(acceleration.sum(Constants.GRAVITY.product(getMass())).product(delta)));
+            accelerate(acceleration.sum(Constants.GRAVITY.product(getMass())).product(delta));
         else
-            accelerate(velocity.sum(acceleration.product(delta)));
-        move(position.sum(velocity.product(delta)));
-        rotate(rotation + angularSpeed);
+            accelerate(acceleration.product(delta));
+        move(velocity.product(delta));
+        rotate(angularSpeed * delta);
     }
 
-    public void move(Vector2d position) {
-        setPosition(position);
-        notifyObservers(new ObjectUpdateAction.Move(position));
+    public void move(Vector2d distance) {
+        if (!distance.equals(Vector2d.ZERO)) {
+            setPosition(this.position.sum(distance));
+        }
     }
 
-    public void accelerate(Vector2d velocity) {
-        setVelocity(velocity);
-        notifyObservers(new ObjectUpdateAction.Accelerate(velocity));
+    public void accelerate(Vector2d acceleration) {
+        if (!acceleration.equals(Vector2d.ZERO)) {
+            setVelocity(this.velocity.sum(acceleration));
+        }
     }
 
-    public void jerk(Vector2d acceleration) {
-        setAcceleration(acceleration);
-        notifyObservers(new ObjectUpdateAction.Jerk(acceleration));
-    }
-
-    public void rotate(float rotation) {
-        setRotation(rotation);
-        notifyObservers(new ObjectUpdateAction.Rotate(rotation));
-    }
-
-    public void surge(float angularSpeed) {
-        setAngularSpeed(angularSpeed);
-        notifyObservers(new ObjectUpdateAction.Surge(angularSpeed));
+    public void rotate(float angle) {
+        if (angle > 0) {
+            setRotation(this.rotation + angle);
+        }
     }
 
     public float getMass() {
@@ -88,6 +81,7 @@ public abstract class ObjectModel extends Model {
 
     public void setPosition(Vector2d position) {
         this.position = position;
+        notifyObservers(new ObjectUpdateAction.MoveTo(position));
     }
 
     public Vector2d getVelocity() {
@@ -96,6 +90,7 @@ public abstract class ObjectModel extends Model {
 
     public void setVelocity(Vector2d velocity) {
         this.velocity = velocity;
+        notifyObservers(new ObjectUpdateAction.AccelerateTo(velocity));
     }
 
     public Vector2d getAcceleration() {
@@ -128,6 +123,7 @@ public abstract class ObjectModel extends Model {
 
     public void setRotation(float rotation) {
         this.rotation = rotation;
+        notifyObservers(new ObjectUpdateAction.RotateTo(rotation));
     }
 
     public float getAngularSpeed() {

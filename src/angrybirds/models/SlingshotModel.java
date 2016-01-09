@@ -56,20 +56,17 @@ public class SlingshotModel extends Model {
 
     }
 
-    public void ready(BirdModel bird) {
-        this.bird = bird;
-        bird.ready(this);
-    }
-
     /**
      * Cette méthode est appellée quand le lance-oiseau est étiré.
      * @param holderPosition  Nouvelle holderPosition du holder par rapport à sa holderPosition au repos.
      */
     public void pull(Vector2d holderPosition) {
-        setHolderPosition(getInRange(holderPosition));
-        bird.move(getAbsoluteHolderPosition());
-        //bird.rotate(?);
-        notifyObservers(new SlingshotUpdateAction.Pull(getHolderPosition()));
+        if (!this.holderPosition.equals(holderPosition)) {
+            setHolderPosition(getInRange(holderPosition));
+            bird.setPosition(getAbsoluteHolderPosition());
+            //bird.rotate(?);
+            notifyObservers(new SlingshotUpdateAction.Pull(getHolderPosition()));
+        }
     }
 
     /**
@@ -77,7 +74,8 @@ public class SlingshotModel extends Model {
      */
     public void release() {
         bird.launch(getInitialVelocity(holderPosition));
-        notifyObservers(new SlingshotUpdateAction.Pull(Vector2d.ZERO));
+        bird = null;
+        notifyObservers(new SlingshotUpdateAction.Release());
     }
 
     /**

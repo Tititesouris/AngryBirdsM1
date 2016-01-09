@@ -55,10 +55,10 @@ public class SlingshotView extends View {
 
     @Override
     public void onUpdate(UpdateAction updateAction) {
-        if (updateAction instanceof SlingshotUpdateAction) {
-            if (updateAction instanceof SlingshotUpdateAction.Pull) {
-                pull(((SlingshotUpdateAction.Pull) updateAction).getHolderPosition());
-            }
+        if (updateAction instanceof SlingshotUpdateAction.Pull) {
+            pull(((SlingshotUpdateAction.Pull) updateAction).getHolderPosition());
+        } else if (updateAction instanceof SlingshotUpdateAction.Release) {
+            release();
         }
     }
 
@@ -68,10 +68,8 @@ public class SlingshotView extends View {
     }
 
     private void release() {
-        if (pulling) {
-            pulling = false;
-            notifyObservers(new SlingshotInputAction.Release());
-        }
+        pulling = false;
+        holderPosition = Vector2d.ZERO;
     }
 
 }

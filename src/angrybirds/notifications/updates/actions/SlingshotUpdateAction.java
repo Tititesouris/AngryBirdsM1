@@ -23,4 +23,6 @@ public abstract class SlingshotUpdateAction implements UpdateAction {
 
     }
 
+    public static class Release extends SlingshotUpdateAction {}
+
 }

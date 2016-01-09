@@ -49,12 +49,12 @@ public class LevelModel extends Model {
 
         for (BirdModel bird : birds.values())
             bird.update(delta);
-
+        /*
         for (ObstacleModel obstacle : obstacles.values())
             obstacle.update(delta);
 
         for (PigModel pig : pigs.values())
-            pig.update(delta);
+            pig.update(delta);*/
     }
 
     public void clearDeadModels() {
@@ -73,25 +73,6 @@ public class LevelModel extends Model {
 
     public void enter() {
         slingshot.setBird(birds.get(birds.firstKey()));
-    }
-
-    /**
-     * Cette méthode prépare le lance-oiseau à tirer.
-     * Elle notifie les observateurs avec LevelUpdateAction.Ready() si il reste au moins un oiseau.
-     * Sinon, elle les notifie avec LevelUpdateAction.End()
-     */
-    public void ready() {
-        if (birds.values().iterator().hasNext()) {
-            slingshot.ready(birds.values().iterator().next());
-            notifyObservers(new LevelUpdateAction.Ready());
-        }
-        else
-            notifyObservers(new LevelUpdateAction.End());
-    }
-
-    public void birdDied(BirdModel bird) {
-        deadModels.add(bird);
-        notifyObservers(new LevelUpdateAction.BirdDied());
     }
 
     public String getName() {
