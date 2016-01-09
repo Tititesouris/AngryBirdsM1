@@ -1,11 +1,9 @@
 package angrybirds.controllers;
 
 import angrybirds.models.Model;
-import angrybirds.utils.Constants;
 import angrybirds.utils.ModelViewPair;
-import angrybirds.utils.inputs.InputObserver;
+import angrybirds.inputs.InputObserver;
 import angrybirds.views.View;
-import org.newdawn.slick.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,20 +15,11 @@ import java.util.List;
  */
 public abstract class Controller implements InputObserver {
 
-    private static final List<Controller> controllers = new ArrayList<>();
-
     private List<ModelViewPair> modelViewPairs;
 
     public Controller() {
         modelViewPairs = new ArrayList<>();
-        controllers.add(this);
     }
-
-    public abstract void init();
-
-    public abstract void update(int delta);
-
-    public abstract void display();
 
     protected boolean addModelViewPair(ModelViewPair modelViewPair) {
         modelViewPair.model.addObserver(modelViewPair.view);
@@ -46,8 +35,12 @@ public abstract class Controller implements InputObserver {
         return models;
     }
 
-    public static List<Controller> getControllers() {
-        return controllers;
+    protected <T extends View> List<T> getViews() {
+        List<T> views = new ArrayList<>();
+        for (ModelViewPair modelViewPair : modelViewPairs) {
+            views.add((T) modelViewPair.view);
+        }
+        return views;
     }
 
     public List<ModelViewPair> getModelViewPairs() {

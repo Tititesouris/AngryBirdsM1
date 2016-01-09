@@ -158,7 +158,7 @@ extends <a href="../../angrybirdsold/models/ObstacleModel.html" title="class in 
 <!--   -->
 </a>
 <h3>Fields inherited from class&nbsp;angrybirdsold.models.<a href="../../angrybirdsold/models/GraphicalObjectModel.html" title="class in angrybirdsold.models">GraphicalObjectModel</a></h3>
-<code><a href="../../angrybirdsold/models/GraphicalObjectModel.html#position">position</a>, <a href="../../angrybirdsold/models/GraphicalObjectModel.html#size">size</a></code></li>
+<code><a href="../../angrybirdsold/models/GraphicalObjectModel.html#holderPosition">holderPosition</a>, <a href="../../angrybirdsold/models/GraphicalObjectModel.html#size">size</a></code></li>
 </ul>
 </li>
 </ul>
@@ -174,7 +174,7 @@ extends <a href="../../angrybirdsold/models/ObstacleModel.html" title="class in 
 <th class="colOne" scope="col">Constructor and Description</th>
 </tr>
 <tr class="altColor">
-<td class="colOne"><code><span class="memberNameLink"><a href="../../angrybirdsold/models/CircularObstacleModel.html#CircularObstacleModel-angrybirdsold.structures.Vector2d-angrybirdsold.structures.Vector2d-angrybirdsold.structures.Vector2d-int-">CircularObstacleModel</a></span>(<a href="../../angrybirdsold/structures/Vector2d.html" title="class in angrybirdsold.structures">Vector2d</a>&nbsp;position,
+<td class="colOne"><code><span class="memberNameLink"><a href="../../angrybirdsold/models/CircularObstacleModel.html#CircularObstacleModel-angrybirdsold.structures.Vector2d-angrybirdsold.structures.Vector2d-angrybirdsold.structures.Vector2d-int-">CircularObstacleModel</a></span>(<a href="../../angrybirdsold/structures/Vector2d.html" title="class in angrybirdsold.structures">Vector2d</a>&nbsp;holderPosition,
                      <a href="../../angrybirdsold/structures/Vector2d.html" title="class in angrybirdsold.structures">Vector2d</a>&nbsp;size,
                      <a href="../../angrybirdsold/structures/Vector2d.html" title="class in angrybirdsold.structures">Vector2d</a>&nbsp;velocity,
                      int&nbsp;flip)</code>
@@ -251,14 +251,14 @@ extends <a href="../../angrybirdsold/models/ObstacleModel.html" title="class in 
 <ul class="blockListLast">
 <li class="blockList">
 <h4>CircularObstacleModel</h4>
-<pre>public&nbsp;CircularObstacleModel(<a href="../../angrybirdsold/structures/Vector2d.html" title="class in angrybirdsold.structures">Vector2d</a>&nbsp;position,
+<pre>public&nbsp;CircularObstacleModel(<a href="../../angrybirdsold/structures/Vector2d.html" title="class in angrybirdsold.structures">Vector2d</a>&nbsp;holderPosition,
                              <a href="../../angrybirdsold/structures/Vector2d.html" title="class in angrybirdsold.structures">Vector2d</a>&nbsp;size,
                              <a href="../../angrybirdsold/structures/Vector2d.html" title="class in angrybirdsold.structures">Vector2d</a>&nbsp;velocity,
                              int&nbsp;flip)</pre>
 <div class="block">Créé un nouvel obstacle</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>position</code> - Position de départ de l'obstacle</dd>
+<dd><code>holderPosition</code> - Position de départ de l'obstacle</dd>
 <dd><code>size</code> - Taille de l'obstacle</dd>
 <dd><code>velocity</code> - Vélocité de l'obstacle</dd>
 <dd><code>flip</code> - Temps en millisecondes avant de faire demi-tour</dd>

@@ -1,13 +1,14 @@
 package angrybirds.views;
 
+import angrybirds.inputs.actions.GameInputAction;
 import angrybirds.models.GameModel;
 import angrybirds.models.LevelModel;
 import angrybirds.models.Model;
-import angrybirds.utils.updates.actions.UpdateAction;
+import angrybirds.updates.actions.GameUpdateAction;
+import angrybirds.updates.actions.UpdateAction;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,41 +18,54 @@ import java.util.List;
  */
 public class GameView extends View {
 
-    private List<String> levels;
+    private List<LevelView> levels;
 
-    private boolean inLevel;
+    private LevelView level;
+
+    public GameView(List<LevelView> levels) {
+        this.levels = levels;
+    }
 
     @Override
     public void init(Model model) {
         GameModel game = (GameModel)model;
-        this.levels = new ArrayList<>();
-        for (LevelModel level : game.getLevels()) {
-            this.levels.add(level.getName());
+        List<LevelModel> levels = game.getLevels();
+        LevelModel level = game.getLevel();
+        if (level != null) {
+            this.level = this.levels.get(levels.indexOf(level));
+            this.level.init(level);
         }
-        this.inLevel = game.getLevel() != null;
     }
 
     @Override
     public void input(Input input) {
-
+        if (level == null) {
+            if (input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON))
+                notifyObservers(new GameInputAction.EnterLevel(0));
+        } else
+            level.input(input);
     }
 
     @Override
     public void display(Graphics graphics) {
-        if (inLevel) {
-
+        if (level == null) {
+            graphics.drawString("Angry Bird. PRESS SPACE", 200, 200);
         }
-        else {
-            int x = 50;
-            for (String levelName : levels) {
-                graphics.drawString(levelName, x+=100, 200);
-            }
-        }
+        else
+            level.display(graphics);
     }
 
     @Override
     public void onUpdate(UpdateAction updateAction) {
+        if (updateAction instanceof GameUpdateAction) {
+            if (updateAction instanceof GameUpdateAction.EnterLevel)
+                enterLevel(((GameUpdateAction.EnterLevel) updateAction).getId());
+        }
+    }
 
+    private void enterLevel(int id) {
+        this.level = levels.get(id);
+        level.ready();
     }
 
 }

@@ -22,18 +22,18 @@ public abstract class ObjectDataModel extends DataModel {
 
     protected float rotation;
 
-    protected float spin;
+    protected float angularSpeed;
 
     protected boolean gravity;
 
-    public ObjectDataModel(Vector2d position, Vector2d velocity, Vector2d acceleration, Vector2d size, float density, float rotation, float spin, boolean gravity) {
+    public ObjectDataModel(Vector2d position, Vector2d velocity, Vector2d acceleration, Vector2d size, float density, float rotation, float angularSpeed, boolean gravity) {
         this.position = position;
         this.velocity = velocity;
         this.acceleration = acceleration;
         this.size = size;
         this.density = density;
         this.rotation = rotation;
-        this.spin = spin;
+        this.angularSpeed = angularSpeed;
         this.gravity = gravity;
     }
 
@@ -85,12 +85,12 @@ public abstract class ObjectDataModel extends DataModel {
         this.rotation = rotation;
     }
 
-    public float getSpin() {
-        return spin;
+    public float getAngularSpeed() {
+        return angularSpeed;
     }
 
-    public void setSpin(float spin) {
-        this.spin = spin;
+    public void setAngularSpeed(float angularSpeed) {
+        this.angularSpeed = angularSpeed;
     }
 
     public float getMass() {

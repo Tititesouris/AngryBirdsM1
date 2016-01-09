@@ -1,6 +1,10 @@
 package angrybirds.models.objects;
 
 import angrybirds.models.Model;
+import angrybirds.models.objects.birds.BirdModel;
+import angrybirds.models.objects.birds.YellowBirdModel;
+import angrybirds.updates.actions.BirdUpdateAction;
+import angrybirds.updates.actions.ObjectUpdateAction;
 import angrybirds.utils.Constants;
 import angrybirds.utils.Vector2d;
 
@@ -23,31 +27,55 @@ public abstract class ObjectModel extends Model {
 
     protected float rotation;
 
-    protected float spin;
+    protected float angularSpeed;
 
     protected boolean gravity;
 
-    public ObjectModel(Vector2d position, Vector2d velocity, Vector2d acceleration, Vector2d size, float density, float rotation, float spin, boolean gravity) {
+    public ObjectModel(Vector2d position, Vector2d velocity, Vector2d acceleration, Vector2d size, float density, float rotation, float angularSpeed, boolean gravity) {
         this.position = position;
         this.velocity = velocity;
         this.acceleration = acceleration;
         this.size = size;
         this.density = density;
         this.rotation = rotation;
-        this.spin = spin;
+        this.angularSpeed = angularSpeed;
         this.gravity = gravity;
     }
 
     @Override
     public void update(int delta) {
         if (gravity)
-            velocity = velocity.sum(acceleration.sum(Constants.GRAVITY.product(getMass())).product(delta));
+            accelerate(velocity.sum(acceleration.sum(Constants.GRAVITY.product(getMass())).product(delta)));
         else
-            velocity = velocity.sum(acceleration.product(delta));
-        position = position.sum(velocity.product(delta));
-        rotation += spin;
+            accelerate(velocity.sum(acceleration.product(delta)));
+        move(position.sum(velocity.product(delta)));
+        rotate(rotation + angularSpeed);
     }
 
+    public void move(Vector2d position) {
+        setPosition(position);
+        notifyObservers(new ObjectUpdateAction.Move(position));
+    }
+
+    public void accelerate(Vector2d velocity) {
+        setVelocity(velocity);
+        notifyObservers(new ObjectUpdateAction.Accelerate(velocity));
+    }
+
+    public void jerk(Vector2d acceleration) {
+        setAcceleration(acceleration);
+        notifyObservers(new ObjectUpdateAction.Jerk(acceleration));
+    }
+
+    public void rotate(float rotation) {
+        setRotation(rotation);
+        notifyObservers(new ObjectUpdateAction.Rotate(rotation));
+    }
+
+    public void surge(float angularSpeed) {
+        setAngularSpeed(angularSpeed);
+        notifyObservers(new ObjectUpdateAction.Surge(angularSpeed));
+    }
 
     public float getMass() {
         return density * size.x * size.y;
@@ -105,12 +133,12 @@ public abstract class ObjectModel extends Model {
         this.rotation = rotation;
     }
 
-    public float getSpin() {
-        return spin;
+    public float getAngularSpeed() {
+        return angularSpeed;
     }
 
-    public void setSpin(float spin) {
-        this.spin = spin;
+    public void setAngularSpeed(float angularSpeed) {
+        this.angularSpeed = angularSpeed;
     }
 
     public boolean hasGravity() {

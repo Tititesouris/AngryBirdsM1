@@ -1,9 +1,9 @@
 package angrybirds.models;
 
 import angrybirds.models.objects.birds.BirdModel;
+import angrybirds.utils.Constants;
 import angrybirds.utils.Vector2d;
-import angrybirds.utils.updates.actions.BirdUpdateAction;
-import angrybirds.utils.updates.actions.SlingshotUpdateAction;
+import angrybirds.updates.actions.SlingshotUpdateAction;
 
 /**
  * TODO: Description
@@ -28,6 +28,7 @@ public class SlingshotModel extends Model {
     private Vector2d holderPosition;
 
     /**
+     * Portée du lance-oiseau.
      * Distance maximale entre la position de la partie du lance-oiseau tenant l'oiseau lorsque
      * l'élastique est tendu et sa position par default lorsque l'élastique est détendu.
      * Cette distance permet de limiter la puissance de tir.
@@ -40,30 +41,54 @@ public class SlingshotModel extends Model {
      */
     private BirdModel bird;
 
-    public SlingshotModel(Vector2d position, Vector2d size, int range) {
+    public SlingshotModel(Vector2d position, int range) {
         this.position = position;
-        this.size = size;
-        this.holderPosition = position.sum(size.product(0.5f));
+        this.size = new Vector2d(100, 200);
+        this.holderPosition = Vector2d.ZERO;
         this.range = range;
     }
 
     @Override
-    public void init() {
-
-    }
-
-    @Override
     public void update(int delta) {
-
+        if (bird != null)
+            bird.checkStop();
     }
 
-    public void pull(Vector2d position) {
-        if (bird != null) {
-            holderPosition = position;
-            bird.setPosition(position);
-            bird.notifyObservers(new BirdUpdateAction.Move(position));
-            notifyObservers(new SlingshotUpdateAction.Stretch(position));
-        }
+    public void ready(BirdModel bird) {
+        this.bird = bird;
+        bird.ready(this);
+    }
+
+    /**
+     * Cette méthode est appellée quand le lance-oiseau est étiré.
+     * @param holderPosition  Nouvelle holderPosition du holder par rapport à sa holderPosition au repos.
+     */
+    public void pull(Vector2d holderPosition) {
+        this.holderPosition = getInRange(holderPosition);
+        bird.move(this.position.sum(this.holderPosition));
+        //bird.rotate(?);
+        notifyObservers(new SlingshotUpdateAction.Pull(this.holderPosition));
+    }
+
+    /**
+     * Cette méthode est appellée quand le lance-oiseau est relaché.
+     */
+    public void release() {
+        bird.launch(getInitialVelocity(holderPosition));
+        notifyObservers(new SlingshotUpdateAction.Pull(Vector2d.ZERO));
+    }
+
+    /**
+     * Cette méthode calcule la holderPosition du holder en respectant la portée du lance-oiseau.
+     * @param holderPosition  Position du holder avant vérification.
+     * @return          Position du holder après vérification.
+     */
+    private Vector2d getInRange(Vector2d holderPosition) {
+        return holderPosition.normalized().product(Math.min(range, holderPosition.hypotenuse()));
+    }
+
+    private Vector2d getInitialVelocity(Vector2d holderPosition) {
+        return holderPosition.normalized().product(-holderPosition.hypotenuse() / Constants.SLING_STRENGTH);
     }
 
     public Vector2d getPosition() {

@@ -119,7 +119,7 @@ var activeTableTab = "activeTableTab";
 <pre>public abstract class <span class="typeNameLabel">GraphicalObjectModel</span>
 extends java.lang.Object
 implements <a href="../../angrybirdsold/models/Model.html" title="interface in angrybirdsold.models">Model</a></pre>
-<div class="block">Cette classe abstraite représente un object avec une position et une taille.</div>
+<div class="block">Cette classe abstraite représente un object avec une holderPosition et une taille.</div>
 <dl>
 <dt><span class="simpleTagLabel">Author:</span></dt>
 <dd>Maxime Catteau, Quentin Brault</dd>
@@ -144,7 +144,7 @@ implements <a href="../../angrybirdsold/models/Model.html" title="interface in a
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>protected <a href="../../angrybirdsold/structures/Vector2d.html" title="class in angrybirdsold.structures">Vector2d</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../angrybirdsold/models/GraphicalObjectModel.html#position">position</a></span></code>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../angrybirdsold/models/GraphicalObjectModel.html#holderPosition">holderPosition</a></span></code>
 <div class="block">Position de l'objet</div>
 </td>
 </tr>
@@ -167,7 +167,7 @@ implements <a href="../../angrybirdsold/models/Model.html" title="interface in a
 <th class="colOne" scope="col">Constructor and Description</th>
 </tr>
 <tr class="altColor">
-<td class="colOne"><code><span class="memberNameLink"><a href="../../angrybirdsold/models/GraphicalObjectModel.html#GraphicalObjectModel-angrybirdsold.structures.Vector2d-angrybirdsold.structures.Vector2d-">GraphicalObjectModel</a></span>(<a href="../../angrybirdsold/structures/Vector2d.html" title="class in angrybirdsold.structures">Vector2d</a>&nbsp;position,
+<td class="colOne"><code><span class="memberNameLink"><a href="../../angrybirdsold/models/GraphicalObjectModel.html#GraphicalObjectModel-angrybirdsold.structures.Vector2d-angrybirdsold.structures.Vector2d-">GraphicalObjectModel</a></span>(<a href="../../angrybirdsold/structures/Vector2d.html" title="class in angrybirdsold.structures">Vector2d</a>&nbsp;holderPosition,
                     <a href="../../angrybirdsold/structures/Vector2d.html" title="class in angrybirdsold.structures">Vector2d</a>&nbsp;size)</code>
 <div class="block">Créé un nouvel objet</div>
 </td>
@@ -190,7 +190,7 @@ implements <a href="../../angrybirdsold/models/Model.html" title="interface in a
 <tr id="i0" class="altColor">
 <td class="colFirst"><code><a href="../../angrybirdsold/structures/Vector2d.html" title="class in angrybirdsold.structures">Vector2d</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../angrybirdsold/models/GraphicalObjectModel.html#getPosition--">getPosition</a></span>()</code>
-<div class="block">Retourne la position de l'objet.</div>
+<div class="block">Retourne la holderPosition de l'objet.</div>
 </td>
 </tr>
 <tr id="i1" class="rowColor">
@@ -203,7 +203,7 @@ implements <a href="../../angrybirdsold/models/Model.html" title="interface in a
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../angrybirdsold/models/GraphicalObjectModel.html#setPosition-double-double-">setPosition</a></span>(double&nbsp;x,
            double&nbsp;y)</code>
-<div class="block">Change la position de l'objet</div>
+<div class="block">Change la holderPosition de l'objet</div>
 </td>
 </tr>
 </table>
@@ -235,13 +235,13 @@ implements <a href="../../angrybirdsold/models/Model.html" title="interface in a
 <!--   -->
 </a>
 <h3>Field Detail</h3>
-<a name="position">
+<a name="holderPosition">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>position</h4>
-<pre>protected&nbsp;<a href="../../angrybirdsold/structures/Vector2d.html" title="class in angrybirdsold.structures">Vector2d</a> position</pre>
+<h4>holderPosition</h4>
+<pre>protected&nbsp;<a href="../../angrybirdsold/structures/Vector2d.html" title="class in angrybirdsold.structures">Vector2d</a> holderPosition</pre>
 <div class="block">Position de l'objet</div>
 </li>
 </ul>
@@ -268,12 +268,12 @@ implements <a href="../../angrybirdsold/models/Model.html" title="interface in a
 <ul class="blockListLast">
 <li class="blockList">
 <h4>GraphicalObjectModel</h4>
-<pre>public&nbsp;GraphicalObjectModel(<a href="../../angrybirdsold/structures/Vector2d.html" title="class in angrybirdsold.structures">Vector2d</a>&nbsp;position,
+<pre>public&nbsp;GraphicalObjectModel(<a href="../../angrybirdsold/structures/Vector2d.html" title="class in angrybirdsold.structures">Vector2d</a>&nbsp;holderPosition,
                             <a href="../../angrybirdsold/structures/Vector2d.html" title="class in angrybirdsold.structures">Vector2d</a>&nbsp;size)</pre>
 <div class="block">Créé un nouvel objet</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>position</code> - Position de l'objet</dd>
+<dd><code>holderPosition</code> - Position de l'objet</dd>
 <dd><code>size</code> - Taille de l'objet</dd>
 </dl>
 </li>
@@ -293,7 +293,7 @@ implements <a href="../../angrybirdsold/models/Model.html" title="interface in a
 <li class="blockList">
 <h4>getPosition</h4>
 <pre>public&nbsp;<a href="../../angrybirdsold/structures/Vector2d.html" title="class in angrybirdsold.structures">Vector2d</a>&nbsp;getPosition()</pre>
-<div class="block">Retourne la position de l'objet.</div>
+<div class="block">Retourne la holderPosition de l'objet.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>Position de l'objet</dd>
@@ -308,7 +308,7 @@ implements <a href="../../angrybirdsold/models/Model.html" title="interface in a
 <h4>setPosition</h4>
 <pre>public&nbsp;void&nbsp;setPosition(double&nbsp;x,
                         double&nbsp;y)</pre>
-<div class="block">Change la position de l'objet</div>
+<div class="block">Change la holderPosition de l'objet</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>x</code> - Position X de l'objet</dd>

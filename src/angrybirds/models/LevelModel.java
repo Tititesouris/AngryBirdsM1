@@ -1,7 +1,9 @@
 package angrybirds.models;
 
-import angrybirds.controllers.BirdController;
+import angrybirds.models.objects.PigModel;
 import angrybirds.models.objects.birds.BirdModel;
+import angrybirds.models.objects.obstacles.ObstacleModel;
+import angrybirds.updates.actions.LevelUpdateAction;
 
 import java.util.List;
 
@@ -14,38 +16,53 @@ public class LevelModel extends Model {
 
     private String name;
 
-    private List<BirdModel> birds;
+    private float ground;
 
     private SlingshotModel slingshot;
 
-    public LevelModel(String name, List<BirdModel> birds, SlingshotModel slingshot) {
+    private List<BirdModel> birds;
+
+    private List<ObstacleModel> obstacles;
+
+    private List<PigModel> pigs;
+
+    public LevelModel(String name, float ground, SlingshotModel slingshot, List<BirdModel> birds, List<ObstacleModel> obstacles, List<PigModel> pigs) {
         this.name = name;
-        this.birds = birds;
+        this.ground = ground;
         this.slingshot = slingshot;
-    }
-
-    @Override
-    public void init() {
-
+        this.birds = birds;
+        this.obstacles = obstacles;
+        this.pigs = pigs;
     }
 
     @Override
     public void update(int delta) {
-
+        slingshot.update(delta);
+        for (BirdModel bird : birds)
+            bird.update(delta);
+        for (ObstacleModel obstacle : obstacles)
+            obstacle.update(delta);
+        for (PigModel pig : pigs)
+            pig.update(delta);
     }
 
-    public void start() {
-        nextBird();
-    }
-
-    public void nextBird() {
+    /**
+     * Cette méthode prépare le lance-oiseau à tirer.
+     * Elle notifie les observateurs avec LevelUpdateAction.Ready() si il reste au moins un oiseau.
+     * Sinon, elle les notifie avec LevelUpdateAction.End()
+     */
+    public void ready() {
         BirdModel bird = slingshot.getBird();
-        if (bird == null)
-            slingshot.setBird(birds.get(0));
-        else if (birds.indexOf(bird) < birds.size() - 1)
-            slingshot.setBird(birds.get(birds.indexOf(bird)));
+        if (bird == null) {
+            slingshot.ready(birds.get(0));
+            notifyObservers(new LevelUpdateAction.Ready());
+        }
+        else if (birds.indexOf(bird) < birds.size() - 1) {
+            slingshot.ready(birds.get(birds.indexOf(bird)));
+            notifyObservers(new LevelUpdateAction.Ready());
+        }
         else
-            System.out.println("Fin du niveau");
+            notifyObservers(new LevelUpdateAction.End());
     }
 
     public String getName() {
@@ -56,12 +73,12 @@ public class LevelModel extends Model {
         this.name = name;
     }
 
-    public List<BirdModel> getBirds() {
-        return birds;
+    public float getGround() {
+        return ground;
     }
 
-    public void setBirds(List<BirdModel> birds) {
-        this.birds = birds;
+    public void setGround(float ground) {
+        this.ground = ground;
     }
 
     public SlingshotModel getSlingshot() {
@@ -70,6 +87,30 @@ public class LevelModel extends Model {
 
     public void setSlingshot(SlingshotModel slingshot) {
         this.slingshot = slingshot;
+    }
+
+    public List<BirdModel> getBirds() {
+        return birds;
+    }
+
+    public void setBirds(List<BirdModel> birds) {
+        this.birds = birds;
+    }
+
+    public List<ObstacleModel> getObstacles() {
+        return obstacles;
+    }
+
+    public void setObstacles(List<ObstacleModel> obstacles) {
+        this.obstacles = obstacles;
+    }
+
+    public List<PigModel> getPigs() {
+        return pigs;
+    }
+
+    public void setPigs(List<PigModel> pigs) {
+        this.pigs = pigs;
     }
 
 }

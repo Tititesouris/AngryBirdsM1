@@ -1,6 +1,6 @@
 package angrybirds.models;
 
-import angrybirds.utils.updates.UpdateObservable;
+import angrybirds.updates.UpdateObservable;
 
 /**
  * TODO: Description
@@ -9,8 +9,25 @@ import angrybirds.utils.updates.UpdateObservable;
  */
 public abstract class Model extends UpdateObservable {
 
-    public abstract void init();
+    private static int idCount = 0;
+
+    private final int id;
+
+    public Model() {
+        id = idCount++;
+    }
 
     public abstract void update(int delta);
+
+    public int getId() {
+        return id;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (object instanceof Model)
+            return this.id == ((Model) object).id;
+        return false;
+    }
 
 }

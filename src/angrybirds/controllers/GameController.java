@@ -1,13 +1,12 @@
 package angrybirds.controllers;
 
 import angrybirds.exceptions.AngryBirdsException;
+import angrybirds.inputs.actions.GameInputAction;
 import angrybirds.models.GameModel;
 import angrybirds.models.LevelModel;
-import angrybirds.models.Model;
 import angrybirds.utils.ModelViewPair;
-import angrybirds.utils.inputs.actions.InputAction;
+import angrybirds.inputs.actions.InputAction;
 import angrybirds.views.GameView;
-import angrybirds.views.LevelView;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -16,8 +15,6 @@ import com.google.gson.JsonParser;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -40,7 +37,7 @@ public class GameController extends Controller {
             levelController = new LevelController(levels);
 
             GameModel model = new GameModel(levelController.getModels());
-            GameView view = new GameView();
+            GameView view = new GameView(levelController.getViews());
             addModelViewPair(new ModelViewPair<>(model, view));
 
         } catch (FileNotFoundException e) {
@@ -50,22 +47,20 @@ public class GameController extends Controller {
 
     @Override
     public void onInput(InputAction inputAction) {
+        List<GameModel> models = getModels();
+        List<GameView> views = getViews();
+        for (int i = 0; i < models.size(); i++) {
+            GameModel model = models.get(i);
+            GameView view = views.get(i);
 
-    }
+            if (inputAction instanceof GameInputAction) {
+                if (inputAction instanceof GameInputAction.EnterLevel) {
+                    model.enterLevel(((GameInputAction.EnterLevel) inputAction).getId());
+                    view.init(model);
+                }
+            }
 
-    @Override
-    public void init() {
-        levelController.init();
-    }
-
-    @Override
-    public void update(int delta) {
-        levelController.update(delta);
-    }
-
-    @Override
-    public void display() {
-        levelController.display();
+        }
     }
 
 }
