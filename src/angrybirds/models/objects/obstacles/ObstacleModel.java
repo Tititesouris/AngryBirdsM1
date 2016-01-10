@@ -2,6 +2,7 @@ package angrybirds.models.objects.obstacles;
 
 import angrybirds.models.LevelModel;
 import angrybirds.models.objects.ObjectModel;
+import angrybirds.models.objects.RectangularObjectModel;
 import angrybirds.utils.Vector2d;
 
 /**
@@ -10,7 +11,7 @@ import angrybirds.utils.Vector2d;
  * @author Quentin Brault
  * @since 2013/10/01
  */
-public class ObstacleModel extends ObjectModel {
+public class ObstacleModel extends RectangularObjectModel {
 
     /**
      * Modèle du niveau qui possède cet obstacle.
@@ -43,16 +44,6 @@ public class ObstacleModel extends ObjectModel {
      */
     public ObstacleMaterial getMaterial() {
         return material;
-    }
-
-    @Override
-    public boolean collidesWith(ObjectModel object) {
-        return false;
-    }
-
-    @Override
-    public float getSurface() {
-        return size.x * size.y;
     }
 
 }

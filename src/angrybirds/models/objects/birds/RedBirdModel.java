@@ -16,14 +16,4 @@ public class RedBirdModel extends BirdModel {
         super(level, position, new Vector2d(30), 0.03f);
     }
 
-    @Override
-    public boolean collidesWith(ObjectModel object) {
-        return false;
-    }
-
-    @Override
-    public float getSurface() {
-        return (float) (Math.PI * (size.x / 2) * (size.y / 2));
-    }
-
 }

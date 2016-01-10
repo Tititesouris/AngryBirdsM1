@@ -6,8 +6,12 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
+ * Cette classe de test vérifie les propriétés et méthodes de la classe utilitaire Vector2d.
+ * @see angrybirds.utils.Vector2d
+ *
  * @author Quentin Brault
  * @author Florent Marcaille
+ * @since  2016/10/01
  */
 public class TestVectors {
 
