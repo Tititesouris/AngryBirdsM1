@@ -61,7 +61,7 @@ public abstract class BirdModel extends ObjectModel {
         setGravity(true);
         setVelocity(velocity);
         dying = true;
-        dies = System.currentTimeMillis() + 1000;
+        dies = System.currentTimeMillis() + 5000;
         notifyObservers(new BirdUpdateAction.Launch());
     }
 

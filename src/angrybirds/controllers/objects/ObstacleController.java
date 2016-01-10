@@ -48,9 +48,8 @@ public class ObstacleController extends Controller {
             ObstacleModel model = new ObstacleModel(
                     level,
                     new Vector2d(position.get(0).getAsFloat(), position.get(1).getAsFloat()),
-                    Vector2d.ZERO, Vector2d.ZERO,
                     obstacleSize, obstacleMaterial,
-                    0, 0);
+                    0);
             ObstacleView view = new ObstacleView(model.getId(), model.getPosition(), model.getSize(), model.getRotation(), ObstacleMaterialView.valueOf(model.getMaterial().name()));
             addModelViewPair(new ModelViewPair<>(model, view));
         }

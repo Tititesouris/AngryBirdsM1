@@ -28,11 +28,7 @@ public class PigController extends Controller {
             JsonArray position = pigs.get(i).getAsJsonArray();
             PigModel model = new PigModel(
                     level,
-                    new Vector2d(position.get(0).getAsFloat(), position.get(1).getAsFloat()),
-                    Vector2d.ZERO,
-                    Vector2d.ZERO,
-                    0,
-                    0
+                    new Vector2d(position.get(0).getAsFloat(), position.get(1).getAsFloat())
             );
             PigView view = new PigView(model.getId(), model.getPosition(), model.getSize(), model.getRotation());
             addModelViewPair(new ModelViewPair<>(model, view));

@@ -13,7 +13,7 @@ import angrybirds.utils.Vector2d;
 public class YellowBirdModel extends BirdModel {
 
     public YellowBirdModel(LevelModel level, Vector2d position) {
-        super(level, position, new Vector2d(30), 0.0005f);
+        super(level, position, new Vector2d(40), 0.01f);
     }
 
     @Override

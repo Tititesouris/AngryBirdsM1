@@ -124,7 +124,7 @@ public class SlingshotModel extends Model {
      * @return Vitesse initiale de l'oiseau au lancé.
      */
     private Vector2d getInitialVelocity() {
-        return holderPosition.normalized().product(-holderPosition.hypotenuse() / Constants.SLING_STRENGTH);
+        return holderPosition.normalized().product(-holderPosition.hypotenuse() * Constants.SLING_STRENGTH);
     }
 
     /**

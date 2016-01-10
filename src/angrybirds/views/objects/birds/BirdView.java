@@ -20,6 +20,8 @@ import java.util.List;
  */
 public abstract class BirdView extends ObjectView {
 
+    private Vector2d holderPositionOffset = new Vector2d(0, -50);
+
     protected Color color;
 
     private List<Vector2d> trail;
@@ -51,7 +53,7 @@ public abstract class BirdView extends ObjectView {
     public void display(Graphics graphics) {
         if (Constants.DEBUG) {
             graphics.setColor(color);
-            graphics.fillOval(position.x - size.x / 2, position.y - size.y / 2, size.x, size.y);
+            graphics.fillOval(position.x + holderPositionOffset.x - size.x / 2, position.y + holderPositionOffset.y - size.y / 2, size.x, size.y);
         }
     }
 

@@ -1,6 +1,6 @@
 package tests;
 
-import angrybirdsold.structures.Vector2d;
+import angrybirds.utils.Vector2d;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -12,46 +12,55 @@ import static org.junit.Assert.*;
 public class TestVectors {
 
     @Test
-    public void testAdd() {
-        assertTrue(new Vector2d(5, 5).add(new Vector2d(5, 5)).equals(new Vector2d(10, 10)));
-        assertTrue(new Vector2d(6.3, 5.2).add(new Vector2d(5, 3.2)).equals(new Vector2d(11.3, 8.4)));
-        assertFalse(new Vector2d(6.3, 5).add(new Vector2d(5, 3.2)).equals(new Vector2d(10, 10)));
+    public void testEquals() {
+        assertTrue(new Vector2d(5, 5).equals(new Vector2d(5, 5)));
+        assertFalse(new Vector2d(4, 5).equals(new Vector2d(5, 5)));
+        assertTrue(new Vector2d(-4.2f, 5).equals(new Vector2d(-4.2f, 5)));
     }
 
     @Test
-    public void testDiff() {
-        assertTrue(new Vector2d(5, 5).diff(new Vector2d(5, 5)).equals(new Vector2d(0, 0)));
-        assertTrue(new Vector2d(6.3, 5.2).diff(new Vector2d(1, 3.2)).equals(new Vector2d(5.3, 2)));
-        assertFalse(new Vector2d(6.3, 5).diff(new Vector2d(5, 3.2)).equals(new Vector2d(10, 10)));
+    public void testConstants() {
+        assertEquals(Vector2d.ZERO, new Vector2d(0, 0));
+        assertEquals(Vector2d.ONE, new Vector2d(1, 1));
+        assertEquals(Vector2d.X, new Vector2d(1, 0));
+        assertEquals(Vector2d.Y, new Vector2d(0, 1));
+        assertEquals(Vector2d.INVERSE, new Vector2d(-1, -1));
+    }
+
+    @Test
+    public void testSum() {
+        assertEquals(new Vector2d(5), Vector2d.ONE.sum(4));
+        assertEquals(new Vector2d(2, 3), Vector2d.ZERO.sum(2).sum(new Vector2d(0, 1)));
+        assertEquals(new Vector2d(-1, 2.3f), Vector2d.INVERSE.sum(new Vector2d(0, 3.3f)));
+    }
+
+    @Test
+    public void testDifference() {
+        assertEquals(new Vector2d(5), Vector2d.ZERO.difference(-5));
+        assertEquals(new Vector2d(-5), Vector2d.ZERO.difference(5));
+        assertEquals(Vector2d.X, new Vector2d(-2.2f, 7.7f).difference(new Vector2d(-3.2f, 7.7f)));
     }
 
     @Test
     public void testProduct() {
-        assertTrue(new Vector2d(1.5, 3).product(2).equals(new Vector2d(3, 6)));
-        assertTrue(new Vector2d(1.5, -3).product(-2).equals(new Vector2d(-3, 6)));
-        assertTrue(new Vector2d(1.5, 3).product(0.5).equals(new Vector2d(0.75, 1.5)));
-        assertFalse(new Vector2d(5, 3).product(0.5).equals(new Vector2d(5, 5)));
+        assertEquals(new Vector2d(5), Vector2d.ONE.product(5));
+        assertEquals(new Vector2d(10, -5), new Vector2d(5).product(new Vector2d(2, -1)));
+        assertEquals(new Vector2d(-3.3f), Vector2d.ONE.product(-3.3f));
     }
 
     @Test
     public void testHypotenuse() {
-        assertEquals(5, new Vector2d(3, 4).getHypotenuse(), 0.00001);
-        assertEquals(4.24264068, new Vector2d(3, 3).getHypotenuse(), 0.00001);
-        assertEquals(4.24264068, new Vector2d(-3, 3).getHypotenuse(), 0.00001);
+        assertTrue(1 == new Vector2d(1, 0).hypotenuse());
+        assertTrue(5 == new Vector2d(4, 3).hypotenuse());
+        assertFalse(-1 == new Vector2d(-1, 0).hypotenuse());
     }
 
     @Test
-    public void testNormalize() {
-        assertTrue(new Vector2d(0, 5).normalize().equals(new Vector2d(0, 1)));
-        assertTrue(new Vector2d(1, 0).normalize().equals(new Vector2d(1, 0)));
-        assertTrue(new Vector2d(-7.1, 0).normalize().equals(new Vector2d(-1, 0)));
-        assertFalse(new Vector2d(5, 5).normalize().equals(new Vector2d(0.5, 0.5)));
-    }
-
-    @Test
-    public void testEquals() {
-        assertTrue(new Vector2d(5, 5).equals(new Vector2d(5, 5)));
-        assertFalse(new Vector2d(4, 5).equals(new Vector2d(5, 5)));
+    public void testNormalized() {
+        assertEquals(Vector2d.X, new Vector2d(10.5f, 0).normalized());
+        assertEquals(Vector2d.Y.product(-1), new Vector2d(0, -4.2f).normalized());
+        assertEquals(new Vector2d((float) Math.sqrt(2) / 2), Vector2d.ONE.normalized());
+        assertEquals(new Vector2d((float) Math.sqrt(2) / -2), Vector2d.INVERSE.product(3.7f).normalized());
     }
 
 }
