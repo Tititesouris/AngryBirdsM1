@@ -17,12 +17,21 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
 /**
- * TODO: Description
+ * Cette classe représente le controlleur pour les oiseaux.
  *
- * @author Tititesouris
+ * @author Quentin Brault
+ * @since  2013/10/01
  */
 public class BirdController extends Controller {
 
+    /**
+     * Créé un nouveau controlleur pour oiseaux.
+     *
+     * @param birds     Liste des types d'oiseau.
+     * @param slingshot Description du lance-oiseau.
+     * @param level     Modèle du niveau.
+     * @throws UnknownBirdException
+     */
     public BirdController(JsonArray birds, JsonObject slingshot, LevelModel level) throws UnknownBirdException {
         for (int i = 0; i < birds.size(); i++) {
             String bird = birds.get(i).getAsString();

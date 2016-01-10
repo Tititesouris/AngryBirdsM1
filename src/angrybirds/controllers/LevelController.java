@@ -22,20 +22,19 @@ import com.google.gson.JsonObject;
 import java.util.SortedMap;
 
 /**
- * TODO: Description
+ * Cette classe représente le controlleur pour les niveaux.
  *
- * @author Tititesouris
+ * @author Quentin Brault
+ * @since  2013/10/01
  */
 public class LevelController extends Controller {
 
-    private SlingshotController slingshotController;
-
-    private BirdController birdController;
-
-    private ObstacleController obstacleController;
-
-    private PigController pigController;
-
+    /**
+     * Créé un nouveau controlleur de niveaux.
+     *
+     * @param levels Liste des descriptions de niveau.
+     * @throws AngryBirdsException
+     */
     public LevelController(JsonArray levels) throws AngryBirdsException {
         for (JsonElement element : levels) {
             JsonObject level = element.getAsJsonObject();
@@ -48,10 +47,10 @@ public class LevelController extends Controller {
 
             LevelModel levelModel = new LevelModel(name, ground);
 
-            slingshotController = new SlingshotController(slingshot, levelModel);
-            birdController = new BirdController(birds, slingshot, levelModel);
-            obstacleController = new ObstacleController(obstacles, levelModel);
-            pigController = new PigController(pigs, levelModel);
+            SlingshotController slingshotController = new SlingshotController(slingshot, levelModel);
+            BirdController birdController = new BirdController(birds, slingshot, levelModel);
+            ObstacleController obstacleController = new ObstacleController(obstacles, levelModel);
+            PigController pigController = new PigController(pigs, levelModel);
 
             SortedMap<Integer, SlingshotModel> slingshotModels = slingshotController.getModels();
             SortedMap<Integer, SlingshotView> slingshotViews = slingshotController.getViews();

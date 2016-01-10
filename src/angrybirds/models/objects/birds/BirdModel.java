@@ -7,9 +7,10 @@ import angrybirds.notifications.updates.actions.BirdUpdateAction;
 import angrybirds.utils.Vector2d;
 
 /**
- * TODO: Description
+ * Cette classe représente les données et actions d'un oiseau.
  *
- * @author Tititesouris
+ * @author Quentin Brault
+ * @since  2013/10/01
  */
 public abstract class BirdModel extends ObjectModel {
 

@@ -10,12 +10,19 @@ import angrybirds.views.objects.PigView;
 import com.google.gson.JsonArray;
 
 /**
- * TODO: Description
+ * Cette classe représente le controlleur pour les cochons.
  *
- * @author Tititesouris
+ * @author Quentin Brault
+ * @since  2013/10/01
  */
 public class PigController extends Controller {
 
+    /**
+     * Créé un nouveau controlleur pour cochon.
+     *
+     * @param pigs  Liste des descriptions de cochon.
+     * @param level Modèle du niveau.
+     */
     public PigController(JsonArray pigs, LevelModel level) {
         for (int i = 0; i < pigs.size(); i++) {
             JsonArray position = pigs.get(i).getAsJsonArray();

@@ -17,4 +17,14 @@ public class PigModel extends ObjectModel {
         this.level = level;
     }
 
+    @Override
+    public boolean collidesWith(ObjectModel object) {
+        return false;
+    }
+
+    @Override
+    public float getSurface() {
+        return (float) (Math.PI * (size.x / 2) * (size.y / 2));
+    }
+
 }

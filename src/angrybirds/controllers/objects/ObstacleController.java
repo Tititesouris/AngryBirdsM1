@@ -18,12 +18,20 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
 /**
- * TODO: Description
+ * Cette classe représente le controlleur pour les obstacles.
  *
- * @author Tititesouris
+ * @author Quentin Brault
+ * @since  2013/10/01
  */
 public class ObstacleController extends Controller {
 
+    /**
+     * Créé un nouveau controlleur pour obstacles.
+     *
+     * @param obstacles Liste des descriptions d'obstacle.
+     * @param level     Modèle du niveau.
+     * @throws AngryBirdsException
+     */
     public ObstacleController(JsonArray obstacles, LevelModel level) throws AngryBirdsException {
         for (JsonElement element : obstacles) {
             JsonObject obstacle = element.getAsJsonObject();
