@@ -44,8 +44,7 @@ public class BirdController extends Controller {
                             new Vector2d(
                                     slingshot.get("position").getAsJsonArray().get(0).getAsFloat() + i * 50,
                                     Constants.WINDOW_HEIGHT - level.getGround()
-                            ),
-                            Vector2d.ZERO, Vector2d.ZERO
+                            )
                     );
                     view = new RedBirdView(model.getId(), model.getPosition(), model.getSize(), model.getRotation());
                     break;
@@ -55,8 +54,7 @@ public class BirdController extends Controller {
                             new Vector2d(
                                     slingshot.get("position").getAsJsonArray().get(0).getAsFloat() + i * 50,
                                     Constants.WINDOW_HEIGHT - level.getGround()
-                            ),
-                            Vector2d.ZERO, Vector2d.ZERO
+                            )
                     );
                     view = new YellowBirdView(model.getId(), model.getPosition(), model.getSize(), model.getRotation());
                     break;

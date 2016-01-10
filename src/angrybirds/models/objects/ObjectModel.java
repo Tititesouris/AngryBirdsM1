@@ -10,7 +10,7 @@ import angrybirds.utils.Vector2d;
  * Un objet est défini comme un élément du jeu qui intéragit physiquement avec d'autres objets.
  *
  * @author Quentin Brault
- * @since 2013 /10/01
+ * @since 2013/10/01
  */
 public abstract class ObjectModel extends Model {
 
@@ -40,7 +40,7 @@ public abstract class ObjectModel extends Model {
     protected float density;
 
     /**
-     * Rotation de l'objet en radians par rapport au 0 du cercle trigonométrique.
+     * Rotation de l'objet en rad par rapport au 0 du cercle trigonométrique.
      */
     protected float rotation;
 

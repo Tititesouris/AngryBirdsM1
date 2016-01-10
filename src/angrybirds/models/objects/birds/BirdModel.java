@@ -14,14 +14,31 @@ import angrybirds.utils.Vector2d;
  */
 public abstract class BirdModel extends ObjectModel {
 
+    /**
+     * Modèle du niveau.
+     */
     private LevelModel level;
 
+    /**
+     * FIXME: facon temporaire de mourrir
+     */
     private long dies;
 
+    /**
+     * FIXME: facon temporaire de mourrir
+     */
     private boolean dying;
 
-    public BirdModel(LevelModel level, Vector2d position, Vector2d velocity, Vector2d acceleration, Vector2d size, float density) {
-        super(position, velocity, acceleration, size, density, 0, 0, false);
+    /**
+     * Créé un nouvel oiseau.
+     *
+     * @param level    Modèle du niveau.
+     * @param position Position de l'objet en m.
+     * @param size     Taille de l'objet en m.
+     * @param density  Densité (ou masse surfacique) de l'objet en kg/m^2.
+     */
+    public BirdModel(LevelModel level, Vector2d position, Vector2d size, float density) {
+        super(position, Vector2d.ZERO, Vector2d.ZERO, size, density, 0, 0, false);
         this.level = level;
     }
 
@@ -35,6 +52,11 @@ public abstract class BirdModel extends ObjectModel {
         }
     }
 
+    /**
+     * Cette méthode lance l'oiseau à la vélocité spécifiée et notifie les observateurs.
+     *
+     * @param velocity Vélocité initiale de l'oiseau.
+     */
     public void launch(Vector2d velocity) {
         setGravity(true);
         setVelocity(velocity);
@@ -43,6 +65,11 @@ public abstract class BirdModel extends ObjectModel {
         notifyObservers(new BirdUpdateAction.Launch());
     }
 
+    /**
+     * Cette méthode prépare l'oiseau pour être lancé.
+     *
+     * @param holderPosition Position du holder du lance-oiseau.
+     */
     public void ready(Vector2d holderPosition) {
         setPosition(holderPosition);
     }

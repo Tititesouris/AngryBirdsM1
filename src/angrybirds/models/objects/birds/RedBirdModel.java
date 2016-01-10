@@ -5,14 +5,15 @@ import angrybirds.models.objects.ObjectModel;
 import angrybirds.utils.Vector2d;
 
 /**
- * TODO: Description
+ * Cette classe représente les données et actions d'un oiseau rouge.
  *
- * @author Tititesouris
+ * @author Quentin Brault
+ * @since  2013/10/01
  */
 public class RedBirdModel extends BirdModel {
 
-    public RedBirdModel(LevelModel level, Vector2d position, Vector2d velocity, Vector2d acceleration) {
-        super(level, position, velocity, acceleration, new Vector2d(30), 0.00075f);
+    public RedBirdModel(LevelModel level, Vector2d position) {
+        super(level, position, new Vector2d(30), 0.00075f);
     }
 
     @Override
