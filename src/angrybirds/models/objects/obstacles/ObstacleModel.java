@@ -46,4 +46,14 @@ public class ObstacleModel extends RectangularObjectModel {
         return material;
     }
 
+    @Override
+    public boolean collidesWith(ObjectModel object) {
+        return false;
+    }
+
+    @Override
+    public float getSurface() {
+        return size.x * size.y;
+    }
+
 }
