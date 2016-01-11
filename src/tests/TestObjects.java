@@ -1,5 +1,6 @@
 package tests;
 
+import angrybirds.models.LevelModel;
 import angrybirds.models.objects.CircularObjectModel;
 import angrybirds.models.objects.ObjectModel;
 import angrybirds.models.objects.RectangularObjectModel;
@@ -17,6 +18,12 @@ import org.junit.Test;
  */
 public class TestObjects {
 
+    private static class TestLevelModel extends LevelModel {
+        public TestLevelModel() {
+            super("Test", 0);
+        }
+    }
+
     private static class TestObjectModel extends ObjectModel {
 
         /**
@@ -32,7 +39,7 @@ public class TestObjects {
          * @param gravity      True si l'objet est soumis à la pesanteur, false sinon.
          */
         public TestObjectModel(Vector2d position, Vector2d velocity, Vector2d acceleration, Vector2d size, float density, float rotation, float angularSpeed, boolean gravity) {
-            super(position, velocity, acceleration, size, density, rotation, angularSpeed, gravity);
+            super(new TestLevelModel(), position, velocity, acceleration, size, density, rotation, angularSpeed, gravity);
         }
 
         @Override

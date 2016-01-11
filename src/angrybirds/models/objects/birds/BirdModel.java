@@ -17,11 +17,6 @@ import angrybirds.utils.Vector2d;
 public abstract class BirdModel extends CircularObjectModel {
 
     /**
-     * Modèle du niveau.
-     */
-    private LevelModel level;
-
-    /**
      * FIXME: facon temporaire de mourrir
      */
     private long dies;
@@ -35,13 +30,12 @@ public abstract class BirdModel extends CircularObjectModel {
      * Créé un nouvel oiseau.
      *
      * @param level    Modèle du niveau.
-     * @param position Position de l'objet en m.
+     * @param position Position du centre de l'objet en m.
      * @param size     Taille de l'objet en m.
      * @param density  Densité (ou masse surfacique) de l'objet en kg/m^2.
      */
     public BirdModel(LevelModel level, Vector2d position, Vector2d size, float density) {
-        super(position, Vector2d.ZERO, Vector2d.ZERO, size, density, 0, 0, false);
-        this.level = level;
+        super(level, position, Vector2d.ZERO, Vector2d.ZERO, size, density, 0, 0, true);
     }
 
     @Override
@@ -73,7 +67,12 @@ public abstract class BirdModel extends CircularObjectModel {
      * @param holderPosition Position du holder du lance-oiseau.
      */
     public void ready(Vector2d holderPosition) {
+        setGravity(false);
         setPosition(holderPosition);
+        setVelocity(Vector2d.ZERO);
+        setAcceleration(Vector2d.ZERO);
+        setRotation(0);
+        setAngularSpeed(0);
     }
 
 }

@@ -36,7 +36,6 @@ public class ObstacleView extends ObjectView {
     @Override
     public void display(Graphics graphics) {
         if (Constants.DEBUG) {
-            rotation += 0.01;
             graphics.setColor(material.getColor());
             Shape obstacle = new Rectangle(position.x - size.x / 2, position.y - size.y / 2, size.x, size.y);
             obstacle = getRotated(obstacle, rotation, size.x / 2, size.y / 2);

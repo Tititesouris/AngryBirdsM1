@@ -1,5 +1,6 @@
 package angrybirds.models.objects;
 
+import angrybirds.models.LevelModel;
 import angrybirds.models.Model;
 import angrybirds.notifications.updates.actions.ObjectUpdateAction;
 import angrybirds.utils.Constants;
@@ -13,6 +14,11 @@ import angrybirds.utils.Vector2d;
  * @since 2013/10/01
  */
 public abstract class ObjectModel extends Model {
+
+    /**
+     * Modèle du niveau.
+     */
+    protected LevelModel level;
 
     /**
      * Position du centre de l'objet en m.
@@ -57,7 +63,8 @@ public abstract class ObjectModel extends Model {
     /**
      * Créé un nouvel objet.
      *
-     * @param position     Position de l'objet en m.
+     * @param level        Modèle du niveau.
+     * @param position     Position du centre de l'objet en m.
      * @param velocity     Vélocité de l'objet en m/s.
      * @param acceleration Accélération de l'objet en m/s^2.
      * @param size         Taille de l'objet en m.
@@ -66,7 +73,8 @@ public abstract class ObjectModel extends Model {
      * @param angularSpeed Vitesse de rotation de l'objet en rad/s
      * @param gravity      True si l'objet est soumis à la pesanteur, false sinon.
      */
-    public ObjectModel(Vector2d position, Vector2d velocity, Vector2d acceleration, Vector2d size, float density, float rotation, float angularSpeed, boolean gravity) {
+    public ObjectModel(LevelModel level, Vector2d position, Vector2d velocity, Vector2d acceleration, Vector2d size, float density, float rotation, float angularSpeed, boolean gravity) {
+        this.level = level;
         this.position = position;
         this.velocity = velocity;
         this.acceleration = acceleration;
@@ -94,8 +102,18 @@ public abstract class ObjectModel extends Model {
      */
     public void move(Vector2d distance) {
         if (!distance.equals(Vector2d.ZERO)) {
-            setPosition(this.position.sum(distance));
+            setPosition(position.sum(distance));
+            checkGround();
         }
+    }
+
+    /**
+     * Regarde si l'objet rentre dans le sol et ajuste sa position si c'est le cas.
+     */
+    private void checkGround() {
+        float ground = Constants.WINDOW_HEIGHT - level.getGround() - size.y / 2;
+        if (position.y - ground > 0)
+            setPosition(new Vector2d(position.x, ground));
     }
 
     /**
@@ -105,7 +123,7 @@ public abstract class ObjectModel extends Model {
      */
     public void accelerate(Vector2d acceleration) {
         if (!acceleration.equals(Vector2d.ZERO)) {
-            setVelocity(this.velocity.sum(acceleration));
+            setVelocity(velocity.sum(acceleration));
         }
     }
 
@@ -116,7 +134,7 @@ public abstract class ObjectModel extends Model {
      */
     public void rotate(float angle) {
         if (angle > 0) {
-            setRotation(this.rotation + angle);
+            setRotation(rotation + angle);
         }
     }
 

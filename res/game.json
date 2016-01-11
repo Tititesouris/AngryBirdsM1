@@ -2,7 +2,7 @@
   "levels": [
     {
       "name": "Level 1",
-      "ground": 110,
+      "ground": 50,
       "slingshot": {
         "position": [
           150,
@@ -19,15 +19,34 @@
       "obstacles": [
         {
           "position": [
-            300,
-            300
+            900,
+            540
           ],
+          "rotation": 1.57,
+          "size": "MEDIUM",
+          "material": "WOOD"
+        },
+        {
+          "position": [
+            1000,
+            540
+          ],
+          "rotation": 1.57,
+          "size": "MEDIUM",
+          "material": "WOOD"
+        },
+        {
+          "position": [
+            950,
+            430
+          ],
+          "rotation": 0,
           "size": "MEDIUM",
           "material": "WOOD"
         }
       ],
       "pigs": [
-        [50, 50], [250, 70], [200, 100]
+        [810, 560], [920, 350]
       ]
     },
     {
@@ -50,6 +69,7 @@
             300,
             300
           ],
+          "rotation": 1.57,
           "size": "MEDIUM",
           "material": "WOOD"
         }
