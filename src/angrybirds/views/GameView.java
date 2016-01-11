@@ -41,13 +41,23 @@ public class GameView extends View {
             level.input(input);
     }
 
+    /**
+     * Affiche les niveaux crées
+     * @param graphics
+     */
     @Override
     public void display(Graphics graphics) {
-        if (level == null) {
-            graphics.drawString("Angry Birds. Click to start", 200, 200);
-        }
-        else
+        if(level ==null) {
+            int x = 200;
+            int y = 200;
+            for (int i = 0; i < levels.size(); i++) {
+                graphics.drawString(""+(i+1), x, y);
+               graphics.drawRect(x,y,graphics.getFont().getWidth(""+i),graphics.getFont().getHeight(""+i));
+                x += 100;
+            }
+        }else{
             level.display(graphics);
+        }
     }
 
     @Override
