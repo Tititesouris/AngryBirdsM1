@@ -9,6 +9,10 @@ import angrybirds.views.objects.ObjectView;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
+import org.newdawn.slick.geom.Circle;
+import org.newdawn.slick.geom.Ellipse;
+import org.newdawn.slick.geom.Polygon;
+import org.newdawn.slick.geom.Shape;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +25,8 @@ import java.util.List;
 public abstract class BirdView extends ObjectView {
 
     private Vector2d holderPositionOffset = new Vector2d(0, -50);
+
+    private boolean onSlingshot;
 
     protected Color color;
 
@@ -47,13 +53,35 @@ public abstract class BirdView extends ObjectView {
             System.out.println("BIRD DIED");
             // animation de mort
         }
+        else if (updateAction instanceof BirdUpdateAction.Ready) {
+            ready();
+        }
+    }
+
+    private void ready() {
+        onSlingshot = true;
     }
 
     @Override
     public void display(Graphics graphics) {
         if (Constants.DEBUG) {
+            Shape bird;
+            Shape beak;
+            if (onSlingshot) {
+                bird = new Ellipse(position.x + holderPositionOffset.x, position.y + holderPositionOffset.y, size.x / 2, size.y / 2);
+                beak = new Ellipse(position.x + holderPositionOffset.x, position.y + holderPositionOffset.y, 10, 5);
+            }
+            else {
+                bird = new Ellipse(position.x, position.y, size.x / 2, size.y / 2);
+                beak = new Ellipse(position.x, position.y, 10, 5);
+            }
+            bird = getRotated(bird, rotation, 0, 0);
+            beak = getRotated(beak, rotation, 0, 0);
+
             graphics.setColor(color);
-            graphics.fillOval(position.x + holderPositionOffset.x - size.x / 2, position.y + holderPositionOffset.y - size.y / 2, size.x, size.y);
+            graphics.fill(bird);
+            graphics.setColor(Color.black);
+            graphics.fill(beak);
         }
     }
 

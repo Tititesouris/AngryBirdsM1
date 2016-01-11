@@ -73,6 +73,7 @@ public abstract class BirdModel extends CircularObjectModel {
         setAcceleration(Vector2d.ZERO);
         setRotation(0);
         setAngularSpeed(0);
+        notifyObservers(new BirdUpdateAction.Ready());
     }
 
 }

@@ -74,7 +74,7 @@ public abstract class View extends InputObservable implements UpdateObserver {
     public abstract void display(Graphics graphics);
 
     protected Shape getRotated(Shape shape, float angle, float xOffset, float yOffset) {
-        return shape.transform(Transform.createRotateTransform(angle, shape.getX() + xOffset, shape.getY() + yOffset));
+        return shape.transform(Transform.createRotateTransform(angle, shape.getCenterX() + xOffset, shape.getCenterY() + yOffset));
     }
 
     public int getId() {

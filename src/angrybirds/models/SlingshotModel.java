@@ -82,7 +82,7 @@ public class SlingshotModel extends Model {
             if (!this.holderPosition.equals(holderPosition)) {
                 setHolderPosition(getInRange(holderPosition));
                 bird.setPosition(getAbsoluteHolderPosition());
-                //bird.rotate(?);
+                bird.setRotation(getHolderRotation());
                 notifyObservers(new SlingshotUpdateAction.Pull(getHolderPosition()));
             }
         }
@@ -125,6 +125,10 @@ public class SlingshotModel extends Model {
      */
     private Vector2d getInitialVelocity() {
         return holderPosition.normalized().product(-holderPosition.hypotenuse() * Constants.SLING_STRENGTH);
+    }
+
+    private float getHolderRotation() {
+        return (float) Math.atan2(-holderPosition.y, -holderPosition.x);
     }
 
     /**

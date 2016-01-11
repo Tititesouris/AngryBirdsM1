@@ -13,4 +13,7 @@ public abstract class BirdUpdateAction extends ObjectUpdateAction {
 
     public static class Die extends BirdUpdateAction {}
 
+    public static class Ready extends BirdUpdateAction {
+    }
+
 }
