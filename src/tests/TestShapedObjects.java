@@ -75,12 +75,27 @@ public class TestShapedObjects {
     }
 
     @Test
-    public void testCollision() {
+    public void testCollisionCircleCircle() {
         // Test 1: Vérifier qu'il y a collision.
         // Test 2: Déplacer les objet, vérifier qu'il n'y a pas collision
         // Test 3: Placer les objets pour que leurs bords se touchent, vérifier collision.
-        // Test 4: Au moins 5 tests
-        // Test 5: Au moins 5 tests
+        // Les tourner, essayer
+    }
+
+    @Test
+    public void testCollisionRectangleRectangle() {
+        // Test 1: Vérifier qu'il y a collision.
+        // Test 2: Déplacer les objet, vérifier qu'il n'y a pas collision
+        // Test 3: Placer les objets pour que leurs bords se touchent, vérifier collision.
+        // Les tourner, essayer
+    }
+
+    @Test
+    public void testCollisionCircleRectangle() {
+        // Test 1: Vérifier qu'il y a collision.
+        // Test 2: Déplacer les objet, vérifier qu'il n'y a pas collision
+        // Test 3: Placer les objets pour que leurs bords se touchent, vérifier collision.
+        // Les tourner, essayer
     }
 
 }
