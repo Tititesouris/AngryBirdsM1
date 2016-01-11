@@ -7,6 +7,8 @@ import angrybirds.utils.Constants;
 import angrybirds.views.objects.PigView;
 import angrybirds.views.objects.birds.BirdView;
 import angrybirds.views.objects.obstacles.ObstacleView;
+
+import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
@@ -78,7 +80,7 @@ public class LevelView extends View {
     public void display(Graphics graphics) {
         graphics.drawImage(background, 0, 0);
         graphics.drawString(name, Constants.WINDOW_WIDTH - graphics.getFont().getWidth(name) - 10, 10);
-
+        
         slingshot.display(graphics);
         for (BirdView bird : birds.values())
             bird.display(graphics);

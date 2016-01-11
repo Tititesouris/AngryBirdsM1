@@ -55,9 +55,28 @@ public class TestObjects {
     }
 
     @Test
+    public void testCreation() {
+        // Vérifier que la valeur des champs correspond à ce qui a été passé au constructeur.
+    }
+
+    @Test
     public void testPosition() {
         // Test 1: Vérifier que la position avant et après un appel à update(1) est identique.
         // Test 2: Mettre une vélocité de (1, 0). Vérifier que la position avant l'appel à update(1) est à un mètre de la position après update(1).
+        // Test 3: Au moins 3 tests
+    }
+
+    @Test
+    public void testVelocity() {
+        // Test 1: Vérifier que la vélocité avant et après un appel à update est identique.
+        // Test 2: Mettre une accélération de (1, 0. Vérifier que la vélocité avant l'appel a update(1) est à un metre/seconde de apres update(1)
+        // Test 3: Au moins 3 tests
+    }
+
+    @Test
+    public void testRotation() {
+        // Test 1: Vérifier que la rotation est pareil avant et apres appel a update
+        // Test 2: mettre une vitesse de rotation, vérifier que ca change, tu connais la chanson...
         // Test 3: Au moins 3 tests
     }
 
@@ -66,6 +85,11 @@ public class TestObjects {
         // Test 1: Vérifier que la position avant et apres un appel à update(1) est identique.
         // Test 2: Activer la gravité de l'objet. Vérifier que sa position à changée après un appel à update(1).
         // Test 3: Au moins 3 tests
+    }
+
+    @Test
+    public void testMass() {
+        // Au moins 3 tests pour vérifier que la masse est caculée correctement.
     }
 
 }

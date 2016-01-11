@@ -9,7 +9,7 @@ import angrybirds.utils.Vector2d;
  * @author Quentin Brault
  * @since  2013/10/01
  */
-public class PigModel extends ObjectModel {
+public class PigModel extends CircularObjectModel {
 
     /**
      * Modèle du niveau.
@@ -25,16 +25,6 @@ public class PigModel extends ObjectModel {
     public PigModel(LevelModel level, Vector2d position) {
         super(position, Vector2d.ZERO, Vector2d.ZERO, new Vector2d(50), 2, 0, 0, true);
         this.level = level;
-    }
-
-    @Override
-    public boolean collidesWith(ObjectModel object) {
-        return false;
-    }
-
-    @Override
-    public float getSurface() {
-        return (float) (Math.PI * (size.x / 2) * (size.y / 2));
     }
 
 }
