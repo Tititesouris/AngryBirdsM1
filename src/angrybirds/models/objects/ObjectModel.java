@@ -15,7 +15,7 @@ import angrybirds.utils.Vector2d;
 public abstract class ObjectModel extends Model {
 
     /**
-     * Position de l'objet en m.
+     * Position du centre de l'objet en m.
      */
     protected Vector2d position;
 

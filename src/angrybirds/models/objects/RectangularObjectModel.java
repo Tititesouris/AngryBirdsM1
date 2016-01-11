@@ -28,7 +28,7 @@ public abstract class RectangularObjectModel extends ObjectModel {
 
     @Override
     public boolean collidesWith(ObjectModel object) {
-        return false;
+        return false; //TODO: Implement
     }
 
     @Override
