@@ -1,10 +1,11 @@
 package angrybirds.exceptions;
 
 /**
- * TODO: Description
+ * Cette classe représente une exception générée par Angry Birds.
  *
- * @author Tititesouris
+ * @author Quentin Brault
+ * @since  2013/10/01
  */
-public class AngryBirdsException extends Exception {
+public abstract class AngryBirdsException extends Exception {
 
 }

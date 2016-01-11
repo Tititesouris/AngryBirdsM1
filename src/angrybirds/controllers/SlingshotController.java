@@ -13,12 +13,19 @@ import com.google.gson.JsonObject;
 import java.util.SortedMap;
 
 /**
- * TODO: Description
+ * Cette classe représente le controlleur pour le lance-oiseau.
  *
- * @author Tititesouris
+ * @author Quentin Brault
+ * @since  2013/10/01
  */
 public class SlingshotController extends Controller {
 
+    /**
+     * Créé un nouveau controlleur pour le lance-oiseau.
+     *
+     * @param slingshot Description du lance-oiseau.
+     * @param level     Modèle du niveau.
+     */
     public SlingshotController(JsonObject slingshot, LevelModel level) {
         JsonArray position = slingshot.get("position").getAsJsonArray();
         int range = slingshot.get("range").getAsInt();

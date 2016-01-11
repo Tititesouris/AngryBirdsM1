@@ -10,22 +10,25 @@ import angrybirds.views.objects.PigView;
 import com.google.gson.JsonArray;
 
 /**
- * TODO: Description
+ * Cette classe représente le controlleur pour les cochons.
  *
- * @author Tititesouris
+ * @author Quentin Brault
+ * @since  2013/10/01
  */
 public class PigController extends Controller {
 
+    /**
+     * Créé un nouveau controlleur pour cochon.
+     *
+     * @param pigs  Liste des descriptions de cochon.
+     * @param level Modèle du niveau.
+     */
     public PigController(JsonArray pigs, LevelModel level) {
         for (int i = 0; i < pigs.size(); i++) {
             JsonArray position = pigs.get(i).getAsJsonArray();
             PigModel model = new PigModel(
                     level,
-                    new Vector2d(position.get(0).getAsFloat(), position.get(1).getAsFloat()),
-                    Vector2d.ZERO,
-                    Vector2d.ZERO,
-                    0,
-                    0
+                    new Vector2d(position.get(0).getAsFloat(), position.get(1).getAsFloat())
             );
             PigView view = new PigView(model.getId(), model.getPosition(), model.getSize(), model.getRotation());
             addModelViewPair(new ModelViewPair<>(model, view));

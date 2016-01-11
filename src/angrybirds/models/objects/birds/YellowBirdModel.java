@@ -1,17 +1,19 @@
 package angrybirds.models.objects.birds;
 
 import angrybirds.models.LevelModel;
+import angrybirds.models.objects.ObjectModel;
 import angrybirds.utils.Vector2d;
 
 /**
- * TODO: Description
+ * Cette classe représente les données et actions d'un oiseau jaune.
  *
- * @author Tititesouris
+ * @author Quentin Brault
+ * @since  2013/10/01
  */
 public class YellowBirdModel extends BirdModel {
 
-    public YellowBirdModel(LevelModel level, Vector2d position, Vector2d velocity, Vector2d acceleration) {
-        super(level, position, velocity, acceleration, new Vector2d(30), 0.0005f);
+    public YellowBirdModel(LevelModel level, Vector2d position) {
+        super(level, position, new Vector2d(40), 0.01f);
     }
 
 }

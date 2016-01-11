@@ -17,23 +17,28 @@ import java.io.FileReader;
 import java.util.SortedMap;
 
 /**
- * TODO: Description
+ * Cette classe représente le controlleur pour le jeu.
  *
- * @author Tititesouris
+ * @author Quentin Brault
+ * @since  2013/10/01
  */
 public class GameController extends Controller {
 
-    private LevelController levelController;
-
-    public GameController() throws AngryBirdsException {
+    /**
+     * Créé un controlleur pour le jeu.
+     *
+     * @param src Path vers le fichier de description du jeu.
+     * @throws AngryBirdsException
+     */
+    public GameController(String src) throws AngryBirdsException {
         JsonParser parser = new JsonParser();
         try {
-            JsonElement json = parser.parse(new BufferedReader(new FileReader("res/game.json")));
+            JsonElement json = parser.parse(new BufferedReader(new FileReader(src)));
 
             JsonObject game = json.getAsJsonObject();
             JsonArray levels = game.get("levels").getAsJsonArray();
 
-            levelController = new LevelController(levels);
+            LevelController levelController = new LevelController(levels);
 
             GameModel model = new GameModel(levelController.getModels());
             GameView view = new GameView(model.getId(), levelController.getViews());

@@ -2,25 +2,45 @@ package angrybirds.models.objects.birds;
 
 import angrybirds.models.LevelModel;
 import angrybirds.models.SlingshotModel;
+import angrybirds.models.objects.CircularObjectModel;
 import angrybirds.models.objects.ObjectModel;
+import angrybirds.models.objects.RectangularObjectModel;
 import angrybirds.notifications.updates.actions.BirdUpdateAction;
 import angrybirds.utils.Vector2d;
 
 /**
- * TODO: Description
+ * Cette classe représente les données et actions d'un oiseau.
  *
- * @author Tititesouris
+ * @author Quentin Brault
+ * @since  2013/10/01
  */
-public abstract class BirdModel extends ObjectModel {
+public abstract class BirdModel extends CircularObjectModel {
 
+    /**
+     * Modèle du niveau.
+     */
     private LevelModel level;
 
+    /**
+     * FIXME: facon temporaire de mourrir
+     */
     private long dies;
 
+    /**
+     * FIXME: facon temporaire de mourrir
+     */
     private boolean dying;
 
-    public BirdModel(LevelModel level, Vector2d position, Vector2d velocity, Vector2d acceleration, Vector2d size, float density) {
-        super(position, velocity, acceleration, size, density, 0, 0, false);
+    /**
+     * Créé un nouvel oiseau.
+     *
+     * @param level    Modèle du niveau.
+     * @param position Position de l'objet en m.
+     * @param size     Taille de l'objet en m.
+     * @param density  Densité (ou masse surfacique) de l'objet en kg/m^2.
+     */
+    public BirdModel(LevelModel level, Vector2d position, Vector2d size, float density) {
+        super(position, Vector2d.ZERO, Vector2d.ZERO, size, density, 0, 0, false);
         this.level = level;
     }
 
@@ -34,14 +54,24 @@ public abstract class BirdModel extends ObjectModel {
         }
     }
 
+    /**
+     * Cette méthode lance l'oiseau à la vélocité spécifiée et notifie les observateurs.
+     *
+     * @param velocity Vélocité initiale de l'oiseau.
+     */
     public void launch(Vector2d velocity) {
         setGravity(true);
         setVelocity(velocity);
         dying = true;
-        dies = System.currentTimeMillis() + 1000;
+        dies = System.currentTimeMillis() + 5000;
         notifyObservers(new BirdUpdateAction.Launch());
     }
 
+    /**
+     * Cette méthode prépare l'oiseau pour être lancé.
+     *
+     * @param holderPosition Position du holder du lance-oiseau.
+     */
     public void ready(Vector2d holderPosition) {
         setPosition(holderPosition);
     }

@@ -18,12 +18,20 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
 /**
- * TODO: Description
+ * Cette classe représente le controlleur pour les obstacles.
  *
- * @author Tititesouris
+ * @author Quentin Brault
+ * @since  2013/10/01
  */
 public class ObstacleController extends Controller {
 
+    /**
+     * Créé un nouveau controlleur pour obstacles.
+     *
+     * @param obstacles Liste des descriptions d'obstacle.
+     * @param level     Modèle du niveau.
+     * @throws AngryBirdsException
+     */
     public ObstacleController(JsonArray obstacles, LevelModel level) throws AngryBirdsException {
         for (JsonElement element : obstacles) {
             JsonObject obstacle = element.getAsJsonObject();
@@ -40,9 +48,8 @@ public class ObstacleController extends Controller {
             ObstacleModel model = new ObstacleModel(
                     level,
                     new Vector2d(position.get(0).getAsFloat(), position.get(1).getAsFloat()),
-                    Vector2d.ZERO, Vector2d.ZERO,
                     obstacleSize, obstacleMaterial,
-                    0, 0);
+                    0);
             ObstacleView view = new ObstacleView(model.getId(), model.getPosition(), model.getSize(), model.getRotation(), ObstacleMaterialView.valueOf(model.getMaterial().name()));
             addModelViewPair(new ModelViewPair<>(model, view));
         }
