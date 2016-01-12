@@ -16,4 +16,9 @@ public class RedBirdModel extends BirdModel {
         super(level, position, new Vector2d(30), 0.03f);
     }
 
+    @Override
+    public void useAbility() {
+        // Rouge ne fait rien
+    }
+
 }

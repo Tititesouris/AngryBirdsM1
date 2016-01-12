@@ -84,4 +84,10 @@ public abstract class BirdModel extends CircularObjectModel {
         notifyObservers(new BirdUpdateAction.Ready());
     }
 
+    /**
+     * Cette méthode abstraite doit être implémentée
+     * par tous les oiseaux afin de réaliser leur abilité.
+     */
+    public abstract void useAbility();
+
 }
