@@ -1,11 +1,13 @@
 package angrybirds.views.objects.birds;
 
+import angrybirds.notifications.inputs.actions.BirdInputAction;
 import angrybirds.notifications.updates.actions.ObjectUpdateAction;
 import angrybirds.utils.Constants;
 import angrybirds.utils.Vector2d;
 import angrybirds.notifications.updates.actions.BirdUpdateAction;
 import angrybirds.notifications.updates.actions.UpdateAction;
 import angrybirds.views.objects.ObjectView;
+
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
@@ -32,6 +34,9 @@ public abstract class BirdView extends ObjectView {
 
     private List<Vector2d> trail;
 
+    //Une variable flying qui permet de savoir si l'oiseau vole
+    protected boolean flying;
+    
     public BirdView(int id, Vector2d position, Vector2d size, float rotation) {
         super(id, position, size, rotation);
         this.trail = new ArrayList<>();
@@ -39,6 +44,13 @@ public abstract class BirdView extends ObjectView {
 
     @Override
     public void input(Input input) {
+    	//Completé par Max
+    	//Si l'oiseau vole est qu'on appuie sur la touche espace
+    	if(flying && input.isKeyDown(Input.KEY_SPACE)){
+    		//On notifie l'observer avec un UseAbility
+    		notifyObservers(new BirdInputAction.UseAbility(id));
+    	}
+    	
         // Si l'oiseau vol et on appuis sur espace, notifie observers avec un useAbility;
         // il faut donc un champ dans la vue pour savoir si l'oiseau vole
         // Aussi implémenter une méthode useAbility() dans cette vue qui est appelée par le onUpdate de cette vue lorsqu'on recoit un BirdUpdateAction.UseAbility()
@@ -58,6 +70,10 @@ public abstract class BirdView extends ObjectView {
         }
         else if (updateAction instanceof BirdUpdateAction.Ready) {
             ready();
+        }
+        //Modifié par Max
+        else if (updateAction instanceof BirdUpdateAction.UseAbility){
+        	System.out.println("ABILITY TRIGGERED");
         }
     }
 
