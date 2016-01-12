@@ -119,4 +119,8 @@ public class SlingshotView extends View {
         holderPosition = Vector2d.ZERO;
     }
 
+    public Vector2d getHolderPositionOffset() {
+        return holderPositionOffset;
+    }
+
 }

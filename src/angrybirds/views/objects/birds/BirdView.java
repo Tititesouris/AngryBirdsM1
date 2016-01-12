@@ -26,7 +26,7 @@ import java.util.List;
  */
 public abstract class BirdView extends ObjectView {
 
-    private Vector2d holderPositionOffset = new Vector2d(0, -50);
+    private Vector2d holderPositionOffset;
 
     private boolean onSlingshot;
 
@@ -34,7 +34,6 @@ public abstract class BirdView extends ObjectView {
 
     private List<Vector2d> trail;
 
-    //Une variable flying qui permet de savoir si l'oiseau vole
     protected boolean flying;
     
     public BirdView(int id, Vector2d position, Vector2d size, float rotation) {
@@ -44,41 +43,41 @@ public abstract class BirdView extends ObjectView {
 
     @Override
     public void input(Input input) {
-    	//Completé par Max
-    	//Si l'oiseau vole est qu'on appuie sur la touche espace
-    	if(flying && input.isKeyDown(Input.KEY_SPACE)){
-    		//On notifie l'observer avec un UseAbility
+        if (flying && input.isKeyDown(Input.KEY_SPACE)) {
     		notifyObservers(new BirdInputAction.UseAbility(id));
     	}
-    	
-        // Si l'oiseau vol et on appuis sur espace, notifie observers avec un useAbility;
-        // il faut donc un champ dans la vue pour savoir si l'oiseau vole
-        // Aussi implémenter une méthode useAbility() dans cette vue qui est appelée par le onUpdate de cette vue lorsqu'on recoit un BirdUpdateAction.UseAbility()
-        // Dans cette méthode faire quelquechose pour que l'on remarque visuellement que l'oiseau a utilisé son abilité.
     }
 
     @Override
     public void onUpdate(UpdateAction updateAction) {
         super.onUpdate(updateAction);
-        if (updateAction instanceof BirdUpdateAction.Launch) {
-            System.out.println("BIRD LAUNCHED");
-            // jouer un son
-            // animation
-        } else if (updateAction instanceof BirdUpdateAction.Die) {
-            System.out.println("BIRD DIED");
-            // animation de mort
-        }
-        else if (updateAction instanceof BirdUpdateAction.Ready) {
+        if (updateAction instanceof BirdUpdateAction.Ready) {
             ready();
-        }
-        //Modifié par Max
-        else if (updateAction instanceof BirdUpdateAction.UseAbility){
-        	System.out.println("ABILITY TRIGGERED");
+        } else if (updateAction instanceof BirdUpdateAction.Launch) {
+            launch();
+        } else if (updateAction instanceof BirdUpdateAction.UseAbility) {
+            useAbility();
+        } else if (updateAction instanceof BirdUpdateAction.Die) {
+            die();
         }
     }
 
     private void ready() {
         onSlingshot = true;
+    }
+
+    private void launch() {
+        System.out.println("BIRD LAUNCHED");
+        flying = true;
+        onSlingshot = false;
+    }
+
+    private void useAbility() {
+        System.out.println("ABILITY TRIGGERED");
+    }
+
+    private void die() {
+        System.out.println("BIRD DIED");
     }
 
     @Override
@@ -102,6 +101,10 @@ public abstract class BirdView extends ObjectView {
             graphics.setColor(Color.black);
             graphics.fill(beak);
         }
+    }
+
+    public void setHolderPositionOffset(Vector2d holderPositionOffset) {
+        this.holderPositionOffset = holderPositionOffset;
     }
 
 }

@@ -46,6 +46,8 @@ public class LevelView extends View {
         this.birds = birds;
         this.obstacles = obstacles;
         this.pigs = pigs;
+        for (BirdView bird : birds.values())
+            bird.setHolderPositionOffset(slingshot.getHolderPositionOffset());
     }
 
     @Override
@@ -72,8 +74,11 @@ public class LevelView extends View {
             if (input.isKeyDown(Input.KEY_SPACE))
                 notifyObservers(new LevelInputAction.Ready(id));
         }
-        else
+        else {
             slingshot.input(input);
+            for (BirdView bird : birds.values())
+                bird.input(input);
+        }
     }
 
     @Override

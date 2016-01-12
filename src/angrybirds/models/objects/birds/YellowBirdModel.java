@@ -19,9 +19,11 @@ public class YellowBirdModel extends BirdModel {
 
     @Override
     public void useAbility() {
-        accelerate(Vector2d.X.product(5));
-        usedAbility = true;
-        notifyObservers(new BirdUpdateAction.UseAbility());
+        if (!usedAbility) {
+            accelerate(Vector2d.X.product(5));
+            usedAbility = true;
+            notifyObservers(new BirdUpdateAction.UseAbility());
+        }
     }
 
 }

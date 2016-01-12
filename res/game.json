@@ -2,7 +2,7 @@
   "levels": [
     {
       "name": "Level 1",
-      "ground": 50,
+      "ground": 100,
       "slingshot": {
         "position": [
           150,
