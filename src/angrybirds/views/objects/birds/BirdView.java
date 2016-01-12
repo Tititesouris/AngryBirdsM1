@@ -39,7 +39,10 @@ public abstract class BirdView extends ObjectView {
 
     @Override
     public void input(Input input) {
-
+        // Si l'oiseau vol et on appuis sur espace, notifie observers avec un useAbility;
+        // il faut donc un champ dans la vue pour savoir si l'oiseau vole
+        // Aussi implémenter une méthode useAbility() dans cette vue qui est appelée par le onUpdate de cette vue lorsqu'on recoit un BirdUpdateAction.UseAbility()
+        // Dans cette méthode faire quelquechose pour que l'on remarque visuellement que l'oiseau a utilisé son abilité.
     }
 
     @Override

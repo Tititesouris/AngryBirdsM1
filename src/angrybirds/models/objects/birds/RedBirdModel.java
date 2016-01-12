@@ -19,6 +19,7 @@ public class RedBirdModel extends BirdModel {
     @Override
     public void useAbility() {
         // Rouge ne fait rien
+        usedAbility = true;
     }
 
 }

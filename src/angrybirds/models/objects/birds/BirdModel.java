@@ -19,7 +19,12 @@ public abstract class BirdModel extends CircularObjectModel {
     /**
      * True si l'oiseau est en vol, false sinon.
      */
-    private boolean flying;
+    protected boolean flying;
+
+    /**
+     * True si l'oiseau à utilisé son pouvoir
+     */
+    protected boolean usedAbility;
 
     /**
      * FIXME: facon temporaire de mourrir
