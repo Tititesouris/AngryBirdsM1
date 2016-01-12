@@ -75,8 +75,8 @@ public abstract class BirdView extends ObjectView {
                 bird = new Ellipse(position.x, position.y, size.x / 2, size.y / 2);
                 beak = new Ellipse(position.x, position.y, 10, 5);
             }
-            bird = getRotated(bird, rotation, 0, 0);
-            beak = getRotated(beak, rotation, 0, 0);
+            bird = getRotated(bird, -rotation, 0, 0);
+            beak = getRotated(beak, -rotation, 0, 0);
 
             graphics.setColor(color);
             graphics.fill(bird);
