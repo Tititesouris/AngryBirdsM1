@@ -19,10 +19,8 @@ public class Main {
         try {
             GameController gameController = new GameController("res/game.json");
             View.setupSlick2d(gameController);
-            View.app.start();
+            View.start();
         } catch (AngryBirdsException e) {
-            e.printStackTrace();
-        } catch (SlickException e) {
             e.printStackTrace();
         }
 

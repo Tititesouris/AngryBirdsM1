@@ -22,6 +22,11 @@ public interface Constants {
     int MIN_ENGINE_DELAY = 10;
 
     /**
+     * Nombre d'images par secondes maximum du jeu.
+     */
+    int FPS = 60;
+
+    /**
      * La largeur de la fenêtre de jeu.
      */
     int WINDOW_WIDTH = 1080;
