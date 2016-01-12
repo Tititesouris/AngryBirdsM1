@@ -18,7 +18,7 @@ public class PigModel extends CircularObjectModel {
      * @param position Position du centre de l'objet en m.
      */
     public PigModel(LevelModel level, Vector2d position) {
-        super(level, position, Vector2d.ZERO, Vector2d.ZERO, new Vector2d(50), 2, 0, 0, true);
+        super(level, position, Vector2d.ZERO, Vector2d.ZERO, new Vector2d(50), 0.01f, 0, 0, true);
     }
 
 }

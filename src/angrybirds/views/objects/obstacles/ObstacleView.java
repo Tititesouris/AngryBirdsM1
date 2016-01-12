@@ -45,7 +45,7 @@ public class ObstacleView extends ObjectView {
 
     @Override
     public void onUpdate(UpdateAction updateAction) {
-
+        super.onUpdate(updateAction);
     }
 
 }

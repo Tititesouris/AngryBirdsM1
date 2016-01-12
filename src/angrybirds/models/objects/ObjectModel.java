@@ -88,9 +88,9 @@ public abstract class ObjectModel extends Model {
     @Override
     public void update(int delta) {
         if (gravity)
-            accelerate(acceleration.sum(Constants.GRAVITY.product(getMass())).product(delta));
+            accelerate(acceleration.sum(Constants.FRICTION.product(velocity)).sum(Constants.GRAVITY.product(getMass())).product(delta));
         else
-            accelerate(acceleration.product(delta));
+            accelerate(acceleration.sum(Constants.FRICTION.product(velocity)).product(delta));
         move(velocity.product(delta));
         rotate(angularSpeed * delta);
     }
