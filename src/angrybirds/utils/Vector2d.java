@@ -136,6 +136,15 @@ public class Vector2d {
         return new Vector2d(x / hypotenuse(), y / hypotenuse());
     }
 
+    /**
+     * Retourne l'angle en rad du vecteur dans le cercle trigonométrique.
+     *
+     * @return Angle en rad du vecteur dans le cercle trigonométrique.
+     */
+    public float angle() {
+        return (float) Math.atan2(-y, x);
+    }
+
     @Override
     public boolean equals(Object o) {
         return o instanceof Vector2d && ((Vector2d) o).x == x && ((Vector2d) o).y == y;

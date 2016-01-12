@@ -163,6 +163,15 @@ public abstract class ObjectModel extends Model {
     public abstract float getSurface();
 
     /**
+     * Calcule et retourne la tangente au mouvement de l'objet.
+     *
+     * @return  Tangente du mouvement de l'objet.
+     */
+    public Vector2d getTangent() {
+        return position.sum(velocity).difference(position);
+    }
+
+    /**
      * TODO
      * @return
      */

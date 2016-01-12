@@ -17,6 +17,11 @@ import angrybirds.utils.Vector2d;
 public abstract class BirdModel extends CircularObjectModel {
 
     /**
+     * True si l'oiseau est en vol, false sinon.
+     */
+    private boolean flying;
+
+    /**
      * FIXME: facon temporaire de mourrir
      */
     private long dies;
@@ -41,6 +46,8 @@ public abstract class BirdModel extends CircularObjectModel {
     @Override
     public void update(int delta) {
         super.update(delta);
+        if (flying)
+            setRotation(getTangent().angle());
         if (dying && dies < System.currentTimeMillis()) {
             dying = false;
             level.birdDied(this);
@@ -56,6 +63,7 @@ public abstract class BirdModel extends CircularObjectModel {
     public void launch(Vector2d velocity) {
         setGravity(true);
         setVelocity(velocity);
+        flying = true;
         dying = true;
         dies = System.currentTimeMillis() + 5000;
         notifyObservers(new BirdUpdateAction.Launch());
