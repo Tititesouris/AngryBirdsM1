@@ -43,7 +43,6 @@ public abstract class SlingshotInputAction implements InputAction {
     /**
      * Cette classe interne définie l'action d'input de relâchement du lance-oiseau.
      */
-    public static class Release extends SlingshotInputAction {
-    }
+    public static class Release extends SlingshotInputAction {}
 
 }
