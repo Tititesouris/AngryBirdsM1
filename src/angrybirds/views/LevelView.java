@@ -46,8 +46,6 @@ public class LevelView extends View {
         this.birds = birds;
         this.obstacles = obstacles;
         this.pigs = pigs;
-        for (BirdView bird : birds.values())
-            bird.setHolderPositionOffset(slingshot.getHolderPositionOffset());
     }
 
     @Override

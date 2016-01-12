@@ -26,10 +26,6 @@ import java.util.List;
  */
 public abstract class BirdView extends ObjectView {
 
-    private Vector2d holderPositionOffset;
-
-    private boolean onSlingshot;
-
     protected Color color;
 
     private List<Vector2d> trail;
@@ -63,13 +59,11 @@ public abstract class BirdView extends ObjectView {
     }
 
     private void ready() {
-        onSlingshot = true;
     }
 
     private void launch() {
         System.out.println("BIRD LAUNCHED");
         flying = true;
-        onSlingshot = false;
     }
 
     private void useAbility() {
@@ -83,16 +77,9 @@ public abstract class BirdView extends ObjectView {
     @Override
     public void display(Graphics graphics) {
         if (Constants.DEBUG) {
-            Shape bird;
-            Shape beak;
-            if (onSlingshot) {
-                bird = new Ellipse(position.x + holderPositionOffset.x, position.y + holderPositionOffset.y, size.x / 2, size.y / 2);
-                beak = new Ellipse(position.x + holderPositionOffset.x, position.y + holderPositionOffset.y, 10, 5);
-            }
-            else {
-                bird = new Ellipse(position.x, position.y, size.x / 2, size.y / 2);
-                beak = new Ellipse(position.x, position.y, 10, 5);
-            }
+            Shape bird = new Ellipse(position.x, position.y, size.x / 2, size.y / 2);
+            Shape beak = new Ellipse(position.x, position.y, 10, 5);
+
             bird = getRotated(bird, -rotation, 0, 0);
             beak = getRotated(beak, -rotation, 0, 0);
 
@@ -101,10 +88,6 @@ public abstract class BirdView extends ObjectView {
             graphics.setColor(Color.black);
             graphics.fill(beak);
         }
-    }
-
-    public void setHolderPositionOffset(Vector2d holderPositionOffset) {
-        this.holderPositionOffset = holderPositionOffset;
     }
 
 }

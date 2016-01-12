@@ -26,16 +26,17 @@ public class SlingshotView extends View {
 
     private Vector2d holderPosition;
 
-    private Vector2d holderPositionOffset = new Vector2d(0, -50);
+    private Vector2d defaultHolderPosition;
 
     private Vector2d holderSize = new Vector2d(50, 20);
 
     private boolean pulling;
 
-    public SlingshotView(int id, Vector2d position, Vector2d size, Vector2d holderPosition) {
+    public SlingshotView(int id, Vector2d position, Vector2d size, Vector2d defaultHolderPosition, Vector2d holderPosition) {
         super(id);
         this.position = position;
         this.size = size;
+        this.defaultHolderPosition = defaultHolderPosition;
         this.holderPosition = holderPosition;
     }
 
@@ -48,8 +49,8 @@ public class SlingshotView extends View {
     public void input(Input input) {
         if (input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
             Vector2d mousePosition = new Vector2d(input.getMouseX(), input.getMouseY());
-            if (pulling || mousePosition.difference(position.sum(holderPosition.sum(holderPositionOffset))).hypotenuse() <= 50) {
-                notifyObservers(new SlingshotInputAction.Pull(mousePosition.difference(position.sum(holderPositionOffset))));
+            if (pulling || mousePosition.difference(position.sum(holderPosition.sum(defaultHolderPosition))).hypotenuse() <= 50) {
+                notifyObservers(new SlingshotInputAction.Pull(mousePosition.difference(position.sum(defaultHolderPosition))));
             }
         }
         else if (pulling) {
@@ -83,22 +84,22 @@ public class SlingshotView extends View {
 
             });
             Shape holder = new Rectangle(
-                    position.x + holderPosition.x + holderPositionOffset.x - holderSize.x / 2,
-                    position.y + holderPosition.y + holderPositionOffset.y - holderSize.y / 2,
+                    position.x + defaultHolderPosition.x + holderPosition.x - holderSize.x / 2,
+                    position.y + defaultHolderPosition.y + holderPosition.y - holderSize.y / 2,
                     holderSize.x,
                     holderSize.y
             );
             Shape elastic1 = new Line(
-                    position.x + holderPositionOffset.x - holderSize.x / 2,
-                    position.y + holderPositionOffset.y - holderSize.y / 2,
-                    position.x + holderPosition.x + holderPositionOffset.x - holderSize.x / 2,
-                    position.y + holderPosition.y + holderPositionOffset.y
+                    position.x + defaultHolderPosition.x - holderSize.x / 2,
+                    position.y + defaultHolderPosition.y - holderSize.y / 2,
+                    position.x + defaultHolderPosition.x + holderPosition.x - holderSize.x / 2,
+                    position.y + defaultHolderPosition.y + holderPosition.y
             );
             Shape elastic2 = new Line(
-                    position.x + holderPositionOffset.x + holderSize.x / 2,
-                    position.y + holderPositionOffset.y - holderSize.y / 2,
-                    position.x + holderPosition.x + holderPositionOffset.x + holderSize.x / 2,
-                    position.y + holderPosition.y + holderPositionOffset.y
+                    position.x + defaultHolderPosition.x + holderSize.x / 2,
+                    position.y + defaultHolderPosition.y - holderSize.y / 2,
+                    position.x + defaultHolderPosition.x + holderPosition.x + holderSize.x / 2,
+                    position.y + defaultHolderPosition.y + holderPosition.y
             );
 
             graphics.draw(slingshot);
@@ -117,10 +118,6 @@ public class SlingshotView extends View {
     private void release() {
         pulling = false;
         holderPosition = Vector2d.ZERO;
-    }
-
-    public Vector2d getHolderPositionOffset() {
-        return holderPositionOffset;
     }
 
 }

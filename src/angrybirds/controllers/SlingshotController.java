@@ -34,7 +34,7 @@ public class SlingshotController extends Controller {
                 new Vector2d(position.get(0).getAsFloat(), position.get(1).getAsFloat()),
                 range
         );
-        SlingshotView view = new SlingshotView(model.getId(), model.getPosition(), model.getSize(), model.getHolderPosition());
+        SlingshotView view = new SlingshotView(model.getId(), model.getPosition(), model.getSize(), model.getDefaultHolderPosition(), model.getHolderPosition());
         addModelViewPair(new ModelViewPair<>(model, view));
 
     }

@@ -28,11 +28,19 @@ public abstract class ObjectView extends View {
     @Override
     public void onUpdate(UpdateAction updateAction) {
         if (updateAction instanceof ObjectUpdateAction.MoveTo) {
-            position = ((ObjectUpdateAction.MoveTo) updateAction).getPosition();
+            moveTo(((ObjectUpdateAction.MoveTo) updateAction).getPosition());
         }
         else if (updateAction instanceof ObjectUpdateAction.RotateTo) {
-            rotation = ((ObjectUpdateAction.RotateTo) updateAction).getRotation();
+            rotateTo(((ObjectUpdateAction.RotateTo) updateAction).getRotation());
         }
+    }
+
+    protected void moveTo(Vector2d position) {
+        this.position = position;
+    }
+
+    protected void rotateTo(float rotation) {
+        this.rotation = rotation;
     }
 
 }
