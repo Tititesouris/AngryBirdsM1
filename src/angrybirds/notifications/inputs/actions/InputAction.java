@@ -1,10 +1,10 @@
 package angrybirds.notifications.inputs.actions;
 
 /**
- * TODO: Description
+ * Cette interface représente une action d'input envoyée par un InputObservable à un InputObserver.
  *
- * @author Tititesouris
+ * @author Quentin Brault
+ * @since 2016/01/10
  */
 public interface InputAction {
-
 }

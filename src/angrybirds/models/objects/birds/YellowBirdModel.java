@@ -20,7 +20,7 @@ public class YellowBirdModel extends BirdModel {
     @Override
     public void useAbility() {
         if (!usedAbility) {
-            accelerate(Vector2d.X.product(5));
+            accelerate(velocity);
             usedAbility = true;
             notifyObservers(new BirdUpdateAction.UseAbility());
         }

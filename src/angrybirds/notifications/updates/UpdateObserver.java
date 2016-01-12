@@ -3,12 +3,19 @@ package angrybirds.notifications.updates;
 import angrybirds.notifications.updates.actions.UpdateAction;
 
 /**
- * TODO: Description
+ * Toute classe implémentant cette interface recevra un appel de sa fonction lorsqu'une classe observée enverra une notification.
+ * La vue observe le modèle via cette classe.
  *
- * @author Tititesouris
+ * @author Quentin Brault
+ * @since 2016/01/10
  */
 public interface UpdateObserver {
 
+    /**
+     * Cette méthode est appellée lorsqu'un UpdateObservable observé envoit une notification.
+     *
+     * @param inputAction Instance d'UpdateAction envoyée par l'observé.
+     */
     void onUpdate(UpdateAction updateAction);
 
 }

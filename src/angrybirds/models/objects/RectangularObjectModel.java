@@ -6,7 +6,7 @@ import angrybirds.utils.Vector2d;
 /**
  * TODO: Description
  *
- * @author Tititesouris
+ * @author Quentin Brault
  * @since 2016/01/10
  */
 public abstract class RectangularObjectModel extends ObjectModel {
