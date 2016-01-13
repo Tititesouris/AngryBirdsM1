@@ -9,13 +9,21 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 
 /**
- * TODO: Description
+ * Cette classe représente une vue d'objet.
  *
- * @author Tititesouris
+ * @author Quentin Brault
+ * @since  2013/10/01
  */
 public class PigView extends ObjectView {
 
-	
+    /**
+     * Créé une vue de cochon.
+     *
+     * @param id       Identifiant unique du modèle de cochon.
+     * @param position Position du cochon.
+     * @param size     Taille du cochon.
+     * @param rotation Rotation du cochon.
+     */
     public PigView(int id, Vector2d position, Vector2d size, float rotation) {
         super(id, position, size, rotation);
     }

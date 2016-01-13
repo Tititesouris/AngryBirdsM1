@@ -118,7 +118,6 @@ public class LevelModel extends Model {
             if (bird.isFlying()) {
                 for (ObstacleModel obstacle : obstacles.values()) {
                     if (bird.collidesWith(obstacle)) {
-                        System.out.println("HIT");
                         bird.hit(obstacle);
                         obstacle.hit(bird);
                     }

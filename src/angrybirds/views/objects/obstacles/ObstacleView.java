@@ -10,12 +10,16 @@ import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
 
 /**
- * TODO: Description
+ * Cette classe représente une vue d'obstacle.
  *
- * @author Tititesouris
+ * @author Quentin Brault
+ * @since  2013/10/01
  */
 public class ObstacleView extends ObjectView {
 
+    /**
+     * Informations graphiques du matériau de l'objet.
+     */
     private ObstacleMaterialView material;
 
     public ObstacleView(int id, Vector2d position, Vector2d size, float rotation, ObstacleMaterialView material) {

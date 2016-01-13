@@ -17,28 +17,63 @@ import org.newdawn.slick.SlickException;
 import java.util.SortedMap;
 
 /**
- * TODO: Description
+ * Cette classe représente une vue de niveau.
  *
- * @author Tititesouris
+ * @author Quentin Brault
+ * @since  2013/10/01
  */
 public class LevelView extends View {
 
+    /**
+     * Nom du niveau.
+     */
     private String name;
 
+    /**
+     * Vue du lance-oiseau du niveau.
+     */
     private SlingshotView slingshot;
 
+    /**
+     * Vues des oiseaux du niveau.
+     */
     private SortedMap<Integer, BirdView> birds;
 
+    /**
+     * Vues des obstacles du niveau.
+     */
     private SortedMap<Integer, ObstacleView> obstacles;
 
+    /**
+     * Vues des cochons du niveau.
+     */
     private SortedMap<Integer, PigView> pigs;
 
+    /**
+     * Image du fond du niveau.
+     */
     private Image background;
 
+    /**
+     * True si un oiseau vient de mourir, false sinon.
+     */
     private boolean birdDied;
 
-    private boolean gameEnded;
+    /**
+     * True si le niveau est terminé, false sinon.
+     */
+    private boolean levelEnded;
 
+    /**
+     * Créé une vue de niveau.
+     *
+     * @param id        Identifiant unique du modèle du niveau.
+     * @param name      Nom du niveau.
+     * @param slingshot Vue du lance-oiseau du niveau.
+     * @param birds     Vues des oiseaux du niveau.
+     * @param obstacles Vues des obstacles du niveau.
+     * @param pigs      Vues des cochons du niveau.
+     */
     public LevelView(int id, String name, SlingshotView slingshot, SortedMap<Integer, BirdView> birds, SortedMap<Integer, ObstacleView> obstacles, SortedMap<Integer, PigView> pigs) {
         super(id);
         this.name = name;
@@ -93,7 +128,7 @@ public class LevelView extends View {
         for (PigView pig : pigs.values())
             pig.display(graphics);
 
-        if (gameEnded) {
+        if (levelEnded) {
             graphics.drawString("LEVEL IS OVER", 250, 250);
         }
     }
@@ -111,18 +146,29 @@ public class LevelView extends View {
         }
     }
 
+    /**
+     * Cette méthode doit être appellée quand le modèle prévient qu'un oiseau vient de mourir.
+     *
+     * @param birdId Identifiant unique du modèle de l'oiseau qui est mort.
+     */
     private void birdDied(int birdId) {
         birds.remove(birdId);
         birdDied = true;
     }
 
+    /**
+     * Cette méthode doit être appellée quand le modèle prévient que le niveau est prêt.
+     */
     private void ready() {
         birdDied = false;
         System.out.println("READY");
     }
 
+    /**
+     * Cette méthode doit être appellée quand le modèle prévient que le niveau est terminé.
+     */
     private void end() {
-        gameEnded = true;
+        levelEnded = true;
     }
 
 }

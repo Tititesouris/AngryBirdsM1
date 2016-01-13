@@ -13,7 +13,6 @@ import org.newdawn.slick.geom.Transform;
  * Cette classe représente une vue.
  * Une vue possède un identifiant qui correspond à l'identifiant unique du modèle auquel elle correspond.
  * Cela permet d'échanger des informations à propos d'un modèle précis via les InputAction.
- * La méthode
  *
  * @author Quentin Brault
  * @since  2013/10/01

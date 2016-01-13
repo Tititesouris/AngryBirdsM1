@@ -14,24 +14,52 @@ import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
 
 /**
- * TODO: Description
+ * Cette classe représente une vue de lance-oiseau.
  *
  * @author Quentin Brault
+ * @since  2013/10/01
  */
 public class SlingshotView extends View {
 
+    /**
+     * Position du centre du lance-oiseau.
+     */
     private Vector2d position;
 
+    /**
+     * Taille du lance-oiseau.
+     */
     private Vector2d size;
 
-    private Vector2d holderPosition;
-
+    /**
+     * Position du holder du lance-oiseau par rapport à la position du centre du lance-oiseau.
+     */
     private Vector2d defaultHolderPosition;
 
+    /**
+     * Position du holder du lance-oiseau par rapport à sa position par défaut.
+     */
+    private Vector2d holderPosition;
+
+    /**
+     * Taille du holder du lance-oiseau.
+     */
     private Vector2d holderSize = new Vector2d(50, 20);
 
+    /**
+     * True si l'utilisateur est en train de tirer sur le lance-oiseau, false sinon.
+     */
     private boolean pulling;
 
+    /**
+     * Créé une vue de slingshot.
+     *
+     * @param id                    Identifiant unique du modèle de lance-oiseau.
+     * @param position              Position du centre du lance-oiseau.
+     * @param size                  Taille du lance-oiseau.
+     * @param defaultHolderPosition Position du holder du lance-oiseau par rapport au centre du lance-oiseau.
+     * @param holderPosition        Position du holder du lance-oiseau par rapport à sa position par défaut.
+     */
     public SlingshotView(int id, Vector2d position, Vector2d size, Vector2d defaultHolderPosition, Vector2d holderPosition) {
         super(id);
         this.position = position;
@@ -110,11 +138,19 @@ public class SlingshotView extends View {
         }
     }
 
+    /**
+     * Cette méthode doit être appellée quand le modèle prévient que le lance-oiseau a été étiré.
+     *
+     * @param holderPosition Nouvelle position du holder du lance-oiseau.
+     */
     private void pull(Vector2d holderPosition) {
         pulling = true;
         this.holderPosition = holderPosition;
     }
 
+    /**
+     * Cette méthode doit être appellée quand le modèle prévient que le lance-oiseau a été relaché.
+     */
     private void release() {
         pulling = false;
         holderPosition = Vector2d.ZERO;

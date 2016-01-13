@@ -1,20 +1,26 @@
 package angrybirds.views.objects.birds;
 
-import angrybirds.utils.Constants;
 import angrybirds.utils.Vector2d;
-import angrybirds.views.LevelView;
-import angrybirds.views.objects.birds.BirdView;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 
 /**
- * TODO: Description
+ * Cette classe représente une vue d'oiseau rouge.
  *
- * @author Tititesouris
+ * @author Quentin Brault
+ * @since  2013/10/01
  */
 public class RedBirdView extends BirdView {
 
+    /**
+     * Créé une vue d'oiseau rouge.
+     *
+     * @param id       Identifiant unique du modèle d'oiseau.
+     * @param position Position de l'oiseau.
+     * @param size     Taille de l'oiseau.
+     * @param rotation Angle de rotation de l'oiseau.
+     */
     public RedBirdView(int id, Vector2d position, Vector2d size, float rotation) {
         super(id, position, size, rotation);
     }

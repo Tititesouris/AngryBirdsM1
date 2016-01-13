@@ -10,12 +10,21 @@ import org.newdawn.slick.geom.Polygon;
 import org.newdawn.slick.geom.Triangulator;
 
 /**
- * TODO: Description
+ * Cette classe représente une vue d'oiseau jaune.
  *
- * @author Tititesouris
+ * @author Quentin Brault
+ * @since  2013/10/01
  */
 public class YellowBirdView extends BirdView {
 
+    /**
+     * Créé une vue d'oiseau jaune.
+     *
+     * @param id       Identifiant unique du modèle d'oiseau.
+     * @param position Position de l'oiseau.
+     * @param size     Taille de l'oiseau.
+     * @param rotation Angle de rotation de l'oiseau.
+     */
     public YellowBirdView(int id, Vector2d position, Vector2d size, float rotation) {
         super(id, position, size, rotation);
     }
