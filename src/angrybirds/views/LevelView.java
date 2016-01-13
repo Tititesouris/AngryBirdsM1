@@ -82,6 +82,7 @@ public class LevelView extends View {
     @Override
     public void display(Graphics graphics) {
         graphics.drawImage(background, 0, 0);
+        graphics.setColor(Color.black);
         graphics.drawString(name, Constants.WINDOW_WIDTH - graphics.getFont().getWidth(name) - 10, 10);
         
         slingshot.display(graphics);

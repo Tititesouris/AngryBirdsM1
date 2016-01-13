@@ -2,6 +2,8 @@ package angrybirds.models.objects;
 
 import angrybirds.models.LevelModel;
 import angrybirds.models.Model;
+import angrybirds.models.objects.birds.BirdModel;
+import angrybirds.models.objects.birds.RedBirdModel;
 import angrybirds.notifications.updates.actions.ObjectUpdateAction;
 import angrybirds.utils.Constants;
 import angrybirds.utils.Vector2d;
@@ -110,10 +112,13 @@ public abstract class ObjectModel extends Model {
     /**
      * Regarde si l'objet rentre dans le sol et ajuste sa position si c'est le cas.
      */
-    private void checkGround() {
+    private boolean checkGround() {
         float ground = Constants.WINDOW_HEIGHT - level.getGround() - size.y / 2;
-        if (position.y - ground > 0)
+        if (position.y - ground > 0) {
             setPosition(new Vector2d(position.x, ground));
+            return true;
+        }
+        return false;
     }
 
     /**
