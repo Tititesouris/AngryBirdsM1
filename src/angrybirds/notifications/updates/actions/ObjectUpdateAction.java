@@ -99,4 +99,10 @@ public abstract class ObjectUpdateAction implements UpdateAction {
 
     }
 
+    /**
+     * Cette classe interne définie un update d'objet lorsqu'il touche un autre.
+     */
+    public static class Hit extends ObjectUpdateAction {
+    }
+
 }

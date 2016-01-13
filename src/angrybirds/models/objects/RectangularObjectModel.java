@@ -30,7 +30,10 @@ public abstract class RectangularObjectModel extends ObjectModel {
 
     @Override
     public boolean collidesWith(ObjectModel object) {
-        return false; //TODO: Implement
+        return !(position.x - size.x / 2 >= object.position.x + object.size.x / 2 ||
+                position.y - size.y / 2 >= object.position.y + object.size.y / 2 ||
+                position.x + size.x / 2 <= object.position.x - object.size.x / 2 ||
+                position.y + size.y / 2 <= object.position.y - object.size.y / 2);
     }
 
     @Override

@@ -30,7 +30,12 @@ public abstract class CircularObjectModel extends ObjectModel {
 
     @Override
     public boolean collidesWith(ObjectModel object) {
-        return false; //TODO: Implement
+        //if (object instanceof CircularObjectModel)
+        //    return position.difference(object.position).hypotenuse() <= size.sum(object.size).x / 4;
+        return !(position.x - size.x / 2 >= object.position.x + object.size.x / 2 ||
+                position.y - size.y / 2 >= object.position.y + object.size.y / 2 ||
+                position.x + size.x / 2 <= object.position.x - object.size.x / 2 ||
+                position.y + size.y / 2 <= object.position.y - object.size.y / 2);
     }
 
     @Override

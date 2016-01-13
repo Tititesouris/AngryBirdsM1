@@ -144,6 +144,18 @@ public abstract class ObjectModel extends Model {
     }
 
     /**
+     * Cette méthode est appellée lorsque l'objet entre en contact avec l'objet spécifié.
+     *
+     * @param object Objet qui est rentré en contact avec cet objet.
+     */
+    public void hit(ObjectModel object) {
+        Vector2d split = velocity.sum(object.velocity).product(0.5f);
+        setVelocity(split);
+        object.setVelocity(split);
+        notifyObservers(new ObjectUpdateAction.Hit());
+    }
+
+    /**
      * Vérifie si l'objet spécifié entre en collision avec cet objet.
      *
      * @param object Objet à vérifier.

@@ -95,4 +95,12 @@ public abstract class BirdModel extends CircularObjectModel {
      */
     public abstract void useAbility();
 
+    public boolean isFlying() {
+        return flying;
+    }
+
+    public boolean hasUsedAbility() {
+        return usedAbility;
+    }
+
 }

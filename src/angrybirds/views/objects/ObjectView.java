@@ -4,6 +4,7 @@ import angrybirds.notifications.updates.actions.ObjectUpdateAction;
 import angrybirds.notifications.updates.actions.UpdateAction;
 import angrybirds.utils.Vector2d;
 import angrybirds.views.View;
+import angrybirds.views.objects.birds.BirdView;
 
 /**
  * TODO: Description
@@ -32,6 +33,9 @@ public abstract class ObjectView extends View {
         }
         else if (updateAction instanceof ObjectUpdateAction.RotateTo) {
             rotateTo(((ObjectUpdateAction.RotateTo) updateAction).getRotation());
+        }
+        else if (updateAction instanceof ObjectUpdateAction.Hit) {
+
         }
     }
 
