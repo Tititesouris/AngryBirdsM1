@@ -1,7 +1,6 @@
 package angrybirds.models.objects.birds;
 
 import angrybirds.models.LevelModel;
-import angrybirds.models.objects.ObjectModel;
 import angrybirds.utils.Vector2d;
 
 /**

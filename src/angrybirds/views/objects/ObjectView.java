@@ -4,7 +4,6 @@ import angrybirds.notifications.updates.actions.ObjectUpdateAction;
 import angrybirds.notifications.updates.actions.UpdateAction;
 import angrybirds.utils.Vector2d;
 import angrybirds.views.View;
-import angrybirds.views.objects.birds.BirdView;
 
 /**
  * Cette classe représente une vue d'objet.

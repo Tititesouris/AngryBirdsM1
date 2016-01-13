@@ -1,6 +1,5 @@
 package angrybirds.models;
 
-import angrybirds.models.objects.ObjectModel;
 import angrybirds.models.objects.PigModel;
 import angrybirds.models.objects.birds.BirdModel;
 import angrybirds.models.objects.obstacles.ObstacleModel;

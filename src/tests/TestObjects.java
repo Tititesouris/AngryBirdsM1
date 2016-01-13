@@ -1,9 +1,7 @@
 package tests;
 
 import angrybirds.models.LevelModel;
-import angrybirds.models.objects.CircularObjectModel;
 import angrybirds.models.objects.ObjectModel;
-import angrybirds.models.objects.RectangularObjectModel;
 import angrybirds.utils.Vector2d;
 import org.junit.Before;
 import org.junit.Test;

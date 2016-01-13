@@ -2,8 +2,6 @@ package angrybirds.models.objects;
 
 import angrybirds.models.LevelModel;
 import angrybirds.models.Model;
-import angrybirds.models.objects.birds.BirdModel;
-import angrybirds.models.objects.birds.RedBirdModel;
 import angrybirds.notifications.updates.actions.ObjectUpdateAction;
 import angrybirds.utils.Constants;
 import angrybirds.utils.Vector2d;

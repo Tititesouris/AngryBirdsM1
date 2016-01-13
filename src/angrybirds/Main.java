@@ -3,7 +3,6 @@ package angrybirds;
 import angrybirds.controllers.GameController;
 import angrybirds.exceptions.AngryBirdsException;
 import angrybirds.views.View;
-import org.newdawn.slick.SlickException;
 
 /**
  * Cette classe est la première éxécutée.

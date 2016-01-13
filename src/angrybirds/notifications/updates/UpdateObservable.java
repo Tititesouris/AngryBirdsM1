@@ -1,7 +1,6 @@
 package angrybirds.notifications.updates;
 
 import angrybirds.notifications.updates.actions.UpdateAction;
-import angrybirds.utils.Constants;
 
 import java.util.ArrayList;
 import java.util.List;

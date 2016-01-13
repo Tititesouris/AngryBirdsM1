@@ -1,10 +1,7 @@
 package angrybirds.models.objects.birds;
 
 import angrybirds.models.LevelModel;
-import angrybirds.models.SlingshotModel;
 import angrybirds.models.objects.CircularObjectModel;
-import angrybirds.models.objects.ObjectModel;
-import angrybirds.models.objects.RectangularObjectModel;
 import angrybirds.notifications.updates.actions.BirdUpdateAction;
 import angrybirds.utils.Vector2d;
 

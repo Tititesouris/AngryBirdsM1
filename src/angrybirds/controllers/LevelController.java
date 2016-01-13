@@ -4,7 +4,6 @@ import angrybirds.controllers.objects.BirdController;
 import angrybirds.controllers.objects.ObstacleController;
 import angrybirds.controllers.objects.PigController;
 import angrybirds.exceptions.AngryBirdsException;
-import angrybirds.models.GameModel;
 import angrybirds.models.LevelModel;
 import angrybirds.models.SlingshotModel;
 import angrybirds.notifications.inputs.actions.LevelInputAction;

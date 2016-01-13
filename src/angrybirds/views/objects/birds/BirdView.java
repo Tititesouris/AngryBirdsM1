@@ -1,7 +1,6 @@
 package angrybirds.views.objects.birds;
 
 import angrybirds.notifications.inputs.actions.BirdInputAction;
-import angrybirds.notifications.updates.actions.ObjectUpdateAction;
 import angrybirds.utils.Constants;
 import angrybirds.utils.Vector2d;
 import angrybirds.notifications.updates.actions.BirdUpdateAction;
@@ -11,9 +10,7 @@ import angrybirds.views.objects.ObjectView;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
-import org.newdawn.slick.geom.Circle;
 import org.newdawn.slick.geom.Ellipse;
-import org.newdawn.slick.geom.Polygon;
 import org.newdawn.slick.geom.Shape;
 
 import java.util.ArrayList;

@@ -1,14 +1,9 @@
 package angrybirds.views.objects.birds;
 
-import angrybirds.utils.Constants;
 import angrybirds.utils.Vector2d;
-import angrybirds.views.LevelView;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
-import org.newdawn.slick.geom.Polygon;
-import org.newdawn.slick.geom.Triangulator;
-
 /**
  * Cette classe représente une vue d'oiseau jaune.
  *
