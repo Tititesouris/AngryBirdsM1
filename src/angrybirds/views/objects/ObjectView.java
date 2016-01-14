@@ -27,6 +27,8 @@ public abstract class ObjectView extends View {
      * Angle de rotation de l'objet.
      */
     protected float rotation;
+    
+    protected boolean hit;
 
     /**
      * Créé une vue d'objet.
@@ -52,7 +54,7 @@ public abstract class ObjectView extends View {
             rotateTo(((ObjectUpdateAction.RotateTo) updateAction).getRotation());
         }
         else if (updateAction instanceof ObjectUpdateAction.Hit) {
-
+        	hit();
         }
     }
 
@@ -72,6 +74,10 @@ public abstract class ObjectView extends View {
      */
     protected void rotateTo(float rotation) {
         this.rotation = rotation;
+    }
+    
+    protected void hit(){
+    	hit = true;
     }
 
 }
