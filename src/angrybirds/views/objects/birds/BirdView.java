@@ -39,7 +39,12 @@ public abstract class BirdView extends ObjectView {
      * True si l'oiseau est en vol, false sinon.
      */
     protected boolean flying;
-    
+
+    /**
+     * Contient la position du dernier point placé
+     */
+    private Vector2d lastDot = position;
+
     /**
      * Créé une vue d'oiseau.
      *
@@ -56,8 +61,8 @@ public abstract class BirdView extends ObjectView {
     @Override
     public void input(Input input) {
         if (flying && input.isKeyDown(Input.KEY_SPACE)) {
-    		notifyObservers(new BirdInputAction.UseAbility(id));
-    	}
+            notifyObservers(new BirdInputAction.UseAbility(id));
+        }
     }
 
     @Override
@@ -94,11 +99,12 @@ public abstract class BirdView extends ObjectView {
 
         graphics.setColor(Color.darkGray);
 
-        for(Vector2d v : trail){
+        for (Vector2d v : trail) {
 
-            if(trail.indexOf(v) % 4 == 0){
+            if (trail.indexOf(v) % 4 == 0) {
                 graphics.fillOval(v.x, v.y, 5, 5);
             }
+
         }
     }
 
@@ -133,8 +139,9 @@ public abstract class BirdView extends ObjectView {
     @Override
     protected void moveTo(Vector2d position){
     	super.moveTo(position);
-    	if(flying && !(this.hit)){
+    	if(flying && !(this.hit) && position.difference(lastDot).hypotenuse()> 10){
     		trail.add(position);
+    		lastDot = position;
     	}
     }
 

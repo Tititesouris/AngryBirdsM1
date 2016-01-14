@@ -1,9 +1,12 @@
 package angrybirds.views.objects.birds;
 
 import angrybirds.utils.Vector2d;
+
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
+import org.newdawn.slick.SlickException;
 /**
  * Cette classe représente une vue d'oiseau jaune.
  *
@@ -12,6 +15,11 @@ import org.newdawn.slick.Input;
  */
 public class YellowBirdView extends BirdView {
 
+    /**
+     * Image de l'oiseau jaune.
+     */
+	private Image sprite;
+	
     /**
      * Créé une vue d'oiseau jaune.
      *
@@ -27,6 +35,11 @@ public class YellowBirdView extends BirdView {
     @Override
     public void init() {
         color = Color.yellow;
+        try {
+			sprite = new Image("/res/sprites/objects/birds/yellow.png");
+		} catch (SlickException e) {
+			e.printStackTrace();
+		}
     }
 
     @Override
