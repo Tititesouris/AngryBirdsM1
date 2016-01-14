@@ -27,7 +27,10 @@ public abstract class ObjectView extends View {
      * Angle de rotation de l'objet.
      */
     protected float rotation;
-    
+
+    /**
+     * True si l'objet a été touché, false sinon.
+     */
     protected boolean hit;
 
     /**
@@ -75,7 +78,10 @@ public abstract class ObjectView extends View {
     protected void rotateTo(float rotation) {
         this.rotation = rotation;
     }
-    
+
+    /**
+     * Cette méthode doit être appellée quand le modèle prévient que l'objet a été touché.
+     */
     protected void hit(){
     	hit = true;
     }
