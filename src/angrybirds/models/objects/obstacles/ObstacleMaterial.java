@@ -11,17 +11,17 @@ public enum ObstacleMaterial {
     /**
      * Verre, fragile.
      */
-    GLASS(0.25f),
+    GLASS(0.005f),
 
     /**
      * Bois, normal.
      */
-    WOOD(0.5f),
+    WOOD(0.01f),
 
     /**
      * Pierre, robuste.
      */
-    STONE(1);
+    STONE(0.05f);
 
     /**
      * Densité (ou masse surfacique) du matériau.

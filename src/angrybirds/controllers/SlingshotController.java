@@ -34,7 +34,7 @@ public class SlingshotController extends Controller {
                 new Vector2d(position.get(0).getAsFloat(), position.get(1).getAsFloat()),
                 range
         );
-        SlingshotView view = new SlingshotView(model.getId(), model.getPosition(), model.getSize(), model.getHolderPosition());
+        SlingshotView view = new SlingshotView(model.getId(), model.getPosition(), model.getSize(), model.getDefaultHolderPosition(), model.getHolderPosition());
         addModelViewPair(new ModelViewPair<>(model, view));
 
     }
@@ -44,6 +44,9 @@ public class SlingshotController extends Controller {
         SortedMap<Integer, SlingshotModel> models = getModels();
         // Un seul lance-oiseau par niveau
         SlingshotModel model = models.get(models.firstKey());
+
+
+
         if (inputAction instanceof SlingshotInputAction.Pull) {
             model.pull(((SlingshotInputAction.Pull) inputAction).getHolderPosition());
         }

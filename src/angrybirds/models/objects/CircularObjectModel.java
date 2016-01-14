@@ -1,5 +1,6 @@
 package angrybirds.models.objects;
 
+import angrybirds.models.LevelModel;
 import angrybirds.utils.Vector2d;
 
 import java.util.Vector;
@@ -7,7 +8,7 @@ import java.util.Vector;
 /**
  * TODO: Description
  *
- * @author Tititesouris
+ * @author Quentin Brault
  * @since 2016/01/10
  */
 public abstract class CircularObjectModel extends ObjectModel {
@@ -15,7 +16,8 @@ public abstract class CircularObjectModel extends ObjectModel {
     /**
      * Créé un nouvel objet circulaire.
      *
-     * @param position     Position de l'objet en m.
+     * @param level        Modèle du niveau.
+     * @param position     Position du centre de l'objet en m.
      * @param velocity     Vélocité de l'objet en m/s.
      * @param acceleration Accélération de l'objet en m/s^2.
      * @param size         Taille de l'objet en m.
@@ -24,8 +26,8 @@ public abstract class CircularObjectModel extends ObjectModel {
      * @param angularSpeed Vitesse de rotation de l'objet en rad/s
      * @param gravity      True si l'objet est soumis à la pesanteur, false sinon.
      */
-    public CircularObjectModel(Vector2d position, Vector2d velocity, Vector2d acceleration, Vector2d size, float density, float rotation, float angularSpeed, boolean gravity) {
-        super(position, velocity, acceleration, size, density, rotation, angularSpeed, gravity);
+    public CircularObjectModel(LevelModel level, Vector2d position, Vector2d velocity, Vector2d acceleration, Vector2d size, float density, float rotation, float angularSpeed, boolean gravity) {
+        super(level, position, velocity, acceleration, size, density, rotation, angularSpeed, gravity);
     }
 
 
@@ -44,12 +46,11 @@ public abstract class CircularObjectModel extends ObjectModel {
             float largeur = object.getSize().x/2;
             float longeur = object.getSize().y/2;
 
-            Vector2d 
+
 
         }
 
-        System.err.println("Invalid Object Format");
-        return false;
+       return false;
     }
 
     @Override

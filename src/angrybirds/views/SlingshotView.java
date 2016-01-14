@@ -14,28 +14,57 @@ import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
 
 /**
- * TODO: Description
+ * Cette classe représente une vue de lance-oiseau.
  *
  * @author Quentin Brault
+ * @since  2013/10/01
  */
 public class SlingshotView extends View {
 
+    /**
+     * Position du centre du lance-oiseau.
+     */
     private Vector2d position;
 
+    /**
+     * Taille du lance-oiseau.
+     */
     private Vector2d size;
 
+    /**
+     * Position du holder du lance-oiseau par rapport à la position du centre du lance-oiseau.
+     */
+    private Vector2d defaultHolderPosition;
+
+    /**
+     * Position du holder du lance-oiseau par rapport à sa position par défaut.
+     */
     private Vector2d holderPosition;
 
-    private Vector2d holderPositionOffset = new Vector2d(0, -50);
-
+    /**
+     * Taille du holder du lance-oiseau.
+     */
     private Vector2d holderSize = new Vector2d(50, 20);
 
+    /**
+     * True si l'utilisateur est en train de tirer sur le lance-oiseau, false sinon.
+     */
     private boolean pulling;
 
-    public SlingshotView(int id, Vector2d position, Vector2d size, Vector2d holderPosition) {
+    /**
+     * Créé une vue de slingshot.
+     *
+     * @param id                    Identifiant unique du modèle de lance-oiseau.
+     * @param position              Position du centre du lance-oiseau.
+     * @param size                  Taille du lance-oiseau.
+     * @param defaultHolderPosition Position du holder du lance-oiseau par rapport au centre du lance-oiseau.
+     * @param holderPosition        Position du holder du lance-oiseau par rapport à sa position par défaut.
+     */
+    public SlingshotView(int id, Vector2d position, Vector2d size, Vector2d defaultHolderPosition, Vector2d holderPosition) {
         super(id);
         this.position = position;
         this.size = size;
+        this.defaultHolderPosition = defaultHolderPosition;
         this.holderPosition = holderPosition;
     }
 
@@ -48,8 +77,8 @@ public class SlingshotView extends View {
     public void input(Input input) {
         if (input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
             Vector2d mousePosition = new Vector2d(input.getMouseX(), input.getMouseY());
-            if (pulling || mousePosition.difference(position.sum(holderPosition.sum(holderPositionOffset))).hypotenuse() <= 50) {
-                notifyObservers(new SlingshotInputAction.Pull(mousePosition.difference(position.sum(holderPositionOffset))));
+            if (pulling || mousePosition.difference(position.sum(holderPosition.sum(defaultHolderPosition))).hypotenuse() <= 50) {
+                notifyObservers(new SlingshotInputAction.Pull(mousePosition.difference(position.sum(defaultHolderPosition))));
             }
         }
         else if (pulling) {
@@ -83,22 +112,22 @@ public class SlingshotView extends View {
 
             });
             Shape holder = new Rectangle(
-                    position.x + holderPosition.x + holderPositionOffset.x - holderSize.x / 2,
-                    position.y + holderPosition.y + holderPositionOffset.y - holderSize.y / 2,
+                    position.x + defaultHolderPosition.x + holderPosition.x - holderSize.x / 2,
+                    position.y + defaultHolderPosition.y + holderPosition.y - holderSize.y / 2,
                     holderSize.x,
                     holderSize.y
             );
             Shape elastic1 = new Line(
-                    position.x + holderPositionOffset.x - holderSize.x / 2,
-                    position.y + holderPositionOffset.y - holderSize.y / 2,
-                    position.x + holderPosition.x + holderPositionOffset.x - holderSize.x / 2,
-                    position.y + holderPosition.y + holderPositionOffset.y
+                    position.x + defaultHolderPosition.x - holderSize.x / 2,
+                    position.y + defaultHolderPosition.y - holderSize.y / 2,
+                    position.x + defaultHolderPosition.x + holderPosition.x - holderSize.x / 2,
+                    position.y + defaultHolderPosition.y + holderPosition.y
             );
             Shape elastic2 = new Line(
-                    position.x + holderPositionOffset.x + holderSize.x / 2,
-                    position.y + holderPositionOffset.y - holderSize.y / 2,
-                    position.x + holderPosition.x + holderPositionOffset.x + holderSize.x / 2,
-                    position.y + holderPosition.y + holderPositionOffset.y
+                    position.x + defaultHolderPosition.x + holderSize.x / 2,
+                    position.y + defaultHolderPosition.y - holderSize.y / 2,
+                    position.x + defaultHolderPosition.x + holderPosition.x + holderSize.x / 2,
+                    position.y + defaultHolderPosition.y + holderPosition.y
             );
 
             graphics.draw(slingshot);
@@ -109,11 +138,19 @@ public class SlingshotView extends View {
         }
     }
 
+    /**
+     * Cette méthode doit être appellée quand le modèle prévient que le lance-oiseau a été étiré.
+     *
+     * @param holderPosition Nouvelle position du holder du lance-oiseau.
+     */
     private void pull(Vector2d holderPosition) {
         pulling = true;
         this.holderPosition = holderPosition;
     }
 
+    /**
+     * Cette méthode doit être appellée quand le modèle prévient que le lance-oiseau a été relaché.
+     */
     private void release() {
         pulling = false;
         holderPosition = Vector2d.ZERO;

@@ -1,7 +1,7 @@
 package angrybirds.models.objects.birds;
 
 import angrybirds.models.LevelModel;
-import angrybirds.models.objects.ObjectModel;
+import angrybirds.notifications.updates.actions.BirdUpdateAction;
 import angrybirds.utils.Vector2d;
 
 /**
@@ -14,6 +14,15 @@ public class YellowBirdModel extends BirdModel {
 
     public YellowBirdModel(LevelModel level, Vector2d position) {
         super(level, position, new Vector2d(40), 0.01f);
+    }
+
+    @Override
+    public void useAbility() {
+        if (!usedAbility) {
+            accelerate(velocity);
+            usedAbility = true;
+            notifyObservers(new BirdUpdateAction.UseAbility());
+        }
     }
 
 }

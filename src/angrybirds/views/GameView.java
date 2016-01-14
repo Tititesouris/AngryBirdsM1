@@ -9,16 +9,29 @@ import org.newdawn.slick.Input;
 import java.util.SortedMap;
 
 /**
- * TODO: Description
+ * Cette classe représente une vue de jeu.
  *
- * @author Tititesouris
+ * @author Quentin Brault
+ * @since  2013/10/01
  */
 public class GameView extends View {
 
+    /**
+     * Vues des niveaux du jeu.
+     */
     private SortedMap<Integer, LevelView> levels;
 
+    /**
+     * Vue du niveau actif du jeu.
+     */
     private LevelView level;
 
+    /**
+     * Créé une vue de jeu.
+     *
+     * @param id     Identifiant unique du modèle du jeu.
+     * @param levels Vues des niveaux du jeu.
+     */
     public GameView(int id, SortedMap<Integer, LevelView> levels) {
         super(id);
         this.levels = levels;
@@ -43,11 +56,17 @@ public class GameView extends View {
 
     @Override
     public void display(Graphics graphics) {
-        if (level == null) {
-            graphics.drawString("Angry Birds. Click to start", 200, 200);
-        }
-        else
+        if(level ==null) {
+            int x = 200;
+            int y = 200;
+            for (int i = 0; i < levels.size(); i++) {
+                graphics.drawString(""+(i+1), x, y);
+               graphics.drawRect(x,y,graphics.getFont().getWidth(""+i),graphics.getFont().getHeight(""+i));
+                x += 100;
+            }
+        }else{
             level.display(graphics);
+        }
     }
 
     @Override
@@ -58,6 +77,11 @@ public class GameView extends View {
         }
     }
 
+    /**
+     * Cette méthode doit être appellée quand le modèle prévient qu'on rentre dans un niveau.
+     *
+     * @param levelId Identifiant unique du niveau entré.
+     */
     private void enterLevel(int levelId) {
         this.level = levels.get(levelId);
     }

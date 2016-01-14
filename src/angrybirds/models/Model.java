@@ -31,7 +31,8 @@ public abstract class Model extends UpdateObservable {
     }
 
     /**
-     * Met à jour le modèle.
+     * Cette méthode est appellée à chaque tick du jeu.
+     * Elle doit être implémentée pour effectuer des modifications au modèle.
      *
      * @param delta Temps écoulé depuis le dernier appel à update() en ms.
      */

@@ -1,7 +1,6 @@
 package angrybirds.models.objects.birds;
 
 import angrybirds.models.LevelModel;
-import angrybirds.models.objects.ObjectModel;
 import angrybirds.utils.Vector2d;
 
 /**
@@ -14,6 +13,13 @@ public class RedBirdModel extends BirdModel {
 
     public RedBirdModel(LevelModel level, Vector2d position) {
         super(level, position, new Vector2d(30), 0.03f);
+    }
+
+    @Override
+    public void useAbility() {
+        if (!usedAbility) {
+            usedAbility = true;
+        }
     }
 
 }

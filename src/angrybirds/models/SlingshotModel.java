@@ -35,6 +35,11 @@ public class SlingshotModel extends Model {
     private Vector2d size;
 
     /**
+     * Position du holder du lance-oiseau au repos par rapport à la position du lance-oiseau en m.
+     */
+    private Vector2d defaultHolderPosition;
+
+    /**
      * Position du holder du lance-oiseau par rapport à sa position au repos en m.
      * Le holder est la partie du lance-oiseau qui porte l'oiseau
      * Cette valeur est le vecteur nul au repos.
@@ -61,6 +66,7 @@ public class SlingshotModel extends Model {
         this.level = level;
         this.position = position;
         this.size = new Vector2d(100, 200);
+        this.defaultHolderPosition = new Vector2d(0, -50);
         this.holderPosition = Vector2d.ZERO;
         this.range = range;
     }
@@ -82,7 +88,7 @@ public class SlingshotModel extends Model {
             if (!this.holderPosition.equals(holderPosition)) {
                 setHolderPosition(getInRange(holderPosition));
                 bird.setPosition(getAbsoluteHolderPosition());
-                //bird.rotate(?);
+                bird.setRotation(holderPosition.product(-1).angle());
                 notifyObservers(new SlingshotUpdateAction.Pull(getHolderPosition()));
             }
         }
@@ -164,6 +170,24 @@ public class SlingshotModel extends Model {
     }
 
     /**
+     * Retourne la position du holder du lance-oiseau au repos par rapport la position du lance-oiseau en m.
+     *
+     * @return Position du holder du lance-oiseau au repos par rapport la position du lance-oiseau en m.
+     */
+    public Vector2d getDefaultHolderPosition() {
+        return defaultHolderPosition;
+    }
+
+    /**
+     * Change la position du holder du lance-oiseau au repos par rapport la position du lance-oiseau par celle spécifiée.
+     *
+     * @param defaultHolderPosition Nouvelle position du holder du lance-oiseau au repos par rapport la position du lance-oiseau en m.
+     */
+    public void setDefaultHolderPosition(Vector2d defaultHolderPosition) {
+        this.defaultHolderPosition = defaultHolderPosition;
+    }
+
+    /**
      * Retourne la position du holder du lance-oiseau par rapport à sa position au repos en m.
      *
      * @return Position du holder du lance-oiseau par rapport à sa position au repos en m.
@@ -187,7 +211,7 @@ public class SlingshotModel extends Model {
      * @return Position du holder du lance-oiseau en m.
      */
     public Vector2d getAbsoluteHolderPosition() {
-        return position.sum(holderPosition);
+        return position.sum(defaultHolderPosition).sum(holderPosition);
     }
 
     /**

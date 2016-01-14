@@ -67,4 +67,12 @@ public class TestVectors {
         assertEquals(new Vector2d((float) Math.sqrt(2) / -2), Vector2d.INVERSE.product(3.7f).normalized());
     }
 
+    @Test
+    public void testAngle() {
+        assertTrue(0 == Vector2d.X.angle());
+        assertTrue((float)(-Math.PI * 0.5) == Vector2d.Y.angle());
+        assertTrue((float)(Math.PI) == Vector2d.X.product(-1).angle());
+        assertTrue((float)(Math.PI * 0.75) == Vector2d.INVERSE.angle());
+    }
+
 }

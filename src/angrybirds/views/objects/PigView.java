@@ -1,17 +1,29 @@
 package angrybirds.views.objects;
 
 import angrybirds.notifications.updates.actions.UpdateAction;
+import angrybirds.utils.Constants;
 import angrybirds.utils.Vector2d;
+
+import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 
 /**
- * TODO: Description
+ * Cette classe représente une vue d'objet.
  *
- * @author Tititesouris
+ * @author Quentin Brault
+ * @since  2013/10/01
  */
 public class PigView extends ObjectView {
 
+    /**
+     * Créé une vue de cochon.
+     *
+     * @param id       Identifiant unique du modèle de cochon.
+     * @param position Position du cochon.
+     * @param size     Taille du cochon.
+     * @param rotation Rotation du cochon.
+     */
     public PigView(int id, Vector2d position, Vector2d size, float rotation) {
         super(id, position, size, rotation);
     }
@@ -28,12 +40,15 @@ public class PigView extends ObjectView {
 
     @Override
     public void display(Graphics graphics) {
-
+    	if(Constants.DEBUG){
+    		graphics.setColor(Color.green);
+    		graphics.fillOval(position.x - size.x / 2, position.y - size.y / 2, size.x, size.y);
+    	}
     }
 
     @Override
     public void onUpdate(UpdateAction updateAction) {
-
+        super.onUpdate(updateAction);
     }
 
 }

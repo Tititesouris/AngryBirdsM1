@@ -88,7 +88,7 @@ public class LevelModel extends Model {
             obstacle.update(delta);
         for (PigModel pig : pigs.values())
             pig.update(delta);
-
+        checkHits();
         clearDeadModels();
     }
 
@@ -107,6 +107,36 @@ public class LevelModel extends Model {
             }
         }
         deadModels.clear();
+    }
+
+    /**
+     * Cette méthode vérifie les collisions entre tous les objets.
+     */
+    private void checkHits() {
+        for (BirdModel bird : birds.values()) {
+            if (bird.isFlying()) {
+                for (ObstacleModel obstacle : obstacles.values()) {
+                    if (bird.collidesWith(obstacle)) {
+                        bird.hit(obstacle);
+                        obstacle.hit(bird);
+                    }
+                }
+                for (PigModel pig : pigs.values()) {
+                    if (bird.collidesWith(pig)) {
+                        bird.hit(pig);
+                        pig.hit(bird);
+                    }
+                }
+            }
+        }
+        for (PigModel pig : pigs.values()) {
+            for (ObstacleModel obstacle : obstacles.values()) {
+                if (pig.collidesWith(obstacle)) {
+                    pig.hit(obstacle);
+                    obstacle.hit(pig);
+                }
+            }
+        }
     }
 
     /**

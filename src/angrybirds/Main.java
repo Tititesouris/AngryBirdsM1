@@ -3,7 +3,6 @@ package angrybirds;
 import angrybirds.controllers.GameController;
 import angrybirds.exceptions.AngryBirdsException;
 import angrybirds.views.View;
-import org.newdawn.slick.SlickException;
 
 /**
  * Cette classe est la première éxécutée.
@@ -19,10 +18,8 @@ public class Main {
         try {
             GameController gameController = new GameController("res/game.json");
             View.setupSlick2d(gameController);
-            View.app.start();
+            View.start();
         } catch (AngryBirdsException e) {
-            e.printStackTrace();
-        } catch (SlickException e) {
             e.printStackTrace();
         }
 

@@ -1,9 +1,10 @@
 package angrybirds.notifications.updates.actions;
 
 /**
- * TODO: Description
+ * Cette interface représente une action d'update envoyée par un UpdateObservable à un UpdateObserver.
  *
- * @author Tititesouris
+ * @author Quentin Brault
+ * @since 2016/01/10
  */
 public interface UpdateAction {
 }

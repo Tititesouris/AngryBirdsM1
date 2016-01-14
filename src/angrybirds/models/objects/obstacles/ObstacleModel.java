@@ -1,7 +1,6 @@
 package angrybirds.models.objects.obstacles;
 
 import angrybirds.models.LevelModel;
-import angrybirds.models.objects.ObjectModel;
 import angrybirds.models.objects.RectangularObjectModel;
 import angrybirds.utils.Vector2d;
 
@@ -14,11 +13,6 @@ import angrybirds.utils.Vector2d;
 public class ObstacleModel extends RectangularObjectModel {
 
     /**
-     * Modèle du niveau qui possède cet obstacle.
-     */
-    private LevelModel level;
-
-    /**
      * Matériau de l'obstacle.
      */
     private ObstacleMaterial material;
@@ -27,13 +21,12 @@ public class ObstacleModel extends RectangularObjectModel {
      * Créé un nouvel obstacle.
      *
      * @param level        Modèle du niveau qui possède cet obstacle.
-     * @param position     Position de l'objet en m.
+     * @param position     Position du centre de l'objet en m.
      * @param size         Taille de l'objet en m.
      * @param rotation     Rotation de l'objet en radians par rapport au 0 du cercle trigonométrique.
      */
     public ObstacleModel(LevelModel level, Vector2d position, ObstacleSize size, ObstacleMaterial material, float rotation) {
-        super(position, Vector2d.ZERO, Vector2d.ZERO, size.getSize(), material.getDensity(), rotation, 0, true);
-        this.level = level;
+        super(level, position, Vector2d.ZERO, Vector2d.ZERO, size.getSize(), material.getDensity(), rotation, 0, true);
         this.material = material;
     }
 
@@ -44,16 +37,6 @@ public class ObstacleModel extends RectangularObjectModel {
      */
     public ObstacleMaterial getMaterial() {
         return material;
-    }
-
-    @Override
-    public boolean collidesWith(ObjectModel object) {
-        return false;
-    }
-
-    @Override
-    public float getSurface() {
-        return size.x * size.y;
     }
 
 }

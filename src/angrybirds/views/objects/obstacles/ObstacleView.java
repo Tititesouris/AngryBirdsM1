@@ -10,12 +10,16 @@ import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
 
 /**
- * TODO: Description
+ * Cette classe représente une vue d'obstacle.
  *
- * @author Tititesouris
+ * @author Quentin Brault
+ * @since  2013/10/01
  */
 public class ObstacleView extends ObjectView {
 
+    /**
+     * Informations graphiques du matériau de l'objet.
+     */
     private ObstacleMaterialView material;
 
     public ObstacleView(int id, Vector2d position, Vector2d size, float rotation, ObstacleMaterialView material) {
@@ -36,7 +40,6 @@ public class ObstacleView extends ObjectView {
     @Override
     public void display(Graphics graphics) {
         if (Constants.DEBUG) {
-            rotation += 0.01;
             graphics.setColor(material.getColor());
             Shape obstacle = new Rectangle(position.x - size.x / 2, position.y - size.y / 2, size.x, size.y);
             obstacle = getRotated(obstacle, rotation, size.x / 2, size.y / 2);
@@ -46,7 +49,7 @@ public class ObstacleView extends ObjectView {
 
     @Override
     public void onUpdate(UpdateAction updateAction) {
-
+        super.onUpdate(updateAction);
     }
 
 }

@@ -1,10 +1,7 @@
 package angrybirds.models.objects.birds;
 
 import angrybirds.models.LevelModel;
-import angrybirds.models.SlingshotModel;
 import angrybirds.models.objects.CircularObjectModel;
-import angrybirds.models.objects.ObjectModel;
-import angrybirds.models.objects.RectangularObjectModel;
 import angrybirds.notifications.updates.actions.BirdUpdateAction;
 import angrybirds.utils.Vector2d;
 
@@ -17,9 +14,14 @@ import angrybirds.utils.Vector2d;
 public abstract class BirdModel extends CircularObjectModel {
 
     /**
-     * Modèle du niveau.
+     * True si l'oiseau est en vol, false sinon.
      */
-    private LevelModel level;
+    protected boolean flying;
+
+    /**
+     * True si l'oiseau à utilisé son pouvoir
+     */
+    protected boolean usedAbility;
 
     /**
      * FIXME: facon temporaire de mourrir
@@ -35,18 +37,19 @@ public abstract class BirdModel extends CircularObjectModel {
      * Créé un nouvel oiseau.
      *
      * @param level    Modèle du niveau.
-     * @param position Position de l'objet en m.
+     * @param position Position du centre de l'objet en m.
      * @param size     Taille de l'objet en m.
      * @param density  Densité (ou masse surfacique) de l'objet en kg/m^2.
      */
     public BirdModel(LevelModel level, Vector2d position, Vector2d size, float density) {
-        super(position, Vector2d.ZERO, Vector2d.ZERO, size, density, 0, 0, false);
-        this.level = level;
+        super(level, position, Vector2d.ZERO, Vector2d.ZERO, size, density, 0, 0, true);
     }
 
     @Override
     public void update(int delta) {
         super.update(delta);
+        if (flying)
+            setRotation(getTangent().angle());
         if (dying && dies < System.currentTimeMillis()) {
             dying = false;
             level.birdDied(this);
@@ -62,6 +65,7 @@ public abstract class BirdModel extends CircularObjectModel {
     public void launch(Vector2d velocity) {
         setGravity(true);
         setVelocity(velocity);
+        flying = true;
         dying = true;
         dies = System.currentTimeMillis() + 5000;
         notifyObservers(new BirdUpdateAction.Launch());
@@ -73,7 +77,27 @@ public abstract class BirdModel extends CircularObjectModel {
      * @param holderPosition Position du holder du lance-oiseau.
      */
     public void ready(Vector2d holderPosition) {
+        setGravity(false);
         setPosition(holderPosition);
+        setVelocity(Vector2d.ZERO);
+        setAcceleration(Vector2d.ZERO);
+        setRotation(0);
+        setAngularSpeed(0);
+        notifyObservers(new BirdUpdateAction.Ready());
+    }
+
+    /**
+     * Cette méthode abstraite doit être implémentée
+     * par tous les oiseaux afin de réaliser leur abilité.
+     */
+    public abstract void useAbility();
+
+    public boolean isFlying() {
+        return flying;
+    }
+
+    public boolean hasUsedAbility() {
+        return usedAbility;
     }
 
 }
