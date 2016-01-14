@@ -91,6 +91,62 @@
           70
         ]
       ]
+    },
+    {
+      "name": "Level 1",
+      "ground": 100,
+      "slingshot": {
+        "position": [
+          150,
+          520
+        ],
+        "range": 150
+      },
+      "birds": [
+        "RED",
+        "YELLOW",
+        "RED",
+        "YELLOW"
+      ],
+      "obstacles": [
+        {
+          "position": [
+            900,
+            590
+          ],
+          "rotation": 1.57,
+          "size": "MEDIUM",
+          "material": "WOOD"
+        },
+        {
+          "position": [
+            800,
+            590
+          ],
+          "rotation": 1.57,
+          "size": "MEDIUM",
+          "material": "WOOD"
+        },
+        {
+          "position": [
+            950,
+            430
+          ],
+          "rotation": 0,
+          "size": "MEDIUM",
+          "material": "WOOD"
+        }
+      ],
+      "pigs": [
+        [
+          830,
+          560
+        ],
+        [
+          950,
+          350
+        ]
+      ]
     }
   ]
 }
