@@ -9,6 +9,7 @@ import angrybirds.views.objects.ObjectView;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.geom.Ellipse;
 import org.newdawn.slick.geom.Shape;
@@ -38,7 +39,7 @@ public abstract class BirdView extends ObjectView {
      * True si l'oiseau est en vol, false sinon.
      */
     protected boolean flying;
-
+    
     /**
      * Créé une vue d'oiseau.
      *
@@ -97,6 +98,8 @@ public abstract class BirdView extends ObjectView {
             		graphics.fillOval(v.x, v.y, 5, 5);
             	}
             }
+        } else {
+        	
         }
     }
 
