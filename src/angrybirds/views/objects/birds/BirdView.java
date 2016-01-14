@@ -41,6 +41,11 @@ public abstract class BirdView extends ObjectView {
     protected boolean flying;
     
     /**
+     * Contient la position du dernier point placé
+     */
+    private Vector2d lastDot = position;
+    
+    /**
      * Créé une vue d'oiseau.
      *
      * @param id       Identifiant unique du modèle d'oiseau.
@@ -97,6 +102,7 @@ public abstract class BirdView extends ObjectView {
             	if(trail.indexOf(v) % 4 == 0){
             		graphics.fillOval(v.x, v.y, 5, 5);
             	}
+            	
             }
         } else {
         	
@@ -134,8 +140,9 @@ public abstract class BirdView extends ObjectView {
     @Override
     protected void moveTo(Vector2d position){
     	super.moveTo(position);
-    	if(flying && !(this.hit)){
+    	if(flying && !(this.hit) && position.difference(lastDot).hypotenuse()> 10){
     		trail.add(position);
+    		lastDot = position;
     	}
     }
 
