@@ -66,7 +66,7 @@ public class LevelController extends Controller {
             levelModel.setPigs(pigController.getModels());
             SortedMap<Integer, PigView> pigViews = pigController.getViews();
 
-            LevelView levelView = new LevelView(levelModel.getId(), levelModel.getName(), slingshotView, birdViews, obstacleViews, pigViews);
+            LevelView levelView = new LevelView(levelModel.getId(), levelModel.getName(), slingshotView, birdViews, obstacleViews, pigViews, levelModel.getGround());
             addModelViewPair(new ModelViewPair<>(levelModel, levelView));
         }
     }

@@ -97,45 +97,51 @@ public class SlingshotView extends View {
 
     @Override
     public void display(Graphics graphics) {
-        if (Constants.DEBUG) {
-            graphics.setColor(Color.black);
-            Shape slingshot = new Polygon(new float[]{
-                    position.x - size.x / 2, position.y - size.y / 2,
-                    position.x - size.x / 2 + 10, position.y - size.y / 2,
-                    position.x, position.y - 10,
-                    position.x + size.x / 2 - 10, position.y - size.y / 2,
-                    position.x + size.x / 2, position.y - size.y / 2,
-                    position.x + 10, position.y + 10,
-                    position.x + 10, position.y + size.y / 2,
-                    position.x - 10, position.y + size.y / 2,
-                    position.x - 10, position.y + 10
+    }
 
-            });
-            Shape holder = new Rectangle(
-                    position.x + defaultHolderPosition.x + holderPosition.x - holderSize.x / 2,
-                    position.y + defaultHolderPosition.y + holderPosition.y - holderSize.y / 2,
-                    holderSize.x,
-                    holderSize.y
-            );
-            Shape elastic1 = new Line(
-                    position.x + defaultHolderPosition.x - holderSize.x / 2,
-                    position.y + defaultHolderPosition.y - holderSize.y / 2,
-                    position.x + defaultHolderPosition.x + holderPosition.x - holderSize.x / 2,
-                    position.y + defaultHolderPosition.y + holderPosition.y
-            );
-            Shape elastic2 = new Line(
-                    position.x + defaultHolderPosition.x + holderSize.x / 2,
-                    position.y + defaultHolderPosition.y - holderSize.y / 2,
-                    position.x + defaultHolderPosition.x + holderPosition.x + holderSize.x / 2,
-                    position.y + defaultHolderPosition.y + holderPosition.y
-            );
+    /**
+     * Cette méthode affiche le lance-oiseau en mode débug.
+     *
+     * @param graphics Contexte graphique.
+     */
+    public void displayDebug(Graphics graphics) {
+        graphics.setColor(Color.black);
+        Shape slingshot = new Polygon(new float[]{
+                position.x - size.x / 2, position.y - size.y / 2,
+                position.x - size.x / 2 + 10, position.y - size.y / 2,
+                position.x, position.y - 10,
+                position.x + size.x / 2 - 10, position.y - size.y / 2,
+                position.x + size.x / 2, position.y - size.y / 2,
+                position.x + 10, position.y + 10,
+                position.x + 10, position.y + size.y / 2,
+                position.x - 10, position.y + size.y / 2,
+                position.x - 10, position.y + 10
 
-            graphics.draw(slingshot);
-            graphics.draw(holder);
-            graphics.setLineWidth(5);
-            graphics.draw(elastic1);
-            graphics.draw(elastic2);
-        }
+        });
+        Shape holder = new Rectangle(
+                position.x + defaultHolderPosition.x + holderPosition.x - holderSize.x / 2,
+                position.y + defaultHolderPosition.y + holderPosition.y - holderSize.y / 2,
+                holderSize.x,
+                holderSize.y
+        );
+        Shape elastic1 = new Line(
+                position.x + defaultHolderPosition.x - holderSize.x / 2,
+                position.y + defaultHolderPosition.y - holderSize.y / 2,
+                position.x + defaultHolderPosition.x + holderPosition.x - holderSize.x / 2,
+                position.y + defaultHolderPosition.y + holderPosition.y
+        );
+        Shape elastic2 = new Line(
+                position.x + defaultHolderPosition.x + holderSize.x / 2,
+                position.y + defaultHolderPosition.y - holderSize.y / 2,
+                position.x + defaultHolderPosition.x + holderPosition.x + holderSize.x / 2,
+                position.y + defaultHolderPosition.y + holderPosition.y
+        );
+
+        graphics.draw(slingshot);
+        graphics.draw(holder);
+        graphics.setLineWidth(5);
+        graphics.draw(elastic1);
+        graphics.draw(elastic2);
     }
 
     /**

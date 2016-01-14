@@ -40,10 +40,12 @@ public class PigView extends ObjectView {
 
     @Override
     public void display(Graphics graphics) {
-    	if(Constants.DEBUG){
-    		graphics.setColor(Color.green);
-    		graphics.fillOval(position.x - size.x / 2, position.y - size.y / 2, size.x, size.y);
-    	}
+    }
+
+    @Override
+    public void displayDebug(Graphics graphics) {
+        graphics.setColor(Color.green);
+        graphics.fillOval(position.x - size.x / 2, position.y - size.y / 2, size.x, size.y);
     }
 
     @Override

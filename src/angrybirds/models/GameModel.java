@@ -13,6 +13,17 @@ import java.util.Map;
 public class GameModel extends Model {
 
     /**
+     * True si le jeu est en mode débug, false sinon.
+     * Le mode débug affiche plus d'informations et avec plus de précision.
+     */
+    private boolean debug = true;
+
+    /**
+     * Timestamp de la dernière modification du mode débug.
+     */
+    private long lastDebug;
+
+    /**
      * Ensemble des niveaux du jeu.
      */
     private Map<Integer, LevelModel> levels;
@@ -50,6 +61,17 @@ public class GameModel extends Model {
     }
 
     /**
+     * Cette méthode change entre le mode débug et normal.
+     */
+    public void switchDebug() {
+        if (lastDebug + 200 <= System.currentTimeMillis()) {
+            debug = !debug;
+            lastDebug = System.currentTimeMillis();
+            notifyObservers(new GameUpdateAction.SwitchDebug(debug));
+        }
+    }
+
+    /**
      * Cette méthode retourne le niveau qui est en train d'être joué.
      * Elle retourne null si le joueur n'est pas dans un niveau.
      *
@@ -57,6 +79,15 @@ public class GameModel extends Model {
      */
     public LevelModel getLevel() {
         return level;
+    }
+
+    /**
+     * Retourne true si le jeu est en mode débug, false sinon.
+     *
+     * @return True si le jeu est en mode débug, false sinon.
+     */
+    public boolean isDebug() {
+        return debug;
     }
 
 }

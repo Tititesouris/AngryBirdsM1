@@ -76,30 +76,29 @@ public abstract class BirdView extends ObjectView {
 
     @Override
     public void display(Graphics graphics) {
-        if (Constants.DEBUG) {
-            Shape bird = new Ellipse(position.x, position.y, size.x / 2, size.y / 2);
-            Shape beak = new Ellipse(position.x, position.y, 10, 5);
-            
-            
 
-            bird = getRotated(bird, -rotation, 0, 0);
-            beak = getRotated(beak, -rotation, 0, 0);
+    }
 
-            graphics.setColor(color);
-            graphics.fill(bird);
-            graphics.setColor(Color.black);
-            graphics.fill(beak);
-            
-            graphics.setColor(Color.darkGray);
-            
-            for(Vector2d v : trail){
-            
-            	if(trail.indexOf(v) % 4 == 0){
-            		graphics.fillOval(v.x, v.y, 5, 5);
-            	}
+    @Override
+    public void displayDebug(Graphics graphics) {
+        Shape bird = new Ellipse(position.x, position.y, size.x / 2, size.y / 2);
+        Shape beak = new Ellipse(position.x, position.y, 10, 5);
+
+        bird = getRotated(bird, -rotation, 0, 0);
+        beak = getRotated(beak, -rotation, 0, 0);
+
+        graphics.setColor(color);
+        graphics.fill(bird);
+        graphics.setColor(Color.black);
+        graphics.fill(beak);
+
+        graphics.setColor(Color.darkGray);
+
+        for(Vector2d v : trail){
+
+            if(trail.indexOf(v) % 4 == 0){
+                graphics.fillOval(v.x, v.y, 5, 5);
             }
-        } else {
-        	
         }
     }
 

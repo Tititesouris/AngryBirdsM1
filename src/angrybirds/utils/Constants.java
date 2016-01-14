@@ -9,12 +9,6 @@ package angrybirds.utils;
 public interface Constants {
 
     /**
-     * True si le jeu est en mode débug, false sinon.
-     * Le mode débug affiche plus d'informations et avec plus de précision.
-     */
-    boolean DEBUG = true;
-
-    /**
      * Temps minimum avec lequel le moteur de jeu travaille en ms.
      * Deux InputAction ne peuvent pas être envoyées plus vite que ce temps.
      * Deux appels à update() ne peuvent pas être effectués plus vite que ce temps, de même pour display().

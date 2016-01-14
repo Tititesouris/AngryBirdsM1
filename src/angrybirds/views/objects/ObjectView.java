@@ -4,6 +4,7 @@ import angrybirds.notifications.updates.actions.ObjectUpdateAction;
 import angrybirds.notifications.updates.actions.UpdateAction;
 import angrybirds.utils.Vector2d;
 import angrybirds.views.View;
+import org.newdawn.slick.Graphics;
 
 /**
  * Cette classe représente une vue d'objet.
@@ -47,6 +48,13 @@ public abstract class ObjectView extends View {
         this.size = size;
         this.rotation = rotation;
     }
+
+    /**
+     * Cette méthode affiche l'objet en mode débug.
+     *
+     * @param graphics Contexte graphique.
+     */
+    public abstract void displayDebug(Graphics graphics);
 
     @Override
     public void onUpdate(UpdateAction updateAction) {
