@@ -6,7 +6,7 @@ import angrybirds.utils.Vector2d;
 import java.util.Vector;
 
 /**
- * TODO: Description
+ * Cette classe représente les données et actions d'un objet rectangulaire.
  *
  * @author Quentin Brault
  * @since 2016/01/10
