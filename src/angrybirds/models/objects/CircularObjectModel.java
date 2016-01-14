@@ -2,6 +2,8 @@ package angrybirds.models.objects;
 
 import angrybirds.utils.Vector2d;
 
+import java.util.Vector;
+
 /**
  * TODO: Description
  *
@@ -26,9 +28,28 @@ public abstract class CircularObjectModel extends ObjectModel {
         super(position, velocity, acceleration, size, density, rotation, angularSpeed, gravity);
     }
 
+
     @Override
     public boolean collidesWith(ObjectModel object) {
-        return false; //TODO: Implement
+        if(object instanceof CircularObjectModel){
+            Vector2d hypo = new Vector2d(object.getPosition().x-this.getPosition().x,object.getPosition().y-this.getPosition().y);
+            float hypotenuse = hypo.hypotenuse();
+
+            if((hypotenuse - ((this.getSize().product(0.5f).x) + (object.getSize().product(0.5f).x))) <= 0){
+                return true;
+            }else{
+                return false;
+            }
+        }else if(object instanceof RectangularObjectModel){
+            float largeur = object.getSize().x/2;
+            float longeur = object.getSize().y/2;
+
+            Vector2d 
+
+        }
+
+        System.err.println("Invalid Object Format");
+        return false;
     }
 
     @Override
