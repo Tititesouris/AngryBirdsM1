@@ -49,6 +49,7 @@ public class RedBirdView extends BirdView {
     @Override
     public void display(Graphics graphics) {
         super.display(graphics);
+        graphics.drawImage(sprite, position.x, position.y);
     }
 
 }
