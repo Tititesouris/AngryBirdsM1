@@ -4,6 +4,7 @@ import angrybirds.notifications.updates.actions.ObjectUpdateAction;
 import angrybirds.notifications.updates.actions.UpdateAction;
 import angrybirds.utils.Vector2d;
 import angrybirds.views.View;
+import angrybirds.views.objects.birds.YellowBirdView;
 import org.newdawn.slick.Graphics;
 
 /**

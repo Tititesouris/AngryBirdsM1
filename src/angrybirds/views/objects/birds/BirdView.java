@@ -137,12 +137,13 @@ public abstract class BirdView extends ObjectView {
     }
     
     @Override
-    protected void moveTo(Vector2d position){
-    	super.moveTo(position);
-    	if(flying && !(this.hit) && position.difference(lastDot).hypotenuse()> 10){
-    		trail.add(position);
-    		lastDot = position;
-    	}
+    protected void moveTo(Vector2d position) {
+        super.moveTo(position);
+        if (flying && !(this.hit) && position.difference(lastDot).hypotenuse() > 10) {
+            trail.add(position);
+            lastDot = position;
+            System.out.println(position);
+        }
     }
 
 }

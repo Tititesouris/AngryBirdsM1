@@ -102,8 +102,9 @@ public abstract class ObjectModel extends Model {
      */
     public void move(Vector2d distance) {
         if (!distance.equals(Vector2d.ZERO)) {
-            setPosition(position.sum(distance));
+            position = position.sum(distance);
             checkGround();
+            notifyObservers(new ObjectUpdateAction.MoveTo(position));
         }
     }
 
@@ -113,7 +114,7 @@ public abstract class ObjectModel extends Model {
     private boolean checkGround() {
         float ground = Constants.WINDOW_HEIGHT - level.getGround() - size.y / 2;
         if (position.y - ground > 0) {
-            setPosition(new Vector2d(position.x, ground));
+            position = new Vector2d(position.x, ground);
             return true;
         }
         return false;
