@@ -59,6 +59,16 @@ public abstract class BirdView extends ObjectView {
      * Texture des particules représentées
      */
     private Image particleSprite;
+    
+    /**
+     * Emetteur de particules
+     */
+    private ConfigurableEmitter emitter;
+    
+    /**
+     * Regarde si le pouvoir a été utilisé
+     */
+    private boolean ability;
 
     /**
      * Créé une vue d'oiseau.
@@ -81,8 +91,8 @@ public abstract class BirdView extends ObjectView {
 			system = new ParticleSystem(particleSprite, 1000);
 
             File xmlFile = new File("res/sprites/particles/particle.xml");
-			ConfigurableEmitter emitter = ParticleIO.loadEmitter(xmlFile);
-			emitter.setPosition((int) position.x - size.x / 2, (int) position.y - size.y / 2);
+			emitter = ParticleIO.loadEmitter(xmlFile);
+			//emitter.setPosition((int) position.x - size.x / 2, (int) position.y - size.y / 2);
 			system.addEmitter(emitter);
 			
 			system.setBlendingMode(ParticleSystem.BLEND_ADDITIVE);
@@ -110,6 +120,7 @@ public abstract class BirdView extends ObjectView {
             launch();
         } else if (updateAction instanceof BirdUpdateAction.UseAbility) {
             useAbility();
+            ability = true;
         } else if (updateAction instanceof BirdUpdateAction.Die) {
             die();
         }
@@ -118,8 +129,13 @@ public abstract class BirdView extends ObjectView {
     @Override
     public void display(Graphics graphics) {
         graphics.drawImage(sprite, position.x - size.x / 2, position.y - size.y / 2);
-        system.update(10);
-        system.render();
+        if(flying && ability){
+        	system.update(10);
+        	system.render();
+        	system.addEmitter(emitter);
+        	emitter.setPosition(position.x - size.x / 2, position.y - size.y / 2);
+        	
+        }
     }
 
     @Override
