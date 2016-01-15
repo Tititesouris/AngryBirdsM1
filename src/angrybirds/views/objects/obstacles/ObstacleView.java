@@ -55,5 +55,4 @@ public class ObstacleView extends ObjectView {
         super.onUpdate(updateAction);
     }
 
-
 }
