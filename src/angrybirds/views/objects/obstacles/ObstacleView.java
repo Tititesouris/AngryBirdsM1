@@ -23,44 +23,50 @@ public class ObstacleView extends ObjectView {
 	/**
 	 * Informations graphiques du matériau de l'objet.
 	 */
-
-	private Image sprite;
-
 	private ObstacleMaterialView material;
 
-	public ObstacleView(int id, Vector2d position, Vector2d size,
-			float rotation, ObstacleMaterialView material) {
-		super(id, position, size, rotation);
-		this.material = material;
-	}
+	/**
+	 * Créé une vue d'obstacle.
+	 *
+	 * @param id       Identifiant unique du modèle d'obstacle.
+	 * @param position Position du centre de l'obstacle.
+	 * @param size     Taille de l'obstacle.
+	 * @param rotation Angle de rotation de l'obstacle.
+     * @param material Matériau de l'obstacle.
+     */
+	public ObstacleView(int id, Vector2d position, Vector2d size, float rotation, ObstacleMaterialView material) {
+        super(id, position, size, rotation);
+        this.material = material;
+    }
 
 	@Override
 	public void init() {
 		try {
-			if (material.name().equals("GLASS")) {
-				sprite = new Image("/res/sprites/objects/obstacles/glass.png").getScaledCopy((int) size.x,(int)  size.y);
-			}
-			else if(material.name().equals("STONE")){
-				sprite = new Image("/res/sprites/objects/obstacles/rock.png").getScaledCopy((int) size.x,(int)  size.y);
-			}
-			else if(material.name().equals("WOOD")){
-				sprite = new Image("/res/sprites/objects/obstacles/wood.png").getScaledCopy((int) size.x,(int)  size.y);
-			}
+            switch (material.name()) {
+                case "GLASS":
+                    sprite = new Image("/res/sprites/objects/obstacles/glass.png").getScaledCopy((int) size.x, (int) size.y);
+                    break;
+                case "STONE":
+                    sprite = new Image("/res/sprites/objects/obstacles/rock.png").getScaledCopy((int) size.x, (int) size.y);
+                    break;
+                case "WOOD":
+                    sprite = new Image("/res/sprites/objects/obstacles/wood.png").getScaledCopy((int) size.x, (int) size.x);
+                    break;
+            }
 		} catch (SlickException e) {
 			e.printStackTrace();
 		}
+        rotateTo(rotation);
 	}
 
 	@Override
 	public void input(Input input) {
-
+        rotateTo(rotation+0.01f);
 	}
 
 	@Override
 	public void display(Graphics graphics) {
-		
 		graphics.drawImage(sprite, position.x - size.x / 2, position.y - size.y / 2);
-		//sprite = getRotated(sprite, -rotation, 0, 0);
 	}
 
 	@Override
@@ -68,7 +74,7 @@ public class ObstacleView extends ObjectView {
 		graphics.setColor(material.getColor());
 		Shape obstacle = new Rectangle(position.x - size.x / 2, position.y
 				- size.y / 2, size.x, size.y);
-		obstacle = getRotated(obstacle, rotation, size.x / 2, size.y / 2);
+		obstacle = getRotated(obstacle, rotation, 0, 0);
 		graphics.fill(obstacle);
 	}
 

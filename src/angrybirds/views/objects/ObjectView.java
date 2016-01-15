@@ -6,6 +6,7 @@ import angrybirds.utils.Vector2d;
 import angrybirds.views.View;
 import angrybirds.views.objects.birds.YellowBirdView;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 
 /**
  * Cette classe représente une vue d'objet.
@@ -34,6 +35,11 @@ public abstract class ObjectView extends View {
      * True si l'objet a été touché, false sinon.
      */
     protected boolean hit;
+
+    /**
+     * Image de l'objet.
+     */
+    protected Image sprite;
 
     /**
      * Créé une vue d'objet.
@@ -86,6 +92,7 @@ public abstract class ObjectView extends View {
      */
     protected void rotateTo(float rotation) {
         this.rotation = rotation;
+        sprite.setRotation((float) (rotation * -180 / Math.PI));
     }
 
     /**

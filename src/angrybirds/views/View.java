@@ -71,7 +71,7 @@ public abstract class View extends InputObservable implements UpdateObserver {
      * @return Nouvelle forme tournée.
      */
     protected Shape getRotated(Shape shape, float angle, float xOffset, float yOffset) {
-        return shape.transform(Transform.createRotateTransform(angle, shape.getCenterX() + xOffset, shape.getCenterY() + yOffset));
+        return shape.transform(Transform.createRotateTransform(-angle, shape.getCenterX() + xOffset, shape.getCenterY() + yOffset));
     }
 
     /**

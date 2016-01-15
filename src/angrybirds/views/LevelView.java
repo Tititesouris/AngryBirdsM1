@@ -117,6 +117,10 @@ public class LevelView extends View {
             slingshot.input(input);
             for (BirdView bird : birds.values())
                 bird.input(input);
+            for (ObstacleView obstacle : obstacles.values())
+                obstacle.input(input);
+            for (PigView pig : pigs.values())
+                pig.input(input);
         }
     }
 

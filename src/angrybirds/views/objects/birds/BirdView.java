@@ -46,11 +46,6 @@ public abstract class BirdView extends ObjectView {
     protected Color color;
 
     /**
-     * Image de l'oiseau.
-     */
-    protected Image sprite;
-
-    /**
      * Créé une vue d'oiseau.
      *
      * @param id       Identifiant unique du modèle d'oiseau.
@@ -92,10 +87,10 @@ public abstract class BirdView extends ObjectView {
     @Override
     public void displayDebug(Graphics graphics) {
         Shape bird = new Ellipse(position.x, position.y, size.x / 2, size.y / 2);
-        Shape beak = new Ellipse(position.x, position.y, 10, 5);
+        Shape beak = new Ellipse(position.x + 5, position.y, 10, 5);
 
-        bird = getRotated(bird, -rotation, 0, 0);
-        beak = getRotated(beak, -rotation, 0, 0);
+        bird = getRotated(bird, rotation, 0, 0);
+        beak = getRotated(beak, rotation, -5, 0);
 
         graphics.setColor(color);
         graphics.fill(bird);
