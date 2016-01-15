@@ -24,7 +24,7 @@
           ],
           "rotation": 1.57,
           "size": "MEDIUM",
-          "material": "WOOD"
+          "material": "STONE"
         },
         {
           "position": [
@@ -42,7 +42,7 @@
           ],
           "rotation": 0,
           "size": "MEDIUM",
-          "material": "WOOD"
+          "material": "GLASS"
         }
       ],
       "pigs": [

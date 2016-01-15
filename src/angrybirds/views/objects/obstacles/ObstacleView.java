@@ -40,7 +40,7 @@ public class ObstacleView extends ObjectView {
 			if (material.name().equals("GLASS")) {
 				sprite = new Image("/res/sprites/objects/obstacles/glass.png");
 			}
-			else if(material.name().equals("ROCK")){
+			else if(material.name().equals("STONE")){
 				sprite = new Image("/res/sprites/objects/obstacles/rock.png");
 			}
 			else if(material.name().equals("WOOD")){
