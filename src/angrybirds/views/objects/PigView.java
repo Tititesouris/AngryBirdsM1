@@ -25,12 +25,6 @@ public class PigView extends ObjectView {
      * @param size     Taille du cochon.
      * @param rotation Rotation du cochon.
      */
-	
-	/**
-	 * Cette variable contient la texture du cochon
-	 */
-	private Image sprite;
-	
     public PigView(int id, Vector2d position, Vector2d size, float rotation) {
         super(id, position, size, rotation);
     }

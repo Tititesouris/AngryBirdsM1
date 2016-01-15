@@ -50,7 +50,7 @@ public class ObstacleView extends ObjectView {
                     sprite = new Image("/res/sprites/objects/obstacles/rock.png").getScaledCopy((int) size.x, (int) size.y);
                     break;
                 case "WOOD":
-                    sprite = new Image("/res/sprites/objects/obstacles/wood.png").getScaledCopy((int) size.x, (int) size.x);
+                    sprite = new Image("/res/sprites/objects/obstacles/wood.png").getScaledCopy((int) size.x, (int) size.y);
                     break;
             }
 		} catch (SlickException e) {
@@ -61,7 +61,6 @@ public class ObstacleView extends ObjectView {
 
 	@Override
 	public void input(Input input) {
-        rotateTo(rotation+0.01f);
 	}
 
 	@Override
