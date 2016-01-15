@@ -26,11 +26,6 @@ import java.util.List;
 public abstract class BirdView extends ObjectView {
 
     /**
-     * Couleur de l'oiseau.
-     */
-    protected Color color;
-
-    /**
      * Liste des points parcouru par l'oiseau.
      */
     private List<Vector2d> trail;
@@ -44,6 +39,16 @@ public abstract class BirdView extends ObjectView {
      * Contient la position du dernier point placé
      */
     private Vector2d lastDot = position;
+
+    /**
+     * Couleur de l'oiseau.
+     */
+    protected Color color;
+
+    /**
+     * Image de l'oiseau.
+     */
+    protected Image sprite;
 
     /**
      * Créé une vue d'oiseau.
@@ -81,7 +86,7 @@ public abstract class BirdView extends ObjectView {
 
     @Override
     public void display(Graphics graphics) {
-
+        graphics.drawImage(sprite, position.x - size.x / 2, position.y - size.y / 2);
     }
 
     @Override
@@ -142,7 +147,6 @@ public abstract class BirdView extends ObjectView {
         if (flying && !(this.hit) && position.difference(lastDot).hypotenuse() > 10) {
             trail.add(position);
             lastDot = position;
-            System.out.println(position);
         }
     }
 

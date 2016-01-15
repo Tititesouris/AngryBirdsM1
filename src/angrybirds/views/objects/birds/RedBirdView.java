@@ -24,9 +24,6 @@ public class RedBirdView extends BirdView {
      * @param size     Taille de l'oiseau.
      * @param rotation Angle de rotation de l'oiseau.
      */
-	
-	private Image sprite;
-	
     public RedBirdView(int id, Vector2d position, Vector2d size, float rotation) {
         super(id, position, size, rotation);
     }
@@ -35,7 +32,7 @@ public class RedBirdView extends BirdView {
     public void init() {
         color = Color.red;
         try {
-			this.sprite = new Image("/res/sprites/objects/birds/red.png");
+			this.sprite = new Image("/res/sprites/objects/birds/red.png").getScaledCopy((int)size.x, (int)size.y);
 		} catch (SlickException e) {
 			e.printStackTrace();
 		}
@@ -44,12 +41,6 @@ public class RedBirdView extends BirdView {
     @Override
     public void input(Input input) {
         super.input(input);
-    }
-
-    @Override
-    public void display(Graphics graphics) {
-        super.display(graphics);
-        graphics.drawImage(sprite, position.x, position.y);
     }
 
 }

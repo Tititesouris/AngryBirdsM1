@@ -14,11 +14,6 @@ import org.newdawn.slick.SlickException;
  * @since  2013/10/01
  */
 public class YellowBirdView extends BirdView {
-
-    /**
-     * Image de l'oiseau jaune.
-     */
-	private Image sprite;
 	
     /**
      * Créé une vue d'oiseau jaune.
@@ -36,7 +31,7 @@ public class YellowBirdView extends BirdView {
     public void init() {
         color = Color.yellow;
         try {
-			sprite = new Image("/res/sprites/objects/birds/yellow.png");
+			sprite = new Image("/res/sprites/objects/birds/yellow.png").getScaledCopy((int)size.x, (int)size.y);
 		} catch (SlickException e) {
 			e.printStackTrace();
 		}
@@ -45,12 +40,6 @@ public class YellowBirdView extends BirdView {
     @Override
     public void input(Input input) {
         super.input(input);
-    }
-
-    @Override
-    public void display(Graphics graphics) {
-        super.display(graphics);
-        graphics.drawImage(sprite, position.x, position.y);
     }
 
 }
