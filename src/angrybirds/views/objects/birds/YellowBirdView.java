@@ -29,6 +29,7 @@ public class YellowBirdView extends BirdView {
 
     @Override
     public void init() {
+        super.init();
         color = Color.yellow;
         try {
 			sprite = new Image("/res/sprites/objects/birds/yellow.png").getScaledCopy((int)size.x, (int)size.y);

@@ -74,13 +74,13 @@ public abstract class BirdView extends ObjectView {
     }
     
     @Override
-    public void init(){
+    public void init() {
     	try {
 			particleSprite = new Image("/res/sprites/particles/particle.png", false);
 			//1000 représente le nombre de particules max par frame
 			system = new ParticleSystem(particleSprite, 1000);
-			
-			File xmlFile = new File("/res/sprites/particle/particle.xml");
+
+            File xmlFile = new File("res/sprites/particles/particle.xml");
 			ConfigurableEmitter emitter = ParticleIO.loadEmitter(xmlFile);
 			emitter.setPosition((int) position.x - size.x / 2, (int) position.y - size.y / 2);
 			system.addEmitter(emitter);
@@ -118,6 +118,8 @@ public abstract class BirdView extends ObjectView {
     @Override
     public void display(Graphics graphics) {
         graphics.drawImage(sprite, position.x - size.x / 2, position.y - size.y / 2);
+        system.update(10);
+        system.render();
     }
 
     @Override
