@@ -1,21 +1,26 @@
 package angrybirds.views.objects.birds;
 
-import angrybirds.notifications.inputs.actions.BirdInputAction;
-import angrybirds.utils.Constants;
-import angrybirds.utils.Vector2d;
-import angrybirds.notifications.updates.actions.BirdUpdateAction;
-import angrybirds.notifications.updates.actions.UpdateAction;
-import angrybirds.views.objects.ObjectView;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
+import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Ellipse;
 import org.newdawn.slick.geom.Shape;
+import org.newdawn.slick.particles.ConfigurableEmitter;
+import org.newdawn.slick.particles.ParticleIO;
+import org.newdawn.slick.particles.ParticleSystem;
 
-import java.util.ArrayList;
-import java.util.List;
+import angrybirds.notifications.inputs.actions.BirdInputAction;
+import angrybirds.notifications.updates.actions.BirdUpdateAction;
+import angrybirds.notifications.updates.actions.UpdateAction;
+import angrybirds.utils.Vector2d;
+import angrybirds.views.objects.ObjectView;
 
 /**
  * Cette classe représente une vue d'oiseau.
@@ -44,6 +49,16 @@ public abstract class BirdView extends ObjectView {
      * Couleur de l'oiseau.
      */
     protected Color color;
+   
+    /**
+     * Systeme de particules
+     */
+    private ParticleSystem system;
+    
+    /**
+     * Texture des particules représentées
+     */
+    private Image particleSprite;
 
     /**
      * Créé une vue d'oiseau.
@@ -56,6 +71,27 @@ public abstract class BirdView extends ObjectView {
     public BirdView(int id, Vector2d position, Vector2d size, float rotation) {
         super(id, position, size, rotation);
         this.trail = new ArrayList<>();
+    }
+    
+    @Override
+    public void init(){
+    	try {
+			particleSprite = new Image("/res/sprites/particles/particle.png", false);
+			//1000 représente le nombre de particules max par frame
+			system = new ParticleSystem(particleSprite, 1000);
+			
+			File xmlFile = new File("/res/sprites/particle/particle.xml");
+			ConfigurableEmitter emitter = ParticleIO.loadEmitter(xmlFile);
+			emitter.setPosition((int) position.x - size.x / 2, (int) position.y - size.y / 2);
+			system.addEmitter(emitter);
+			
+			system.setBlendingMode(ParticleSystem.BLEND_ADDITIVE);
+			
+		} catch (SlickException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
     }
 
     @Override
