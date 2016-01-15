@@ -93,58 +93,145 @@
       ]
     },
     {
-      "name": "Level 1",
-      "ground": 100,
+      "name": "Level 2",
+      "ground": 134,
       "slingshot": {
         "position": [
-          150,
-          520
+          100,
+          450
         ],
         "range": 150
       },
       "birds": [
-        "RED",
         "YELLOW",
-        "RED",
         "YELLOW"
       ],
       "obstacles": [
         {
           "position": [
-            900,
-            590
+            300,
+            300
           ],
           "rotation": 1.57,
-          "size": "MEDIUM",
-          "material": "WOOD"
-        },
-        {
-          "position": [
-            800,
-            590
-          ],
-          "rotation": 1.57,
-          "size": "MEDIUM",
-          "material": "WOOD"
-        },
-        {
-          "position": [
-            950,
-            430
-          ],
-          "rotation": 0,
           "size": "MEDIUM",
           "material": "WOOD"
         }
       ],
       "pigs": [
         [
-          830,
-          560
+          50,
+          50
         ],
         [
-          950,
-          350
+          250,
+          70
+        ]
+      ]
+    },
+    {
+      "name": "Level 2",
+      "ground": 134,
+      "slingshot": {
+        "position": [
+          100,
+          450
+        ],
+        "range": 150
+      },
+      "birds": [
+        "YELLOW",
+        "YELLOW"
+      ],
+      "obstacles": [
+        {
+          "position": [
+            300,
+            300
+          ],
+          "rotation": 1.57,
+          "size": "MEDIUM",
+          "material": "WOOD"
+        }
+      ],
+      "pigs": [
+        [
+          50,
+          50
+        ],
+        [
+          250,
+          70
+        ]
+      ]
+    },{
+      "name": "Level 2",
+      "ground": 134,
+      "slingshot": {
+        "position": [
+          100,
+          450
+        ],
+        "range": 150
+      },
+      "birds": [
+        "YELLOW",
+        "YELLOW"
+      ],
+      "obstacles": [
+        {
+          "position": [
+            300,
+            300
+          ],
+          "rotation": 1.57,
+          "size": "MEDIUM",
+          "material": "WOOD"
+        }
+      ],
+      "pigs": [
+        [
+          50,
+          50
+        ],
+        [
+          250,
+          70
+        ]
+      ]
+    },
+    {
+      "name": "Level 2",
+      "ground": 134,
+      "slingshot": {
+        "position": [
+          100,
+          450
+        ],
+        "range": 150
+      },
+      "birds": [
+        "YELLOW",
+        "YELLOW"
+      ],
+      "obstacles": [
+        {
+          "position": [
+            300,
+            300
+          ],
+          "rotation": 1.57,
+          "size": "MEDIUM",
+          "material": "WOOD"
+        }
+      ],
+      "pigs": [
+        [
+          50,
+          50
+        ],
+        [
+          250,
+          70
         ]
       ]
     }
