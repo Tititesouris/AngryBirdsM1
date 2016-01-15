@@ -38,13 +38,13 @@ public class ObstacleView extends ObjectView {
 	public void init() {
 		try {
 			if (material.name().equals("GLASS")) {
-				sprite = new Image("/res/sprites/objects/obstacles/glass.png");
+				sprite = new Image("/res/sprites/objects/obstacles/glass.png").getScaledCopy((int) size.x,(int)  size.y);
 			}
 			else if(material.name().equals("STONE")){
-				sprite = new Image("/res/sprites/objects/obstacles/rock.png");
+				sprite = new Image("/res/sprites/objects/obstacles/rock.png").getScaledCopy((int) size.x,(int)  size.y);
 			}
 			else if(material.name().equals("WOOD")){
-				sprite = new Image("/res/sprites/objects/obstacles/wood.png");
+				sprite = new Image("/res/sprites/objects/obstacles/wood.png").getScaledCopy((int) size.x,(int)  size.y);
 			}
 		} catch (SlickException e) {
 			e.printStackTrace();
@@ -58,7 +58,9 @@ public class ObstacleView extends ObjectView {
 
 	@Override
 	public void display(Graphics graphics) {
+		
 		graphics.drawImage(sprite, position.x - size.x / 2, position.y - size.y / 2);
+		//sprite = getRotated(sprite, -rotation, 0, 0);
 	}
 
 	@Override

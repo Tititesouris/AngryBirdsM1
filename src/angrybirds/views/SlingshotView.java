@@ -1,17 +1,19 @@
 package angrybirds.views;
 
-import angrybirds.utils.Constants;
-import angrybirds.utils.Vector2d;
-import angrybirds.notifications.inputs.actions.SlingshotInputAction;
-import angrybirds.notifications.updates.actions.SlingshotUpdateAction;
-import angrybirds.notifications.updates.actions.UpdateAction;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
+import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Line;
 import org.newdawn.slick.geom.Polygon;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
+
+import angrybirds.notifications.inputs.actions.SlingshotInputAction;
+import angrybirds.notifications.updates.actions.SlingshotUpdateAction;
+import angrybirds.notifications.updates.actions.UpdateAction;
+import angrybirds.utils.Vector2d;
 
 /**
  * Cette classe représente une vue de lance-oiseau.
@@ -50,6 +52,11 @@ public class SlingshotView extends View {
      * True si l'utilisateur est en train de tirer sur le lance-oiseau, false sinon.
      */
     private boolean pulling;
+    
+    /**
+     * Contient l'image du lance-oiseau
+     */
+    private Image sprite;
 
     /**
      * Créé une vue de slingshot.
@@ -70,7 +77,11 @@ public class SlingshotView extends View {
 
     @Override
     public void init() {
-
+    	try {
+			sprite = new Image("/res/sprites/objects/slingshot.png").getScaledCopy((int) size.x, (int) size.y);
+		} catch (SlickException e) {
+			e.printStackTrace();
+		}
     }
 
     @Override
@@ -97,6 +108,7 @@ public class SlingshotView extends View {
 
     @Override
     public void display(Graphics graphics) {
+    	graphics.drawImage(sprite, position.x - size.x / 2, position.y - size.y /2);
     }
 
     /**
