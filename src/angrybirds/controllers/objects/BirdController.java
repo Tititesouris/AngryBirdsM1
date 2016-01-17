@@ -33,7 +33,7 @@ public class BirdController extends Controller {
      * @param birds     Liste des types d'oiseau.
      * @param slingshot Description du lance-oiseau.
      * @param level     Modèle du niveau.
-     * @throws UnknownBirdException
+     * @throws UnknownBirdException Si un oiseau décrit dans le fichier des niveaux est invalide.
      */
     public BirdController(JsonArray birds, JsonObject slingshot, LevelModel level) throws UnknownBirdException {
         for (int i = 0; i < birds.size(); i++) {

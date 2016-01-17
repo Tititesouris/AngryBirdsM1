@@ -14,7 +14,7 @@ public interface UpdateObserver {
     /**
      * Cette méthode est appellée lorsqu'un UpdateObservable observé envoit une notification.
      *
-     * @param inputAction Instance d'UpdateAction envoyée par l'observé.
+     * @param updateAction Instance d'UpdateAction envoyée par l'observé.
      */
     void onUpdate(UpdateAction updateAction);
 

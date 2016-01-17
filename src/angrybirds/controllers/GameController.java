@@ -29,7 +29,7 @@ public class GameController extends Controller {
      * Créé un controlleur pour le jeu.
      *
      * @param src Path vers le fichier de description du jeu.
-     * @throws AngryBirdsException
+     * @throws AngryBirdsException Si le fichier décrivant les niveaux est éronné.
      */
     public GameController(String src) throws AngryBirdsException {
         JsonParser parser = new JsonParser();

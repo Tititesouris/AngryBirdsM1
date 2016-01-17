@@ -189,7 +189,7 @@ public abstract class ObjectModel extends Model {
 
     /**
      * TODO
-     * @return
+     * @return 0
      */
     public float getKineticEnergy() {
         return 0;

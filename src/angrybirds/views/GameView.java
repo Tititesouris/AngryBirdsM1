@@ -40,6 +40,7 @@ public class GameView extends View {
      *
      * @param id     Identifiant unique du modèle du jeu.
      * @param levels Vues des niveaux du jeu.
+     * @param debug  True si le jeu est en mode débug, false sinon.
      */
     public GameView(int id, SortedMap<Integer, LevelView> levels, boolean debug) {
         super(id);

@@ -32,7 +32,7 @@ public class LevelController extends Controller {
      * Créé un nouveau controlleur de niveaux.
      *
      * @param levels Liste des descriptions de niveau.
-     * @throws AngryBirdsException
+     * @throws AngryBirdsException Si le fichier décrivant les niveaux est éronné.
      */
     public LevelController(JsonArray levels) throws AngryBirdsException {
         for (JsonElement element : levels) {

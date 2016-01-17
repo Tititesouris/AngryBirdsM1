@@ -30,7 +30,7 @@ public class ObstacleController extends Controller {
      *
      * @param obstacles Liste des descriptions d'obstacle.
      * @param level     Modèle du niveau.
-     * @throws AngryBirdsException
+     * @throws AngryBirdsException Si un obstacle décrit dans le fichier des niveaux est invalide.
      */
     public ObstacleController(JsonArray obstacles, LevelModel level) throws AngryBirdsException {
         for (JsonElement element : obstacles) {

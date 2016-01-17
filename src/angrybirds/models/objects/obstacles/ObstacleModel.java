@@ -23,6 +23,7 @@ public class ObstacleModel extends RectangularObjectModel {
      * @param level        Modèle du niveau qui possède cet obstacle.
      * @param position     Position du centre de l'objet en m.
      * @param size         Taille de l'objet en m.
+     * @param material     Matériau de l'objet.
      * @param rotation     Rotation de l'objet en radians par rapport au 0 du cercle trigonométrique.
      */
     public ObstacleModel(LevelModel level, Vector2d position, ObstacleSize size, ObstacleMaterial material, float rotation) {

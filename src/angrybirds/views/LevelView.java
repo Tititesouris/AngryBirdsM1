@@ -78,6 +78,7 @@ public class LevelView extends View {
      * @param birds     Vues des oiseaux du niveau.
      * @param obstacles Vues des obstacles du niveau.
      * @param pigs      Vues des cochons du niveau.
+     * @param ground    Hauteur du sol.
      */
     public LevelView(int id, String name, SlingshotView slingshot, SortedMap<Integer, BirdView> birds, SortedMap<Integer, ObstacleView> obstacles, SortedMap<Integer, PigView> pigs, float ground) {
         super(id);
