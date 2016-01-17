@@ -55,11 +55,13 @@ public class GameView extends View {
 
     @Override
     public void input(Input input) {
-        if (input.isKeyDown(Input.KEY_D))
+        if (input.isKeyDown(Input.KEY_D)) {
             notifyObservers(new GameInputAction.SwitchDebug(id));
+        }
         if (level == null) {
             if (input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
-                LevelView levelSelected = levels.get(levels.firstKey());
+                int nbLevel = input.getMouseX() / (Constants.WINDOW_WIDTH / levels.size());
+                LevelView levelSelected = (LevelView) levels.values().toArray()[nbLevel];
                 notifyObservers(new GameInputAction.EnterLevel(id, levelSelected.id));
             }
         } else
@@ -68,25 +70,28 @@ public class GameView extends View {
 
     @Override
     public void display(Graphics graphics) {
+        if (debug)
+            displayDebug(graphics);
+        else {
+            if (level == null) {
 
-        if (level == null) {
-
-            int width = Constants.WINDOW_WIDTH;
-            int height = Constants.WINDOW_HEIGHT;
-            int x = 0;
-            int y = height / 2;
-            int xRect = 0;
-            int nbLevels = levels.size();
-            int largeurRect = width / nbLevels;
-            for (int i = 0; i < nbLevels; i++) {
-                x = x + width / nbLevels;
-                graphics.drawString("" + (i + 1), xRect + largeurRect / 2, y);
-                graphics.drawRect(xRect, 0, largeurRect, height);
-                xRect = xRect + largeurRect;
-                x += x;
+                int width = Constants.WINDOW_WIDTH;
+                int height = Constants.WINDOW_HEIGHT;
+                int x = 0;
+                int y = height / 2;
+                int xRect = 0;
+                int nbLevels = levels.size();
+                int largeurRect = width / nbLevels;
+                for (int i = 0; i < nbLevels; i++) {
+                    x = x + width / nbLevels;
+                    graphics.drawString("" + (i + 1), xRect + largeurRect / 2, y);
+                    graphics.drawRect(xRect, 0, largeurRect, height);
+                    xRect = xRect + largeurRect;
+                    x += x;
+                }
+            } else {
+                level.display(graphics);
             }
-        } else{
-            level.display(graphics);
         }
     }
     /**

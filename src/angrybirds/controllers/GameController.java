@@ -38,7 +38,6 @@ public class GameController extends Controller {
 
             JsonObject game = json.getAsJsonObject();
             JsonArray levels = game.get("levels").getAsJsonArray();
-            System.out.println(levels);
 
             LevelController levelController = new LevelController(levels);
 

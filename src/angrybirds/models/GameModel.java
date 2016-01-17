@@ -16,7 +16,7 @@ public class GameModel extends Model {
      * True si le jeu est en mode débug, false sinon.
      * Le mode débug affiche plus d'informations et avec plus de précision.
      */
-    private boolean debug = true;
+    private boolean debug;
 
     /**
      * Timestamp de la dernière modification du mode débug.
