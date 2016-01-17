@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Vector;
 
 /**
- * Cette classe représente les données et actions d'un objet rectangulaire.
+ * TODO: Description
  *
  * @author Quentin Brault
  * @since 2016/01/10
@@ -76,26 +76,142 @@ public abstract class CircularObjectModel extends ObjectModel {
             rectangularCorners.add(corner3);
             rectangularCorners.add(corner4);
 
-            float bestX = 0;
-            float bestY = 0;
+            float distX = corner1.x - this.getPosition().x;
+            float distY = corner1.y - this.getPosition().y;
+            float closeCornerX = corner1.x;
+            float closeCornerY = corner1.y;
 
             for(int i=0;i<rectangularCorners.size();i++){
-                if(rectangularCorners.get(i).x - this.getPosition().x >= bestX){
-                    bestX = rectangularCorners.get(i).x;
+                float distanceX = rectangularCorners.get(i).x - this.getPosition().x;
+                float distanceY = rectangularCorners.get(i).y - this.getPosition().y;
+
+                if(distanceX < 0){
+                    distanceX = distanceX * -1;
                 }
-                if(rectangularCorners.get(i).y - this.getPosition().y >= bestY){
-                    bestY = rectangularCorners.get(i).y;
+                if(distanceY < 0){
+                    distanceY = distanceY * -1;
+                }
+
+                if(distanceX <= distX){
+                    distX = rectangularCorners.get(i).x - this.getPosition().x;
+                    closeCornerX = rectangularCorners.get(i).x;
+                }
+                if(distanceY >= distY){
+                    distY = rectangularCorners.get(i).y - this.getPosition().y;
+                    closeCornerY = rectangularCorners.get(i).y;
                 }
             }
 
-            //System.out.println("X : "+bestX+" Y : "+bestY);
+            float secondDistX = corner2.x - this.getPosition().x;
+            float secondDistY = corner2.y - this.getPosition().y;
+            float secondCloseCornerX = corner2.x;
+            float secondCloseCornerY = corner2.y;
 
-            Vector2d proxyCorner = new Vector2d(bestX,bestY);
+            //search the 2nd closest corner
+            for(int i=0;i<rectangularCorners.size();i++){
+                float secondDistanceX = rectangularCorners.get(i).x - this.getPosition().x;
+                float secondDistanceY = rectangularCorners.get(i).y - this.getPosition().y;
 
-            Vector2d hypo = new Vector2d(proxyCorner.x-this.getPosition().x,proxyCorner.y-this.getPosition().y);
-            float hypotenuse = hypo.hypotenuse();
+                if(secondDistanceX < 0){
+                    secondDistanceX = secondDistanceX * -1;
+                }
+                if(secondDistanceY < 0){
+                    secondDistanceY = secondDistanceY * -1;
+                }
 
-            if((hypotenuse - (this.getSize().product(0.5f).x) ) <= 0){
+                if(secondDistanceX <= secondDistX && secondDistanceX > distX){
+                    secondDistX = rectangularCorners.get(i).x - this.getPosition().x;
+                    secondCloseCornerX = rectangularCorners.get(i).x;
+                }
+                if(secondDistanceY >= secondDistY && secondDistanceY > distY){
+                    secondDistY = rectangularCorners.get(i).y - this.getPosition().y;
+                    secondCloseCornerY = rectangularCorners.get(i).y;
+                }
+            }
+
+            float thirdDistX = corner3.x - this.getPosition().x;
+            float thirdDistY = corner3.y - this.getPosition().y;
+            float thirdCloseCornerX = corner3.x;
+            float thirdCloseCornerY = corner3.y;
+
+            //search the 3rd closest corner
+            for(int i=0;i<rectangularCorners.size();i++){
+                float thirdDistanceX = rectangularCorners.get(i).x - this.getPosition().x;
+                float thirdDistanceY = rectangularCorners.get(i).y - this.getPosition().y;
+
+                if(thirdDistanceX < 0){
+                    thirdDistanceX = thirdDistanceX * -1;
+                }
+                if(thirdDistanceY < 0){
+                    thirdDistanceY = thirdDistanceY * -1;
+                }
+
+                if(thirdDistanceX <= thirdDistX && thirdDistanceX > distX && thirdDistanceX > secondDistX){
+                    thirdDistX = rectangularCorners.get(i).x - this.getPosition().x;
+                    thirdCloseCornerX = rectangularCorners.get(i).x;
+                }
+                if(thirdDistanceY >= thirdDistY && thirdDistanceY > distY && thirdDistanceY > secondDistY){
+                    thirdDistY = rectangularCorners.get(i).y - this.getPosition().y;
+                    thirdCloseCornerY = rectangularCorners.get(i).y;
+                }
+            }
+
+
+            // reduction des tailles des vecteurs pour que les distances influent moins
+            // et donc recuperer le cote ou l oiseau est sense toucher
+            Vector2d closeCorner = new Vector2d(closeCornerX,closeCornerY);
+            Vector2d secondCloseCorner = new Vector2d(secondCloseCornerX,secondCloseCornerY);
+            Vector2d thirdCloseCorner = new Vector2d(thirdCloseCornerX,thirdCloseCornerY);
+
+            Vector2d middleFirstSecond = closeCorner;
+            middleFirstSecond.sum(secondCloseCorner);
+            middleFirstSecond.product(0.5f);
+
+            Vector2d middleFirstThird = closeCorner;
+            middleFirstThird.sum(thirdCloseCorner);
+            middleFirstThird.product(0.5f);
+
+            Vector2d firstSecondDist = middleFirstSecond.sum(this.getPosition());
+            Vector2d firstThirdDist = middleFirstThird.sum(this.getPosition());
+
+            float distMaxFirstSecond = firstSecondDist.x + firstSecondDist.y;
+            float distMaxFirstThird = firstThirdDist.x + firstThirdDist.y;
+
+            Vector2d secondTrianglePoint;
+
+            if(distMaxFirstSecond < distMaxFirstThird){
+                secondTrianglePoint = secondCloseCorner;
+            }else{
+                secondTrianglePoint = thirdCloseCorner;
+            }
+
+            // calcul de la hauteur du triangle
+            float distCircularSecondTriangle = (float)Math.sqrt((double)((this.getPosition().x-secondTrianglePoint.x)*(this.getPosition().x-secondTrianglePoint.x)+(this.getPosition().y-secondTrianglePoint.y)*(this.getPosition().y-secondTrianglePoint.y)));
+            float distCircularFirstTriangle = (float)Math.sqrt((double)((this.getPosition().x-closeCorner.x)*(this.getPosition().x-closeCorner.x)+(this.getPosition().y-closeCorner.y)*(this.getPosition().y-closeCorner.y)));
+            float distFirstSecondTriangle = (float)Math.sqrt((double)((closeCorner.x-secondTrianglePoint.x)*(closeCorner.x-secondTrianglePoint.x)+(closeCorner.y-secondTrianglePoint.y)*(closeCorner.y-secondTrianglePoint.y)));
+
+            ArrayList<Float> distTriangle = new ArrayList<>();
+
+            distTriangle.add(distFirstSecondTriangle);
+            distTriangle.add(distCircularSecondTriangle);
+            distTriangle.add(distCircularFirstTriangle);
+
+            float min = distCircularSecondTriangle;
+            float base = distFirstSecondTriangle;
+            float max = distCircularSecondTriangle;
+
+            for(int i=0;i<distTriangle.size();i++){
+                if(distTriangle.get(i) > max){
+                    max = distTriangle.get(i);
+                }
+                if(distTriangle.get(i) < min){
+                    min = distTriangle.get(i);
+                }
+            }
+
+            float hauteur = (float)Math.sqrt(max*max - (((base*base - min*min + max*max)/2*base)*(base*base - min*min + max*max)/2*base));
+
+            if((hauteur - (this.getSize().product(0.5f).x) ) <= 0){
                 System.out.print("Hit");
                 return true;
             }else{
