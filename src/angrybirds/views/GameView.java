@@ -3,6 +3,8 @@ package angrybirds.views;
 import angrybirds.notifications.inputs.actions.GameInputAction;
 import angrybirds.notifications.updates.actions.GameUpdateAction;
 import angrybirds.notifications.updates.actions.UpdateAction;
+import angrybirds.utils.Constants;
+import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 
@@ -25,6 +27,8 @@ public class GameView extends View {
      * Vue du niveau actif du jeu.
      */
     private LevelView level;
+
+
 
     /**
      * True si le jeu est en mode débug.
@@ -64,16 +68,34 @@ public class GameView extends View {
 
     @Override
     public void display(Graphics graphics) {
-        if (debug)
-            displayDebug(graphics);
-        else if (level == null) {
 
-        }
-        else {
-            level.display(graphics);
+        if (level == null) {
+
+            int width = Constants.WINDOW_WIDTH;
+            int height = Constants.WINDOW_HEIGHT;
+            int x = 0;
+            int y = height / 2;
+            int xRect = 0;
+            int nbLevels = levels.size();
+            int largeurRect = width / nbLevels;
+            for (int i = 0; i < nbLevels; i++) {
+                x = x + width / nbLevels;
+                graphics.drawString("" + (i + 1), xRect + largeurRect / 2, y);
+                graphics.drawRect(xRect, 0, largeurRect, height);
+                xRect = xRect + largeurRect;
+                x += x;
+
+
+                if (debug)
+                    displayDebug(graphics);
+                else if (level == null) {
+
+                } else {
+                    level.display(graphics);
+                }
+            }
         }
     }
-
     /**
      * Cette méthode affiche le jeu en mode débug.
      *
@@ -81,12 +103,20 @@ public class GameView extends View {
      */
     public void displayDebug(Graphics graphics) {
         if (level == null) {
-            int x = 200;
-            int y = 200;
-            for (int i = 0; i < levels.size(); i++) {
-                graphics.drawString("" + (i + 1), x, y);
-                graphics.drawRect(x, y, graphics.getFont().getWidth("" + i), graphics.getFont().getHeight("" + i));
-                x += 100;
+            int width = Constants.WINDOW_WIDTH;
+            int height = Constants.WINDOW_HEIGHT;
+            int x = 0;
+            int y = height / 2;
+            int xRect = 0;
+            int nbLevels = levels.size();
+            int largeurRect = width / nbLevels;
+            for (int i = 0; i < nbLevels; i++) {
+                x = x + width / nbLevels;
+                graphics.drawString("" + (i + 1), xRect + largeurRect / 2, y);
+                graphics.drawRect(xRect, 0, largeurRect, height);
+                xRect = xRect + largeurRect;
+                x += x;
+
             }
         } else {
             level.displayDebug(graphics);
