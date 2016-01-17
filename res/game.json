@@ -91,6 +91,42 @@
           70
         ]
       ]
+    },
+    {
+      "name": "Level 2",
+      "ground": 134,
+      "slingshot": {
+        "position": [
+          100,
+          450
+        ],
+        "range": 150
+      },
+      "birds": [
+        "YELLOW",
+        "YELLOW"
+      ],
+      "obstacles": [
+        {
+          "position": [
+            300,
+            300
+          ],
+          "rotation": 1.57,
+          "size": "MEDIUM",
+          "material": "WOOD"
+        }
+      ],
+      "pigs": [
+        [
+          50,
+          50
+        ],
+        [
+          250,
+          70
+        ]
+      ]
     }
   ]
 }
