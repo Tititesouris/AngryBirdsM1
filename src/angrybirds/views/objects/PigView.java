@@ -1,12 +1,13 @@
 package angrybirds.views.objects;
 
-import angrybirds.notifications.updates.actions.UpdateAction;
-import angrybirds.utils.Constants;
-import angrybirds.utils.Vector2d;
-
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
+import org.newdawn.slick.SlickException;
+
+import angrybirds.notifications.updates.actions.UpdateAction;
+import angrybirds.utils.Vector2d;
 
 /**
  * Cette classe représente une vue d'objet.
@@ -30,7 +31,11 @@ public class PigView extends ObjectView {
 
     @Override
     public void init() {
-
+    	try {
+			sprite = new Image("/res/sprites/objects/pig.png").getScaledCopy((int) size.x,(int) size.y);
+		} catch (SlickException e) {
+			e.printStackTrace();
+		}
     }
 
     @Override
@@ -40,10 +45,13 @@ public class PigView extends ObjectView {
 
     @Override
     public void display(Graphics graphics) {
-    	if(Constants.DEBUG){
-    		graphics.setColor(Color.green);
-    		graphics.fillOval(position.x - size.x / 2, position.y - size.y / 2, size.x, size.y);
-    	}
+    	graphics.drawImage(sprite, position.x - size.x / 2, position.y - size.y / 2);
+    }
+
+    @Override
+    public void displayDebug(Graphics graphics) {
+        graphics.setColor(Color.green);
+        graphics.fillOval(position.x - size.x / 2, position.y - size.y / 2, size.x, size.y);
     }
 
     @Override

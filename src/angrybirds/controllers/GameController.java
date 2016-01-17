@@ -3,6 +3,7 @@ package angrybirds.controllers;
 import angrybirds.exceptions.AngryBirdsException;
 import angrybirds.notifications.inputs.actions.GameInputAction;
 import angrybirds.models.GameModel;
+import angrybirds.utils.Constants;
 import angrybirds.utils.ModelViewPair;
 import angrybirds.notifications.inputs.actions.InputAction;
 import angrybirds.views.GameView;
@@ -42,7 +43,7 @@ public class GameController extends Controller {
             LevelController levelController = new LevelController(levels);
 
             GameModel model = new GameModel(levelController.getModels());
-            GameView view = new GameView(model.getId(), levelController.getViews());
+            GameView view = new GameView(model.getId(), levelController.getViews(), model.isDebug());
             addModelViewPair(new ModelViewPair<>(model, view));
 
         } catch (FileNotFoundException e) {
@@ -56,6 +57,10 @@ public class GameController extends Controller {
         if (inputAction instanceof GameInputAction.EnterLevel) {
             GameModel model = models.get(((GameInputAction.EnterLevel) inputAction).getGameId());
             model.enterLevel(((GameInputAction.EnterLevel) inputAction).getLevelId());
+        }
+        else if (inputAction instanceof GameInputAction.SwitchDebug) {
+            GameModel model = models.get(((GameInputAction.SwitchDebug) inputAction).getGameId());
+            model.switchDebug();
         }
     }
 

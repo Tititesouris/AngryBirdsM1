@@ -4,6 +4,9 @@ import angrybirds.notifications.updates.actions.ObjectUpdateAction;
 import angrybirds.notifications.updates.actions.UpdateAction;
 import angrybirds.utils.Vector2d;
 import angrybirds.views.View;
+import angrybirds.views.objects.birds.YellowBirdView;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 
 /**
  * Cette classe représente une vue d'objet.
@@ -29,6 +32,16 @@ public abstract class ObjectView extends View {
     protected float rotation;
 
     /**
+     * True si l'objet a été touché, false sinon.
+     */
+    protected boolean hit;
+
+    /**
+     * Image de l'objet.
+     */
+    protected Image sprite;
+
+    /**
      * Créé une vue d'objet.
      *
      * @param id       Identifiant unique du modèle de l'objet.
@@ -43,6 +56,13 @@ public abstract class ObjectView extends View {
         this.rotation = rotation;
     }
 
+    /**
+     * Cette méthode affiche l'objet en mode débug.
+     *
+     * @param graphics Contexte graphique.
+     */
+    public abstract void displayDebug(Graphics graphics);
+
     @Override
     public void onUpdate(UpdateAction updateAction) {
         if (updateAction instanceof ObjectUpdateAction.MoveTo) {
@@ -52,7 +72,7 @@ public abstract class ObjectView extends View {
             rotateTo(((ObjectUpdateAction.RotateTo) updateAction).getRotation());
         }
         else if (updateAction instanceof ObjectUpdateAction.Hit) {
-
+        	hit();
         }
     }
 
@@ -72,6 +92,14 @@ public abstract class ObjectView extends View {
      */
     protected void rotateTo(float rotation) {
         this.rotation = rotation;
+        sprite.setRotation((float) (rotation * -180 / Math.PI));
+    }
+
+    /**
+     * Cette méthode doit être appellée quand le modèle prévient que l'objet a été touché.
+     */
+    protected void hit(){
+    	hit = true;
     }
 
 }

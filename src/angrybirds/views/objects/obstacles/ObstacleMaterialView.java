@@ -14,17 +14,17 @@ public enum ObstacleMaterialView {
     /**
      * Verre.
      */
-    GLASS(Color.blue),
+    GLASS(Color.blue, "/src/sprites/objects/obstacles/glass.png"),
 
     /**
      * Bois.
      */
-    WOOD(Color.orange),
+    WOOD(Color.orange, "/src/sprites/objects/obstacles/wood.png"),
 
     /**
      * Pierre
      */
-    STONE(Color.lightGray);
+    STONE(Color.lightGray, "/src/sprites/objects/obstacles/stone.png");
 
     /**
      * Couleur du matériau.
@@ -32,17 +32,19 @@ public enum ObstacleMaterialView {
     private Color color;
 
     /**
-     * Image du matériau.
+     * Chemin vers l'image du matériau.
      */
-    private SpriteSheet spriteSheet;
+    private String spritePath;
 
     /**
      * Créé un nouveau matériau.
      *
-     * @param color Couleur du matériau.
+     * @param color      Couleur du matériau.
+     * @param spritePath Chemin vers l'image du matériau.
      */
-    ObstacleMaterialView(Color color) {
+    ObstacleMaterialView(Color color, String spritePath) {
         this.color = color;
+        this.spritePath = spritePath;
     }
 
     /**
@@ -55,12 +57,12 @@ public enum ObstacleMaterialView {
     }
 
     /**
-     * Retourne l'image du matériau.
+     * Retourne le chemin vers l'image du matériau.
      *
-     * @return Image du matériau.
+     * @return Chemin vers l'image du matériau.
      */
-    public SpriteSheet getSpriteSheet() {
-        return spriteSheet;
+    public String getSpritePath() {
+        return spritePath;
     }
 
 }

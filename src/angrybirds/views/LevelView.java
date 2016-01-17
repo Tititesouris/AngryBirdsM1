@@ -50,9 +50,9 @@ public class LevelView extends View {
     private SortedMap<Integer, PigView> pigs;
 
     /**
-     * Image du fond du niveau.
+     * Hauteur du sol du niveau.
      */
-    private Image background;
+    private float ground;
 
     /**
      * True si un oiseau vient de mourir, false sinon.
@@ -65,6 +65,11 @@ public class LevelView extends View {
     private boolean levelEnded;
 
     /**
+     * Image du fond du niveau.
+     */
+    private Image background;
+
+    /**
      * Créé une vue de niveau.
      *
      * @param id        Identifiant unique du modèle du niveau.
@@ -74,13 +79,14 @@ public class LevelView extends View {
      * @param obstacles Vues des obstacles du niveau.
      * @param pigs      Vues des cochons du niveau.
      */
-    public LevelView(int id, String name, SlingshotView slingshot, SortedMap<Integer, BirdView> birds, SortedMap<Integer, ObstacleView> obstacles, SortedMap<Integer, PigView> pigs) {
+    public LevelView(int id, String name, SlingshotView slingshot, SortedMap<Integer, BirdView> birds, SortedMap<Integer, ObstacleView> obstacles, SortedMap<Integer, PigView> pigs, float ground) {
         super(id);
         this.name = name;
         this.slingshot = slingshot;
         this.birds = birds;
         this.obstacles = obstacles;
         this.pigs = pigs;
+        this.ground = ground;
     }
 
     @Override
@@ -111,14 +117,16 @@ public class LevelView extends View {
             slingshot.input(input);
             for (BirdView bird : birds.values())
                 bird.input(input);
+            for (ObstacleView obstacle : obstacles.values())
+                obstacle.input(input);
+            for (PigView pig : pigs.values())
+                pig.input(input);
         }
     }
 
     @Override
     public void display(Graphics graphics) {
         graphics.drawImage(background, 0, 0);
-        graphics.setColor(Color.black);
-        graphics.drawString(name, Constants.WINDOW_WIDTH - graphics.getFont().getWidth(name) - 10, 10);
         
         slingshot.display(graphics);
         for (BirdView bird : birds.values())
@@ -127,10 +135,31 @@ public class LevelView extends View {
             obstacle.display(graphics);
         for (PigView pig : pigs.values())
             pig.display(graphics);
+    }
+
+    /**
+     * Cette méthode affiche le niveau en mode débug.
+     *
+     * @param graphics Contexte graphique.
+     */
+    public void displayDebug(Graphics graphics) {
+        graphics.setColor(Color.white);
+        graphics.fillRect(0, 0, Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT);
+        graphics.setColor(Color.black);
+        graphics.drawString(name, Constants.WINDOW_WIDTH - graphics.getFont().getWidth(name) - 10, 10);
+        graphics.drawLine(0, Constants.WINDOW_HEIGHT - ground, Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT - ground);
 
         if (levelEnded) {
-            graphics.drawString("LEVEL IS OVER", 250, 250);
+            graphics.drawString("LEVEL IS OVER", 250, 50);
         }
+
+        slingshot.displayDebug(graphics);
+        for (BirdView bird : birds.values())
+            bird.displayDebug(graphics);
+        for (ObstacleView obstacle : obstacles.values())
+            obstacle.displayDebug(graphics);
+        for (PigView pig : pigs.values())
+            pig.displayDebug(graphics);
     }
 
     @Override

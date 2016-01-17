@@ -63,4 +63,20 @@ public abstract class GameInputAction implements InputAction {
 
     }
 
+    /**
+     * Cette classe interne définie un input de jeu lorsqu'il change entre le mode de jeu debug et non debug.
+     */
+    public static class SwitchDebug extends GameInputAction {
+
+        /**
+         * Créé une action d'input de jeu.
+         *
+         * @param gameId Id du modèle du jeu ayant envoyé l'input.
+         */
+        public SwitchDebug(int gameId) {
+            super(gameId);
+        }
+
+    }
+
 }
