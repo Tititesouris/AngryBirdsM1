@@ -133,7 +133,7 @@ public abstract class BirdView extends ObjectView {
         	system.update(10);
         	system.render();
         	system.addEmitter(emitter);
-        	emitter.setPosition(position.x - size.x / 2, position.y - size.y / 2);
+        	emitter.setPosition(position.x/* - size.x / 2*/, position.y /*- size.y / 2*/);
         	
         }
     }
