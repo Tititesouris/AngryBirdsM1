@@ -26,6 +26,7 @@ import angrybirds.views.objects.ObjectView;
  * Cette classe représente une vue d'oiseau.
  *
  * @author Quentin Brault
+ * A contribué : Maxime Catteau
  * @since  2013/10/01
  */
 public abstract class BirdView extends ObjectView {

@@ -11,6 +11,7 @@ import org.newdawn.slick.SlickException;
  * Cette classe représente une vue d'oiseau jaune.
  *
  * @author Quentin Brault
+ * A contribué : Maxime Catteau
  * @since  2013/10/01
  */
 public class YellowBirdView extends BirdView {

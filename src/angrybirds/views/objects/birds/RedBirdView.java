@@ -12,6 +12,7 @@ import org.newdawn.slick.SlickException;
  * Cette classe représente une vue d'oiseau rouge.
  *
  * @author Quentin Brault
+ * A contribué : Maxime Catteau
  * @since  2013/10/01
  */
 public class RedBirdView extends BirdView {

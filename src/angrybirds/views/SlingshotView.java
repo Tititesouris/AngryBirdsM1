@@ -19,6 +19,7 @@ import angrybirds.utils.Vector2d;
  * Cette classe représente une vue de lance-oiseau.
  *
  * @author Quentin Brault
+ * A contribué : Maxime Catteau
  * @since  2013/10/01
  */
 public class SlingshotView extends View {

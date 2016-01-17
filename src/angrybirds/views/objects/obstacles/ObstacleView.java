@@ -16,6 +16,7 @@ import org.newdawn.slick.geom.Shape;
  * Cette classe représente une vue d'obstacle.
  *
  * @author Quentin Brault
+ * A contribué : Maxime Catteau
  * @since 2013/10/01
  */
 public class ObstacleView extends ObjectView {
