@@ -86,7 +86,7 @@ public class GameView extends View {
                 for (int i = 0; i < nbLevels; i++) {
                     x = x + width / nbLevels;
                     graphics.drawString("" + (i + 1), xRect + largeurRect / 2, y);
-                    graphics.drawRect(xRect, 0, largeurRect, height);
+                    graphics.drawRect(xRect, height/4, largeurRect, height/2);
                     xRect = xRect + largeurRect;
                     x += x;
                 }
