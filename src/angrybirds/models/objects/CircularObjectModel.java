@@ -209,9 +209,15 @@ public abstract class CircularObjectModel extends ObjectModel {
                 }
             }
 
-            float hauteur = (float)Math.sqrt(max*max - (((base*base - min*min + max*max)/2*base)*(base*base - min*min + max*max)/2*base));
+            //System.out.println("Min : "+min+" base : "+base+" Max : "+max);
+
+            double hauteur = Math.sqrt(max*max - (((base*base - min*min + max*max)/(2*base))*(base*base - min*min + max*max)/(2*base)));
+            // Nan problem
+            //System.out.println("Hauteur : "+hauteur);
 
             if((hauteur - (this.getSize().product(0.5f).x) ) <= 0){
+                // on peut recuperer facilement l'endroit de hit par rapport aux 2 points du triangle en
+                // calculant le point de la hauteur et donc l angle d incidence
                 System.out.print("Hit");
                 return true;
             }else{
