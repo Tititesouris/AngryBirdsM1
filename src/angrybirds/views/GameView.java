@@ -84,16 +84,9 @@ public class GameView extends View {
                 graphics.drawRect(xRect, 0, largeurRect, height);
                 xRect = xRect + largeurRect;
                 x += x;
-
-
-                if (debug)
-                    displayDebug(graphics);
-                else if (level == null) {
-
-                } else {
-                    level.display(graphics);
-                }
             }
+        } else{
+            level.display(graphics);
         }
     }
     /**
@@ -103,6 +96,7 @@ public class GameView extends View {
      */
     public void displayDebug(Graphics graphics) {
         if (level == null) {
+
             int width = Constants.WINDOW_WIDTH;
             int height = Constants.WINDOW_HEIGHT;
             int x = 0;
@@ -116,8 +110,7 @@ public class GameView extends View {
                 graphics.drawRect(xRect, 0, largeurRect, height);
                 xRect = xRect + largeurRect;
                 x += x;
-
-            }
+           }
         } else {
             level.displayDebug(graphics);
         }
