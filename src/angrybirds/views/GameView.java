@@ -82,6 +82,7 @@ public class GameView extends View {
                 int xRect = 0;
                 int nbLevels = levels.size();
                 int largeurRect = width / nbLevels;
+                graphics.drawString("Choix du niveau",0,100);
                 for (int i = 0; i < nbLevels; i++) {
                     x = x + width / nbLevels;
                     graphics.drawString("" + (i + 1), xRect + largeurRect / 2, y);
@@ -115,7 +116,7 @@ public class GameView extends View {
                 graphics.drawRect(xRect, 0, largeurRect, height);
                 xRect = xRect + largeurRect;
                 x += x;
-           }
+            }
         } else {
             level.displayDebug(graphics);
         }
